@@ -1,7 +1,7 @@
 const Skills = () => {
     return (
       <div className="skills-container">
-        <h2>Skills</h2>
+        <h2>Showcasing My Digital Sorcery</h2>
         <div className="grid-skills">
           <div className="skill-card html">
             <i className="fa-brands fa-html5 html-icon"></i>

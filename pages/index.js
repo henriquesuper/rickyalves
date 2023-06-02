@@ -10,8 +10,8 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Ricky's Portfolio</title>
-        <meta name="description" content="Ricky's Portfolio" />
+        <title>Ricky's Code Chronicles</title>
+        <meta name="description" content="Ricky's Code Chronicles" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

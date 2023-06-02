@@ -3,7 +3,7 @@ import { projectData } from './data.js';
 const Projects = () => {
   return (
     <div className="projects-container">
-      <h2>Projects</h2>
+      <h2>Glimpse Into My Code Laboratory</h2>
       <div className="projects-grid">
         {projectData && projectData.map((project) => (
           <div className="project-card" key={project.id}>
