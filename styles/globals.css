@@ -292,6 +292,14 @@
   .skills-container .grid-skills .python:hover {
     background-color: #3776AB;
   }
+
+  .skills-container .grid-skills .swift:hover {
+    background-color: #00A1A7;
+  }
+
+  .skills-container .grid-skills .docker:hover {
+    background-color: #66A61E;
+  }
   
   /* Projects */
   .projects-container {
