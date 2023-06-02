@@ -2,8 +2,8 @@ const Contact = () => {
     return (
       <div className="contact-container">
         <h2>Get In Touch</h2>
-        <p>If you want us to work together, have any questions or want me to speak at your event, my inbox is always open. Whether I just want to say hi, I'll try my best to get back to you! Cheers!</p>
-        <a href="mailto:hike.lika@gmail.com" className='cta-btn'>Say Hello</a>
+        <p>If you're interested in conjuring up some digital magic together, if your mind is teeming with questions, or if you want me to light up your event with some tech-savvy insights, my inbox is just a keystroke away. Even if you just want to pop in for a virtual 'hello', I'll do my coding-ninja best to respond post-haste! So, here's to breaking the ice with a 'ping', instead of a pint. Over and out!</p>
+        <a href="mailto:hike.lika@gmail.com" className='cta-btn'>Press to Summon Code Wizard</a>
       </div>
     )
   }
