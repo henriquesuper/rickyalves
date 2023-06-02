@@ -16,9 +16,9 @@ export default function Home() {
 
         {/* Social media links can be added here */}
         <div className={styles.links}>
-          <a href="https://twitter.com/rickyalves">Twitter</a>
-          <a href="https://linkedin.com/in/rickyalves">LinkedIn</a>
-          <a href="https://github.com/rickyalves">GitHub</a>
+          <a href="https://twitter.com/henriquesuper">Twitter</a>
+          <a href="https://linkedin.com/in/henriquesuper">LinkedIn</a>
+          <a href="https://github.com/henriquesuper">GitHub</a>
         </div>
 
       </main>
