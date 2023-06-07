@@ -33,7 +33,7 @@ const Hero = () => {
             <i className="fa-brands fa-github"></i>
           </a>
           <a
-            href="https://www.linkedin.com/in/rickyalves/"
+            href="https://linkedin.com/in/rickyalves/"
             aria-label="LinkedIn"
             target="_blank"
             rel="noopener noreferrer"
