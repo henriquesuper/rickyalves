@@ -1,6 +1,19 @@
 import { useEffect, useState } from 'react';
 
-const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C#', 'D#', 'F#', 'G#', 'A#'];
+const notes = [
+  { note: 'C', color: 'white' },
+  { note: 'C#', color: 'black' },
+  { note: 'D', color: 'white' },
+  { note: 'D#', color: 'black' },
+  { note: 'E', color: 'white' },
+  { note: 'F', color: 'white' },
+  { note: 'F#', color: 'black' },
+  { note: 'G', color: 'white' },
+  { note: 'G#', color: 'black' },
+  { note: 'A', color: 'white' },
+  { note: 'A#', color: 'black' },
+  { note: 'B', color: 'white' },
+];
 
 function Piano() {
   const [audioContext, setAudioContext] = useState(null);
@@ -25,10 +38,14 @@ function Piano() {
   };
 
   return (
-    <div>
-      {notes.map((note, index) => (
-        <button key={note} onClick={() => playNote(calculateFrequency(index))}>
-          {note}
+    <div className="piano">
+      {notes.map((noteObj, index) => (
+        <button
+          className={`key ${noteObj.color === 'black' ? 'black' : ''}`}
+          key={noteObj.note}
+          onClick={() => playNote(calculateFrequency(index))}
+        >
+          {noteObj.note}
         </button>
       ))}
     </div>
