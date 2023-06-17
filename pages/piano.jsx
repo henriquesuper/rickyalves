@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import '../styles/piano.css';
-
 
 const notes = [
   { note: 'C', color: 'white' },

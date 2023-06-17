@@ -397,3 +397,35 @@
     margin-bottom: 1rem;
     text-align: center;
   }
+  /* Styles for Piano Component */
+.key {
+  height: 200px;
+  width: 75px;
+  border: 1px solid #000;
+  float: left;
+  position: relative;
+  text-align: center;
+  line-height: 200px;
+  user-select: none;
+}
+
+.key.black {
+  background-color: #000;
+  color: #fff;
+  width: 50px;
+  height: 130px;
+  z-index: 1;
+  left: -25px;
+  line-height: 130px;
+}
+
+.key:active, .key.black:active {
+  background-color: #ddd;
+}
+
+.piano {
+  width: 900px;
+  height: 200px;
+  margin: 0 auto;
+  background-color: #fff;
+}
