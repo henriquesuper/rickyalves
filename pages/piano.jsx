@@ -1,55 +1,52 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const notes = [
-  { note: 'C', color: 'white' },
-  { note: 'C#', color: 'black' },
-  { note: 'D', color: 'white' },
-  { note: 'D#', color: 'black' },
-  { note: 'E', color: 'white' },
-  { note: 'F', color: 'white' },
-  { note: 'F#', color: 'black' },
-  { note: 'G', color: 'white' },
-  { note: 'G#', color: 'black' },
-  { note: 'A', color: 'white' },
-  { note: 'A#', color: 'black' },
-  { note: 'B', color: 'white' },
+  "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
 ];
 
-function Piano() {
-  const [audioContext, setAudioContext] = useState(null);
+const keyWidth = 60; // The width of each key in pixels.
 
+const Piano = () => {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [activeNote, setActiveNote] = useState(null);
+
+  // This function will run whenever the window is resized.
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  // Add the event listener when the component is mounted, and remove it when it's unmounted.
   useEffect(() => {
-    setAudioContext(new (window.AudioContext || window.webkitAudioContext)());
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  const playNote = (frequency) => {
-    const oscillator = audioContext.createOscillator();
+  // Calculate how many keys can fit on the screen.
+  const numberOfKeys = Math.floor(windowWidth / keyWidth);
 
-    oscillator.type = 'sine';
-    oscillator.frequency.value = frequency;
-    oscillator.connect(audioContext.destination);
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.3);
-  };
-
-  const calculateFrequency = (noteIndex) => {
-    const middleA = 440;
-    return middleA * Math.pow(2, (noteIndex - 9) / 12);
-  };
+  // Create an array of notes that will fit on the screen.
+  // This assumes that the 'notes' array contains one octave, and copies it as many times as needed.
+  const keys = new Array(numberOfKeys)
+    .fill([...notes])
+    .flat()
+    .slice(0, numberOfKeys); // We slice the array to ensure that we don't end up with partial octaves.
 
   return (
     <div className="piano">
-      {notes.map((noteObj, index) => (
-        <button
-          className={`key ${noteObj.color === 'black' ? 'black' : ''}`}
-          key={noteObj.note}
-          onClick={() => playNote(calculateFrequency(index))}
+      {keys.map((note, idx) => (
+        <div
+          key={idx}
+          onMouseDown={() => setActiveNote(note)}
+          onMouseUp={() => setActiveNote(null)}
+          className={`key ${note.includes("#") && "black"}`}
         >
-          {noteObj.note}
-        </button>
+          {note}
+        </div>
       ))}
     </div>
   );
-}
+};
 
 export default Piano;
