@@ -1,48 +1,51 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const notes = [
-  "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
+const useWindowSize = () => {
+  const [size, setSize] = useState([0, 0]);
+  useEffect(() => {
+    const handleResize = () => {
+      setSize([window.innerWidth, window.innerHeight]);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  return size;
+}
+
+const KEY_WIDTH = 60;  // Update this to your key's width
+
+// Piano keys data
+const keyData = [
+  { note: 'C', color: 'white' },
+  { note: 'C#', color: 'black' },
+  { note: 'D', color: 'white' },
+  { note: 'D#', color: 'black' },
+  { note: 'E', color: 'white' },
+  { note: 'F', color: 'white' },
+  { note: 'F#', color: 'black' },
+  { note: 'G', color: 'white' },
+  { note: 'G#', color: 'black' },
+  { note: 'A', color: 'white' },
+  { note: 'A#', color: 'black' },
+  { note: 'B', color: 'white' },
 ];
 
-const keyWidth = 60; // The width of each key in pixels.
-
 const Piano = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [activeNote, setActiveNote] = useState(null);
+  const [width] = useWindowSize();
+  const [keys, setKeys] = useState([]);
 
-  // This function will run whenever the window is resized.
-  const handleResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
-  // Add the event listener when the component is mounted, and remove it when it's unmounted.
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  // Calculate how many keys can fit on the screen.
-  const numberOfKeys = Math.floor(windowWidth / keyWidth);
-
-  // Create an array of notes that will fit on the screen.
-  // This assumes that the 'notes' array contains one octave, and copies it as many times as needed.
-  const keys = new Array(numberOfKeys)
-    .fill([...notes])
-    .flat()
-    .slice(0, numberOfKeys); // We slice the array to ensure that we don't end up with partial octaves.
+    const numOfKeys = Math.floor(width / KEY_WIDTH);
+    const newKeys = new Array(numOfKeys).fill(0).map((_, idx) => keyData[idx % keyData.length]);
+    setKeys(newKeys);
+  }, [width]);
 
   return (
     <div className="piano">
-      {keys.map((note, idx) => (
-        <div
-          key={idx}
-          onMouseDown={() => setActiveNote(note)}
-          onMouseUp={() => setActiveNote(null)}
-          className={`key ${note.includes("#") && "black"}`}
-        >
-          {note}
+      {keys.map((key, idx) => (
+        <div key={idx} className={`key ${key.color}`}>
+          {key.note}
         </div>
       ))}
     </div>
