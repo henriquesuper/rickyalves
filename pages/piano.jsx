@@ -1,48 +1,65 @@
 import React, { useEffect, useState } from "react";
+import * as Tone from 'tone';
 
 const notes = [
-  "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
+  { note: "C", octave: 4, frequency: 261.63 },
+  { note: "C#", octave: 4, frequency: 277.18 },
+  { note: "D", octave: 4, frequency: 293.66 },
+  { note: "D#", octave: 4, frequency: 311.13 },
+  { note: "E", octave: 4, frequency: 329.63 },
+  { note: "F", octave: 4, frequency: 349.23 },
+  { note: "F#", octave: 4, frequency: 369.99 },
+  { note: "G", octave: 4, frequency: 392.00 },
+  { note: "G#", octave: 4, frequency: 415.30 },
+  { note: "A", octave: 4, frequency: 440.00 },
+  { note: "A#", octave: 4, frequency: 466.16 },
+  { note: "B", octave: 4, frequency: 493.88 }
 ];
 
 const keyWidth = 60; // The width of each key in pixels.
 
 const Piano = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [activeNote, setActiveNote] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(null);
 
   // This function will run whenever the window is resized.
   const handleResize = () => {
     setWindowWidth(window.innerWidth);
   };
 
-  // Add the event listener when the component is mounted, and remove it when it's unmounted.
   useEffect(() => {
+    setWindowWidth(window.innerWidth);
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
-  // Calculate how many keys can fit on the screen.
-  const numberOfKeys = Math.floor(windowWidth / keyWidth);
+  if (!windowWidth) {
+    return null;
+  }
 
-  // Create an array of notes that will fit on the screen.
-  // This assumes that the 'notes' array contains one octave, and copies it as many times as needed.
+  const numberOfKeys = Math.floor(windowWidth / keyWidth);
   const keys = new Array(numberOfKeys)
     .fill([...notes])
     .flat()
-    .slice(0, numberOfKeys); // We slice the array to ensure that we don't end up with partial octaves.
+    .slice(0, numberOfKeys);
+
+  // Tone.js part
+  const synth = new Tone.Synth().toDestination();
+
+  const playNote = (frequency) => {
+    synth.triggerAttackRelease(frequency, "8n");
+  };
 
   return (
     <div className="piano">
-      {keys.map((note, idx) => (
+      {keys.map((key, idx) => (
         <div
           key={idx}
-          onMouseDown={() => setActiveNote(note)}
-          onMouseUp={() => setActiveNote(null)}
-          className={`key ${note.includes("#") && "black"}`}
+          onMouseDown={() => playNote(key.frequency)}
+          className={`key ${key.note.includes("#") ? "black" : "white"}`}
         >
-          {note}
+          {key.note}
         </div>
       ))}
     </div>

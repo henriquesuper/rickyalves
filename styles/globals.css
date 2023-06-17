@@ -402,34 +402,34 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 120px;
-  width: 100%;
-  background-color: #1D1E20;
-  border: 1px solid #DADADB;
-  border-radius: 5px;
-  overflow: hidden;
-  flex-wrap: no-wrap;
+  height: 100vh;
+  background-color: #282c34;
 }
 
 .key {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-  width: 60px;  /* This is the base width of a key. It will be used to calculate the number of keys displayed */
-  min-width: 60px;  /* Let's make sure keys have a minimum width */
-  flex-grow: 1;  /* Keys will grow to take up any available space */
-  border: 1px solid #DADADB;
-  border-radius: 5px;
-  margin: 0 0.5px;
-  user-select: none;
+  border: 1px solid #000;
+  height: 180px;
+  line-height: 180px;
+  text-align: center;
   cursor: pointer;
+  user-select: none;
+  color: #000;
+  background-color: #fff;
 }
 
 .key.black {
-  background-color: #1D1E20;
-  color: #DADADB;
-  height: 75px;
+  background-color: #000;
+  color: #fff;
+  width: 40px;
+  height: 120px;
+  margin: 0 -20px;
   z-index: 1;
-  margin-bottom: 25px;
+}
+
+.key.white {
+  width: 60px;
+}
+
+.key.pressed {
+  background-color: #888;
 }
