@@ -400,46 +400,36 @@ hr {
 /* Styles for Piano Component */
 .piano {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 200px;
-  margin-bottom: 40px;
-  border: 1px solid #ddd;
+  justify-content: center;
+  height: 120px;
+  width: 100%;
+  background-color: #1D1E20;
+  border: 1px solid #DADADB;
   border-radius: 5px;
-  background-color: #f7f7f7;
+  overflow: hidden;
+  flex-wrap: no-wrap;
 }
 
 .key {
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 100%;
-  border-right: 1px solid #ddd;
-  background-color: white;
-  text-align: center;
+  justify-content: center;
+  height: 100px;
+  width: 60px;  /* This is the base width of a key. It will be used to calculate the number of keys displayed */
+  min-width: 60px;  /* Let's make sure keys have a minimum width */
+  flex-grow: 1;  /* Keys will grow to take up any available space */
+  border: 1px solid #DADADB;
+  border-radius: 5px;
+  margin: 0 0.5px;
+  user-select: none;
   cursor: pointer;
-  transition: 0.3s all;
 }
 
 .key.black {
-  background-color: black;
-  color: white;
-  height: 60%;
-  width: 30px;
-  position: relative;
-  margin: 0 -15px;
+  background-color: #1D1E20;
+  color: #DADADB;
+  height: 75px;
   z-index: 1;
-}
-
-.key:not(:last-child) {
-  border-right: 1px solid #ddd;
-}
-
-.key:active {
-  background-color: #ddd;
-}
-
-.key.black:active {
-  background-color: #444;
+  margin-bottom: 25px;
 }
