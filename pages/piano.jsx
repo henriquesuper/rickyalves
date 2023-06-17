@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B', 'C#', 'D#', 'F#', 'G#', 'A#'];
 
-export function Piano() {
+function Piano() {
   const [audioContext, setAudioContext] = useState(null);
 
   useEffect(() => {
@@ -34,3 +34,5 @@ export function Piano() {
     </div>
   );
 }
+
+export default Piano;
