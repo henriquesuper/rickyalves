@@ -7,7 +7,7 @@ const notes = [
 const keyWidth = 60; // The width of each key in pixels.
 
 const Piano = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(null);
   const [activeNote, setActiveNote] = useState(null);
 
   // This function will run whenever the window is resized.
@@ -15,13 +15,21 @@ const Piano = () => {
     setWindowWidth(window.innerWidth);
   };
 
-  // Add the event listener when the component is mounted, and remove it when it's unmounted.
   useEffect(() => {
+    // Initially sets windowWidth when component is mounted
+    setWindowWidth(window.innerWidth);
+
+    // Adds event listener for window resize and removes it after unmount
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, []); // Empty dependency array means this useEffect will run once when component is mounted
+
+  // If windowWidth is not set yet, don't render anything
+  if (windowWidth === null) {
+    return null;
+  }
 
   // Calculate how many keys can fit on the screen.
   const numberOfKeys = Math.floor(windowWidth / keyWidth);
