@@ -398,34 +398,49 @@
     text-align: center;
   }
   /* Styles for Piano Component */
-.key {
-  height: 200px;
-  width: 75px;
-  border: 1px solid #000;
-  float: left;
-  position: relative;
-  text-align: center;
-  line-height: 200px;
-  user-select: none;
-}
-
-.key.black {
-  background-color: #000;
-  color: #fff;
-  width: 50px;
-  height: 130px;
-  z-index: 1;
-  left: -25px;
-  line-height: 130px;
-}
-
-.key:active, .key.black:active {
-  background-color: #ddd;
-}
-
-.piano {
-  width: 900px;
-  height: 200px;
-  margin: 0 auto;
-  background-color: #fff;
-}
+  .piano {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin-bottom: 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+  }
+  
+  .key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 100%;
+    border-right: 1px solid #ddd;
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s all;
+  }
+  
+  .key.black {
+    background-color: black;
+    color: white;
+    height: 60%;
+    width: 30px;
+    position: relative;
+    margin: 0 -15px;
+    z-index: 1;
+  }
+  
+  .key:not(:last-child) {
+    border-right: 1px solid #ddd;
+  }
+  
+  .key:active {
+    background-color: #ddd;
+  }
+  
+  .key.black:active {
+    background-color: #444;
+  }
+  
