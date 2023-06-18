@@ -433,3 +433,11 @@ hr {
 .key.pressed {
   background-color: #888;
 }
+.key.active.white {
+  filter: brightness(0.8);
+}
+
+.key.active.black {
+  filter: brightness(0.8);
+}
+
