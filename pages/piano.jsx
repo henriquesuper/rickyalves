@@ -2,18 +2,18 @@ import React, { useEffect, useState } from "react";
 import * as Tone from 'tone';
 
 const notes = [
-  { note: "C",  frequency: 261.63 },
+  { note: "C", frequency: 261.63 },
   { note: "C#", frequency: 277.18 },
-  { note: "D",  frequency: 293.66 },
+  { note: "D", frequency: 293.66 },
   { note: "D#", frequency: 311.13 },
-  { note: "E",  frequency: 329.63 },
-  { note: "F",  frequency: 349.23 },
+  { note: "E", frequency: 329.63 },
+  { note: "F", frequency: 349.23 },
   { note: "F#", frequency: 369.99 },
-  { note: "G",  frequency: 392.00 },
+  { note: "G", frequency: 392.00 },
   { note: "G#", frequency: 415.30 },
-  { note: "A",  frequency: 440.00 },
+  { note: "A", frequency: 440.00 },
   { note: "A#", frequency: 466.16 },
-  { note: "B",  frequency: 493.88 }
+  { note: "B", frequency: 493.88 }
 ];
 
 const keyWidth = 60;
@@ -55,20 +55,16 @@ const Piano = () => {
         return (
           <div
             key={idx}
-            onTouchStart={() => {
+            onPointerDown={() => {
               playNote(frequency);
               setActiveNote(`${item.note}${idx}`);
             }}
-            onTouchEnd={() => setActiveNote(null)}
-            onMouseDown={() => {
-              playNote(frequency);
-              setActiveNote(`${item.note}${idx}`);
-            }}
-            onMouseUp={() => setActiveNote(null)}
+            onPointerUp={() => setActiveNote(null)}
             className={`key ${isBlack ? 'black' : 'white'} ${isActive ? 'active' : ''}`}
           >
             {item.note}
           </div>
+
         );
       })}
     </div>
