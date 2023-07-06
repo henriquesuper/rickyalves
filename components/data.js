@@ -34,4 +34,11 @@ export const projectData = [
         'Simple Twitter UI clone built with TailwindCSS and Vue Js. This covers only the homepage of Twitter UI. This is cool to get started with TailwindCSS as it helps understand basic concepts.',
       gitHubLink: 'https://github.com/olawanlejoel/TwitterUI-clone',
     },
+    {
+      id: 6,
+      title: 'React Piano with Tone.js',
+      description:
+        'Fully functional piano created using React.js and Tone.js. It uses the Web Audio API via the Tone.js library to generate sounds, and React.js for the UI.',
+      gitHubLink: 'https://github.com/olawanlejoel/TwitterUI-clone',
+    },
   ];
