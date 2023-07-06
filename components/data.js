@@ -39,6 +39,6 @@ export const projectData = [
       title: 'React Piano with Tone.js',
       description:
         'Fully functional piano created using React.js and Tone.js. It uses the Web Audio API via the Tone.js library to generate sounds, and React.js for the UI.',
-      gitHubLink: 'https://github.com/olawanlejoel/TwitterUI-clone',
+      gitHubLink: 'https://github.com/henriquesuper/piano',
     },
   ];
