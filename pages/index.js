@@ -4,6 +4,7 @@ import Skills from '../components/Skills';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import Head from 'next/head';
+import Script from 'next/script'
 
 const Home = () => {
   return (
@@ -24,5 +25,22 @@ const Home = () => {
     </>
   );
 };
+
+function Home() {
+  return (
+    <div className="container">
+      <Script src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'GA_MEASUREMENT_ID');
+        `}
+      </Script>
+    </div>
+  )
+}
 
 export default Home;
