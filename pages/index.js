@@ -26,7 +26,7 @@ const Home = () => {
   );
 };
 
-function Home() {
+function HomeContainer() {
   return (
     <div className="container">
       <Script src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID" />
@@ -44,3 +44,4 @@ function Home() {
 }
 
 export default Home;
+export { HomeContainer };

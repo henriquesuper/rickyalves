@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from "next/image";
 
 const Hero = () => {
@@ -5,15 +6,20 @@ const Hero = () => {
     <div className="hero-container">
       <Image src='/images/profile.jpeg' className="profile-img" width={300} height={300} alt="Ricky's personal headshot" />
       <div className="hero-text">
-        <h1>Hey, I'm Ricky 👋</h1>
+        <div class="text-5xl font-extrabold ...">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 space-x-8">
+          Hey, I'm Ricky 
+          </span>👋
+        </div>
+        
         <p>
-        I'm a software wizard hailing from the world of palm trees 
-        and traffic, Los Angeles. I'm skilled at conjuring exceptional 
-        websites, applications, and all sorts of digital magic in 
-        between. They don't call it "coding" here, it's more like 
-        weaving the matrix. And occasionally, I moonlight as a pixel 
-        Picasso, designing sleek interfaces that even Leonardo da 
-        Vinci would double-tap on Instagram.
+          I'm a software wizard hailing from the world of palm trees
+          and traffic, Los Angeles. I'm skilled at conjuring exceptional
+          websites, applications, and all sorts of digital magic in
+          between. They don't call it "coding" here, it's more like
+          weaving the matrix. And occasionally, I moonlight as a pixel
+          Picasso, designing sleek interfaces that even Leonardo da
+          Vinci would double-tap on Instagram.
         </p>
         <div className="social-icons">
           <a
