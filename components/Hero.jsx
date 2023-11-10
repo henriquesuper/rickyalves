@@ -8,10 +8,10 @@ const Hero = () => {
       <div className="hero-text">
         <div class="text-5xl font-extrabold ...">
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 space-x-8">
-          Hey, I'm Ricky 
+            Hey, I'm Ricky
           </span>👋
         </div>
-        
+
         <p>
           I'm a software wizard hailing from the world of palm trees
           and traffic, Los Angeles. I'm skilled at conjuring exceptional
@@ -28,8 +28,7 @@ const Hero = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i className="fa-brands fa-twitter"></i>
-          </a>
+            <i class="fa-brands fa-x-twitter"></i>          </a>
           <a
             href="https://github.com/henriquesuper"
             aria-label="GitHub"
