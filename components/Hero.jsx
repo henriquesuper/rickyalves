@@ -6,12 +6,11 @@ const Hero = () => {
     <div className="hero-container">
       <Image src='/images/profile.jpeg' className="profile-img" width={300} height={300} alt="Ricky's personal headshot" />
       <div className="hero-text">
-        <div class="text-5xl font-extrabold ...">
+        <div class="text-5xl font-extrabold mb-12 mt-12 ...">
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 space-x-8">
             Hey, I'm Ricky
           </span>👋
         </div>
-
         <p>
           I'm a software wizard hailing from the world of palm trees
           and traffic, Los Angeles. I'm skilled at conjuring exceptional
