@@ -3,9 +3,9 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="hero-container">
-      <Image src='/images/profile.jpeg' className="profile-img" width={300} height={300} alt="Ricky's personal headshot" />
-      <div className="hero-text">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center py-16 px-8">
+      <Image src='/images/profile.jpeg' className="profile-img justify-self-center md:col-span-1" width={300} height={300} alt="Ricky's personal headshot" />
+      <div className="text-left md:col-span-2 md:text-left">
         <div class="text-5xl font-extrabold mb-12 mt-12 ...">
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 space-x-8">
             Hey, I'm Ricky
@@ -20,7 +20,7 @@ const Hero = () => {
           Picasso, designing sleek interfaces that even Leonardo da
           Vinci would double-tap on Instagram.
         </p>
-        <div className="social-icons">
+        <div className="social-icons flex justify-center md:justify-start items-center gap-4">
           <a
             href="https://twitter.com/henriquesuper"
             aria-label="Twitter"

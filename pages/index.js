@@ -15,7 +15,7 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div>
+      <div className="font-inter text-base leading-normal bg-gray-100 text-gray-800 max-w-6xl mx-auto px-8">
         <Hero />
         <About />
         <Skills />
