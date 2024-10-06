@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,11 +11,11 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  background-color: #1d1e20;
-  color: #dadadb;
+  background-color: #f8f9fa;
+  color: #212529;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -29,7 +30,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #dadadb;
+  color: #3498db;
 }
 
 li {
@@ -42,17 +43,19 @@ li {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  background-color: #1d1e20;
+  background-color: #f4f4f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container .logo {
   font-size: 1.5rem;
   font-weight: bold;
+  color: #333333;
 }
 
 .cta-btn {
-  background-color: #ffcc1a;
-  color: #1d1e20;
+  background-color: #3498db;
+  color: #ffffff;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   font-size: 1rem;
@@ -63,7 +66,7 @@ li {
 }
 
 .cta-btn:hover {
-  background-color: #dadadb;
+  background-color: #2980b9;
 }
 
 /* Footer */
@@ -86,12 +89,13 @@ hr {
   justify-content: space-around;
   align-items: center;
   padding: 2rem 0;
-  background-color: #1d1e20;
+  background-color: #f4f4f8;
+  border-top: 1px solid #e0e0e0;
 }
 
 .footer-container p {
-  font-size: 0.8rem;
-  color: #9b9c9d;
+  font-size: 0.9rem;
+  color: #333333;
 }
 
 .footer-container .social_icons {
@@ -102,43 +106,42 @@ hr {
 }
 
 .footer-container .social_icons a {
-  color: #9b9c9d;
+  color: #333333;
   font-size: 1.5rem;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .footer-container .social_icons a:hover {
-  color: #dadadb;
+  color: #4a90e2;
 }
 
 /* Hero */
 
 .hero-container {
-  height: 90vh;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
   align-items: center;
-  flex-direction: column;
-  padding: 2rem 0;
+  padding: 4rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .hero-container {
+    grid-template-columns: 1fr 2fr;
+  }
 }
 
 .hero-container .profile-img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  margin: 0 auto;
-  object-fit: cover;
+  justify-self: center;
 }
 
 .hero-container .hero-text {
-  text-align: center;
-  margin: 1rem 0;
-  width: 80%;
+  text-align: left;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 767px) {
   .hero-container .hero-text {
-    width: 100%;
+    text-align: center;
   }
 }
 
@@ -173,7 +176,21 @@ hr {
 
 /* About */
 .about-container {
-  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 4rem 2rem;
+}
+
+@media (min-width: 768px) {
+  .about-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.about-container .about-text,
+.about-container .about-img {
+  width: 100%;
 }
 
 .about-container h2 {
@@ -235,19 +252,13 @@ hr {
 
 /* Skills */
 .skills-container {
-  padding: 2rem 0;
-}
-
-.skills-container h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  padding: 4rem 2rem;
 }
 
 .skills-container .grid-skills {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -257,8 +268,8 @@ hr {
 }
 
 .skills-container .grid-skills .skill-card {
-  background-color: #dadadb;
-  color: #1d1e20;
+  background-color: #e9ecef;
+  color: #212529;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -308,18 +319,12 @@ hr {
 
 /* Projects */
 .projects-container {
-  padding: 2rem 0;
-}
-
-.projects-container h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  padding: 4rem 2rem;
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
 }
 
@@ -332,7 +337,14 @@ hr {
 .project-card {
   border: 1px solid #e6e6e6;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
 }
 
 .project-card .project-header {
@@ -467,4 +479,3 @@ hr {
 .key.black::after {
   color: #ccc;
 }
-
