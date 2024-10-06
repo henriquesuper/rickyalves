@@ -6,7 +6,7 @@ const Projects = () => {
       <h2 className="text-3xl font-semibold mb-8">Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projectData && projectData.map((project) => (
-          <div className="border border-gray-300 p-5 rounded-lg transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg" key={project.id}>
+          <div className="border border-gray-200 p-6 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-xl bg-white" key={project.id}>
             <div className="flex justify-between items-start mb-5">
               <i className="fa-regular fa-folder-open text-4xl text-yellow-400"></i>
               <div className="flex gap-2">

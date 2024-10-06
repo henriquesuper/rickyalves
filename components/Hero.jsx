@@ -5,11 +5,12 @@ const Hero = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center py-16 px-8">
       <Image src='/images/profile.jpeg' className="profile-img justify-self-center md:col-span-1" width={300} height={300} alt="Ricky's personal headshot" />
-      <div className="text-left md:col-span-2 md:text-left">
-        <div class="text-5xl font-extrabold mb-12 mt-12 ...">
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 space-x-8">
+      <div className="text-left md:col-span-2 md:text-left animate-fade-in-down">
+        <div className="text-5xl font-extrabold mb-12 mt-12">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 animate-gradient">
             Hey, I'm Ricky
-          </span>👋
+          </span>
+          <span className="inline-block animate-wave ml-2">👋</span>
         </div>
         <p>
           I'm a software wizard hailing from the world of palm trees

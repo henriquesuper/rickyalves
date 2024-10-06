@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
         {/* Add the Font Awesome Script here */}
-        <script src="https://kit.fontawesome.com/b4b5469beb.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/b4b5469beb.js" crossOrigin="anonymous"></script>
       </Head>
       <body>
         <Main />

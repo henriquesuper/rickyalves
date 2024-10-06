@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       <hr className="border-none bg-gray-400 h-px w-4/5 mx-auto md:w-full" />
-      <div className="flex justify-around items-center py-8 bg-gray-100 border-t border-gray-300">
+      <div className="flex justify-around items-center py-8 bg-transparent border-t border-gray-300">
         <p className="text-sm text-gray-800">© {currentYear} Ricky Alves</p>
         <div className="flex justify-between items-center gap-4">
           <a href="https://twitter.com/henriquesuper" aria-label="Twitter" target="_blank" rel="noopener noreferrer" className="text-gray-800 text-2xl transition-all duration-300 ease-in-out hover:text-blue-500">

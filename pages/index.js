@@ -15,33 +15,15 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div className="font-inter text-base leading-normal bg-gray-100 text-gray-800 max-w-6xl mx-auto px-8">
+      <div className="font-inter text-base leading-normal bg-white text-gray-800 max-w-6xl mx-auto px-8 shadow-lg rounded-lg my-8">
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
+        <section id="about"><About /></section>
+        <section id="skills"><Skills /></section>
+        <section id="projects"><Projects /></section>
+        <section id="contact"><Contact /></section>
       </div>
     </>
   );
 };
 
-function HomeContainer() {
-  return (
-    <div className="container">
-      <Script src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID" />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
- 
-          gtag('config', 'GA_MEASUREMENT_ID');
-        `}
-      </Script>
-    </div>
-  )
-}
-
 export default Home;
-export { HomeContainer };
