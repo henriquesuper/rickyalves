@@ -28,7 +28,7 @@ const Hero = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i class="fa-brands fa-x-twitter"></i>          </a>
+            <i className="fa-brands fa-x-twitter"></i>          </a>
           <a
             href="https://github.com/henriquesuper"
             aria-label="GitHub"
