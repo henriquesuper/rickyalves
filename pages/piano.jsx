@@ -20,7 +20,7 @@ const keyWidth = 40;
 
 const Piano = () => {
   const [windowWidth, setWindowWidth] = useState(null);
-  const [activeNote, setActiveNote] = useState(null);
+  const [activeNotes, setActiveNotes] = useState(new Set());
   const [sampler, setSampler] = useState(null);
 
   useEffect(() => {
@@ -90,24 +90,45 @@ const Piano = () => {
   };
 
   const numberOfKeys = windowWidth ? Math.floor(windowWidth / keyWidth) : 12;
-  const octaves = new Array(Math.ceil(numberOfKeys / 12)).fill([...notes]).flat();
+  const fullOctaves = Math.floor(numberOfKeys / 12);
+  const remainingKeys = numberOfKeys % 12;
+  
+  const octaves = [
+    ...new Array(fullOctaves).fill([...notes]).flat(),
+    ...notes.slice(0, remainingKeys + 1)
+  ];
 
   return (
     <div className="piano">
       {octaves.map((item, idx) => {
         const isBlack = item.note.includes("#");
-        const isActive = activeNote === `${item.note}${idx}`;
-        const octave = Math.floor(idx / 12) + 4; // Start from the 4th octave
+        const octave = Math.floor(idx / 12) + 4;
         const noteWithOctave = `${item.note}${octave}`;
+        const isActive = activeNotes.has(noteWithOctave);
 
         return (
           <div
             key={idx}
-            onPointerDown={() => {
+            onPointerDown={(e) => {
+              e.target.setPointerCapture(e.pointerId);
               playNote(noteWithOctave);
-              setActiveNote(`${item.note}${idx}`);
+              setActiveNotes(prev => new Set(prev).add(noteWithOctave));
             }}
-            onPointerUp={() => setActiveNote(null)}
+            onPointerUp={(e) => {
+              e.target.releasePointerCapture(e.pointerId);
+              setActiveNotes(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(noteWithOctave);
+                return newSet;
+              });
+            }}
+            onPointerCancel={(e) => {
+              setActiveNotes(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(noteWithOctave);
+                return newSet;
+              });
+            }}
             className={`key ${isBlack ? 'black' : 'white'} ${isActive ? 'active' : ''}`}
             data-note={item.note}
           />
