@@ -23,37 +23,39 @@ export async function GET(request) {
     case 'status':
       // Filtrar reações dos últimos 5 segundos para mostrar na TV
       const now = Date.now();
-      const recentReactions = globalState.interactions
-        .filter(i => i.type === 'reaction' && (now - i.timestamp) < 5000)
-        .map(reaction => ({
-          id: reaction.id,
-          reaction: reaction.reaction,
-          userName: reaction.userName,
-          timestamp: reaction.timestamp,
-          count: globalState.interactions.filter(r => 
-            r.type === 'reaction' && 
-            r.reaction === reaction.reaction && 
-            (now - r.timestamp) < 5000
-          ).length
-        }));
+      const recentReactionsList = globalState.interactions
+        .filter(i => i.type === 'reaction' && (now - i.timestamp) < 5000);
       
-      // Agrupar reações similares para evitar spam
-      const groupedReactions = [];
-      const processed = new Set();
+      // Agrupar por usuário+reação para evitar duplicatas (pegar só a mais recente)
+      const uniqueReactions = new Map();
       
-      recentReactions.forEach(reaction => {
+      recentReactionsList.forEach(reaction => {
         const key = `${reaction.reaction}_${reaction.userName}`;
-        if (!processed.has(key)) {
-          processed.add(key);
-          groupedReactions.push(reaction);
+        const existing = uniqueReactions.get(key);
+        
+        // Manter apenas a reação mais recente de cada usuário+tipo
+        if (!existing || reaction.timestamp > existing.timestamp) {
+          uniqueReactions.set(key, reaction);
         }
       });
+      
+      // Converter para array e adicionar contagem
+      const finalReactions = Array.from(uniqueReactions.values()).map(reaction => ({
+        id: reaction.id,
+        reaction: reaction.reaction,
+        userName: reaction.userName,
+        timestamp: reaction.timestamp,
+        count: recentReactionsList.filter(r => 
+          r.reaction === reaction.reaction && 
+          r.userName === reaction.userName
+        ).length
+      }));
       
       return NextResponse.json({
         attendance: globalState.attendance,
         currentPoll: globalState.currentPoll ? globalState.polls[globalState.currentPoll] : null,
         stats: globalState.stats,
-        recentReactions: groupedReactions.slice(-5) // Máximo 5 reações na tela
+        recentReactions: finalReactions.slice(-5) // Máximo 5 reações na tela
       });
 
     case 'polls':
