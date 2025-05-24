@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaQrcode, FaUsers, FaVoteYea, FaHandsHelping, FaMobileAlt } from 'react-icons/fa';
+import { FaQrcode, FaUsers, FaVoteYea, FaHandsHelping, FaMobileAlt, FaStar, FaWifi, FaArrowRight } from 'react-icons/fa';
 import { QRCodeSVG } from 'qrcode.react';
 import { useInteraction } from '../hooks/useInteraction';
 
@@ -53,81 +53,251 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
   ];
 
   if (!isPresenterMode) {
-    // Versão compacta para exibir na apresentação
+    // Versão ESPETACULAR para exibir na apresentação
     return (
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-8 right-8 z-50">
         <motion.button
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setShowQR(!showQR)}
-          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 p-4 rounded-2xl shadow-2xl shadow-purple-500/25 backdrop-blur-md border border-white/20"
+          className="relative group"
         >
-          <FaQrcode className="text-white text-2xl" />
+          {/* Glow Effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 animate-pulse"></div>
+          <div className="relative bg-gradient-to-br from-purple-600 via-indigo-600 to-cyan-600 hover:from-purple-500 hover:via-indigo-500 hover:to-cyan-500 p-5 rounded-3xl shadow-2xl backdrop-blur-md border border-white/30 transition-all duration-300">
+            <FaQrcode className="text-white text-3xl drop-shadow-lg" />
+            <div className="absolute -top-2 -right-2 bg-gradient-to-r from-pink-500 to-red-500 rounded-full w-6 h-6 flex items-center justify-center animate-bounce">
+              <FaWifi className="text-white text-xs" />
+            </div>
+          </div>
         </motion.button>
 
         <AnimatePresence>
           {showQR && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              className="absolute bottom-16 right-0 bg-white p-6 rounded-2xl shadow-2xl border border-gray-200 w-80"
+              initial={{ opacity: 0, scale: 0.5, y: 50, rotateY: -90 }}
+              animate={{ opacity: 1, scale: 1, y: 0, rotateY: 0 }}
+              exit={{ opacity: 0, scale: 0.5, y: 50, rotateY: 90 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 200, 
+                damping: 20,
+                duration: 0.6 
+              }}
+              className="absolute bottom-20 right-0 w-[90vw] sm:w-[380px] max-w-[380px] max-h-[80vh] overflow-y-auto transform sm:transform-none -translate-x-1/2 sm:translate-x-0"
             >
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-gray-800 mb-4">
-                  Participe da Escola Sabatina
-                </h3>
+              {/* Background with enhanced effects */}
+              <div className="relative bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-indigo-900/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
                 
-                <div className="bg-white p-3 rounded-xl border">
-                  <QRCodeSVG 
-                    value={mobileUrl}
-                    size={200}
-                    bgColor="#ffffff"
-                    fgColor="#000000"
-                    level="M"
-                    includeMargin={true}
-                  />
+                {/* Animated background pattern */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-full">
+                    <div className="absolute top-10 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl animate-pulse"></div>
+                    <div className="absolute bottom-10 right-10 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
+                  </div>
                 </div>
-                
-                <p className="text-sm text-gray-600 mt-4 mb-2">
-                  Escaneie com seu celular ou acesse:
-                </p>
-                <p className="text-xs text-blue-600 font-mono break-all">
-                  {mobileUrl}
-                </p>
-                
-                <div className="flex items-center justify-center mt-4 pt-4 border-t border-gray-200">
-                  <FaUsers className="text-purple-500 mr-2" />
-                  <span className="text-sm font-medium text-gray-700">
-                    {attendance} participantes conectados
-                  </span>
+
+                <div className="relative p-4 sm:p-6 lg:p-8">
+                  {/* Header */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-center mb-6"
+                  >
+                    <div className="flex items-center justify-center mb-4">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl blur-lg opacity-50"></div>
+                        <div className="relative bg-gradient-to-br from-purple-600 to-cyan-600 p-4 rounded-2xl">
+                          <FaMobileAlt className="text-white text-2xl" />
+                        </div>
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-cyan-200 to-indigo-200 mb-2">
+                      Participe da Escola Sabatina
+                    </h3>
+                    <p className="text-white/70 font-medium">
+                      Conecte-se e interaja em tempo real
+                    </p>
+                  </motion.div>
+                  
+                  {/* QR Code Container */}
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="relative mb-6"
+                  >
+                    {/* QR Code with enhanced styling */}
+                    <div className="relative mx-auto w-fit">
+                      {/* Glow effect behind QR */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-cyan-500 to-indigo-500 rounded-3xl blur-xl opacity-30"></div>
+                      
+                      {/* QR Code container */}
+                      <div className="relative bg-white p-6 rounded-3xl shadow-2xl border-4 border-gradient-to-r from-purple-400 via-cyan-400 to-indigo-400">
+                        {/* Corner decorations */}
+                        <div className="absolute top-2 left-2 w-4 h-4 border-l-3 border-t-3 border-purple-500 rounded-tl-lg"></div>
+                        <div className="absolute top-2 right-2 w-4 h-4 border-r-3 border-t-3 border-cyan-500 rounded-tr-lg"></div>
+                        <div className="absolute bottom-2 left-2 w-4 h-4 border-l-3 border-b-3 border-indigo-500 rounded-bl-lg"></div>
+                        <div className="absolute bottom-2 right-2 w-4 h-4 border-r-3 border-b-3 border-purple-500 rounded-br-lg"></div>
+                        
+                        <div className="w-[180px] sm:w-[220px] h-[180px] sm:h-[220px] mx-auto">
+                          <QRCodeSVG 
+                            value={mobileUrl}
+                            size={220}
+                            className="w-full h-full max-w-[220px] max-h-[220px]"
+                          bgColor="#ffffff"
+                          fgColor="#1a1a2e"
+                          level="H"
+                          includeMargin={false}
+                          imageSettings={{
+                            src: "data:image/svg+xml;base64," + btoa(`
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="40" fill="url(#grad)" stroke="#fff" stroke-width="4"/>
+                                <defs>
+                                  <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#8B5CF6"/>
+                                    <stop offset="100%" style="stop-color:#06B6D4"/>
+                                  </linearGradient>
+                                </defs>
+                                <rect x="35" y="40" width="30" height="20" fill="white" rx="3"/>
+                                <rect x="40" y="45" width="20" height="10" fill="url(#grad)" rx="2"/>
+                                <circle cx="45" cy="35" r="2" fill="white"/>
+                                <circle cx="55" cy="35" r="2" fill="white"/>
+                              </svg>
+                            `),
+                            height: 44,
+                            width: 44,
+                            excavate: true,
+                          }}
+                        />
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                  
+                  {/* Instructions */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="text-center mb-6"
+                  >
+                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                      <p className="text-white/90 font-medium mb-3 flex items-center justify-center">
+                        <FaArrowRight className="mr-2 text-cyan-300" />
+                        Escaneie com seu celular ou acesse:
+                      </p>
+                      <div className="bg-black/20 rounded-xl p-3 border border-white/10">
+                        <p className="text-cyan-300 font-mono text-sm font-bold break-all">
+                          {mobileUrl}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                  
+                  {/* Stats */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 }}
+                    className="flex items-center justify-center space-x-6 pt-4 border-t border-white/10"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-sm opacity-50"></div>
+                        <div className="relative bg-gradient-to-r from-purple-500 to-pink-500 rounded-full p-2">
+                          <FaUsers className="text-white text-sm" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">
+                          {attendance}
+                        </div>
+                        <div className="text-xs text-white/60 font-medium">participantes</div>
+                      </div>
+                    </div>
+                    
+                    <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+                    
+                    <div className="flex items-center space-x-3">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full blur-sm opacity-50"></div>
+                        <div className="relative bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full p-2">
+                          <FaStar className="text-white text-sm animate-pulse" />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-indigo-300">
+                          {stats.totalVotes}
+                        </div>
+                        <div className="text-xs text-white/60 font-medium">interações</div>
+                      </div>
+                    </div>
+                  </motion.div>
                 </div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* Reações flutuantes */}
-        <div className="fixed top-1/2 right-4 space-y-2">
+        {/* Reações flutuantes aprimoradas */}
+        <div className="fixed top-1/3 right-8 space-y-3 z-40">
           <AnimatePresence>
             {recentReactions.map((reaction) => (
               <motion.div
                 key={reaction.id}
-                initial={{ opacity: 0, scale: 0, x: 50 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                exit={{ opacity: 0, scale: 0, x: 50 }}
-                className="bg-black/60 backdrop-blur-md rounded-full px-4 py-2 flex items-center space-x-2 text-white"
+                initial={{ opacity: 0, scale: 0, x: 50, rotateZ: -20 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  x: 0, 
+                  rotateZ: 0,
+                  y: [0, -5, 0]
+                }}
+                exit={{ opacity: 0, scale: 0, x: 50, rotateZ: 20 }}
+                transition={{ 
+                  duration: 0.6,
+                  y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="relative group"
               >
-                <span className="text-2xl">
-                  {reaction.reaction === 'amen' && '🙏'}
-                  {reaction.reaction === 'praise' && '👏'}
-                  {reaction.reaction === 'love' && '❤️'}
-                  {reaction.reaction === 'blessing' && '⭐'}
-                  {reaction.reaction === 'understanding' && '💡'}
-                  {reaction.reaction === 'peace' && '🕊️'}
-                </span>
-                <span className="text-xs text-white/80">{reaction.userName}</span>
-                <span className="font-bold">+{reaction.count}</span>
+                {/* Enhanced glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity"></div>
+                
+                <div className="relative bg-gradient-to-br from-black/80 to-purple-900/80 backdrop-blur-xl rounded-2xl px-6 py-4 flex items-center space-x-3 text-white shadow-2xl border border-white/20 min-w-[220px]">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-sm opacity-50"></div>
+                    <span className="relative text-3xl drop-shadow-lg">
+                      {reaction.reaction === 'amen' && '🙏'}
+                      {reaction.reaction === 'praise' && '👏'}
+                      {reaction.reaction === 'love' && '❤️'}
+                      {reaction.reaction === 'blessing' && '⭐'}
+                      {reaction.reaction === 'understanding' && '💡'}
+                      {reaction.reaction === 'peace' && '🕊️'}
+                    </span>
+                  </div>
+                  <div className="flex flex-col flex-1">
+                    <span className="text-sm font-semibold text-purple-200">
+                      {reaction.userName || 'Anônimo'}
+                    </span>
+                    <span className="text-xs text-white/70">
+                      {reaction.reaction === 'amen' && 'Amém'}
+                      {reaction.reaction === 'praise' && 'Aleluia'}
+                      {reaction.reaction === 'love' && 'Gratidão'}
+                      {reaction.reaction === 'blessing' && 'Bênção'}
+                      {reaction.reaction === 'understanding' && 'Compreendo'}
+                      {reaction.reaction === 'peace' && 'Paz'}
+                    </span>
+                  </div>
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-lg blur-sm opacity-50"></div>
+                    <span className="relative font-bold text-lg text-cyan-300 bg-black/20 px-3 py-1 rounded-lg">
+                      +{reaction.count}
+                    </span>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>
@@ -136,14 +306,26 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
     );
   }
 
-  // Painel completo do apresentador
+  // Painel ESPETACULAR do apresentador
   return (
     <div className="fixed top-4 left-4 z-50 max-w-sm">
       <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        className="bg-black/80 backdrop-blur-xl p-6 rounded-3xl border border-white/20 shadow-2xl text-white"
+        initial={{ opacity: 0, x: -50, scale: 0.9 }}
+        animate={{ opacity: 1, x: 0, scale: 1 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        className="relative overflow-hidden"
       >
+        {/* Enhanced background with effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-indigo-900/95 backdrop-blur-2xl rounded-3xl shadow-2xl"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-cyan-500/10 to-indigo-500/10 rounded-3xl"></div>
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-4 right-4 w-16 h-16 bg-purple-500/5 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute bottom-4 left-4 w-12 h-12 bg-cyan-500/5 rounded-full blur-lg animate-pulse delay-1000"></div>
+        </div>
+        
+        <div className="relative p-6 text-white border border-white/20 rounded-3xl">
+        
+        {/* Cabeçalho aprimorado */}
         {/* Cabeçalho */}
         <div className="flex items-center space-x-3 mb-6">
           <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center">
@@ -259,7 +441,8 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
             </motion.div>
           )}
         </div>
+        </div>
       </motion.div>
     </div>
   );
-} 
+}
