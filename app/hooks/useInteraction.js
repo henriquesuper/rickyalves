@@ -67,8 +67,10 @@ export function useInteraction() {
           });
 
           socket.on('live-reaction', (reactionData) => {
+            console.log('🔥 [TV DEBUG] Reação recebida via Socket.io:', reactionData);
             setRecentReactions(prev => {
               const updated = [...prev, { ...reactionData, id: Date.now() }];
+              console.log('🔥 [TV DEBUG] Estado das reações atualizado:', updated);
               return updated.slice(-5);
             });
             
@@ -159,8 +161,25 @@ export function useInteraction() {
 
   const react = useCallback(async (reactionType, userName = null) => {
     if (isDevelopment) {
-      // Em desenvolvimento, Socket.io já cuida das reações
-      return { success: true, reaction: reactionType, userName };
+      // Em desenvolvimento, emitir via Socket.io
+      try {
+        const { default: io } = await import('socket.io-client');
+        const socket = io('http://localhost:3001');
+        
+        return new Promise((resolve) => {
+          socket.on('connect', () => {
+            console.log('🔥 [HOOK DEBUG] Conectado ao Socket.io, emitindo reação:', reactionType, userName);
+            socket.emit('reaction', { type: reactionType, userName });
+            setTimeout(() => {
+              socket.disconnect();
+              resolve({ success: true, reaction: reactionType, userName });
+            }, 500);
+          });
+        });
+      } catch (error) {
+        console.error('Erro ao emitir reação via Socket.io no hook:', error);
+        return { success: false, error: error.message };
+      }
     } else {
       // Em produção, usar API routes
       try {

@@ -53,22 +53,12 @@ export default function MobileInterface() {
   };
 
   const handleReaction = async (reactionType) => {
-    // Para desenvolvimento (Socket.io), vamos emitir direto também
-    const isDevelopment = process.env.NODE_ENV === 'development';
+    console.log('📱 [MOBILE DEBUG] Botão de reação clicado:', reactionType, 'usuário:', userName);
     
-    if (isDevelopment && typeof window !== 'undefined') {
-      try {
-        const { default: io } = await import('socket.io-client');
-        const socket = io('http://localhost:3001');
-        socket.emit('reaction', { type: reactionType, userName });
-        socket.disconnect();
-      } catch (error) {
-        console.error('Erro ao emitir reação via Socket.io:', error);
-      }
-    }
-    
-    // Usar também o hook para compatibilidade com Vercel
-    await react(reactionType, userName);
+    // Usar o hook unificado que funciona tanto em desenvolvimento quanto produção
+    console.log('📱 [MOBILE DEBUG] Chamando hook react...');
+    const result = await react(reactionType, userName);
+    console.log('📱 [MOBILE DEBUG] Resultado do hook react:', result);
   };
 
   const reactions = [

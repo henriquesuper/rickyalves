@@ -32,6 +32,11 @@ export default function SalmosPage() {
     recentReactions
   } = useInteraction();
 
+  // Debug das reações na TV
+  useEffect(() => {
+    console.log('📺 [TV DEBUG] Estado das reações na TV:', recentReactions);
+  }, [recentReactions]);
+
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -268,7 +273,9 @@ export default function SalmosPage() {
       {/* Floating Reactions */}
       <div className="fixed top-1/3 right-8 space-y-3 z-40">
         <AnimatePresence>
-          {recentReactions.map((reaction) => (
+          {recentReactions.map((reaction) => {
+            console.log('🎬 [TV DEBUG] Renderizando reação:', reaction);
+            return (
             <motion.div
               key={reaction.id}
               initial={{ opacity: 0, scale: 0, x: 50 }}
@@ -312,7 +319,8 @@ export default function SalmosPage() {
                 <span className="font-bold text-lg text-cyan-300">+{reaction.count}</span>
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </AnimatePresence>
       </div>
     </div>

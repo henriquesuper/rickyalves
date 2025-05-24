@@ -7,7 +7,7 @@ import AnimatedLayout from './AnimatedLayout';
 
 export default function LayoutContentRenderer({ children }) {
   const pathname = usePathname();
-  const showNavbarAndFooter = pathname !== '/salmos';
+  const showNavbarAndFooter = pathname !== '/salmos' && pathname !== '/mobile-interface';
 
   return (
     <>

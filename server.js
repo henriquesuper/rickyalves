@@ -103,6 +103,8 @@ io.on('connection', (socket) => {
 
   // Reações em tempo real
   socket.on('reaction', (reactionData) => {
+    console.log('🎬 [SERVER DEBUG] Reação recebida no servidor:', reactionData);
+    
     const reactionEntry = {
       type: 'reaction',
       userId: socket.id,
@@ -114,8 +116,7 @@ io.on('connection', (socket) => {
     
     presentationState.interactions.push(reactionEntry);
     
-    // Broadcast da reação para todos
-    io.emit('live-reaction', {
+    const broadcastData = {
       reaction: reactionData.type,
       userName: reactionEntry.userName,
       count: presentationState.interactions.filter(i => 
@@ -124,7 +125,12 @@ io.on('connection', (socket) => {
         Date.now() - i.timestamp < 5000
       ).length,
       id: reactionEntry.id
-    });
+    };
+    
+    console.log('🎬 [SERVER DEBUG] Fazendo broadcast da reação:', broadcastData);
+    
+    // Broadcast da reação para todos
+    io.emit('live-reaction', broadcastData);
   });
 
   // Resposta do quiz
