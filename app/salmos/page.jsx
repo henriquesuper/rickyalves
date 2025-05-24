@@ -19,6 +19,90 @@ const Sanctuary3D = dynamic(() => import('../components/Sanctuary3D'), {
   </div>
 });
 
+// Temporary simple sanctuary representation to avoid 3D issues
+const SimpleSanctuary = ({ height = "450px" }) => {
+  return (
+    <div className="w-full flex items-center justify-center bg-gradient-to-b from-amber-100 to-amber-200 rounded-xl overflow-hidden" style={{ height }}>
+      <div className="relative w-full max-w-4xl h-full flex items-center justify-center p-8">
+        {/* Desert Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-50 to-amber-200"></div>
+        
+        {/* Mountains in background */}
+        <div className="absolute bottom-0 left-0 right-0 h-32">
+          <svg viewBox="0 0 800 200" className="w-full h-full opacity-30">
+            <polygon points="0,200 100,100 200,150 300,80 400,120 500,70 600,110 700,90 800,130 800,200" fill="#8B7355" />
+            <polygon points="0,200 150,120 250,160 350,100 450,140 550,90 650,130 750,110 800,140 800,200" fill="#A0916B" />
+          </svg>
+        </div>
+        
+        {/* Main Sanctuary Structure */}
+        <div className="relative z-10 flex items-center justify-center space-x-12">
+          {/* Outer Court */}
+          <div className="flex flex-col items-center space-y-4">
+            {/* Bronze Altar */}
+            <div className="w-12 h-8 bg-gradient-to-b from-amber-600 to-amber-800 rounded-sm shadow-lg">
+              <div className="w-full h-2 bg-gradient-to-b from-red-500 to-orange-600 rounded-t-sm opacity-80"></div>
+            </div>
+            <span className="text-xs text-amber-800 font-semibold">Altar de Bronze</span>
+            
+            {/* Bronze Basin */}
+            <div className="w-8 h-6 bg-gradient-to-b from-amber-500 to-amber-700 rounded-full shadow-md"></div>
+            <span className="text-xs text-amber-800 font-semibold">Bacia de Bronze</span>
+          </div>
+          
+          {/* Tabernacle */}
+          <div className="relative">
+            {/* Tent Structure */}
+            <div className="relative w-40 h-20 bg-gradient-to-b from-slate-100 to-slate-300 rounded-t-3xl border-2 border-amber-600 shadow-xl">
+              {/* Tent Peak */}
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-0 h-0 border-l-4 border-r-4 border-b-6 border-l-transparent border-r-transparent border-b-amber-600"></div>
+              
+              {/* Holy Place */}
+              <div className="absolute left-2 top-2 bottom-2 w-20 bg-gradient-to-b from-yellow-200 to-yellow-400 rounded-sm opacity-80">
+                <div className="text-[8px] text-amber-800 text-center mt-2 font-bold">Lugar Santo</div>
+                {/* Furniture icons */}
+                <div className="flex justify-around mt-1">
+                  <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
+                  <div className="w-2 h-2 bg-amber-600 rounded-sm"></div>
+                  <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
+                </div>
+              </div>
+              
+              {/* Most Holy Place */}
+              <div className="absolute right-2 top-2 bottom-2 w-14 bg-gradient-to-b from-yellow-100 to-yellow-300 rounded-sm opacity-90 border-l-2 border-amber-700">
+                <div className="text-[8px] text-amber-800 text-center mt-2 font-bold">Santo dos Santos</div>
+                {/* Ark */}
+                <div className="flex justify-center mt-2">
+                  <div className="w-4 h-2 bg-gradient-to-b from-yellow-400 to-amber-600 rounded-sm shadow-sm"></div>
+                </div>
+              </div>
+              
+              {/* Entrance */}
+              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1 w-2 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-r-sm opacity-70"></div>
+            </div>
+            
+            <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-amber-800 font-semibold whitespace-nowrap">Tabernáculo</span>
+          </div>
+        </div>
+        
+        {/* Divine Light Effect */}
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
+          <div className="w-24 h-12 bg-gradient-radial from-yellow-200 via-yellow-300 to-transparent rounded-full opacity-60"></div>
+          <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gradient-radial from-white via-yellow-100 to-transparent rounded-full opacity-80"></div>
+        </div>
+        
+        {/* Floating Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* Light rays */}
+          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-1 h-16 bg-gradient-to-b from-yellow-200 to-transparent opacity-40 rotate-12"></div>
+          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-1 h-16 bg-gradient-to-b from-yellow-200 to-transparent opacity-40 -rotate-12"></div>
+          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-1 h-20 bg-gradient-to-b from-yellow-200 to-transparent opacity-50"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function SalmosPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -84,6 +168,27 @@ export default function SalmosPage() {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       
+      {/* Custom CSS for radial gradients and scrollbar */}
+      <style jsx>{`
+        .bg-gradient-radial {
+          background: radial-gradient(circle, var(--tw-gradient-stops));
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(0, 0, 0, 0.1);
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(139, 92, 246, 0.5);
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(139, 92, 246, 0.7);
+        }
+      `}</style>
+      
       {/* Enhanced Cloud Background */}
       <CloudBackground color={0x0f0828} />
       
@@ -142,28 +247,12 @@ export default function SalmosPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}
-            className="w-full max-w-6xl mx-auto overflow-y-auto max-h-full"
+            className="w-full max-w-6xl mx-auto overflow-y-auto max-h-full custom-scrollbar"
             style={{ 
               scrollbarWidth: 'thin',
               scrollbarColor: 'rgba(139, 92, 246, 0.5) transparent'
             }}
           >
-            <style jsx>{`
-              div::-webkit-scrollbar {
-                width: 8px;
-              }
-              div::-webkit-scrollbar-track {
-                background: rgba(0, 0, 0, 0.1);
-                border-radius: 4px;
-              }
-              div::-webkit-scrollbar-thumb {
-                background: rgba(139, 92, 246, 0.5);
-                border-radius: 4px;
-              }
-              div::-webkit-scrollbar-thumb:hover {
-                background: rgba(139, 92, 246, 0.7);
-              }
-            `}</style>
             {slides[currentSlide]}
           </motion.div>
         </AnimatePresence>
@@ -812,7 +901,7 @@ const slides = [
           </div>
         </motion.div>
         
-        {/* 3D Sanctuary Display */}
+        {/* Sanctuary Display */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -821,7 +910,7 @@ const slides = [
         >
           <div className="relative rounded-2xl overflow-hidden border-2 border-gradient-to-r from-purple-500 via-cyan-500 to-indigo-500 shadow-2xl shadow-cyan-500/20">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-cyan-500/20 to-indigo-500/20 pointer-events-none z-10"></div>
-            <Sanctuary3D height="450px" />
+            <SimpleSanctuary height="450px" />
           </div>
         </motion.div>
         
