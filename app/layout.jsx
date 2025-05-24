@@ -1,8 +1,6 @@
 import { Inter } from 'next/font/google';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import '../styles/globals.css';
-import AnimatedLayout from '../components/AnimatedLayout';
+import LayoutContentRenderer from '../components/LayoutContentRenderer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,11 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen bg-gradient-to-b from-gray-50 to-gray-100`}>
-        <Navbar />
-        <AnimatedLayout>
-          {children}
-        </AnimatedLayout>
-        <Footer />
+        <LayoutContentRenderer>{children}</LayoutContentRenderer>
       </body>
     </html>
   );
