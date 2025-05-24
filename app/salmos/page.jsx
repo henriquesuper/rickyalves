@@ -9,7 +9,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import CloudBackground from '../components/CloudBackground';
 import QRCodeInteraction from '../components/QRCodeInteraction';
-import io from 'socket.io-client';
+import { useInteraction } from '../hooks/useInteraction';
 
 // Dynamically import the 3D component to avoid SSR issues
 const Sanctuary3D = dynamic(() => import('../components/Sanctuary3D'), { 
@@ -22,47 +22,15 @@ const Sanctuary3D = dynamic(() => import('../components/Sanctuary3D'), {
 export default function SalmosPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [socket, setSocket] = useState(null);
-  const [attendance, setAttendance] = useState(0);
-  const [currentPoll, setCurrentPoll] = useState(null);
-  const [recentReactions, setRecentReactions] = useState([]);
   const [isPresenterMode, setIsPresenterMode] = useState(false);
   const totalSlides = slides.length;
 
-  // Socket connection for real-time interactions
-  useEffect(() => {
-    const newSocket = io('http://localhost:3001');
-    setSocket(newSocket);
-
-    newSocket.on('attendance-update', (data) => {
-      setAttendance(data.count);
-    });
-
-    newSocket.on('new-poll', (poll) => {
-      setCurrentPoll(poll);
-    });
-
-    newSocket.on('poll-update', (poll) => {
-      setCurrentPoll(poll);
-    });
-
-    newSocket.on('poll-ended', () => {
-      setCurrentPoll(null);
-    });
-
-    newSocket.on('live-reaction', (reactionData) => {
-      setRecentReactions(prev => {
-        const updated = [...prev, { ...reactionData, id: Date.now() }];
-        return updated.slice(-5);
-      });
-      
-      setTimeout(() => {
-        setRecentReactions(prev => prev.slice(1));
-      }, 4000);
-    });
-
-    return () => newSocket.close();
-  }, []);
+  // Use o hook de interação que funciona tanto local quanto no Vercel
+  const {
+    attendance,
+    currentPoll,
+    recentReactions
+  } = useInteraction();
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -83,13 +51,11 @@ export default function SalmosPage() {
   const nextSlide = () => {
     const newSlide = currentSlide === totalSlides - 1 ? 0 : currentSlide + 1;
     setCurrentSlide(newSlide);
-    socket?.emit('slide-change', newSlide);
   };
 
   const prevSlide = () => {
     const newSlide = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
     setCurrentSlide(newSlide);
-    socket?.emit('slide-change', newSlide);
   };
 
   const toggleFullscreen = () => {

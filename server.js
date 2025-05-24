@@ -103,21 +103,27 @@ io.on('connection', (socket) => {
 
   // Reações em tempo real
   socket.on('reaction', (reactionData) => {
-    presentationState.interactions.push({
+    const reactionEntry = {
       type: 'reaction',
       userId: socket.id,
+      userName: reactionData.userName || 'Anônimo',
       reaction: reactionData.type,
-      timestamp: Date.now()
-    });
+      timestamp: Date.now(),
+      id: Date.now() + Math.random()
+    };
+    
+    presentationState.interactions.push(reactionEntry);
     
     // Broadcast da reação para todos
     io.emit('live-reaction', {
       reaction: reactionData.type,
+      userName: reactionEntry.userName,
       count: presentationState.interactions.filter(i => 
         i.type === 'reaction' && 
         i.reaction === reactionData.type && 
         Date.now() - i.timestamp < 5000
-      ).length
+      ).length,
+      id: reactionEntry.id
     });
   });
 

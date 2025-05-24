@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 
 // Detecta se estamos em desenvolvimento ou produção
 const isDevelopment = process.env.NODE_ENV === 'development';
-const API_BASE = isDevelopment ? 'http://localhost:3001' : '/api/socket';
+const API_BASE = '/api/socket'; // Sempre usar API routes para fetch
 
 export function useInteraction() {
   const [connected, setConnected] = useState(false);
@@ -94,140 +94,172 @@ export function useInteraction() {
   }, [fetchStatus]);
 
   const join = useCallback(async (userName) => {
-    try {
-      const response = await fetch(API_BASE, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'join',
-          data: { userName }
-        }),
-      });
-      
-      const result = await response.json();
-      if (result.success) {
-        setUserId(result.userId);
-        setAttendance(result.attendance);
+    if (isDevelopment) {
+      // Em desenvolvimento, usar Socket.io direto
+      const userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      setUserId(userId);
+      return { success: true, userId };
+    } else {
+      // Em produção, usar API routes
+      try {
+        const response = await fetch(API_BASE, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'join',
+            data: { userName }
+          }),
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+          setUserId(result.userId);
+          setAttendance(result.attendance);
+        }
+        return result;
+      } catch (error) {
+        console.error('Erro ao entrar:', error);
+        return { success: false, error: error.message };
       }
-      return result;
-    } catch (error) {
-      console.error('Erro ao entrar:', error);
-      return { success: false, error: error.message };
     }
   }, []);
 
   const vote = useCallback(async (pollId, optionIndex) => {
-    try {
-      const response = await fetch(API_BASE, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'vote',
-          data: { pollId, optionIndex, userId }
-        }),
-      });
-      
-      const result = await response.json();
-      if (result.success) {
-        setCurrentPoll(result.poll);
-        setStats(result.stats);
+    if (isDevelopment) {
+      // Em desenvolvimento, usar Socket.io (será implementado quando necessário)
+      return { success: true };
+    } else {
+      // Em produção, usar API routes
+      try {
+        const response = await fetch(API_BASE, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'vote',
+            data: { pollId, optionIndex, userId }
+          }),
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+          setCurrentPoll(result.poll);
+          setStats(result.stats);
+        }
+        return result;
+      } catch (error) {
+        console.error('Erro ao votar:', error);
+        return { success: false, error: error.message };
       }
-      return result;
-    } catch (error) {
-      console.error('Erro ao votar:', error);
-      return { success: false, error: error.message };
     }
   }, [userId]);
 
   const react = useCallback(async (reactionType, userName = null) => {
-    try {
-      const response = await fetch(API_BASE, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'reaction',
-          data: { type: reactionType, userId, userName }
-        }),
-      });
-      
-      const result = await response.json();
-      if (result.success) {
-        // Adicionar reação local imediatamente para feedback visual
-        const newReaction = {
-          reaction: result.reaction,
-          userName: result.userName,
-          count: result.count,
-          id: Date.now(),
-          timestamp: Date.now()
-        };
-        
-        setRecentReactions(prev => {
-          const updated = [...prev, newReaction];
-          return updated.slice(-5);
+    if (isDevelopment) {
+      // Em desenvolvimento, Socket.io já cuida das reações
+      return { success: true, reaction: reactionType, userName };
+    } else {
+      // Em produção, usar API routes
+      try {
+        const response = await fetch(API_BASE, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'reaction',
+            data: { type: reactionType, userId, userName }
+          }),
         });
         
-        setTimeout(() => {
-          setRecentReactions(prev => prev.slice(1));
-        }, 4000);
+        const result = await response.json();
+        if (result.success) {
+          // Adicionar reação local imediatamente para feedback visual
+          const newReaction = {
+            reaction: result.reaction,
+            userName: result.userName,
+            count: result.count,
+            id: Date.now(),
+            timestamp: Date.now()
+          };
+          
+          setRecentReactions(prev => {
+            const updated = [...prev, newReaction];
+            return updated.slice(-5);
+          });
+          
+          setTimeout(() => {
+            setRecentReactions(prev => prev.slice(1));
+          }, 4000);
+        }
+        return result;
+      } catch (error) {
+        console.error('Erro ao reagir:', error);
+        return { success: false, error: error.message };
       }
-      return result;
-    } catch (error) {
-      console.error('Erro ao reagir:', error);
-      return { success: false, error: error.message };
     }
   }, [userId]);
 
   const createPoll = useCallback(async (question, options) => {
-    try {
-      const response = await fetch(API_BASE, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'create-poll',
-          data: { question, options }
-        }),
-      });
-      
-      const result = await response.json();
-      if (result.success) {
-        setCurrentPoll(result.poll);
+    if (isDevelopment) {
+      // Em desenvolvimento, usar Socket.io (será implementado quando necessário)
+      return { success: true };
+    } else {
+      // Em produção, usar API routes
+      try {
+        const response = await fetch(API_BASE, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'create-poll',
+            data: { question, options }
+          }),
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+          setCurrentPoll(result.poll);
+        }
+        return result;
+      } catch (error) {
+        console.error('Erro ao criar enquete:', error);
+        return { success: false, error: error.message };
       }
-      return result;
-    } catch (error) {
-      console.error('Erro ao criar enquete:', error);
-      return { success: false, error: error.message };
     }
   }, []);
 
   const endPoll = useCallback(async (pollId) => {
-    try {
-      const response = await fetch(API_BASE, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          action: 'end-poll',
-          data: { pollId }
-        }),
-      });
-      
-      const result = await response.json();
-      if (result.success) {
-        setCurrentPoll(null);
+    if (isDevelopment) {
+      // Em desenvolvimento, usar Socket.io (será implementado quando necessário)
+      return { success: true };
+    } else {
+      // Em produção, usar API routes
+      try {
+        const response = await fetch(API_BASE, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'end-poll',
+            data: { pollId }
+          }),
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+          setCurrentPoll(null);
+        }
+        return result;
+      } catch (error) {
+        console.error('Erro ao finalizar enquete:', error);
+        return { success: false, error: error.message };
       }
-      return result;
-    } catch (error) {
-      console.error('Erro ao finalizar enquete:', error);
-      return { success: false, error: error.message };
     }
   }, []);
 
