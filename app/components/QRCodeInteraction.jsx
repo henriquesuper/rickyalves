@@ -36,19 +36,47 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
     }
   };
 
-  // Enquetes predefinidas para a lição dos Salmos
+  // Enquetes predefinidas para a lição dos Salmos - VERSÃO AVANÇADA PARA VETERANOS
   const predefinedPolls = [
     {
-      question: "Qual aspecto dos Salmos mais toca seu coração?",
-      options: ["Adoração e louvor", "Lamentos e súplicas", "Promessas de salvação", "Profecia messiânica"]
+      question: "Por que Deus revelou primeiro o santuário terrestre, depois o celestial?",
+      options: ["Pedagogia divina (do conhecido ao desconhecido)", "Limitação humana para compreender o celestial", "Progressão histórica da revelação", "Todas refletem aspectos da verdade"],
+      timing: "SLIDE 2-3: O Santuário como Chave Hermenêutica"
     },
     {
-      question: "Como você se conecta pessoalmente com o Santuário?",
-      options: ["Através da oração", "Estudando as Escrituras", "Na comunhão fraternal", "No serviço missionário"]
+      question: "Qual a diferença essencial entre Salmo 15 ('quem habitará') e Apocalipse 14 ('os que têm o nome')?",
+      options: ["Requisitos vs. Graça já recebida", "AT vs. NT", "Individual vs. Corporativo", "Lei vs. Evangelho"],
+      timing: "SLIDE 4-5: Monte Sião - Geografia Teológica"
     },
     {
-      question: "O que significa ter o 'nome de Deus' escrito na testa?",
-      options: ["Refletir Seu caráter", "Guardar Seus mandamentos", "Amar como Ele ama", "Todas as alternativas"]
+      question: "Como conciliar 'irrepreensíveis' (Ap 14:5) com 'todos pecaram' (Rm 3:23)?",
+      options: ["Perfeição através da união com Cristo", "Justificação cobrindo imperfeições", "Santificação progressiva completa", "Perspectiva celestial vs. terrestre"],
+      timing: "SLIDE 6: O Cordeiro - Elemento Ausente/Presente"
+    },
+    {
+      question: "O 'nome na testa' dos 144 mil representa principalmente:",
+      options: ["Caráter transformado", "Lealdade ao sábado", "Conhecimento doutrinal", "Experiência de adoração"],
+      timing: "SLIDE 7: O Nome na Testa - Teologia do Caráter"
+    },
+    {
+      question: "Por que 'verdade na boca' aparece em Salmo 5 E Apocalipse 14:5?",
+      options: ["Integridade valida proclamação", "Condição para estar na presença divina", "Contraste com mentiras de Babilônia", "Evidência de transformação interior"],
+      timing: "SLIDE 8: Salmo 5 - Contrastes Proféticos"
+    },
+    {
+      question: "A conexão Salmo 51:13 com as 3 mensagens angélicas sugere que:",
+      options: ["Experiência pessoal valida missão", "Perdoados ensinam transgressores", "Transformação precede proclamação", "Todas as anteriores"],
+      timing: "SLIDE 9: Ensinar aos Transgressores"
+    },
+    {
+      question: "Qual Salmo melhor prepara o remanescente para o tempo de angústia?",
+      options: ["Salmo 91 (proteção divina)", "Salmo 46 (Deus é refúgio)", "Salmo 27 (uma coisa pedi)", "Salmo 23 (o Senhor é Pastor)"],
+      timing: "DISCUSSÃO FINAL: Aplicação Prática"
+    },
+    {
+      question: "Nossa maior falha ao ensinar sobre o santuário tem sido:",
+      options: ["Excesso de doutrina, pouca experiência", "Foco no terrestre, não celestial", "Conhecimento sem transformação", "Todas são preocupações válidas"],
+      timing: "REFLEXÃO MINISTERIAL: Para Veteranos"
     }
   ];
 
