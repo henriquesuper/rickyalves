@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaChevronLeft, FaChevronRight, FaExpand, FaCompress, FaStar, FaCrown, FaHeart, FaBookOpen, FaPray, FaChurch, FaUsers, FaVoteYea } from 'react-icons/fa';
+import { FaChevronLeft, FaChevronRight, FaExpand, FaCompress, FaStar, FaCrown, FaHeart, FaBookOpen, FaPray, FaChurch, FaUsers, FaVoteYea, FaEye } from 'react-icons/fa';
 import { BiInfinite } from 'react-icons/bi';
 import { GiCrossedSwords, GiHolyGrail, GiAngelWings, GiCandleFlame } from 'react-icons/gi';
 import Image from 'next/image';
@@ -19,86 +19,48 @@ const Sanctuary3D = dynamic(() => import('../components/Sanctuary3D'), {
   </div>
 });
 
-// Temporary simple sanctuary representation to avoid 3D issues
+// Enhanced Sanctuary with Video Background
 const SimpleSanctuary = ({ height = "450px" }) => {
   return (
-    <div className="w-full flex items-center justify-center bg-gradient-to-b from-amber-100 to-amber-200 rounded-xl overflow-hidden" style={{ height }}>
-      <div className="relative w-full max-w-4xl h-full flex items-center justify-center p-8">
-        {/* Desert Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-50 to-amber-200"></div>
-        
-        {/* Mountains in background */}
-        <div className="absolute bottom-0 left-0 right-0 h-32">
-          <svg viewBox="0 0 800 200" className="w-full h-full opacity-30">
-            <polygon points="0,200 100,100 200,150 300,80 400,120 500,70 600,110 700,90 800,130 800,200" fill="#8B7355" />
-            <polygon points="0,200 150,120 250,160 350,100 450,140 550,90 650,130 750,110 800,140 800,200" fill="#A0916B" />
-          </svg>
-        </div>
-        
-        {/* Main Sanctuary Structure */}
-        <div className="relative z-10 flex items-center justify-center space-x-12">
-          {/* Outer Court */}
-          <div className="flex flex-col items-center space-y-4">
-            {/* Bronze Altar */}
-            <div className="w-12 h-8 bg-gradient-to-b from-amber-600 to-amber-800 rounded-sm shadow-lg">
-              <div className="w-full h-2 bg-gradient-to-b from-red-500 to-orange-600 rounded-t-sm opacity-80"></div>
-            </div>
-            <span className="text-xs text-amber-800 font-semibold">Altar de Bronze</span>
-            
-            {/* Bronze Basin */}
-            <div className="w-8 h-6 bg-gradient-to-b from-amber-500 to-amber-700 rounded-full shadow-md"></div>
-            <span className="text-xs text-amber-800 font-semibold">Bacia de Bronze</span>
-          </div>
-          
-          {/* Tabernacle */}
-          <div className="relative">
-            {/* Tent Structure */}
-            <div className="relative w-40 h-20 bg-gradient-to-b from-slate-100 to-slate-300 rounded-t-3xl border-2 border-amber-600 shadow-xl">
-              {/* Tent Peak */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-0 h-0 border-l-4 border-r-4 border-b-6 border-l-transparent border-r-transparent border-b-amber-600"></div>
-              
-              {/* Holy Place */}
-              <div className="absolute left-2 top-2 bottom-2 w-20 bg-gradient-to-b from-yellow-200 to-yellow-400 rounded-sm opacity-80">
-                <div className="text-[8px] text-amber-800 text-center mt-2 font-bold">Lugar Santo</div>
-                {/* Furniture icons */}
-                <div className="flex justify-around mt-1">
-                  <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
-                  <div className="w-2 h-2 bg-amber-600 rounded-sm"></div>
-                  <div className="w-2 h-2 bg-amber-600 rounded-full"></div>
-                </div>
-              </div>
-              
-              {/* Most Holy Place */}
-              <div className="absolute right-2 top-2 bottom-2 w-14 bg-gradient-to-b from-yellow-100 to-yellow-300 rounded-sm opacity-90 border-l-2 border-amber-700">
-                <div className="text-[8px] text-amber-800 text-center mt-2 font-bold">Santo dos Santos</div>
-                {/* Ark */}
-                <div className="flex justify-center mt-2">
-                  <div className="w-4 h-2 bg-gradient-to-b from-yellow-400 to-amber-600 rounded-sm shadow-sm"></div>
-                </div>
-              </div>
-              
-              {/* Entrance */}
-              <div className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-1 w-2 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-r-sm opacity-70"></div>
-            </div>
-            
-            <span className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-xs text-amber-800 font-semibold whitespace-nowrap">Tabernáculo</span>
+    <div 
+      className="relative w-full bg-black rounded-xl overflow-hidden border border-amber-500/30 shadow-2xl"
+      style={{ height }}
+    >
+      {/* Video Background */}
+      <video 
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        style={{ 
+          filter: 'brightness(0.85) contrast(1.15) saturate(1.1)',
+          objectPosition: 'center center'
+        }}
+      >
+        <source src="/videos/tabernacle_loop.webm" type="video/webm" />
+        {/* Fallback for browsers that don't support WebM */}
+        <source src="/videos/tabernacle_loop.mp4" type="video/mp4" />
+        {/* Fallback content if video fails to load */}
+        <div className="w-full h-full flex items-center justify-center bg-gradient-to-b from-amber-900 to-amber-800 text-white">
+          <div className="text-center">
+            <div className="text-2xl mb-2">🏛️</div>
+            <div className="text-sm">Carregando Santuário...</div>
           </div>
         </div>
-        
-        {/* Divine Light Effect */}
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-          <div className="w-24 h-12 bg-gradient-radial from-yellow-200 via-yellow-300 to-transparent rounded-full opacity-60"></div>
-          <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-16 h-8 bg-gradient-radial from-white via-yellow-100 to-transparent rounded-full opacity-80"></div>
-        </div>
-        
-        {/* Floating Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          {/* Light rays */}
-          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-1 h-16 bg-gradient-to-b from-yellow-200 to-transparent opacity-40 rotate-12"></div>
-          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-1 h-16 bg-gradient-to-b from-yellow-200 to-transparent opacity-40 -rotate-12"></div>
-          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-1 h-20 bg-gradient-to-b from-yellow-200 to-transparent opacity-50"></div>
-        </div>
-      </div>
+      </video>
+      
+      {/* Subtle overlay for better integration with UI */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none"></div>
+      
+      {/* Ambient light effects for better integration */}
+      <div className="absolute top-4 left-4 w-24 h-24 bg-gradient-radial from-yellow-200/15 to-transparent rounded-full animate-pulse delay-500 pointer-events-none"></div>
+      <div className="absolute bottom-4 right-4 w-20 h-20 bg-gradient-radial from-amber-300/15 to-transparent rounded-full animate-pulse delay-1500 pointer-events-none"></div>
+      
+      {/* Enhanced border with glow effect */}
+      <div className="absolute inset-0 border border-amber-400/40 rounded-xl shadow-inner pointer-events-none"></div>
+      <div className="absolute inset-0 border border-amber-200/20 rounded-xl shadow-lg shadow-amber-500/20 pointer-events-none"></div>
     </div>
   );
 };
@@ -1128,392 +1090,1280 @@ const slides = [
     </div>
   </div>,
 
-  // SLIDE 3 - Our High Priest
+  // SLIDE 3 - Nosso Sumo Sacerdote (COMPLETELY REDESIGNED - Ultra Premium)
   <div className="slide-content" key="slide-3">
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300 mb-6">
-        Nosso Sumo Sacerdote
-      </h2>
-      
-      <motion.blockquote 
-        initial={{ opacity: 0, y: 20 }}
+    <div className="relative min-h-screen flex items-center justify-center py-8">
+      {/* Spectacular Background Effects */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        <div className="absolute top-16 left-16 transform rotate-12">
+          <GiHolyGrail className="text-8xl text-amber-300" />
+        </div>
+        <div className="absolute bottom-16 right-16 transform -rotate-12">
+          <GiAngelWings className="text-7xl text-purple-300" />
+        </div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20">
+          <FaCrown className="text-[15rem] text-indigo-200" />
+        </div>
+      </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="border-l-4 border-purple-500 pl-4 mb-8 text-white/90 italic"
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto px-8 z-10"
       >
-        "Cristo veio como sumo sacerdote dos bens já realizados. Ele atravessou o tabernáculo maior e mais perfeito, não feito por mãos humanas, isto é, não pertencente a esta criação." (Hebreus 9:11)
-      </motion.blockquote>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-purple-500/20"
+        {/* Enhanced Header with Hermeneutical Insight */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mb-16"
         >
-          <h3 className="text-xl font-semibold text-indigo-300 mb-3">O Santuário Terrestre</h3>
-          <ul className="space-y-2">
-            <li className="flex items-start gap-2">
-              <span className="text-purple-400">›</span>
-              <span>Um modelo do celestial</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-purple-400">›</span>
-              <span>Êxodo 25:40: "Tenha o cuidado de fazer tudo segundo o modelo"</span>
-            </li>
-          </ul>
+          <h2 className="font-['Playfair_Display'] text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-purple-300 to-indigo-200 mb-6">
+            Nosso Sumo Sacerdote
+          </h2>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "500px" }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="h-1 bg-gradient-to-r from-amber-400 via-purple-400 to-indigo-400 mx-auto mb-8"
+          ></motion.div>
+          <h3 className="font-['Cinzel'] text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 mb-4">
+            Do Modelo Terrestre à Realidade Celestial
+          </h3>
+          <p className="font-['Inter'] text-lg text-cyan-200/80 italic max-w-4xl mx-auto">
+            "A pedagogia divina: por que Deus revelou primeiro o padrão terrestre para depois revelar a realidade celestial?"
+          </p>
         </motion.div>
         
+        {/* Central Hermeneutical Question */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-purple-500/20"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-center mb-12"
         >
-          <h3 className="text-xl font-semibold text-indigo-300 mb-3">A Obra de Cristo</h3>
-          <ul className="space-y-2">
-            <li className="flex items-start gap-2">
-              <span className="text-purple-400">›</span>
-              <span>Cristo cumpre todos os símbolos do santuário</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-purple-400">›</span>
-              <span>O significado da entrada de Cristo com Seu próprio sangue</span>
-            </li>
-          </ul>
-        </motion.div>
-      </div>
-    </motion.div>
-  </div>,
-
-  // SLIDE 4 - The Sanctuary in Revelation
-  <div className="slide-content" key="slide-4">
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300 mb-8">
-        O Santuário no Apocalipse
-      </h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <h3 className="text-2xl font-semibold text-indigo-300 mb-4">Elementos do Santuário:</h3>
-          <div className="space-y-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-gradient-to-r from-purple-900/40 to-indigo-900/40 backdrop-blur-sm p-3 rounded-lg border-l-4 border-purple-500"
-            >
-              <p className="text-white/90">Candelabro (Ap 1:12,13)</p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="bg-gradient-to-r from-purple-900/40 to-indigo-900/40 backdrop-blur-sm p-3 rounded-lg border-l-4 border-indigo-500"
-            >
-              <p className="text-white/90">Sala do trono (Ap 4:2-5)</p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="bg-gradient-to-r from-purple-900/40 to-indigo-900/40 backdrop-blur-sm p-3 rounded-lg border-l-4 border-purple-500"
-            >
-              <p className="text-white/90">Altar de incenso (Ap 8:3)</p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.0 }}
-              className="bg-gradient-to-r from-purple-900/40 to-indigo-900/40 backdrop-blur-sm p-3 rounded-lg border-l-4 border-indigo-500"
-            >
-              <p className="text-white/90">Arca da aliança (Ap 11:19)</p>
-            </motion.div>
+          <div className="relative bg-gradient-to-br from-red-900/40 via-orange-900/40 to-red-900/40 backdrop-blur-2xl p-8 rounded-3xl border border-red-400/30 shadow-2xl shadow-red-500/20 max-w-6xl mx-auto overflow-hidden">
+            <div className="absolute top-4 left-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-2xl">❓</span>
+              </div>
+            </div>
+            <div className="pt-12">
+              <h4 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-orange-300 mb-6">
+                A Questão Hermenêutica Fundamental
+              </h4>
+              
+              <p className="font-['Inter'] text-xl md:text-2xl text-white/95 font-light leading-relaxed mb-6">
+                <span className="text-orange-300 font-semibold">"Hebreus 9:11-15 nos diz que Cristo é nosso Sumo Sacerdote</span> 
+                'do tabernáculo maior e mais perfeito.' Mas aqui está a questão que poucos fazem: 
+                <span className="text-red-300 font-semibold italic"> Por que Deus revelou primeiro o padrão terrestre para depois revelar a realidade celestial?</span>"
+              </p>
+            </div>
           </div>
         </motion.div>
         
-        <motion.div 
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <h3 className="text-2xl font-semibold text-indigo-300 mb-4">Salmo 122:</h3>
-          <motion.blockquote 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-purple-300 italic text-xl mb-4"
+        {/* Advanced Theological Analysis Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          {/* Pedagogia Divina */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="space-y-6"
           >
-            "Alegrei-me quando me disseram: Vamos à Casa do Senhor!"
-          </motion.blockquote>
+            <div className="relative bg-gradient-to-br from-purple-900/40 via-indigo-900/40 to-purple-900/40 backdrop-blur-xl p-8 rounded-3xl border border-purple-400/30 shadow-2xl shadow-purple-500/20 overflow-hidden">
+              <div className="absolute top-4 left-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <svg viewBox="0 0 100 100" className="w-10 h-10 text-white drop-shadow-lg">
+                    <defs>
+                      <radialGradient id="pedagogyGlow" cx="50%" cy="30%" r="40%">
+                        <stop offset="0%" stopColor="#FEF3C7" opacity="0.9" />
+                        <stop offset="100%" stopColor="#FEF3C7" opacity="0.1" />
+                      </radialGradient>
+                    </defs>
+                    {/* Teacher figure */}
+                    <circle cx="50" cy="25" r="8" fill="#FEF3C7" />
+                    <rect x="45" y="33" width="10" height="15" fill="#FEF3C7" />
+                    {/* Divine light radiating */}
+                    <circle cx="50" cy="25" r="20" fill="url(#pedagogyGlow)" />
+                    {/* Steps of learning */}
+                    <rect x="20" y="80" width="15" height="8" fill="#8B4513" />
+                    <rect x="30" y="75" width="15" height="8" fill="#8B4513" />
+                    <rect x="40" y="70" width="15" height="8" fill="#8B4513" />
+                    <rect x="50" y="65" width="15" height="8" fill="#8B4513" />
+                    {/* Arrow progression */}
+                    <path d="M35 85 L45 80 L55 75 L65 70" stroke="#FEF3C7" strokeWidth="2" fill="none" markerEnd="url(#arrowhead)" />
+                  </svg>
+                </div>
+              </div>
+              <div className="pt-16">
+                <h3 className="font-['Cinzel'] text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 mb-4">
+                  1. Pedagogia Divina
+                </h3>
+                <div className="space-y-3">
+                  <p className="font-['Inter'] text-white/90 text-sm leading-relaxed">
+                    <span className="text-purple-300 font-semibold">Do conhecido ao desconhecido:</span> Deus ensina através da experiência humana
+                  </p>
+                  <p className="font-['Inter'] text-white/90 text-sm leading-relaxed">
+                    <span className="text-purple-300 font-semibold">Progressão revelacional:</span> Cada detalhe terrestre revela verdades celestiais
+                  </p>
+                  <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 p-3 rounded-xl border-l-3 border-purple-500">
+                    <p className="text-purple-300 text-sm italic">
+                      "Tenha o cuidado de fazer tudo segundo o modelo" (Êx 25:40)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
           
-          <div className="space-y-4">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="flex items-center gap-3"
-            >
-              <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-              <p className="text-white/90">Alegria na presença de Deus</p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-              className="flex items-center gap-3"
-            >
-              <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-              <p className="text-white/90">Segurança e paz</p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1.0 }}
-              className="flex items-center gap-3"
-            >
-              <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-              <p className="text-white/90">Adoração e louvor</p>
-            </motion.div>
+          {/* Tipologia Experiencial */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-amber-900/40 via-yellow-900/40 to-amber-900/40 backdrop-blur-xl p-8 rounded-3xl border border-amber-400/30 shadow-2xl shadow-amber-500/20 overflow-hidden">
+              <div className="absolute top-4 left-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <FaHeart className="text-2xl text-white" />
+                </div>
+              </div>
+              <div className="pt-16">
+                <h3 className="font-['Cinzel'] text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-300 mb-4">
+                  2. Tipologia Experiencial
+                </h3>
+                <div className="space-y-3">
+                  <p className="font-['Inter'] text-white/90 text-sm leading-relaxed">
+                    <span className="text-amber-300 font-semibold">Experiência genuína:</span> Os rituais terrestres geravam transformação real
+                  </p>
+                  <p className="font-['Inter'] text-white/90 text-sm leading-relaxed">
+                    <span className="text-amber-300 font-semibold">Portal espiritual:</span> Davi via o santuário como acesso à presença divina
+                  </p>
+                  <div className="bg-gradient-to-r from-amber-900/30 to-yellow-900/30 p-3 rounded-xl border-l-3 border-amber-500">
+                    <p className="text-amber-300 text-sm italic">
+                      "Alegrei-me quando me disseram: Vamos à Casa do Senhor!" (Sl 122:1)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Realidade Celestial */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-emerald-900/40 via-teal-900/40 to-emerald-900/40 backdrop-blur-xl p-8 rounded-3xl border border-emerald-400/30 shadow-2xl shadow-emerald-500/20 overflow-hidden">
+              <div className="absolute top-4 left-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <GiAngelWings className="text-2xl text-white" />
+                </div>
+              </div>
+              <div className="pt-16">
+                <h3 className="font-['Cinzel'] text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300 mb-4">
+                  3. Realidade Celestial
+                </h3>
+                <div className="space-y-3">
+                  <p className="font-['Inter'] text-white/90 text-sm leading-relaxed">
+                    <span className="text-emerald-300 font-semibold">Cristo como realidade:</span> O "tabernáculo maior e mais perfeito"
+                  </p>
+                  <p className="font-['Inter'] text-white/90 text-sm leading-relaxed">
+                    <span className="text-emerald-300 font-semibold">Acesso direto:</span> Através do véu, isto é, Sua carne
+                  </p>
+                  <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 p-3 rounded-xl border-l-3 border-emerald-500">
+                    <p className="text-emerald-300 text-sm italic">
+                      "Ousadia para entrar no Santuário, pelo sangue de Jesus" (Hb 10:19)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+        
+        {/* Advanced Insight Box */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="relative bg-gradient-to-br from-cyan-900/40 via-blue-900/40 to-cyan-900/40 backdrop-blur-xl p-8 rounded-3xl border border-cyan-400/30 shadow-2xl shadow-cyan-500/20 mb-12"
+        >
+          <div className="flex items-center mb-6">
+            <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg mr-4">
+              <FaBookOpen className="text-2xl text-white" />
+            </div>
+            <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-300">
+              Insight Hermenêutico Avançado
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-cyan-300">A Questão Teológica Profunda:</h4>
+              <p className="font-['Inter'] text-white/90 leading-relaxed">
+                <span className="text-cyan-300 font-semibold">Se o santuário terrestre era uma 'sombra das coisas celestiais' (Hb 8:5), </span> 
+                como explicamos que os serviços terrestres geravam experiências espirituais genuínas? 
+                Eram apenas símbolos vazios até Cristo?
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-cyan-300">A Resposta Adventista:</h4>
+              <p className="font-['Inter'] text-white/90 leading-relaxed">
+                <span className="text-cyan-300 font-semibold">O santuário terrestre não era símbolo vazio, </span> 
+                mas portal de acesso à mesma realidade celestial que acessamos hoje. 
+                A diferença não está na eficácia, mas na clareza da revelação.
+              </p>
+            </div>
           </div>
         </motion.div>
-      </div>
-    </motion.div>
-  </div>,
-
-  // SLIDE 5 - Mount Zion
-  <div className="slide-content" key="slide-5">
-    <motion.div 
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h2 className="text-4xl font-bold text-white mb-6">
-        Monte Sião: Local de Encontro
-      </h2>
-      
-      <motion.blockquote 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="text-center italic text-xl text-cyan-300 mb-8"
-      >
-        "Quem poderá subir ao monte do Senhor? Quem poderá permanecer no seu santuário?" (Salmo 24:3)
-      </motion.blockquote>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20"
-        >
-          <h3 className="text-2xl font-semibold text-cyan-300 mb-4">Requisitos nos Salmos:</h3>
-          <ul className="space-y-3">
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.5 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Mãos limpas e coração puro</p>
-            </motion.li>
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.7 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Não rende culto a ídolos</p>
-            </motion.li>
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.9 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Não jura falsamente</p>
-            </motion.li>
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 1.1 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Vive com integridade</p>
-            </motion.li>
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 1.3 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Fala a verdade de coração</p>
-            </motion.li>
-          </ul>
-        </motion.div>
         
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20"
+        {/* What This Means for Us Today */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 }}
+          className="relative bg-gradient-to-br from-black/40 via-purple-900/30 to-indigo-900/40 backdrop-blur-2xl p-8 rounded-3xl border border-white/20 shadow-2xl shadow-purple-500/20 overflow-hidden"
         >
-          <h3 className="text-2xl font-semibold text-cyan-300 mb-4">Em Apocalipse 14:</h3>
-          <ul className="space-y-3">
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.7 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">144.000 com o Cordeiro</p>
-            </motion.li>
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 0.9 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Nome do Pai na testa</p>
-            </motion.li>
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 1.1 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Redimidos da terra</p>
-            </motion.li>
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 1.3 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Não contaminados</p>
-            </motion.li>
-            <motion.li 
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3, delay: 1.5 }}
-              className="flex items-start gap-3"
-            >
-              <div className="text-cyan-400 text-lg">•</div>
-              <p className="text-white/90">Na boca não se achou mentira</p>
-            </motion.li>
-          </ul>
+          <div className="flex items-center justify-center mb-6">
+            <GiAngelWings className="text-3xl text-cyan-300 mr-3" />
+            <FaPray className="text-3xl text-purple-300" />
+            <GiAngelWings className="text-3xl text-cyan-300 ml-3" />
+          </div>
+          <h4 className="font-['Cinzel'] text-xl font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 mb-4">
+            Implicação Para Nossa Experiência Hoje
+          </h4>
+          <p className="font-['Inter'] text-lg md:text-xl text-center text-white/95 leading-relaxed">
+            "Nossa compreensão do santuário celestial deve ser 
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 font-semibold"> igualmente experiencial, não apenas doutrinal. </span> 
+            Como Davi, precisamos ver o santuário não como ritual morto, mas como 
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-300 font-semibold"> portal vivo de acesso à presença divina.</span>"
+          </p>
         </motion.div>
-      </div>
-    </motion.div>
-  </div>,
-
-  // SLIDE 6 - Who Can Be on the Holy Mountain
-  <div className="slide-content" key="slide-6">
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300 mb-6">
-        Quem Pode Estar no Monte Santo?
-      </h2>
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 backdrop-blur-md p-5 rounded-xl border border-purple-500/30 mb-8"
-      >
-        <p className="text-purple-300 italic text-xl">
-          "Se dissermos que não temos pecado nenhum, [...] a verdade não está em nós" (1 João 1:8).
-        </p>
       </motion.div>
-      
-      <div className="space-y-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex items-start gap-4"
-        >
-          <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-3 rounded-lg text-white font-bold flex-shrink-0">
-            1
-          </div>
-          <div>
-            <p className="text-xl text-white/90">Ninguém pode dizer que "não será jamais abalado" (Sl 15:5)</p>
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="flex items-start gap-4"
-        >
-          <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-3 rounded-lg text-white font-bold flex-shrink-0">
-            2
-          </div>
-          <div>
-            <p className="text-xl text-white/90">O Cordeiro nos capacita a estar em pé no monte Sião</p>
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.0 }}
-          className="flex items-start gap-4"
-        >
-          <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-3 rounded-lg text-white font-bold flex-shrink-0">
-            3
-          </div>
-          <div>
-            <p className="text-xl text-white/90">Temos "ousadia para entrar no Santuário, pelo sangue de Jesus" (Hebreus 10:19)</p>
-          </div>
-        </motion.div>
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="flex items-start gap-4"
-        >
-          <div className="bg-gradient-to-r from-purple-500 to-indigo-500 p-3 rounded-lg text-white font-bold flex-shrink-0">
-            4
-          </div>
-          <div>
-            <p className="text-xl text-white/90">A justiça perfeita de Cristo nos é atribuída pela fé</p>
-          </div>
-        </motion.div>
+    </div>
+  </div>,
+
+  // SLIDE 4 - O Santuário no Apocalipse (COMPLETELY REDESIGNED - Ultra Premium)
+  <div className="slide-content" key="slide-4">
+    <div className="relative min-h-screen flex items-center justify-center py-8">
+      {/* Epic Background Effects */}
+      <div className="absolute inset-0 overflow-hidden opacity-10">
+        <div className="absolute top-20 left-20 transform rotate-45">
+          <FaBookOpen className="text-9xl text-purple-300" />
+        </div>
+        <div className="absolute bottom-20 right-20 transform -rotate-45">
+          <FaEye className="text-8xl text-cyan-300" />
+        </div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <BiInfinite className="text-[18rem] text-indigo-200" />
+        </div>
       </div>
-    </motion.div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto px-8 z-10"
+      >
+        {/* Enhanced Header */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-['Playfair_Display'] text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-cyan-300 to-indigo-200 mb-6">
+            O Santuário no Apocalipse
+          </h2>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "600px" }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="h-1 bg-gradient-to-r from-purple-400 via-cyan-400 to-indigo-400 mx-auto mb-8"
+          ></motion.div>
+          <h3 className="font-['Cinzel'] text-3xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 mb-4">
+            A Chave Hermenêutica para Compreender João
+          </h3>
+          <p className="font-['Inter'] text-lg text-cyan-200/80 italic max-w-5xl mx-auto">
+            "Hoje descobriremos como os Salmos servem de lente hermenêutica para Apocalipse 14"
+          </p>
+        </motion.div>
+        
+        {/* Critical Hermeneutical Statement */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-center mb-12"
+        >
+          <div className="relative bg-gradient-to-br from-red-900/40 via-orange-900/40 to-red-900/40 backdrop-blur-2xl p-8 rounded-3xl border border-red-400/30 shadow-2xl shadow-red-500/20 max-w-6xl mx-auto overflow-hidden">
+            <div className="absolute top-4 left-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-2xl">⚠️</span>
+              </div>
+            </div>
+            <div className="pt-12">
+              <h4 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-orange-300 mb-6">
+                DECLARAÇÃO HERMENÊUTICA FUNDAMENTAL
+              </h4>
+              
+              <p className="font-['Inter'] text-xl md:text-2xl text-white/95 font-bold leading-relaxed mb-4">
+                "Sem uma compreensão do <span className="text-red-300 font-bold">santuário do Antigo Testamento</span>, 
+                é simplesmente <span className="text-orange-300 font-bold">IMPOSSÍVEL compreender </span> 
+                o que João queria dizer ao descrever suas visões apocalípticas."
+              </p>
+              
+              <p className="font-['Inter'] text-lg text-white/80 italic">
+                Esta não é hipérbole teológica - é realidade hermenêutica
+              </p>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* The Revelation Sanctuary Elements */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+          {/* Left Side - Sanctuary Elements in Revelation */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-purple-900/40 via-indigo-900/40 to-purple-900/40 backdrop-blur-xl p-8 rounded-3xl border border-purple-400/30 shadow-2xl shadow-purple-500/20">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg mr-4">
+                  <FaEye className="text-2xl text-white" />
+                </div>
+                <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300">
+                  Elementos Santuariais no Apocalipse
+                </h3>
+              </div>
+              
+              <div className="space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.9 }}
+                  className="group bg-gradient-to-r from-amber-900/30 to-yellow-900/30 p-4 rounded-xl border-l-4 border-amber-500 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between">
+                    <p className="text-white/90 font-medium">
+                      <span className="text-amber-300 font-semibold">Candelabro</span> (Ap 1:12,13)
+                    </p>
+                    <GiCandleFlame className="text-amber-300 text-xl group-hover:animate-pulse" />
+                  </div>
+                  <p className="text-white/70 text-sm mt-2">Cristo entre as igrejas - Lugar Santo</p>
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 1.1 }}
+                  className="group bg-gradient-to-r from-indigo-900/30 to-cyan-900/30 p-4 rounded-xl border-l-4 border-indigo-500 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between">
+                    <p className="text-white/90 font-medium">
+                      <span className="text-indigo-300 font-semibold">Sala do Trono</span> (Ap 4:2-5)
+                    </p>
+                    <FaCrown className="text-indigo-300 text-xl group-hover:animate-pulse" />
+                  </div>
+                  <p className="text-white/70 text-sm mt-2">Centro do governo divino - Santíssimo</p>
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 1.3 }}
+                  className="group bg-gradient-to-r from-green-900/30 to-emerald-900/30 p-4 rounded-xl border-l-4 border-green-500 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between">
+                    <p className="text-white/90 font-medium">
+                      <span className="text-green-300 font-semibold">Altar de Incenso</span> (Ap 8:3)
+                    </p>
+                    <span className="text-green-300 text-xl">🔥</span>
+                  </div>
+                  <p className="text-white/70 text-sm mt-2">Orações dos santos - Intercessão</p>
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 1.5 }}
+                  className="group bg-gradient-to-r from-yellow-900/30 to-orange-900/30 p-4 rounded-xl border-l-4 border-yellow-500 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-center justify-between">
+                    <p className="text-white/90 font-medium">
+                      <span className="text-yellow-300 font-semibold">Arca da Aliança</span> (Ap 11:19)
+                    </p>
+                    <span className="text-yellow-300 text-xl">⚡</span>
+                  </div>
+                  <p className="text-white/70 text-sm mt-2">Lei de Deus revelada - Juízo</p>
+                </motion.div>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Right Side - Hermeneutical Insights */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-cyan-900/40 via-blue-900/40 to-cyan-900/40 backdrop-blur-xl p-8 rounded-3xl border border-cyan-400/30 shadow-2xl shadow-cyan-500/20">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg mr-4">
+                  <FaBookOpen className="text-2xl text-white" />
+                </div>
+                <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-300">
+                  Insight Hermenêutico
+                </h3>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 p-4 rounded-xl border-l-4 border-cyan-500">
+                  <h4 className="text-cyan-300 font-semibold mb-2">1 Coríntios 10:11</h4>
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    <span className="text-cyan-300 font-semibold">"Aconteceram com eles para servir de exemplo </span> 
+                    e foram escritas como advertência a nós, para quem o fim dos tempos tem chegado"
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 p-4 rounded-xl border-l-4 border-blue-500">
+                  <h4 className="text-blue-300 font-semibold mb-2">Método Tipológico</h4>
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    João não inventou novas imagens - ele <span className="text-blue-300 font-semibold">reutilizou intencionalmente </span> 
+                    a linguagem santuarial que seus leitores judeu-cristãos conheciam profundamente
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-4 rounded-xl border-l-4 border-indigo-500">
+                  <h4 className="text-indigo-300 font-semibold mb-2">Pedagogia Profética</h4>
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    <span className="text-indigo-300 font-semibold">Do conhecido para o desconhecido: </span> 
+                    O santuário terrestre prepara nossa mente para compreender as realidades escatológicas
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Advanced Question Box */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.1 }}
+              className="relative bg-gradient-to-br from-emerald-900/40 via-teal-900/40 to-emerald-900/40 backdrop-blur-xl p-6 rounded-3xl border border-emerald-400/30 shadow-2xl shadow-emerald-500/20"
+            >
+              <div className="flex items-center mb-4">
+                <span className="text-2xl mr-3">💭</span>
+                <h4 className="font-['Cinzel'] text-lg font-semibold text-emerald-300">
+                  Pergunta Hermenêutica Avançada
+                </h4>
+              </div>
+              <p className="text-white/90 text-sm italic leading-relaxed">
+                "Por que Deus permitiu a destruição do templo em 70 d.C. se ele era necessário para compreensão contínua? 
+                <span className="text-emerald-300 font-semibold"> Não seria a progressão revelacional: </span> 
+                símbolo → realidade → visão profética?"
+              </p>
+            </motion.div>
+          </motion.div>
+        </div>
+        
+        {/* Revolutionary Theological Insight */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="relative bg-gradient-to-br from-amber-900/40 via-yellow-900/40 to-amber-900/40 backdrop-blur-xl p-8 rounded-3xl border border-amber-400/30 shadow-2xl shadow-amber-500/20 mb-12"
+        >
+          <div className="text-center mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <span className="text-white font-bold text-3xl">💡</span>
+            </div>
+            <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-300">
+              Insight Revolucionário
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center space-y-3">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-amber-300">Antigo Testamento</h4>
+              <div className="h-1 bg-gradient-to-r from-amber-400 to-yellow-400 rounded-full mx-auto w-16"></div>
+              <p className="text-white/90 text-sm">
+                <span className="text-amber-300 font-semibold">Símbolos físicos</span><br />
+                Santuário terrestre visível
+              </p>
+            </div>
+            
+            <div className="text-center space-y-3">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-yellow-300">Era Cristã</h4>
+              <div className="h-1 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full mx-auto w-16"></div>
+              <p className="text-white/90 text-sm">
+                <span className="text-yellow-300 font-semibold">Realidade espiritual</span><br />
+                Cristo no santuário celestial
+              </p>
+            </div>
+            
+            <div className="text-center space-y-3">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-orange-300">Apocalipse</h4>
+              <div className="h-1 bg-gradient-to-r from-orange-400 to-red-400 rounded-full mx-auto w-16"></div>
+              <p className="text-white/90 text-sm">
+                <span className="text-orange-300 font-semibold">Visão profética</span><br />
+                Santuário na perspectiva escatológica
+              </p>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* Final Application */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 }}
+          className="relative bg-gradient-to-br from-black/40 via-purple-900/30 to-indigo-900/40 backdrop-blur-2xl p-8 rounded-3xl border border-white/20 shadow-2xl shadow-purple-500/20 overflow-hidden"
+        >
+          <div className="flex items-center justify-center mb-6">
+            <BiInfinite className="text-4xl text-cyan-300 mr-3" />
+            <h4 className="font-['Cinzel'] text-2xl font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300">
+              Implicação Para Nossa Hermenêutica
+            </h4>
+            <BiInfinite className="text-4xl text-cyan-300 ml-3" />
+          </div>
+          <p className="font-['Inter'] text-lg md:text-xl text-center text-white/95 leading-relaxed">
+            "Como <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 font-semibold">adventistas</span>, 
+            compreendemos que o santuário não é apenas doutrina histórica, mas 
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-300 font-semibold"> chave hermenêutica viva </span> 
+            que desvenda os mistérios apocalípticos para o remanescente dos últimos dias."
+          </p>
+        </motion.div>
+      </motion.div>
+    </div>
+  </div>,
+
+  // SLIDE 5 - Monte Sião: Local de Encontro (COMPLETELY REDESIGNED - Ultra Premium)
+  <div className="slide-content" key="slide-5">
+    <div className="relative min-h-screen flex items-center justify-center py-8">
+      {/* Epic Mountain Background Effects */}
+      <div className="absolute inset-0 overflow-hidden opacity-8">
+        <div className="absolute top-10 left-10 transform rotate-12">
+          <FaStar className="text-8xl text-amber-300" />
+        </div>
+        <div className="absolute bottom-10 right-10 transform -rotate-12">
+          <GiAngelWings className="text-7xl text-purple-300" />
+        </div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-15">
+          <svg viewBox="0 0 200 100" className="w-[30rem] h-[15rem] text-indigo-200">
+            {/* Mountain silhouette */}
+            <path d="M0 80 L30 40 L50 60 L80 20 L120 50 L150 30 L200 70 L200 100 L0 100 Z" fill="currentColor" opacity="0.3" />
+            <path d="M0 85 L40 55 L70 75 L100 35 L140 65 L170 45 L200 80 L200 100 L0 100 Z" fill="currentColor" opacity="0.2" />
+          </svg>
+        </div>
+      </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto px-8 z-10"
+      >
+        {/* Enhanced Header with Progressive Revelation Theme */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-['Playfair_Display'] text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-purple-300 to-indigo-200 mb-6">
+            Monte Sião
+          </h2>
+          <h3 className="font-['Cinzel'] text-4xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-purple-300 mb-6">
+            Da Pergunta de Davi à Resposta de João
+          </h3>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "600px" }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="h-1 bg-gradient-to-r from-amber-400 via-purple-400 to-indigo-400 mx-auto mb-4"
+          ></motion.div>
+          <p className="font-['Inter'] text-lg text-cyan-200/80 italic max-w-5xl mx-auto">
+            "Geografia teológica: para mentes antigas, geografia era teologia. Sião não era apenas um lugar - era um conceito."
+          </p>
+        </motion.div>
+        
+        {/* The Central Hermeneutical Question */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-center mb-12"
+        >
+          <div className="relative bg-gradient-to-br from-blue-900/40 via-indigo-900/40 to-blue-900/40 backdrop-blur-2xl p-8 rounded-3xl border border-blue-400/30 shadow-2xl shadow-blue-500/20 max-w-6xl mx-auto overflow-hidden">
+            <div className="absolute top-4 left-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-2xl">❓</span>
+              </div>
+            </div>
+            <div className="pt-12">
+              <h4 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300 mb-6">
+                A Progressão Hermenêutica Fascinante
+              </h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <h5 className="font-['Cinzel'] text-lg font-semibold text-blue-300">Davi Pergunta:</h5>
+                  <p className="font-['Inter'] text-lg text-white/95 italic leading-relaxed">
+                    <span className="text-blue-300 font-semibold">"QUEM poderá subir ao monte do Senhor?"</span> 
+                    (Sl 24:3)
+                  </p>
+                  <p className="text-blue-200/80 text-sm">Foco: Requisitos para ENTRAR</p>
+                </div>
+                <div className="space-y-4">
+                  <h5 className="font-['Cinzel'] text-lg font-semibold text-indigo-300">João Responde:</h5>
+                  <p className="font-['Inter'] text-lg text-white/95 italic leading-relaxed">
+                    <span className="text-indigo-300 font-semibold">"OS QUE TÊM O NOME do Cordeiro"</span> 
+                    (Ap 14:1)
+                  </p>
+                  <p className="text-indigo-200/80 text-sm">Foco: Graça já RECEBIDA</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* Progressive Revelation Analysis */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+          {/* Salmo 15 - Individual Requirements */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-red-900/40 via-orange-900/40 to-red-900/40 backdrop-blur-xl p-8 rounded-3xl border border-red-400/30 shadow-2xl shadow-red-500/20 overflow-hidden">
+              <div className="absolute top-4 left-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-lg">15</span>
+                </div>
+              </div>
+              <div className="pt-16">
+                <h3 className="font-['Cinzel'] text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-orange-300 mb-4">
+                  Salmo 15: "Quem Habitará?"
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-red-900/30 to-orange-900/30 p-3 rounded-xl border-l-3 border-red-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-red-300 font-semibold">Foco:</span> Caráter ético individual
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-red-900/30 to-orange-900/30 p-3 rounded-xl border-l-3 border-red-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-red-300 font-semibold">Perspectiva:</span> Entrada no santuário
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-red-900/30 to-orange-900/30 p-3 rounded-xl border-l-3 border-red-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-red-300 font-semibold">Ênfase:</span> Requisitos morais
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 p-3 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-xl">
+                  <p className="text-red-300 text-xs italic text-center">
+                    "Vive com integridade, fala a verdade"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Salmo 24 - Corporate Worship */}
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-blue-900/40 via-indigo-900/40 to-blue-900/40 backdrop-blur-xl p-8 rounded-3xl border border-blue-400/30 shadow-2xl shadow-blue-500/20 overflow-hidden">
+              <div className="absolute top-4 left-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-lg">24</span>
+                </div>
+              </div>
+              <div className="pt-16">
+                <h3 className="font-['Cinzel'] text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300 mb-4">
+                  Salmo 24: "Quem Subirá?"
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 p-3 rounded-xl border-l-3 border-blue-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-blue-300 font-semibold">Foco:</span> Pureza ritual e moral
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 p-3 rounded-xl border-l-3 border-blue-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-blue-300 font-semibold">Perspectiva:</span> Adoração corporativa
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 p-3 rounded-xl border-l-3 border-blue-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-blue-300 font-semibold">Ênfase:</span> Mãos limpas, coração puro
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 p-3 bg-gradient-to-r from-blue-800/20 to-indigo-800/20 rounded-xl">
+                  <p className="text-blue-300 text-xs italic text-center">
+                    "Não rende culto a ídolos, não jura falsamente"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Apocalipse 14 - Grace Accomplished */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-emerald-900/40 via-teal-900/40 to-emerald-900/40 backdrop-blur-xl p-8 rounded-3xl border border-emerald-400/30 shadow-2xl shadow-emerald-500/20 overflow-hidden">
+              <div className="absolute top-4 left-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-sm">14</span>
+                </div>
+              </div>
+              <div className="pt-16">
+                <h3 className="font-['Cinzel'] text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300 mb-4">
+                  Apocalipse 14: "Os Que Estão"
+                </h3>
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 p-3 rounded-xl border-l-3 border-emerald-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-emerald-300 font-semibold">Foco:</span> Graça já recebida
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 p-3 rounded-xl border-l-3 border-emerald-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-emerald-300 font-semibold">Perspectiva:</span> Presença confirmada
+                    </p>
+                  </div>
+                  <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 p-3 rounded-xl border-l-3 border-emerald-500">
+                    <p className="text-white/90 text-sm">
+                      <span className="text-emerald-300 font-semibold">Ênfase:</span> Nome do Cordeiro
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="mt-4 p-3 bg-gradient-to-r from-emerald-800/20 to-teal-800/20 rounded-xl">
+                  <p className="text-emerald-300 text-xs italic text-center">
+                    "Têm o nome escrito na testa"
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+        
+        {/* Revolutionary Theological Insight */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="relative bg-gradient-to-br from-amber-900/40 via-yellow-900/40 to-amber-900/40 backdrop-blur-xl p-8 rounded-3xl border border-amber-400/30 shadow-2xl shadow-amber-500/20 mb-12"
+        >
+          <div className="text-center mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <span className="text-white font-bold text-3xl">🔄</span>
+            </div>
+            <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-300">
+              A Evolução Revelacional Fascinante
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-amber-300">🤔 A Questão Hermenêutica Desafiadora:</h4>
+              <p className="font-['Inter'] text-white/90 leading-relaxed">
+                <span className="text-amber-300 font-semibold">Davi pergunta "QUEM pode habitar",</span> 
+                mas Apocalipse 14 responde <span className="text-yellow-300 font-semibold">"OS QUE TÊM O NOME."</span> 
+                Essa mudança de perspectiva revela que evolução na compreensão da salvação?
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-yellow-300">💡 A Resposta Teológica:</h4>
+              <p className="font-['Inter'] text-white/90 leading-relaxed">
+                <span className="text-yellow-300 font-semibold">Observem a progressão:</span> 
+                Davi vê requisitos para ENTRAR na presença de Deus. 
+                João vê pessoas que já ESTÃO na presença de Deus porque têm o nome do Cordeiro. 
+                <span className="text-amber-300 font-semibold">Isso é graça preveniente em ação!</span>
+              </p>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* The Missing Element Analysis */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.5 }}
+          className="relative bg-gradient-to-br from-purple-900/40 via-indigo-900/40 to-purple-900/40 backdrop-blur-xl p-8 rounded-3xl border border-purple-400/30 shadow-2xl shadow-purple-500/20 mb-12"
+        >
+          <div className="flex items-center mb-6">
+            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg mr-4">
+              <span className="text-white font-bold text-2xl">🐑</span>
+            </div>
+            <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300">
+              O Elemento Ausente/Presente
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-r from-red-900/30 to-orange-900/30 p-6 rounded-xl border border-red-500/30">
+              <h4 className="text-red-300 font-semibold mb-3">❌ Nos Salmos 15 e 24:</h4>
+              <p className="text-white/90 text-sm leading-relaxed">
+                Davi lista os requisitos para estar na presença de Deus, 
+                mas <span className="text-red-300 font-semibold">não menciona o Cordeiro.</span> 
+                Os requisitos morais aparecem aparentemente impossíveis para pecadores.
+              </p>
+            </div>
+            <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 p-6 rounded-xl border border-emerald-500/30">
+              <h4 className="text-emerald-300 font-semibold mb-3">✅ Em Apocalipse 14:</h4>
+              <p className="text-white/90 text-sm leading-relaxed">
+                <span className="text-emerald-300 font-semibold">O Cordeiro aparece PRIMEIRO.</span> 
+                É quase como se Apocalipse 14 estivesse respondendo à pergunta de Davi. 
+                A presença do Cordeiro torna possível o impossível.
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-6 p-4 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl text-center">
+            <p className="text-purple-300 italic">
+              "Agora que o Cordeiro de Deus está estabelecido no monte Sião, no santuário, 
+              também podemos estar presentes nesse lugar porque Sua justiça perfeita é atribuída a nós pela fé"
+            </p>
+          </div>
+        </motion.div>
+        
+        {/* Final Application */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.7 }}
+          className="relative bg-gradient-to-br from-black/40 via-purple-900/30 to-indigo-900/40 backdrop-blur-2xl p-8 rounded-3xl border border-white/20 shadow-2xl shadow-purple-500/20 overflow-hidden"
+        >
+          <div className="flex items-center justify-center mb-6">
+            <FaStar className="text-4xl text-amber-300 mr-3 animate-pulse" />
+            <h4 className="font-['Cinzel'] text-2xl font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300">
+              Geografia Teológica Transformadora
+            </h4>
+            <FaStar className="text-4xl text-amber-300 ml-3 animate-pulse" />
+          </div>
+          <p className="font-['Inter'] text-lg md:text-xl text-center text-white/95 leading-relaxed">
+            "Para <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 font-semibold">mentes antigas, geografia era teologia.</span> 
+            Monte Sião não era apenas local físico, mas 
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-300 font-semibold">conceito espiritual</span> 
+            que evoluiu de requisito impossível para <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300 font-semibold">realidade graciosa</span> através do Cordeiro."
+          </p>
+        </motion.div>
+      </motion.div>
+    </div>
+  </div>,
+
+  // SLIDE 6 - Quem Pode Estar no Monte Santo? (COMPLETELY REDESIGNED - Ultra Premium)
+  <div className="slide-content" key="slide-6">
+    <div className="relative min-h-screen flex items-center justify-center py-8">
+      {/* Epic Background Effects */}
+      <div className="absolute inset-0 overflow-hidden opacity-8">
+        <div className="absolute top-16 right-16 transform rotate-15">
+          <FaHeart className="text-8xl text-red-300" />
+        </div>
+        <div className="absolute bottom-16 left-16 transform -rotate-15">
+          <GiCrossedSwords className="text-7xl text-purple-300" />
+        </div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-10">
+          <FaCrown className="text-[20rem] text-indigo-200" />
+        </div>
+      </div>
+
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="max-w-7xl mx-auto px-8 z-10"
+      >
+        {/* Enhanced Header with Theological Tension */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-['Playfair_Display'] text-6xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-200 via-purple-300 to-indigo-200 mb-6">
+            Quem Pode Estar
+          </h2>
+          <h3 className="font-['Playfair_Display'] text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-amber-300 to-indigo-200 mb-6">
+            no Monte Santo?
+          </h3>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: "700px" }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="h-1 bg-gradient-to-r from-red-400 via-purple-400 to-indigo-400 mx-auto mb-4"
+          ></motion.div>
+          <p className="font-['Inter'] text-lg text-red-200/80 italic max-w-5xl mx-auto">
+            "A tensão teológica central: Como conciliar 'irrepreensíveis' (Ap 14:5) com 'todos pecaram' (Rm 3:23)?"
+          </p>
+        </motion.div>
+        
+        {/* The Central Theological Problem */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-center mb-12"
+        >
+          <div className="relative bg-gradient-to-br from-red-900/40 via-orange-900/40 to-red-900/40 backdrop-blur-2xl p-8 rounded-3xl border border-red-400/30 shadow-2xl shadow-red-500/20 max-w-6xl mx-auto overflow-hidden">
+            <div className="absolute top-4 left-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-red-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
+                <span className="text-white font-bold text-2xl">⚖️</span>
+              </div>
+            </div>
+            <div className="pt-12">
+              <h4 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-red-300 to-orange-300 mb-6">
+                A Tensão Teológica Fundamental
+              </h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <h5 className="font-['Cinzel'] text-lg font-semibold text-red-300">❌ A Realidade Humana:</h5>
+                  <p className="font-['Inter'] text-lg text-white/95 italic leading-relaxed">
+                    <span className="text-red-300 font-semibold">"Se dissermos que não temos pecado nenhum, [...] a verdade não está em nós"</span> 
+                    (1 João 1:8)
+                  </p>
+                </div>
+                <div className="space-y-4">
+                  <h5 className="font-['Cinzel'] text-lg font-semibold text-orange-300">✅ A Descrição dos 144 Mil:</h5>
+                  <p className="font-['Inter'] text-lg text-white/95 italic leading-relaxed">
+                    <span className="text-orange-300 font-semibold">"E na sua boca não se achou mentira; são irrepreensíveis"</span> 
+                    (Ap 14:5)
+                  </p>
+                </div>
+              </div>
+              
+              <div className="mt-6 p-4 bg-gradient-to-r from-red-800/20 to-orange-800/20 rounded-xl">
+                <p className="text-white/90 text-lg font-medium text-center">
+                  <span className="text-red-300 font-bold">Como resolver esta aparente contradição?</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* The Impossible Standards Analysis */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+          {/* Left Side - The Impossible Standards */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-gray-900/40 via-slate-900/40 to-gray-900/40 backdrop-blur-xl p-8 rounded-3xl border border-gray-400/30 shadow-2xl shadow-gray-500/20">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-gray-500 to-slate-600 rounded-2xl flex items-center justify-center shadow-lg mr-4">
+                  <svg viewBox="0 0 100 100" className="w-10 h-10 text-white drop-shadow-lg">
+                    <defs>
+                      <linearGradient id="impossibleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#F3F4F6" />
+                        <stop offset="100%" stopColor="#6B7280" />
+                      </linearGradient>
+                    </defs>
+                    {/* Broken ladder to heaven */}
+                    <rect x="40" y="20" width="4" height="60" fill="url(#impossibleGrad)" />
+                    <rect x="56" y="20" width="4" height="60" fill="url(#impossibleGrad)" />
+                    {/* Broken rungs */}
+                    <rect x="40" y="75" width="20" height="3" fill="url(#impossibleGrad)" />
+                    <rect x="40" y="65" width="15" height="3" fill="url(#impossibleGrad)" opacity="0.7" />
+                    <rect x="45" y="55" width="10" height="3" fill="url(#impossibleGrad)" opacity="0.5" />
+                    <rect x="50" y="45" width="8" height="3" fill="url(#impossibleGrad)" opacity="0.3" />
+                    {/* Person at bottom, unable to climb */}
+                    <circle cx="30" cy="82" r="4" fill="#EF4444" />
+                    <rect x="28" y="86" width="4" height="10" fill="#EF4444" />
+                    {/* Heaven at top */}
+                    <circle cx="50" cy="15" r="8" fill="#FEF3C7" opacity="0.8" />
+                    {/* X marks indicating failure */}
+                    <path d="M20 50 L25 55 M25 50 L20 55" stroke="#EF4444" strokeWidth="2" />
+                    <path d="M75 40 L80 45 M80 40 L75 45" stroke="#EF4444" strokeWidth="2" />
+                  </svg>
+                </div>
+                <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-slate-300">
+                  Os Padrões Impossíveis
+                </h3>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-gradient-to-r from-red-900/30 to-gray-900/30 p-4 rounded-xl border-l-4 border-red-500">
+                  <h4 className="text-red-300 font-semibold mb-2">Pergunta Honesta #1:</h4>
+                  <p className="text-white/90 text-sm">
+                    <span className="text-red-300 font-semibold">Quem pode dizer honestamente</span> que sempre "vive com integridade"? (Sl 15:2)
+                  </p>
+                </div>
+                <div className="bg-gradient-to-r from-red-900/30 to-gray-900/30 p-4 rounded-xl border-l-4 border-red-500">
+                  <h4 className="text-red-300 font-semibold mb-2">Pergunta Honesta #2:</h4>
+                  <p className="text-white/90 text-sm">
+                    <span className="text-red-300 font-semibold">Quem sempre</span>, "de coração, fala a verdade"? (Sl 15:2)
+                  </p>
+                </div>
+                <div className="bg-gradient-to-r from-red-900/30 to-gray-900/30 p-4 rounded-xl border-l-4 border-red-500">
+                  <h4 className="text-red-300 font-semibold mb-2">Pergunta Honesta #3:</h4>
+                  <p className="text-white/90 text-sm">
+                    <span className="text-red-300 font-semibold">Ninguém pode dizer</span> que "não será jamais abalado" (Sl 15:5)
+                  </p>
+                </div>
+              </div>
+              
+              <div className="mt-6 p-4 bg-gradient-to-r from-gray-800/40 to-red-800/40 rounded-xl text-center">
+                <p className="text-gray-300 italic text-sm">
+                  "A escada para o céu tem degraus quebrados..."
+                </p>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Right Side - The Revolutionary Solution */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="space-y-6"
+          >
+            <div className="relative bg-gradient-to-br from-emerald-900/40 via-teal-900/40 to-emerald-900/40 backdrop-blur-xl p-8 rounded-3xl border border-emerald-400/30 shadow-2xl shadow-emerald-500/20">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg mr-4">
+                  <svg viewBox="0 0 100 100" className="w-10 h-10 text-white drop-shadow-lg">
+                    <defs>
+                      <radialGradient id="solutionGlow" cx="50%" cy="50%" r="60%">
+                        <stop offset="0%" stopColor="#FEF3C7" opacity="1" />
+                        <stop offset="100%" stopColor="#FEF3C7" opacity="0.1" />
+                      </radialGradient>
+                    </defs>
+                    {/* Divine light radiating from Lamb */}
+                    <circle cx="50" cy="50" r="40" fill="url(#solutionGlow)" />
+                    {/* The Lamb at center */}
+                    <circle cx="50" cy="50" r="12" fill="#F59E0B" />
+                    {/* Crown on lamb */}
+                    <path d="M46 40 L48 35 L50 38 L52 35 L54 40 L52 43 L48 43 Z" fill="#F59E0B" />
+                    {/* Bridge from Lamb to people */}
+                    <rect x="25" y="47" width="50" height="6" fill="#10B981" opacity="0.7" rx="3" />
+                    {/* People being lifted up */}
+                    <circle cx="20" cy="75" r="3" fill="#10B981" />
+                    <circle cx="80" cy="75" r="3" fill="#10B981" />
+                    {/* Light rays connecting Lamb to people */}
+                    <path d="M35 50 L20 75" stroke="#FEF3C7" strokeWidth="2" opacity="0.8" strokeLinecap="round" />
+                    <path d="M65 50 L80 75" stroke="#FEF3C7" strokeWidth="2" opacity="0.8" strokeLinecap="round" />
+                    {/* Names written (light on foreheads) */}
+                    <circle cx="20" cy="72" r="1.5" fill="#FEF3C7" />
+                    <circle cx="80" cy="72" r="1.5" fill="#FEF3C7" />
+                  </svg>
+                </div>
+                <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300">
+                  A Solução: O Cordeiro
+                </h3>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 p-4 rounded-xl border-l-4 border-emerald-500">
+                  <h4 className="text-emerald-300 font-semibold mb-2">Capacitação Divina:</h4>
+                  <p className="text-white/90 text-sm">
+                    <span className="text-emerald-300 font-semibold">O Cordeiro nos capacita</span> a ficar em pé no monte Sião
+                  </p>
+                </div>
+                <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 p-4 rounded-xl border-l-4 border-emerald-500">
+                  <h4 className="text-emerald-300 font-semibold mb-2">Justiça Imputada:</h4>
+                  <p className="text-white/90 text-sm">
+                    <span className="text-emerald-300 font-semibold">Sua justiça perfeita</span> é atribuída a nós pela fé
+                  </p>
+                </div>
+                <div className="bg-gradient-to-r from-emerald-900/30 to-teal-900/30 p-4 rounded-xl border-l-4 border-emerald-500">
+                  <h4 className="text-emerald-300 font-semibold mb-2">Acesso Garantido:</h4>
+                  <p className="text-white/90 text-sm">
+                    <span className="text-emerald-300 font-semibold">Ousadia para entrar</span> no Santuário pelo sangue de Jesus (Hb 10:19)
+                  </p>
+                </div>
+              </div>
+              
+              <div className="mt-6 p-4 bg-gradient-to-r from-emerald-800/40 to-teal-800/40 rounded-xl text-center">
+                <p className="text-emerald-300 italic text-sm">
+                  "A ponte para o céu é construída pelo Cordeiro..."
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+        
+        {/* Advanced Theological Question */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.1 }}
+          className="relative bg-gradient-to-br from-blue-900/40 via-indigo-900/40 to-blue-900/40 backdrop-blur-xl p-8 rounded-3xl border border-blue-400/30 shadow-2xl shadow-blue-500/20 mb-12"
+        >
+          <div className="text-center mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <span className="text-white font-bold text-3xl">🤔</span>
+            </div>
+            <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-indigo-300">
+              A Questão Teológica Avançada
+            </h3>
+          </div>
+          
+          <div className="space-y-6">
+            <div className="bg-gradient-to-r from-blue-900/30 to-indigo-900/30 p-6 rounded-xl border border-blue-500/30">
+              <h4 className="text-blue-300 font-semibold mb-3 text-center">🔥 A Pergunta Que Gera Debate:</h4>
+              <p className="font-['Inter'] text-lg text-white/90 leading-relaxed text-center">
+                "Se a justiça do Cordeiro é <span className="text-blue-300 font-semibold">imputada</span> a nós pela fé, 
+                por que Apocalipse 14:5 ainda enfatiza que os 144 mil <span className="text-indigo-300 font-semibold">'são irrepreensíveis'?</span> 
+                Como conciliamos <span className="text-blue-300 font-semibold">imputação</span> com <span className="text-indigo-300 font-semibold">transformação real?</span>"
+              </p>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* The Adventist Solution */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="relative bg-gradient-to-br from-amber-900/40 via-yellow-900/40 to-amber-900/40 backdrop-blur-xl p-8 rounded-3xl border border-amber-400/30 shadow-2xl shadow-amber-500/20 mb-12"
+        >
+          <div className="text-center mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+              <span className="text-white font-bold text-3xl">🔗</span>
+            </div>
+            <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-300">
+              A Síntese Teológica Adventista
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-red-900/30 to-orange-900/30 p-6 rounded-xl border border-red-500/30 text-center">
+              <h4 className="text-red-300 font-semibold mb-3">❌ Não É:</h4>
+              <p className="text-white/90 text-sm">
+                <span className="text-red-300 font-semibold">Nossa justiça</span><br />
+                (impossível para pecadores)
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-amber-900/30 to-yellow-900/30 p-6 rounded-xl border border-amber-500/30 text-center">
+              <h4 className="text-amber-300 font-semibold mb-3">❌ Nem É:</h4>
+              <p className="text-white/90 text-sm">
+                <span className="text-amber-300 font-semibold">OU a justiça de Cristo</span><br />
+                (sem transformação real)
+              </p>
+            </div>
+            <div className="bg-gradient-to-br from-emerald-900/30 to-teal-900/30 p-6 rounded-xl border border-emerald-500/30 text-center">
+              <h4 className="text-emerald-300 font-semibold mb-3">✅ É:</h4>
+              <p className="text-white/90 text-sm">
+                <span className="text-emerald-300 font-semibold">Nossa justiça ATRAVÉS da justiça de Cristo</span><br />
+                (união com Cristo)
+              </p>
+            </div>
+          </div>
+          
+          <div className="mt-8 p-6 bg-gradient-to-r from-amber-800/20 to-yellow-800/20 rounded-xl text-center">
+            <p className="font-['Inter'] text-lg text-amber-300 italic leading-relaxed">
+              "Os 144 mil são a demonstração de que <span className="font-semibold">a graça realmente transforma.</span> 
+              Não é nossa justiça OU a justiça de Cristo. É nossa justiça ATRAVÉS da justiça de Cristo - união perfeita!"
+            </p>
+          </div>
+        </motion.div>
+        
+        {/* Mission Connection */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.5 }}
+          className="relative bg-gradient-to-br from-purple-900/40 via-indigo-900/40 to-purple-900/40 backdrop-blur-xl p-8 rounded-3xl border border-purple-400/30 shadow-2xl shadow-purple-500/20 mb-12"
+        >
+          <div className="flex items-center mb-6">
+            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg mr-4">
+              <span className="text-white font-bold text-2xl">📢</span>
+            </div>
+            <h3 className="font-['Cinzel'] text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-indigo-300">
+              Conexão com Salmo 51:13
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-purple-300">A Sequência de Davi:</h4>
+              <div className="space-y-3">
+                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 p-3 rounded-xl border-l-3 border-purple-500">
+                  <p className="text-white/90 text-sm">
+                    <span className="text-purple-300 font-semibold">1º:</span> Ser perdoado e purificado
+                  </p>
+                </div>
+                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 p-3 rounded-xl border-l-3 border-purple-500">
+                  <p className="text-white/90 text-sm">
+                    <span className="text-purple-300 font-semibold">2º:</span> "Ensinar aos transgressores os teus caminhos"
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <h4 className="font-['Cinzel'] text-lg font-semibold text-indigo-300">As Três Mensagens Angélicas:</h4>
+              <div className="space-y-3">
+                <div className="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-3 rounded-xl border-l-3 border-indigo-500">
+                  <p className="text-white/90 text-sm">
+                    <span className="text-indigo-300 font-semibold">1º:</span> Fundamentadas no "evangelho eterno"
+                  </p>
+                </div>
+                <div className="bg-gradient-to-r from-indigo-900/30 to-purple-900/30 p-3 rounded-xl border-l-3 border-indigo-500">
+                  <p className="text-white/90 text-sm">
+                    <span className="text-indigo-300 font-semibold">2º:</span> Ensinar ao mundo os caminhos de Deus
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-6 p-4 bg-gradient-to-r from-purple-900/30 to-indigo-900/30 rounded-xl text-center">
+            <p className="text-purple-300 italic">
+              "Só quem experimentou o perdão pode ensinar sobre perdão. 
+              A experiência pessoal valida a proclamação pública."
+            </p>
+          </div>
+        </motion.div>
+        
+        {/* Final Application */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.7 }}
+          className="relative bg-gradient-to-br from-black/40 via-purple-900/30 to-indigo-900/40 backdrop-blur-2xl p-8 rounded-3xl border border-white/20 shadow-2xl shadow-purple-500/20 overflow-hidden"
+        >
+          <div className="flex items-center justify-center mb-6">
+            <FaHeart className="text-4xl text-red-300 mr-3 animate-pulse" />
+            <h4 className="font-['Cinzel'] text-2xl font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300">
+              A Demonstração Final da Graça
+            </h4>
+            <FaHeart className="text-4xl text-red-300 ml-3 animate-pulse" />
+          </div>
+          <p className="font-['Inter'] text-lg md:text-xl text-center text-white/95 leading-relaxed">
+            "O mundo não precisa de mais <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-cyan-300 font-semibold">pregadores de doutrinas corretas.</span> 
+            Precisa de <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-yellow-300 font-semibold">testemunhas de vidas transformadas.</span> 
+            Os 144 mil são a prova viva de que <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-teal-300 font-semibold">a graça realmente transforma</span> - 
+            não através da perfeição humana, mas através da união perfeita com o Cordeiro."
+          </p>
+        </motion.div>
+      </motion.div>
+    </div>
   </div>,
 
   // SLIDE 7 - Psalm 5 and Contrasts
@@ -1532,7 +2382,7 @@ const slides = [
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-red-500/20"
+          className="bg-gradient-to-r from-red-900/30 to-rose-900/30 backdrop-blur-md p-6 rounded-xl border border-red-500/40"
         >
           <h3 className="text-2xl font-semibold text-red-300 mb-4">Os Perdidos</h3>
           <ul className="space-y-3">
@@ -1559,7 +2409,7 @@ const slides = [
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-green-500/20"
+          className="bg-gradient-to-r from-green-900/30 to-emerald-900/30 backdrop-blur-md p-6 rounded-xl border border-green-500/40"
         >
           <h3 className="text-2xl font-semibold text-green-300 mb-4">Os Redimidos</h3>
           <ul className="space-y-3">
