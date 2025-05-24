@@ -15,6 +15,7 @@ export default function MobileInterface() {
   const [hasVoted, setHasVoted] = useState(false);
   const [userName, setUserName] = useState('');
   const [isRegistered, setIsRegistered] = useState(false);
+  const [checkingSession, setCheckingSession] = useState(true);
 
   // Usar o hook de interação
   const {
@@ -26,6 +27,40 @@ export default function MobileInterface() {
     vote,
     react
   } = useInteraction();
+
+  // Verificar se há sessão ativa ao carregar
+  useEffect(() => {
+    const checkExistingSession = () => {
+      try {
+        const savedSession = localStorage.getItem('escola_sabatina_session');
+        if (savedSession) {
+          const session = JSON.parse(savedSession);
+          // Se a sessão é recente (menos de 1 hora)
+          if ((Date.now() - session.timestamp) < 3600000) {
+            console.log('📱 [MOBILE] Sessão ativa encontrada:', session.userName);
+            setUserName(session.userName);
+            setIsRegistered(true);
+            // Tentar restaurar a sessão
+            join(session.userName).then(result => {
+              if (result.success) {
+                console.log('📱 [MOBILE] Sessão restaurada automaticamente!');
+              }
+            });
+          } else {
+            // Sessão expirada
+            localStorage.removeItem('escola_sabatina_session');
+            console.log('📱 [MOBILE] Sessão expirada removida');
+          }
+        }
+      } catch (e) {
+        console.log('📱 [MOBILE] Erro ao verificar sessão:', e);
+        localStorage.removeItem('escola_sabatina_session');
+      }
+      setCheckingSession(false);
+    };
+
+    checkExistingSession();
+  }, [join]);
 
   // Resetar voto quando uma nova enquete chegar
   useEffect(() => {
@@ -69,6 +104,24 @@ export default function MobileInterface() {
     { type: 'understanding', icon: FaLightbulb, label: 'Compreendo', color: 'from-green-400 to-emerald-500' },
     { type: 'peace', icon: FaBookOpen, label: 'Paz', color: 'from-indigo-400 to-purple-500' }
   ];
+
+  // Mostrar loading enquanto verifica sessão
+  if (checkingSession) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center"
+        >
+          <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+            <FaChurch className="text-white text-2xl" />
+          </div>
+          <p className="text-white/80">Verificando sessão...</p>
+        </motion.div>
+      </div>
+    );
+  }
 
   if (!isRegistered) {
     return (

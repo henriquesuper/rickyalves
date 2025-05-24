@@ -107,10 +107,35 @@ export function useInteraction() {
       // Em desenvolvimento, usar Socket.io direto
       const userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       setUserId(userId);
+      
+      // Salvar no localStorage
+      localStorage.setItem('escola_sabatina_session', JSON.stringify({
+        userId,
+        userName,
+        timestamp: Date.now()
+      }));
+      
       return { success: true, userId };
     } else {
       // Em produção, usar API routes
       try {
+        // Verificar se já tem sessão salva
+        const savedSession = localStorage.getItem('escola_sabatina_session');
+        let existingUserId = null;
+        
+        if (savedSession) {
+          try {
+            const session = JSON.parse(savedSession);
+            // Se a sessão é recente (menos de 1 hora) e o nome é o mesmo
+            if (session.userName === userName && (Date.now() - session.timestamp) < 3600000) {
+              existingUserId = session.userId;
+              console.log('📱 [SESSION] Tentando restaurar sessão:', existingUserId, userName);
+            }
+          } catch (e) {
+            console.log('📱 [SESSION] Sessão salva inválida, criando nova');
+          }
+        }
+        
         const response = await fetch(API_BASE, {
           method: 'POST',
           headers: {
@@ -118,7 +143,7 @@ export function useInteraction() {
           },
           body: JSON.stringify({
             action: 'join',
-            data: { userName }
+            data: { userName, userId: existingUserId }
           }),
         });
         
@@ -126,6 +151,19 @@ export function useInteraction() {
         if (result.success) {
           setUserId(result.userId);
           setAttendance(result.attendance);
+          
+          // Salvar/atualizar sessão no localStorage
+          localStorage.setItem('escola_sabatina_session', JSON.stringify({
+            userId: result.userId,
+            userName: result.userName,
+            timestamp: Date.now()
+          }));
+          
+          if (result.sessionRestored) {
+            console.log('✅ [SESSION] Sessão restaurada com sucesso!');
+          } else {
+            console.log('✅ [SESSION] Nova sessão criada!');
+          }
         }
         return result;
       } catch (error) {

@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 // Estado global simplificado para demonstração
 // Em produção, você usaria um banco de dados como Redis ou PostgreSQL
 let globalState = {
-  participants: new Set(),
+  participants: new Map(), // Mudando para Map para armazenar dados do usuário
   polls: {},
   currentPoll: null,
   attendance: 0,
@@ -15,9 +15,36 @@ let globalState = {
   }
 };
 
+// Função para limpar sessões inativas (mais de 10 minutos sem atividade)
+function cleanupInactiveSessions() {
+  const now = Date.now();
+  const INACTIVE_TIMEOUT = 10 * 60 * 1000; // 10 minutos
+  
+  const toRemove = [];
+  globalState.participants.forEach((user, userId) => {
+    if (now - user.lastActivity > INACTIVE_TIMEOUT) {
+      toRemove.push(userId);
+    }
+  });
+  
+  toRemove.forEach(userId => {
+    const user = globalState.participants.get(userId);
+    globalState.participants.delete(userId);
+    console.log('🧹 [CLEANUP] Sessão inativa removida:', userId, user.userName);
+  });
+  
+  if (toRemove.length > 0) {
+    globalState.attendance = globalState.participants.size;
+    globalState.stats.activeUsers = globalState.attendance;
+  }
+}
+
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const action = searchParams.get('action');
+
+  // Limpar sessões inativas a cada requisição GET
+  cleanupInactiveSessions();
 
   switch (action) {
     case 'status':
@@ -79,19 +106,71 @@ export async function POST(request) {
 
   switch (action) {
     case 'join':
-      const userId = data.userId || `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      globalState.participants.add(userId);
+      const userName = data.userName;
+      const existingUserId = data.userId;
+      
+      // Se já tem userId e userName, verificar se é válido
+      if (existingUserId && userName && globalState.participants.has(existingUserId)) {
+        const existingUser = globalState.participants.get(existingUserId);
+        if (existingUser.userName === userName) {
+          // Usuário já existe e é válido, apenas atualizar timestamp
+          existingUser.lastActivity = Date.now();
+          console.log('🔄 [SESSION] Sessão existente encontrada:', existingUserId, userName);
+          
+          return NextResponse.json({
+            success: true,
+            userId: existingUserId,
+            userName: userName,
+            attendance: globalState.participants.size,
+            sessionRestored: true
+          });
+        }
+      }
+      
+      // Remover conexões antigas do mesmo nome (cleanup de refresh/duplicatas)
+      if (userName) {
+        const toRemove = [];
+        globalState.participants.forEach((user, id) => {
+          if (user.userName === userName) {
+            toRemove.push(id);
+          }
+        });
+        toRemove.forEach(id => {
+          globalState.participants.delete(id);
+          console.log('🧹 [CLEANUP] Removida sessão antiga:', id, userName);
+        });
+      }
+      
+      // Criar nova sessão
+      const newUserId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      globalState.participants.set(newUserId, {
+        userId: newUserId,
+        userName: userName || 'Anônimo',
+        joinedAt: Date.now(),
+        lastActivity: Date.now()
+      });
+      
       globalState.attendance = globalState.participants.size;
       globalState.stats.activeUsers = globalState.attendance;
       
+      console.log('✅ [SESSION] Nova sessão criada:', newUserId, userName);
+      console.log('👥 [SESSION] Total de participantes:', globalState.attendance);
+      
       return NextResponse.json({
         success: true,
-        userId,
-        attendance: globalState.attendance
+        userId: newUserId,
+        userName: userName || 'Anônimo',
+        attendance: globalState.attendance,
+        sessionRestored: false
       });
 
     case 'leave':
-      globalState.participants.delete(data.userId);
+      if (data.userId && globalState.participants.has(data.userId)) {
+        const user = globalState.participants.get(data.userId);
+        globalState.participants.delete(data.userId);
+        console.log('👋 [SESSION] Usuário saiu:', data.userId, user.userName);
+      }
+      
       globalState.attendance = globalState.participants.size;
       globalState.stats.activeUsers = globalState.attendance;
       
@@ -117,6 +196,11 @@ export async function POST(request) {
       });
 
     case 'vote':
+      // Atualizar atividade do usuário
+      if (data.userId && globalState.participants.has(data.userId)) {
+        globalState.participants.get(data.userId).lastActivity = Date.now();
+      }
+      
       const { pollId: votePollId, optionIndex } = data;
       if (globalState.polls[votePollId] && globalState.polls[votePollId].isActive) {
         globalState.polls[votePollId].options[optionIndex].votes++;
@@ -140,6 +224,11 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: 'Poll not found or inactive' });
 
     case 'reaction':
+      // Atualizar atividade do usuário
+      if (data.userId && globalState.participants.has(data.userId)) {
+        globalState.participants.get(data.userId).lastActivity = Date.now();
+      }
+      
       const reactionData = {
         type: 'reaction',
         userId: data.userId,
