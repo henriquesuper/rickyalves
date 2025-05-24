@@ -336,12 +336,12 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
 
   // Painel ESPETACULAR do apresentador
   return (
-    <div className="fixed top-4 left-4 z-50 max-w-sm">
+    <div className="fixed top-4 left-4 z-50 max-w-sm max-h-[90vh]">
       <motion.div
         initial={{ opacity: 0, x: -50, scale: 0.9 }}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        className="relative overflow-hidden"
+        className="relative overflow-hidden max-h-[90vh]"
       >
         {/* Enhanced background with effects */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-indigo-900/95 backdrop-blur-2xl rounded-3xl shadow-2xl"></div>
@@ -351,7 +351,29 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
           <div className="absolute bottom-4 left-4 w-12 h-12 bg-cyan-500/5 rounded-full blur-lg animate-pulse delay-1000"></div>
         </div>
         
-        <div className="relative p-6 text-white border border-white/20 rounded-3xl">
+        <div className="relative p-6 text-white border border-white/20 rounded-3xl overflow-y-auto max-h-[90vh] custom-scrollbar">
+        
+        {/* Custom CSS for scrollbar in presenter panel */}
+        <style jsx>{`
+          .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.6);
+            border-radius: 3px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.8);
+          }
+          .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(139, 92, 246, 0.6) transparent;
+          }
+        `}</style>
         
         {/* Cabeçalho aprimorado */}
         {/* Cabeçalho */}
