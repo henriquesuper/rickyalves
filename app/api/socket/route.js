@@ -109,12 +109,16 @@ export async function POST(request) {
       return NextResponse.json({ success: false, error: 'Poll not found or inactive' });
 
     case 'reaction':
-      globalState.interactions.push({
+      const reactionData = {
         type: 'reaction',
         userId: data.userId,
+        userName: data.userName || 'Anônimo',
         reaction: data.type,
-        timestamp: Date.now()
-      });
+        timestamp: Date.now(),
+        id: Date.now() + Math.random()
+      };
+      
+      globalState.interactions.push(reactionData);
       
       // Contar reações recentes (últimos 5 segundos)
       const recentReactions = globalState.interactions.filter(i => 
@@ -126,7 +130,9 @@ export async function POST(request) {
       return NextResponse.json({
         success: true,
         reaction: data.type,
-        count: recentReactions
+        userName: reactionData.userName,
+        count: recentReactions,
+        reactionData: reactionData
       });
 
     case 'end-poll':

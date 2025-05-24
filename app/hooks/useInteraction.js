@@ -143,7 +143,7 @@ export function useInteraction() {
     }
   }, [userId]);
 
-  const react = useCallback(async (reactionType) => {
+  const react = useCallback(async (reactionType, userName = null) => {
     try {
       const response = await fetch(API_BASE, {
         method: 'POST',
@@ -152,7 +152,7 @@ export function useInteraction() {
         },
         body: JSON.stringify({
           action: 'reaction',
-          data: { type: reactionType, userId }
+          data: { type: reactionType, userId, userName }
         }),
       });
       
@@ -161,8 +161,10 @@ export function useInteraction() {
         // Adicionar reação local imediatamente para feedback visual
         const newReaction = {
           reaction: result.reaction,
+          userName: result.userName,
           count: result.count,
-          id: Date.now()
+          id: Date.now(),
+          timestamp: Date.now()
         };
         
         setRecentReactions(prev => {

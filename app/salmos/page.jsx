@@ -300,7 +300,7 @@ export default function SalmosPage() {
       </AnimatePresence>
 
       {/* Floating Reactions */}
-      <div className="fixed top-1/3 right-8 space-y-2 z-40">
+      <div className="fixed top-1/3 right-8 space-y-3 z-40">
         <AnimatePresence>
           {recentReactions.map((reaction) => (
             <motion.div
@@ -310,24 +310,41 @@ export default function SalmosPage() {
                 opacity: 1, 
                 scale: 1, 
                 x: 0,
-                y: [0, -20, 0]
+                y: [0, -10, 0]
               }}
               exit={{ opacity: 0, scale: 0, x: 50 }}
               transition={{ 
-                duration: 0.6,
-                y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+                duration: 0.8,
+                y: { duration: 3, repeat: Infinity, ease: "easeInOut" }
               }}
-              className="bg-black/70 backdrop-blur-md rounded-2xl px-6 py-3 flex items-center space-x-3 text-white shadow-2xl border border-white/20"
+              className="bg-gradient-to-r from-black/80 to-purple-900/80 backdrop-blur-xl rounded-2xl px-6 py-4 text-white shadow-2xl border border-purple-400/30 min-w-[200px]"
             >
-              <span className="text-3xl">
-                {reaction.reaction === 'amen' && '🙏'}
-                {reaction.reaction === 'praise' && '👏'}
-                {reaction.reaction === 'love' && '❤️'}
-                {reaction.reaction === 'fire' && '🔥'}
-                {reaction.reaction === 'light' && '💡'}
-                {reaction.reaction === 'crown' && '👑'}
-              </span>
-              <span className="font-bold text-xl">+{reaction.count}</span>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <span className="text-3xl">
+                    {reaction.reaction === 'amen' && '🙏'}
+                    {reaction.reaction === 'praise' && '👏'}
+                    {reaction.reaction === 'love' && '❤️'}
+                    {reaction.reaction === 'blessing' && '⭐'}
+                    {reaction.reaction === 'understanding' && '💡'}
+                    {reaction.reaction === 'peace' && '🕊️'}
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-purple-200">
+                      {reaction.userName || 'Anônimo'}
+                    </span>
+                    <span className="text-xs text-white/60">
+                      {reaction.reaction === 'amen' && 'Amém'}
+                      {reaction.reaction === 'praise' && 'Aleluia'}
+                      {reaction.reaction === 'love' && 'Gratidão'}
+                      {reaction.reaction === 'blessing' && 'Bênção'}
+                      {reaction.reaction === 'understanding' && 'Compreendo'}
+                      {reaction.reaction === 'peace' && 'Paz'}
+                    </span>
+                  </div>
+                </div>
+                <span className="font-bold text-lg text-cyan-300">+{reaction.count}</span>
+              </div>
             </motion.div>
           ))}
         </AnimatePresence>

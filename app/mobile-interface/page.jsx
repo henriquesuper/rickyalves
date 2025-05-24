@@ -53,16 +53,16 @@ export default function MobileInterface() {
   };
 
   const handleReaction = async (reactionType) => {
-    await react(reactionType);
+    await react(reactionType, userName);
   };
 
   const reactions = [
     { type: 'amen', icon: FaPray, label: 'Amém', color: 'from-yellow-400 to-amber-500' },
     { type: 'praise', icon: FaHandsHelping, label: 'Aleluia', color: 'from-purple-400 to-pink-500' },
-    { type: 'love', icon: FaHeart, label: 'Amor', color: 'from-red-400 to-rose-500' },
-    { type: 'fire', icon: FaFire, label: 'Fogo', color: 'from-orange-400 to-red-500' },
-    { type: 'light', icon: FaLightbulb, label: 'Revelação', color: 'from-cyan-400 to-blue-500' },
-    { type: 'crown', icon: FaCrown, label: 'Glória', color: 'from-indigo-400 to-purple-500' }
+    { type: 'love', icon: FaHeart, label: 'Gratidão', color: 'from-red-400 to-rose-500' },
+    { type: 'blessing', icon: FaStar, label: 'Bênção', color: 'from-blue-400 to-cyan-500' },
+    { type: 'understanding', icon: FaLightbulb, label: 'Compreendo', color: 'from-green-400 to-emerald-500' },
+    { type: 'peace', icon: FaBookOpen, label: 'Paz', color: 'from-indigo-400 to-purple-500' }
   ];
 
   if (!isRegistered) {
@@ -175,9 +175,9 @@ export default function MobileInterface() {
                 {reaction.reaction === 'amen' && '🙏'}
                 {reaction.reaction === 'praise' && '👏'}
                 {reaction.reaction === 'love' && '❤️'}
-                {reaction.reaction === 'fire' && '🔥'}
-                {reaction.reaction === 'light' && '💡'}
-                {reaction.reaction === 'crown' && '👑'}
+                {reaction.reaction === 'blessing' && '⭐'}
+                {reaction.reaction === 'understanding' && '💡'}
+                {reaction.reaction === 'peace' && '🕊️'}
               </span>
               <span className="text-sm font-medium">+{reaction.count}</span>
             </motion.div>

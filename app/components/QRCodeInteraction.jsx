@@ -122,10 +122,11 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
                   {reaction.reaction === 'amen' && '🙏'}
                   {reaction.reaction === 'praise' && '👏'}
                   {reaction.reaction === 'love' && '❤️'}
-                  {reaction.reaction === 'fire' && '🔥'}
-                  {reaction.reaction === 'light' && '💡'}
-                  {reaction.reaction === 'crown' && '👑'}
+                  {reaction.reaction === 'blessing' && '⭐'}
+                  {reaction.reaction === 'understanding' && '💡'}
+                  {reaction.reaction === 'peace' && '🕊️'}
                 </span>
+                <span className="text-xs text-white/80">{reaction.userName}</span>
                 <span className="font-bold">+{reaction.count}</span>
               </motion.div>
             ))}
