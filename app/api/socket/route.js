@@ -21,10 +21,39 @@ export async function GET(request) {
 
   switch (action) {
     case 'status':
+      // Filtrar reações dos últimos 5 segundos para mostrar na TV
+      const now = Date.now();
+      const recentReactions = globalState.interactions
+        .filter(i => i.type === 'reaction' && (now - i.timestamp) < 5000)
+        .map(reaction => ({
+          id: reaction.id,
+          reaction: reaction.reaction,
+          userName: reaction.userName,
+          timestamp: reaction.timestamp,
+          count: globalState.interactions.filter(r => 
+            r.type === 'reaction' && 
+            r.reaction === reaction.reaction && 
+            (now - r.timestamp) < 5000
+          ).length
+        }));
+      
+      // Agrupar reações similares para evitar spam
+      const groupedReactions = [];
+      const processed = new Set();
+      
+      recentReactions.forEach(reaction => {
+        const key = `${reaction.reaction}_${reaction.userName}`;
+        if (!processed.has(key)) {
+          processed.add(key);
+          groupedReactions.push(reaction);
+        }
+      });
+      
       return NextResponse.json({
         attendance: globalState.attendance,
         currentPoll: globalState.currentPoll ? globalState.polls[globalState.currentPoll] : null,
-        stats: globalState.stats
+        stats: globalState.stats,
+        recentReactions: groupedReactions.slice(-5) // Máximo 5 reações na tela
       });
 
     case 'polls':
@@ -119,6 +148,8 @@ export async function POST(request) {
       };
       
       globalState.interactions.push(reactionData);
+      console.log('🔥 [API DEBUG] Reação adicionada:', reactionData);
+      console.log('🔥 [API DEBUG] Total de interações:', globalState.interactions.length);
       
       // Contar reações recentes (últimos 5 segundos)
       const recentReactions = globalState.interactions.filter(i => 

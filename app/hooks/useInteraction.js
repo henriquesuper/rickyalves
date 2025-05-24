@@ -21,6 +21,13 @@ export function useInteraction() {
       setAttendance(data.attendance || 0);
       setCurrentPoll(data.currentPoll);
       setStats(data.stats || { totalVotes: 0, activeUsers: 0 });
+      
+      // Atualizar reações vindas do servidor
+      if (data.recentReactions) {
+        console.log('📺 [VERCEL DEBUG] Reações recebidas da API:', data.recentReactions);
+        setRecentReactions(data.recentReactions);
+      }
+      
       setConnected(true);
     } catch (error) {
       console.error('Erro ao buscar status:', error);
@@ -89,7 +96,7 @@ export function useInteraction() {
     } else {
       // Usar polling em produção
       fetchStatus();
-      const interval = setInterval(fetchStatus, 2000); // Poll a cada 2 segundos
+      const interval = setInterval(fetchStatus, 1000); // Poll a cada 1 segundo para reações mais responsivas
       
       return () => clearInterval(interval);
     }
@@ -195,25 +202,9 @@ export function useInteraction() {
         });
         
         const result = await response.json();
-        if (result.success) {
-          // Adicionar reação local imediatamente para feedback visual
-          const newReaction = {
-            reaction: result.reaction,
-            userName: result.userName,
-            count: result.count,
-            id: Date.now(),
-            timestamp: Date.now()
-          };
-          
-          setRecentReactions(prev => {
-            const updated = [...prev, newReaction];
-            return updated.slice(-5);
-          });
-          
-          setTimeout(() => {
-            setRecentReactions(prev => prev.slice(1));
-          }, 4000);
-        }
+        console.log('📱 [MOBILE DEBUG] Reação enviada:', result);
+        // As reações agora são gerenciadas pelo polling do servidor
+        // não precisamos adicionar localmente pois virão via fetchStatus()
         return result;
       } catch (error) {
         console.error('Erro ao reagir:', error);
