@@ -83,7 +83,7 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
   if (!isPresenterMode) {
     // Versão ESPETACULAR para exibir na apresentação
     return (
-      <div className="fixed bottom-8 right-8 z-50">
+      <div className="fixed bottom-24 sm:bottom-8 right-4 sm:right-8 z-50">
         <motion.button
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.95 }}
@@ -92,9 +92,9 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
         >
           {/* Glow Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500 rounded-3xl blur-xl opacity-75 group-hover:opacity-100 animate-pulse"></div>
-          <div className="relative bg-gradient-to-br from-purple-600 via-indigo-600 to-cyan-600 hover:from-purple-500 hover:via-indigo-500 hover:to-cyan-500 p-5 rounded-3xl shadow-2xl backdrop-blur-md border border-white/30 transition-all duration-300">
-            <FaQrcode className="text-white text-3xl drop-shadow-lg" />
-            <div className="absolute -top-2 -right-2 bg-gradient-to-r from-pink-500 to-red-500 rounded-full w-6 h-6 flex items-center justify-center animate-bounce">
+          <div className="relative bg-gradient-to-br from-purple-600 via-indigo-600 to-cyan-600 hover:from-purple-500 hover:via-indigo-500 hover:to-cyan-500 p-4 sm:p-5 rounded-3xl shadow-2xl backdrop-blur-md border border-white/30 transition-all duration-300">
+            <FaQrcode className="text-white text-2xl sm:text-3xl drop-shadow-lg" />
+            <div className="absolute -top-1 sm:-top-2 -right-1 sm:-right-2 bg-gradient-to-r from-pink-500 to-red-500 rounded-full w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center animate-bounce">
               <FaWifi className="text-white text-xs" />
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
                 damping: 20,
                 duration: 0.6 
               }}
-              className="absolute bottom-20 right-0 w-[90vw] sm:w-[380px] max-w-[380px] max-h-[80vh] overflow-y-auto transform sm:transform-none -translate-x-1/2 sm:translate-x-0"
+              className="absolute bottom-16 sm:bottom-20 right-0 w-[95vw] sm:w-[380px] max-w-[380px] max-h-[75vh] sm:max-h-[80vh] overflow-y-auto transform -translate-x-1/2 sm:translate-x-0"
             >
               {/* Background with enhanced effects */}
               <div className="relative bg-gradient-to-br from-slate-900/95 via-purple-900/95 to-indigo-900/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
@@ -271,7 +271,7 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
         </AnimatePresence>
 
         {/* Reações flutuantes aprimoradas */}
-        <div className="fixed top-1/3 right-8 space-y-3 z-40">
+        <div className="fixed top-1/3 right-2 sm:right-8 space-y-2 sm:space-y-3 z-40">
           <AnimatePresence>
             {recentReactions.map((reaction) => (
               <motion.div
@@ -294,10 +294,10 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
                 {/* Enhanced glow effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity"></div>
                 
-                <div className="relative bg-gradient-to-br from-black/80 to-purple-900/80 backdrop-blur-xl rounded-2xl px-6 py-4 flex items-center space-x-3 text-white shadow-2xl border border-white/20 min-w-[220px]">
+                <div className="relative bg-gradient-to-br from-black/80 to-purple-900/80 backdrop-blur-xl rounded-2xl px-4 sm:px-6 py-3 sm:py-4 flex items-center space-x-2 sm:space-x-3 text-white shadow-2xl border border-white/20 min-w-[180px] sm:min-w-[220px]">
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-sm opacity-50"></div>
-                    <span className="relative text-3xl drop-shadow-lg">
+                    <span className="relative text-2xl sm:text-3xl drop-shadow-lg">
                       {reaction.reaction === 'amen' && '🙏'}
                       {reaction.reaction === 'praise' && '👏'}
                       {reaction.reaction === 'love' && '❤️'}
@@ -307,7 +307,7 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
                     </span>
                   </div>
                   <div className="flex flex-col flex-1">
-                    <span className="text-sm font-semibold text-purple-200">
+                    <span className="text-xs sm:text-sm font-semibold text-purple-200">
                       {reaction.userName || 'Anônimo'}
                     </span>
                     <span className="text-xs text-white/70">
@@ -321,7 +321,7 @@ export default function QRCodeInteraction({ isPresenterMode = false }) {
                   </div>
                   <div className="relative">
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-lg blur-sm opacity-50"></div>
-                    <span className="relative font-bold text-lg text-cyan-300 bg-black/20 px-3 py-1 rounded-lg">
+                    <span className="relative font-bold text-sm sm:text-lg text-cyan-300 bg-black/20 px-2 sm:px-3 py-1 rounded-lg">
                       +{reaction.count}
                     </span>
                   </div>

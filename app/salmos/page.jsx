@@ -221,26 +221,26 @@ export default function SalmosPage() {
       </div>
 
       {/* Enhanced Navigation Controls */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center items-center gap-12 z-20">
+      <div className="absolute bottom-8 left-0 right-0 flex justify-center items-center gap-6 sm:gap-12 z-20 px-4">
         <motion.button
           whileHover={{ scale: 1.15, boxShadow: "0 0 30px rgba(99, 102, 241, 0.5)" }}
           whileTap={{ scale: 0.9 }}
           onClick={prevSlide}
-          className="group relative bg-gradient-to-r from-indigo-600/80 to-purple-600/80 hover:from-indigo-500/90 hover:to-purple-500/90 p-4 rounded-2xl backdrop-blur-md border border-white/20 shadow-xl shadow-indigo-500/25 transition-all duration-300"
+          className="group relative bg-gradient-to-r from-indigo-600/80 to-purple-600/80 hover:from-indigo-500/90 hover:to-purple-500/90 p-3 sm:p-4 rounded-2xl backdrop-blur-md border border-white/20 shadow-xl shadow-indigo-500/25 transition-all duration-300"
         >
-          <FaChevronLeft className="text-white text-2xl group-hover:text-cyan-300 transition-colors duration-300" />
+          <FaChevronLeft className="text-white text-xl sm:text-2xl group-hover:text-cyan-300 transition-colors duration-300" />
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-400/20 to-purple-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </motion.button>
         
         <motion.div 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="px-8 py-3 bg-black/30 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl"
+          className="px-4 sm:px-8 py-2 sm:py-3 bg-black/30 backdrop-blur-md rounded-2xl border border-white/20 shadow-xl"
         >
-          <div className="text-white/90 font-['Inter'] text-lg font-medium">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 font-bold text-2xl">{currentSlide + 1}</span>
-            <span className="text-white/60 mx-2 text-xl">/</span>
-            <span className="text-white/80 text-xl">{totalSlides}</span>
+          <div className="text-white/90 font-['Inter'] text-base sm:text-lg font-medium">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 font-bold text-xl sm:text-2xl">{currentSlide + 1}</span>
+            <span className="text-white/60 mx-1 sm:mx-2 text-lg sm:text-xl">/</span>
+            <span className="text-white/80 text-lg sm:text-xl">{totalSlides}</span>
           </div>
         </motion.div>
         
@@ -248,9 +248,9 @@ export default function SalmosPage() {
           whileHover={{ scale: 1.15, boxShadow: "0 0 30px rgba(99, 102, 241, 0.5)" }}
           whileTap={{ scale: 0.9 }}
           onClick={nextSlide}
-          className="group relative bg-gradient-to-r from-purple-600/80 to-indigo-600/80 hover:from-purple-500/90 hover:to-indigo-500/90 p-4 rounded-2xl backdrop-blur-md border border-white/20 shadow-xl shadow-purple-500/25 transition-all duration-300"
+          className="group relative bg-gradient-to-r from-purple-600/80 to-indigo-600/80 hover:from-purple-500/90 hover:to-indigo-500/90 p-3 sm:p-4 rounded-2xl backdrop-blur-md border border-white/20 shadow-xl shadow-purple-500/25 transition-all duration-300"
         >
-          <FaChevronRight className="text-white text-2xl group-hover:text-cyan-300 transition-colors duration-300" />
+          <FaChevronRight className="text-white text-xl sm:text-2xl group-hover:text-cyan-300 transition-colors duration-300" />
           <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400/20 to-cyan-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </motion.button>
       </div>
