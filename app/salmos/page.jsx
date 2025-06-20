@@ -66,6 +66,37 @@ const SimpleSanctuary = ({ height = "450px" }) => {
 };
 
 export default function SalmosPage() {
+  // 🚧 Temporarily disabled to reduce Vercel function invocations
+  // Remove this block to restore full functionality
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 text-white flex items-center justify-center p-8">
+      <div className="text-center max-w-2xl mx-auto">
+        <div className="mb-8">
+          <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center shadow-2xl">
+            <span className="text-white text-6xl">🏛️</span>
+          </div>
+        </div>
+        <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">
+          Estudo dos Salmos
+        </h1>
+        <p className="text-xl text-white/80 mb-6">
+          Esta página está temporariamente em manutenção para otimização de recursos.
+        </p>
+        <div className="bg-black/30 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+          <p className="text-white/70 mb-4">
+            Estamos trabalhando para melhorar a experiência. Em breve estaremos de volta!
+          </p>
+          <button 
+            onClick={() => window.history.back()} 
+            className="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-3 rounded-xl font-medium hover:scale-105 transition-transform"
+          >
+            Voltar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isPresenterMode, setIsPresenterMode] = useState(false);
