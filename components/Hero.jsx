@@ -9,6 +9,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import HackerText from "./ui/HackerText";
 import CyberGlitchImage from "./ui/CyberGlitchImage";
+import HumanTypewriter from "./ui/HumanTypewriter";
 
 const Hero = () => {
   return (
@@ -29,9 +30,13 @@ const Hero = () => {
         
         <div className="text-left md:col-span-2 md:text-left relative z-10">
           <ScrollAnimation direction="right" delay={0.2}>
-            <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400 pb-4">
-              Ricky Alves <br />
-              <span className="text-2xl md:text-4xl font-normal text-green-400 font-mono mt-2 block">
+            <h1 className="text-5xl md:text-7xl font-bold pb-4 font-mono tracking-tighter min-h-[5rem]">
+              <HumanTypewriter 
+                text="RICKY ALVES" 
+                className="bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400"
+              />
+              <br />
+              <span className="text-2xl md:text-4xl font-normal text-green-400 font-mono mt-2 block tracking-normal">
                 <HackerText text="> The Digital Alchemist" />
               </span>
             </h1>
