@@ -2,107 +2,94 @@
 
 /* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
-import Image from "next/image";
 import { motion } from "framer-motion";
 import ScrollAnimation from "../app/components/ScrollAnimation";
 import HoverAnimation from "../app/components/HoverAnimation";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import HackerText from "./ui/HackerText";
+import CyberGlitchImage from "./ui/CyberGlitchImage";
 
 const Hero = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center py-16 px-8">
-      <ScrollAnimation direction="left">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
-        >
-          <Image src='/images/profile.jpeg' className="profile-img justify-self-center md:col-span-1" width={300} height={300} alt="Ricky's personal headshot" />
-        </motion.div>
-      </ScrollAnimation>
+    <div className="h-[45rem] w-full rounded-md flex md:items-center md:justify-center antialiased bg-transparent relative overflow-hidden">
       
-      <div className="text-left md:col-span-2 md:text-left">
-        <ScrollAnimation direction="right" delay={0.2}>
-          <div className="text-5xl font-extrabold mb-12 mt-12">
-            <motion.span 
-              className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"
-              animate={{ 
-                backgroundPosition: ["0% 0%", "100% 100%"],
-              }}
-              transition={{ 
-                duration: 5, 
-                repeat: Infinity, 
-                repeatType: "reverse" 
-              }}
-            >
-              Hey, I'm Ricky
-            </motion.span>
-            <motion.span 
-              className="inline-block ml-2"
-              animate={{ 
-                rotate: [0, 20, 0, 20, 0],
-                transition: {
-                  duration: 1.5,
-                  repeat: Infinity,
-                  repeatDelay: 1
-                }
-              }}
-            >
-              👋
-            </motion.span>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center p-4 max-w-7xl mx-auto z-10 w-full pt-20 md:pt-0">
+        <ScrollAnimation direction="left">
+          <div className="relative flex justify-center md:justify-start md:col-span-1">
+            <CyberGlitchImage 
+              src='/images/profile.jpeg' 
+              width={350} 
+              height={350} 
+              alt="Ricky's personal headshot"
+              className="border border-white/10 shadow-2xl shadow-black/50" 
+            />
           </div>
         </ScrollAnimation>
         
-        <ScrollAnimation direction="up" delay={0.4}>
-          <p>
-            I'm a software wizard hailing from the world of palm trees
-            and traffic, Los Angeles. I'm skilled at conjuring exceptional
-            websites, applications, and all sorts of digital magic in
-            between. They don't call it "coding" here, it's more like
-            weaving the matrix. And occasionally, I moonlight as a pixel
-            Picasso, designing sleek interfaces that even Leonardo da
-            Vinci would double-tap on Instagram.
-          </p>
-        </ScrollAnimation>
-        
-        <ScrollAnimation direction="up" delay={0.6}>
-          <div className="social-icons flex justify-center md:justify-start items-center gap-4 mt-6">
-            <HoverAnimation rotate={10}>
-              <a
-                href="https://twitter.com/henriquesuper"
-                aria-label="Twitter"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-2xl hover:text-blue-400 transition-colors"
-              >
-                <i className="fa-brands fa-x-twitter"></i>
-              </a>
-            </HoverAnimation>
-            
-            <HoverAnimation rotate={-10}>
-              <a
-                href="https://github.com/henriquesuper"
-                aria-label="GitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-2xl hover:text-gray-700 transition-colors"
-              >
-                <i className="fa-brands fa-github"></i>
-              </a>
-            </HoverAnimation>
-            
-            <HoverAnimation rotate={10}>
-              <a
-                href="https://linkedin.com/in/rickyalves/"
-                aria-label="LinkedIn"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-2xl hover:text-blue-600 transition-colors"
-              >
-                <i className="fa-brands fa-linkedin"></i>
-              </a>
-            </HoverAnimation>
-          </div>
-        </ScrollAnimation>
+        <div className="text-left md:col-span-2 md:text-left relative z-10">
+          <ScrollAnimation direction="right" delay={0.2}>
+            <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400 pb-4">
+              Ricky Alves <br />
+              <span className="text-2xl md:text-4xl font-normal text-green-400 font-mono mt-2 block">
+                <HackerText text="> The Digital Alchemist" />
+              </span>
+            </h1>
+          </ScrollAnimation>
+          
+          <ScrollAnimation direction="up" delay={0.4}>
+            <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg leading-relaxed font-mono">
+              <span className="text-green-500/50 mr-2">01</span>
+              I'm a software wizard from Los Angeles.
+              <br/>
+              <span className="text-green-500/50 mr-2">02</span>
+              Conjuring exceptional digital magic.
+              <br/>
+              <span className="text-green-500/50 mr-2">03</span>
+              Weaving the matrix, one line at a time.
+            </p>
+          </ScrollAnimation>
+          
+          <ScrollAnimation direction="up" delay={0.6}>
+            <div className="social-icons flex justify-center md:justify-start items-center gap-6 mt-8">
+              <HoverAnimation rotate={10}>
+                <a
+                  href="https://twitter.com/henriquesuper"
+                  aria-label="Twitter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-3xl text-neutral-500 hover:text-green-400 transition-colors transform hover:scale-110"
+                >
+                  <FaXTwitter />
+                </a>
+              </HoverAnimation>
+              
+              <HoverAnimation rotate={-10}>
+                <a
+                  href="https://github.com/henriquesuper"
+                  aria-label="GitHub"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-3xl text-neutral-500 hover:text-white transition-colors transform hover:scale-110"
+                >
+                  <FaGithub />
+                </a>
+              </HoverAnimation>
+              
+              <HoverAnimation rotate={10}>
+                <a
+                  href="https://linkedin.com/in/rickyalves/"
+                  aria-label="LinkedIn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-3xl text-neutral-500 hover:text-blue-500 transition-colors transform hover:scale-110"
+                >
+                  <FaLinkedin />
+                </a>
+              </HoverAnimation>
+            </div>
+          </ScrollAnimation>
+        </div>
       </div>
     </div>
   )

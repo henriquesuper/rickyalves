@@ -31,30 +31,32 @@ export default function MobileInterface() {
   // Verificar se há sessão ativa ao carregar
   useEffect(() => {
     const checkExistingSession = () => {
-      try {
-        const savedSession = localStorage.getItem('escola_sabatina_session');
-        if (savedSession) {
-          const session = JSON.parse(savedSession);
-          // Se a sessão é recente (menos de 1 hora)
-          if ((Date.now() - session.timestamp) < 3600000) {
-            console.log('📱 [MOBILE] Sessão ativa encontrada:', session.userName);
-            setUserName(session.userName);
-            setIsRegistered(true);
-            // Tentar restaurar a sessão
-            join(session.userName).then(result => {
-              if (result.success) {
-                console.log('📱 [MOBILE] Sessão restaurada automaticamente!');
-              }
-            });
-          } else {
-            // Sessão expirada
-            localStorage.removeItem('escola_sabatina_session');
-            console.log('📱 [MOBILE] Sessão expirada removida');
+      if (typeof window !== 'undefined') {
+        try {
+          const savedSession = localStorage.getItem('escola_sabatina_session');
+          if (savedSession) {
+            const session = JSON.parse(savedSession);
+            // Se a sessão é recente (menos de 1 hora)
+            if ((Date.now() - session.timestamp) < 3600000) {
+              console.log('📱 [MOBILE] Sessão ativa encontrada:', session.userName);
+              setUserName(session.userName);
+              setIsRegistered(true);
+              // Tentar restaurar a sessão
+              join(session.userName).then(result => {
+                if (result.success) {
+                  console.log('📱 [MOBILE] Sessão restaurada automaticamente!');
+                }
+              });
+            } else {
+              // Sessão expirada
+              localStorage.removeItem('escola_sabatina_session');
+              console.log('📱 [MOBILE] Sessão expirada removida');
+            }
           }
+        } catch (e) {
+          console.log('📱 [MOBILE] Erro ao verificar sessão:', e);
+          localStorage.removeItem('escola_sabatina_session');
         }
-      } catch (e) {
-        console.log('📱 [MOBILE] Erro ao verificar sessão:', e);
-        localStorage.removeItem('escola_sabatina_session');
       }
       setCheckingSession(false);
     };

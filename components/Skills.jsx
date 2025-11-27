@@ -1,28 +1,40 @@
-const Skills = () => {
-    const skills = [
-        { icon: 'html5', name: 'HTML' },
-        { icon: 'css3-alt', name: 'CSS' },
-        { icon: 'js-square', name: 'JavaScript' },
-        { icon: 'react', name: 'React' },
-        { icon: 'node-js', name: 'Node' },
-        { icon: 'python', name: 'Python' },
-        { icon: 'swift', name: 'Swift' },
-        { icon: 'flutter', name: 'Flutter' },
-    ];
+"use client";
 
-    return (
-      <div className="py-16 px-8">
-        <h2 className="text-3xl font-semibold mb-8">Skills</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {skills.map((skill, index) => (
-            <div key={index} className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white flex justify-center items-center gap-4 p-4 rounded-lg shadow-md transition-all duration-500 ease-in-out cursor-default hover:from-purple-600 hover:to-indigo-500">
-              <i className={`fa-brands fa-${skill.icon} text-2xl`}></i>
-              <p>{skill.name}</p>
-            </div>
-          ))}
+import { InfiniteMovingCards } from "./ui/InfiniteMovingCards";
+import { FaHtml5, FaCss3Alt, FaJsSquare, FaReact, FaNodeJs, FaPython, FaSwift } from "react-icons/fa";
+import { SiFlutter } from "react-icons/si";
+import HackerText from "./ui/HackerText";
+
+const Skills = () => {
+  const skills = [
+    { icon: <FaHtml5 className="group-hover:text-[#E34F26] transition-colors" />, name: 'HTML' },
+    { icon: <FaCss3Alt className="group-hover:text-[#1572B6] transition-colors" />, name: 'CSS' },
+    { icon: <FaJsSquare className="group-hover:text-[#F7DF1E] transition-colors" />, name: 'JavaScript' },
+    { icon: <FaReact className="group-hover:text-[#61DAFB] transition-colors" />, name: 'React' },
+    { icon: <FaNodeJs className="group-hover:text-[#339933] transition-colors" />, name: 'Node' },
+    { icon: <FaPython className="group-hover:text-[#3776AB] transition-colors" />, name: 'Python' },
+    { icon: <FaSwift className="group-hover:text-[#F05138] transition-colors" />, name: 'Swift' },
+    { icon: <SiFlutter className="group-hover:text-[#02569B] transition-colors" />, name: 'Flutter' }, 
+  ];
+
+  return (
+    <div className="py-20 relative flex flex-col antialiased items-center justify-center overflow-hidden z-10">
+       <div className="text-center mb-10">
+         <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400 font-mono mb-2">
+          <HackerText text="> Neural_Extensions" />
+        </h2>
+        <div className="text-xs font-mono text-green-500/60 tracking-widest">
+          MODULES_LOADED: {skills.length}/{skills.length} | SYSTEM: OPTIMIZED
         </div>
-      </div>
-    )
-  }
-  
-  export default Skills;
+       </div>
+       
+      <InfiniteMovingCards
+        items={skills}
+        direction="right"
+        speed="normal"
+      />
+    </div>
+  )
+}
+
+export default Skills;

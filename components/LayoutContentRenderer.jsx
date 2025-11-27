@@ -1,9 +1,10 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Navbar from './Navbar';
 import Footer from './Footer';
 import AnimatedLayout from './AnimatedLayout';
+import SystemHeader from './Navigation/SystemHeader';
+import CommandDock from './Navigation/CommandDock';
 
 export default function LayoutContentRenderer({ children }) {
   const pathname = usePathname();
@@ -11,11 +12,16 @@ export default function LayoutContentRenderer({ children }) {
 
   return (
     <>
-      {showNavbarAndFooter && <Navbar />}
+      {showNavbarAndFooter && <SystemHeader />}
       <AnimatedLayout>
         {children}
       </AnimatedLayout>
-      {showNavbarAndFooter && <Footer />}
+      {showNavbarAndFooter && (
+        <>
+          <CommandDock />
+          <Footer />
+        </>
+      )}
     </>
   );
 } 

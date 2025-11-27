@@ -109,30 +109,34 @@ export function useInteraction() {
       setUserId(userId);
       
       // Salvar no localStorage
-      localStorage.setItem('escola_sabatina_session', JSON.stringify({
-        userId,
-        userName,
-        timestamp: Date.now()
-      }));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('escola_sabatina_session', JSON.stringify({
+          userId,
+          userName,
+          timestamp: Date.now()
+        }));
+      }
       
       return { success: true, userId };
     } else {
       // Em produção, usar API routes
       try {
         // Verificar se já tem sessão salva
-        const savedSession = localStorage.getItem('escola_sabatina_session');
         let existingUserId = null;
-        
-        if (savedSession) {
-          try {
-            const session = JSON.parse(savedSession);
-            // Se a sessão é recente (menos de 1 hora) e o nome é o mesmo
-            if (session.userName === userName && (Date.now() - session.timestamp) < 3600000) {
-              existingUserId = session.userId;
-              console.log('📱 [SESSION] Tentando restaurar sessão:', existingUserId, userName);
+        if (typeof window !== 'undefined') {
+           const savedSession = localStorage.getItem('escola_sabatina_session');
+           
+           if (savedSession) {
+            try {
+              const session = JSON.parse(savedSession);
+              // Se a sessão é recente (menos de 1 hora) e o nome é o mesmo
+              if (session.userName === userName && (Date.now() - session.timestamp) < 3600000) {
+                existingUserId = session.userId;
+                console.log('📱 [SESSION] Tentando restaurar sessão:', existingUserId, userName);
+              }
+            } catch (e) {
+              console.log('📱 [SESSION] Sessão salva inválida, criando nova');
             }
-          } catch (e) {
-            console.log('📱 [SESSION] Sessão salva inválida, criando nova');
           }
         }
         
@@ -153,11 +157,13 @@ export function useInteraction() {
           setAttendance(result.attendance);
           
           // Salvar/atualizar sessão no localStorage
-          localStorage.setItem('escola_sabatina_session', JSON.stringify({
-            userId: result.userId,
-            userName: result.userName,
-            timestamp: Date.now()
-          }));
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('escola_sabatina_session', JSON.stringify({
+              userId: result.userId,
+              userName: result.userName,
+              timestamp: Date.now()
+            }));
+          }
           
           if (result.sessionRestored) {
             console.log('✅ [SESSION] Sessão restaurada com sucesso!');

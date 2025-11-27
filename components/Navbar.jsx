@@ -1,6 +1,8 @@
 'use client';
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import HackerText from "./ui/HackerText";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,27 +15,60 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const linkClass = `px-3 py-2 rounded-md text-sm font-medium ${
-    isScrolled ? "text-gray-800 hover:bg-gray-100" : "text-gray-800 hover:bg-gray-200"
-  }`;
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const linkClass = "px-3 py-2 text-sm font-mono font-medium text-neutral-400 hover:text-green-400 transition-colors duration-200";
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white shadow-md" : "bg-white bg-opacity-90"}`}>
-      <div className="max-w-6xl mx-auto px-4">
+    <nav className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
+      isScrolled ? "bg-black/80 backdrop-blur-md border-white/10 shadow-lg shadow-green-900/5" : "bg-transparent"
+    )}>
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          <div className="text-2xl font-bold">
-            <Link href="/" className="font-sans tracking-tight text-gray-800 hover:text-blue-600 transition-colors duration-300">
-              Ricky's Code Chronicles
+          <div className="text-xl font-bold font-mono">
+            <a 
+              href="#" 
+              onClick={scrollToTop}
+              className="tracking-tight text-white hover:text-green-400 transition-colors duration-300"
+            >
+              <span className="text-green-500 mr-2">{">"}</span>
+              <HackerText text="Ricky's_Code_Chronicles" />
+              <span className="animate-pulse text-green-500">_</span>
+            </a>
+          </div>
+          
+          <div className="hidden md:flex space-x-2 items-center">
+            <Link href="#about" className={linkClass}>
+              <HackerText text="~/about" />
+            </Link>
+            <Link href="#skills" className={linkClass}>
+              <HackerText text="~/skills" />
+            </Link>
+            <Link href="#projects" className={linkClass}>
+              <HackerText text="~/projects" />
+            </Link>
+            <Link href="#contact" className={linkClass}>
+              <HackerText text="~/contact" />
+            </Link>
+            
+            <Link href="/piano" className="ml-6 group relative inline-flex h-9 overflow-hidden rounded-none border border-green-500/50 bg-black/50 hover:bg-green-500/10 focus:outline-none transition-all">
+              <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full group-hover:translate-x-0 ease">
+                <span className="font-mono text-xs">Let's_Jam</span>
+              </span>
+              <span className="absolute inset-0 flex items-center justify-center w-full h-full text-green-400 duration-300 group-hover:translate-x-full ease">
+                <span className="font-mono text-xs">./play_piano.sh</span>
+              </span>
+              <span className="relative invisible font-mono text-xs px-4 py-2">./play_piano.sh</span>
             </Link>
           </div>
-          <div className="flex space-x-1 items-center">
-            <Link href="/#about" className={linkClass}>About</Link>
-            <Link href="/#skills" className={linkClass}>Skills</Link>
-            <Link href="/#projects" className={linkClass}>Projects</Link>
-            <Link href="/#contact" className={linkClass}>Contact</Link>
-            <Link href="/piano" className={`ml-4 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ease-in-out transform hover:-translate-y-0.5 ${isScrolled ? "bg-blue-500 text-white hover:bg-blue-600 hover:shadow-lg" : "bg-blue-500 text-white hover:bg-blue-600"}`}>
-              Cast a Musical Spell
-            </Link>
+          
+          {/* Mobile Menu Button Placeholder - sticking to simple md:flex for now as per request focus on style */}
+          <div className="md:hidden text-white font-mono text-xs">
+            [MENU]
           </div>
         </div>
       </div>
