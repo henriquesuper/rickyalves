@@ -1,6 +1,10 @@
 'use client';
 
 import React, { useEffect, useState, useCallback, useRef } from "react";
+import Script from "next/script";
+import MatrixRain from '@/components/ui/MatrixRain';
+import { Spotlight } from '@/components/ui/Spotlight';
+import HackerText from '@/components/ui/HackerText';
 
 const notes = [
   { note: "C", frequency: 261.63 },
@@ -18,26 +22,183 @@ const notes = [
 ];
 
 const sampleSongs = [
-  { name: "Twinkle Twinkle Little Star", notes: ["C", "C", "G", "G", "A", "A", "G", "F", "F", "E", "E", "D", "D", "C"] },
-  { name: "Happy Birthday", notes: ["C", "C", "D", "C", "F", "E", "C", "C", "D", "C", "G", "F"] },
-  { name: "Ode to Joy", notes: ["E", "E", "F", "G", "G", "F", "E", "D", "C", "C", "D", "E", "E", "D", "D"] },
-  { name: "Mary Had a Little Lamb", notes: ["E", "D", "C", "D", "E", "E", "E", "D", "D", "D", "E", "G", "G"] },
-  { name: "Jingle Bells", notes: ["E", "E", "E", "E", "E", "E", "E", "G", "C", "D", "E", "F", "F", "F", "F", "F", "E", "E", "E", "E", "E", "D", "D", "E", "D", "G"] },
-  { name: "Row Row Row Your Boat", notes: ["C", "C", "C", "D", "E", "E", "D", "E", "F", "G", "C", "C", "C", "G", "G", "G", "E", "E", "E", "C", "C", "C"] },
-  { name: "Frère Jacques", notes: ["C", "D", "E", "C", "C", "D", "E", "C", "E", "F", "G", "E", "F", "G"] },
-  { name: "London Bridge", notes: ["G", "A", "G", "F", "E", "F", "G", "D", "E", "F", "E", "F", "G"] },
-  { name: "Old MacDonald", notes: ["G", "G", "G", "D", "E", "E", "D", "B", "B", "A", "A", "G"] },
-  { name: "Yankee Doodle", notes: ["C", "C", "D", "E", "C", "E", "D", "G", "C", "C", "D", "E", "C", "B", "C"] },
-  { name: "Itsy Bitsy Spider", notes: ["G", "C", "C", "C", "D", "E", "E", "E", "D", "C", "D", "E", "C"] },
-  { name: "Baa Baa Black Sheep", notes: ["G", "G", "D", "D", "E", "E", "D", "C", "C", "B", "B", "A", "A", "G"] },
-  { name: "Hot Cross Buns", notes: ["B", "A", "G", "B", "A", "G", "G", "G", "G", "A", "A", "A"] },
-  { name: "Three Blind Mice", notes: ["E", "D", "C", "E", "D", "C", "G", "G", "F", "F", "E", "E"] },
-  { name: "Hickory Dickory Dock", notes: ["C", "D", "E", "C", "D", "E", "G", "E", "C", "D", "E", "C"] },
-  { name: "Pop Goes the Weasel", notes: ["C", "F", "G", "A", "G", "F", "E", "C", "D", "E", "F"] },
-  { name: "If You're Happy", notes: ["G", "G", "A", "G", "C", "B", "G", "G", "A", "G", "D", "C"] },
-  { name: "This Old Man", notes: ["G", "E", "G", "E", "C", "D", "E", "C", "D", "E", "C"] },
-  { name: "Ring Around the Rosie", notes: ["E", "G", "G", "A", "G", "F", "E", "D", "C", "D", "E", "E"] },
-  { name: "Hey Diddle Diddle", notes: ["C", "D", "E", "F", "G", "G", "A", "G", "F", "E", "D", "C"] }
+  { 
+    name: "Twinkle Twinkle Little Star", 
+    notes: [
+      { note: "C", duration: 500 }, { note: "C", duration: 500 }, { note: "G", duration: 500 }, { note: "G", duration: 500 }, 
+      { note: "A", duration: 500 }, { note: "A", duration: 500 }, { note: "G", duration: 1000 },
+      { note: "F", duration: 500 }, { note: "F", duration: 500 }, { note: "E", duration: 500 }, { note: "E", duration: 500 }, 
+      { note: "D", duration: 500 }, { note: "D", duration: 500 }, { note: "C", duration: 1000 }
+    ] 
+  },
+  { 
+    name: "Happy Birthday", 
+    notes: [
+      { note: "C", duration: 250 }, { note: "C", duration: 250 }, { note: "D", duration: 500 }, { note: "C", duration: 500 }, { note: "F", duration: 500 }, { note: "E", duration: 1000 },
+      { note: "C", duration: 250 }, { note: "C", duration: 250 }, { note: "D", duration: 500 }, { note: "C", duration: 500 }, { note: "G", duration: 500 }, { note: "F", duration: 1000 }
+    ] 
+  },
+  { 
+    name: "Ode to Joy", 
+    notes: [
+      { note: "E", duration: 500 }, { note: "E", duration: 500 }, { note: "F", duration: 500 }, { note: "G", duration: 500 }, 
+      { note: "G", duration: 500 }, { note: "F", duration: 500 }, { note: "E", duration: 500 }, { note: "D", duration: 500 }, 
+      { note: "C", duration: 500 }, { note: "C", duration: 500 }, { note: "D", duration: 500 }, { note: "E", duration: 500 }, 
+      { note: "E", duration: 750 }, { note: "D", duration: 250 }, { note: "D", duration: 1000 }
+    ] 
+  },
+  { 
+    name: "Mary Had a Little Lamb", 
+    notes: [
+      { note: "E", duration: 500 }, { note: "D", duration: 500 }, { note: "C", duration: 500 }, { note: "D", duration: 500 }, 
+      { note: "E", duration: 500 }, { note: "E", duration: 500 }, { note: "E", duration: 1000 },
+      { note: "D", duration: 500 }, { note: "D", duration: 500 }, { note: "D", duration: 1000 },
+      { note: "E", duration: 500 }, { note: "G", duration: 500 }, { note: "G", duration: 1000 },
+      { note: "E", duration: 500 }, { note: "D", duration: 500 }, { note: "D", duration: 500 }, { note: "E", duration: 500 }, 
+      { note: "D", duration: 500 }, { note: "C", duration: 1000 }
+    ] 
+  },
+  { 
+    name: "Jingle Bells", 
+    notes: [
+      { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 600 }, 
+      { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 600 },
+      { note: "E", duration: 300 }, { note: "G", duration: 300 }, { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 900 },
+      { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "F", duration: 150 }, { note: "F", duration: 150 }, { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 150 }, { note: "E", duration: 150 },
+      { note: "E", duration: 300 }, { note: "D", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 600 }, { note: "G", duration: 900 }
+    ] 
+  },
+  { 
+    name: "Row Row Row Your Boat", 
+    notes: [
+      { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 300 },
+      { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 600 },
+      { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "F", duration: 300 }, { note: "G", duration: 900 },
+      { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "G", duration: 600 },
+      { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 900 }
+    ] 
+  },
+  { 
+    name: "Frère Jacques", 
+    notes: [
+      { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 600 },
+      { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 600 },
+      { note: "E", duration: 300 }, { note: "F", duration: 300 }, { note: "G", duration: 600 },
+      { note: "E", duration: 300 }, { note: "F", duration: 300 }, { note: "G", duration: 900 }
+    ] 
+  },
+  { 
+    name: "London Bridge", 
+    notes: [
+      { note: "G", duration: 300 }, { note: "A", duration: 300 }, { note: "G", duration: 300 }, { note: "F", duration: 300 }, { note: "E", duration: 300 }, { note: "F", duration: 300 }, { note: "G", duration: 600 },
+      { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "F", duration: 300 }, { note: "E", duration: 300 }, { note: "F", duration: 300 }, { note: "G", duration: 600 }
+    ] 
+  },
+  { 
+    name: "Old MacDonald", 
+    notes: [
+      { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "D", duration: 300 }, 
+      { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 600 },
+      { note: "B", duration: 300 }, { note: "B", duration: 300 }, { note: "A", duration: 300 }, { note: "A", duration: 300 }, 
+      { note: "G", duration: 600 }
+    ] 
+  },
+  { 
+    name: "Yankee Doodle", 
+    notes: [
+      { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, 
+      { note: "C", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 600 },
+      { note: "G", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "D", duration: 300 }, 
+      { note: "E", duration: 300 }, { note: "C", duration: 300 }, { note: "B", duration: 300 }, { note: "C", duration: 600 }
+    ] 
+  },
+  { 
+    name: "Itsy Bitsy Spider", 
+    notes: [
+      { note: "G", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 300 }, 
+      { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 600 },
+      { note: "D", duration: 300 }, { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, 
+      { note: "C", duration: 600 }
+    ] 
+  },
+  { 
+    name: "Baa Baa Black Sheep", 
+    notes: [
+      { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "D", duration: 300 }, { note: "D", duration: 300 }, 
+      { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 600 },
+      { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "B", duration: 300 }, { note: "B", duration: 300 }, 
+      { note: "A", duration: 300 }, { note: "A", duration: 300 }, { note: "G", duration: 600 }
+    ] 
+  },
+  { 
+    name: "Hot Cross Buns", 
+    notes: [
+      { note: "B", duration: 300 }, { note: "A", duration: 300 }, { note: "G", duration: 600 },
+      { note: "B", duration: 300 }, { note: "A", duration: 300 }, { note: "G", duration: 600 },
+      { note: "G", duration: 150 }, { note: "G", duration: 150 }, { note: "G", duration: 150 }, { note: "G", duration: 150 }, 
+      { note: "A", duration: 150 }, { note: "A", duration: 150 }, { note: "A", duration: 150 }, { note: "A", duration: 150 }, 
+      { note: "B", duration: 300 }, { note: "A", duration: 300 }, { note: "G", duration: 600 }
+    ] 
+  },
+  { 
+    name: "Three Blind Mice", 
+    notes: [
+      { note: "E", duration: 300 }, { note: "D", duration: 300 }, { note: "C", duration: 600 },
+      { note: "E", duration: 300 }, { note: "D", duration: 300 }, { note: "C", duration: 600 },
+      { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "F", duration: 300 }, { note: "F", duration: 300 }, 
+      { note: "E", duration: 300 }, { note: "E", duration: 600 }
+    ] 
+  },
+  { 
+    name: "Hickory Dickory Dock", 
+    notes: [
+      { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 600 },
+      { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 600 },
+      { note: "G", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 600 },
+      { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 900 }
+    ] 
+  },
+  { 
+    name: "Pop Goes the Weasel", 
+    notes: [
+      { note: "C", duration: 300 }, { note: "F", duration: 300 }, { note: "G", duration: 300 }, { note: "A", duration: 300 }, 
+      { note: "G", duration: 300 }, { note: "F", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 600 },
+      { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "F", duration: 900 }
+    ] 
+  },
+  { 
+    name: "If You're Happy", 
+    notes: [
+      { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "A", duration: 300 }, { note: "G", duration: 300 }, 
+      { note: "C", duration: 300 }, { note: "B", duration: 600 },
+      { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "A", duration: 300 }, { note: "G", duration: 300 }, 
+      { note: "D", duration: 300 }, { note: "C", duration: 600 }
+    ] 
+  },
+  { 
+    name: "This Old Man", 
+    notes: [
+      { note: "G", duration: 300 }, { note: "E", duration: 300 }, { note: "G", duration: 300 }, { note: "E", duration: 300 }, 
+      { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 600 },
+      { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 900 }
+    ] 
+  },
+  { 
+    name: "Ring Around the Rosie", 
+    notes: [
+      { note: "E", duration: 300 }, { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "A", duration: 300 }, 
+      { note: "G", duration: 300 }, { note: "F", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 300 }, 
+      { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 600 }
+    ] 
+  },
+  { 
+    name: "Hey Diddle Diddle", 
+    notes: [
+      { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "F", duration: 300 }, 
+      { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "A", duration: 300 }, { note: "G", duration: 300 }, 
+      { note: "F", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 300 }, { note: "C", duration: 600 }
+    ] 
+  }
 ];
 
 export default function Piano() {
@@ -47,18 +208,32 @@ export default function Piano() {
   const [playedNotes, setPlayedNotes] = useState([]);
   const [guessedSong, setGuessedSong] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [toneLoaded, setToneLoaded] = useState(false);
+  const [isPlayingDemo, setIsPlayingDemo] = useState(false);
+  const isPlayingDemoRef = useRef(false);
   const samplerRef = useRef(null);
 
   useEffect(() => {
-    setWindowWidth(window.innerWidth);
+    isPlayingDemoRef.current = isPlayingDemo;
+  }, [isPlayingDemo]);
 
-    // Initialize the Sampler with piano samples
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
+
+  // Initialize the Sampler once Tone.js is loaded
+  useEffect(() => {
+    if (!toneLoaded) return;
+
     const initSampler = async () => {
       try {
-        // Import specific classes from Tone.js
-        const { Sampler, Synth } = await import('tone');
+        const Tone = window.Tone;
+        
+        if (!Tone || !Tone.Sampler) {
+          throw new Error("Tone.js not found on window object");
+        }
 
-        const newSampler = new Sampler({
+        const newSampler = new Tone.Sampler({
           urls: {
             A0: "A0.mp3",
             C1: "C1.mp3",
@@ -92,26 +267,37 @@ export default function Piano() {
           },
           release: 1,
           baseUrl: "https://tonejs.github.io/audio/salamander/",
+          onload: () => {
+             setIsLoading(false);
+          }
         }).toDestination();
-
-        newSampler.loaded.then(() => {
-          setIsLoading(false);
-        });
 
         setSampler(newSampler);
         samplerRef.current = newSampler;
+
+        setTimeout(() => {
+          setIsLoading((loading) => {
+            if (loading) {
+              console.warn("Sample loading timed out, enabling interface anyway");
+              return false;
+            }
+            return loading;
+          });
+        }, 5000);
+
       } catch (error) {
         console.error('Error initializing sampler:', error);
         try {
-          // Fallback to basic synth if sampler fails
-          const { Synth } = await import('tone');
-          const newSynth = new Synth().toDestination();
-          setSampler(newSynth);
-          samplerRef.current = newSynth;
-          setIsLoading(false);
+          const Tone = window.Tone;
+          if (Tone && Tone.Synth) {
+            const newSynth = new Tone.Synth().toDestination();
+            setSampler(newSynth);
+            samplerRef.current = newSynth;
+            setIsLoading(false);
+          } else {
+             createSimpleOscillator();
+          }
         } catch (fallbackError) {
-          console.error('Fallback synth also failed:', fallbackError);
-          // Last resort: create a simple oscillator
           createSimpleOscillator();
         }
       }
@@ -124,7 +310,7 @@ export default function Piano() {
         samplerRef.current.dispose();
       }
     };
-  }, []);
+  }, [toneLoaded]);
 
   const handleResize = useCallback(() => {
     setWindowWidth(window.innerWidth);
@@ -137,34 +323,7 @@ export default function Piano() {
     };
   }, [handleResize]);
 
-  const playNote = useCallback((note) => {
-    if (!sampler) return;
-
-    try {
-      // Check if it's a Sampler (has loaded property), Synth, or simple oscillator
-      if (sampler.loaded !== undefined) {
-        // It's a Sampler
-        if (sampler.loaded) {
-          sampler.triggerAttackRelease(note, "8n");
-        }
-      } else if (typeof sampler.triggerAttackRelease === 'function') {
-        // It's a Synth or simple oscillator
-        sampler.triggerAttackRelease(note, "8n");
-      }
-
-      // Add the played note to the sequence
-      setPlayedNotes(prev => {
-        const newNotes = [...prev, note.slice(0, -1)]; // Remove octave number
-        guessSong(newNotes);
-        return newNotes.slice(-20); // Keep only the last 20 notes
-      });
-    } catch (error) {
-      console.error('Error playing note:', error);
-    }
-  }, [sampler]);
-
   const guessSong = useCallback((playedNotes) => {
-    // Minimum notes needed to start guessing
     if (playedNotes.length < 4) {
       setGuessedSong(null);
       return;
@@ -173,36 +332,28 @@ export default function Piano() {
     let bestMatch = null;
     let bestMatchPercentage = 0;
 
-    // Define note order for comparison
     const noteOrder = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-    // Helper function to check if notes are close (including same note or adjacent notes)
     const areNotesClose = (playedNote, songNote) => {
       if (playedNote === songNote) return true;
-
       const playedIndex = noteOrder.indexOf(playedNote);
       const songIndex = noteOrder.indexOf(songNote);
-
       if (playedIndex === -1 || songIndex === -1) return false;
-
-      // Check if notes are adjacent (within 1 semitone)
       return Math.abs(playedIndex - songIndex) <= 1;
     };
 
     sampleSongs.forEach(song => {
       const sequenceLength = Math.min(playedNotes.length, song.notes.length);
       let matches = 0;
-
-      // Compare the last played notes with the song
       for (let i = 0; i < sequenceLength; i++) {
         const playedNote = playedNotes[playedNotes.length - sequenceLength + i];
-        const songNote = song.notes[i];
-
+        const rawSongNote = song.notes[i];
+        const songNote = typeof rawSongNote === 'object' ? rawSongNote.note : rawSongNote;
+        
         if (areNotesClose(playedNote, songNote)) {
           matches++;
         }
       }
-
       const matchPercentage = (matches / sequenceLength) * 100;
       if (matchPercentage > bestMatchPercentage) {
         bestMatchPercentage = matchPercentage;
@@ -210,77 +361,159 @@ export default function Piano() {
       }
     });
 
-    // Lower threshold to 60% for more lenient matching
     if (bestMatchPercentage >= 60) {
       setGuessedSong(bestMatch);
     } else {
       setGuessedSong(null);
     }
-  }, []);
+  }, []); // guessSong is defined FIRST
+
+  const startNote = useCallback(async (note) => {
+    if (!sampler) return;
+
+    if (window.Tone && window.Tone.context.state !== 'running') {
+      await window.Tone.start();
+    }
+
+    try {
+      if (sampler.loaded) {
+        sampler.triggerAttack(note);
+      } else if (typeof sampler.triggerAttack === 'function') {
+        sampler.triggerAttack(note);
+      } else {
+        // Fallback if no triggerAttack (e.g. simple synth)
+        sampler.triggerAttackRelease(note, "8n");
+      }
+
+      setActiveNotes(prev => new Set(prev).add(note));
+      
+      setPlayedNotes(prev => {
+        const newNotes = [...prev, note.slice(0, -1)];
+        if (!isPlayingDemoRef.current) guessSong(newNotes); // Using isPlayingDemoRef and guessSong
+        return newNotes.slice(-20);
+      });
+    } catch (error) {
+      console.error('Error starting note:', error);
+    }
+  }, [sampler, guessSong]); // guessSong is now a valid dependency
+
+  const stopNote = useCallback((note) => {
+    if (!sampler) return;
+
+    try {
+      if (sampler.loaded) {
+        sampler.triggerRelease(note);
+      } else if (typeof sampler.triggerRelease === 'function') {
+        sampler.triggerRelease(note);
+      }
+
+      setActiveNotes(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(note);
+        return newSet;
+      });
+    } catch (error) {
+      console.error('Error stopping note:', error);
+    }
+  }, [sampler]);
+
+  const playSong = async (song) => {
+    if (isPlayingDemoRef.current) return;
+    
+    setIsPlayingDemo(true);
+    setGuessedSong(`EXECUTING: ${song.name}`);
+    setPlayedNotes([]);
+
+    const octave = 4;
+
+    for (const noteItem of song.notes) {
+      if (!sampler) break;
+      
+      const noteName = typeof noteItem === 'object' ? noteItem.note : noteItem;
+      const duration = typeof noteItem === 'object' ? noteItem.duration : 300;
+      
+      const fullNote = `${noteName}${octave}`;
+      
+      await startNote(fullNote); 
+      await new Promise(resolve => setTimeout(resolve, duration));
+      stopNote(fullNote);
+      
+      await new Promise(resolve => setTimeout(resolve, 100));
+    }
+
+    setIsPlayingDemo(false);
+    setTimeout(() => setGuessedSong(null), 1000);
+  };
 
   const clearNotes = () => {
     setPlayedNotes([]);
     setGuessedSong(null);
   };
 
-  // Last resort: simple oscillator fallback
   const createSimpleOscillator = () => {
     try {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-      const oscillator = audioContext.createOscillator();
-      const gainNode = audioContext.createGain();
-
-      oscillator.connect(gainNode);
-      gainNode.connect(audioContext.destination);
-
-      oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // A4 note
-      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-      oscillator.start();
+      const activeOscillators = {};
 
       const simpleSynth = {
-        triggerAttackRelease: (note, duration) => {
-          // Convert note name to frequency
+        triggerAttack: (note) => {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+
           const noteToFreq = {
             'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13, 'E4': 329.63, 'F4': 349.23,
             'F#4': 369.99, 'G4': 392.00, 'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88,
             'C5': 523.25, 'C#5': 554.37, 'D5': 587.33, 'D#5': 622.25, 'E5': 659.25, 'F5': 698.46,
             'F#5': 739.99, 'G5': 783.99, 'G#5': 830.61, 'A5': 880.00, 'A#5': 932.33, 'B5': 987.77
           };
-
           const frequency = noteToFreq[note] || 440;
           oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
-          gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+          gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+          gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.01);
+          oscillator.start();
+          activeOscillators[note] = { oscillator, gainNode };
+        },
+        triggerRelease: (note) => {
+          const active = activeOscillators[note];
+          if (active) {
+            const { oscillator, gainNode } = active;
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+            oscillator.stop(audioContext.currentTime + 0.5);
+            delete activeOscillators[note];
+          }
+        },
+        triggerAttackRelease: (note, duration) => {
+           simpleSynth.triggerAttack(note);
+           setTimeout(() => simpleSynth.triggerRelease(note), 300);
         },
         dispose: () => {
-          try {
-            oscillator.stop();
-            audioContext.close();
-          } catch (e) {
-            // Already stopped or closed
-          }
+          try { audioContext.close(); } catch (e) {}
         }
       };
-
       setSampler(simpleSynth);
       samplerRef.current = simpleSynth;
       setIsLoading(false);
     } catch (error) {
-      console.error('Even simple oscillator failed:', error);
       setIsLoading(false);
     }
   };
 
-  // Responsive key sizing
-  const getKeyWidth = () => {
-    if (!windowWidth) return 45;
-    if (windowWidth < 640) return 35; // Mobile
-    if (windowWidth < 1024) return 40; // Tablet
-    return 45; // Desktop
-  };
+  // Dynamic key sizing based on window width
+  const minWhiteKeyWidth = 40; // Minimum width for a white key
+  const whiteKeysPerOctave = 7;
+  const paddingCompensation = 80; // px padding on both sides of the piano container + 16px extra buffer
 
-  const keyWidth = getKeyWidth();
-  const numberOfKeys = windowWidth ? Math.floor((windowWidth - 32) / keyWidth) : 12; // Account for padding
+  const availableWidth = windowWidth ? windowWidth - paddingCompensation : minWhiteKeyWidth * whiteKeysPerOctave * 2; // Default to 2 octaves
+
+  const numWhiteKeysThatFit = windowWidth ? Math.floor(availableWidth / minWhiteKeyWidth) : whiteKeysPerOctave * 2;
+  const numWhiteKeysToShow = Math.max(whiteKeysPerOctave, numWhiteKeysThatFit); // Ensure at least one octave
+
+  const keyWidth = availableWidth / numWhiteKeysToShow; // Distribute available width evenly
+
+  const numberOfKeys = Math.floor((numWhiteKeysToShow / whiteKeysPerOctave) * 12); // Total notes considering black keys
+
   const fullOctaves = Math.floor(numberOfKeys / 12);
   const remainingKeys = numberOfKeys % 12;
 
@@ -289,179 +522,222 @@ export default function Piano() {
     ...notes.slice(0, remainingKeys + 1)
   ];
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-900">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-gray-300 text-lg">Loading piano samples...</p>
-        </div>
-      </div>
-    );
-  }
+  // Center the piano range around Middle C (Octave 4)
+  const startOctave = Math.max(2, 4 - Math.floor(fullOctaves / 2));
+
+  const touchedNotes = useRef(new Set());
+  
+  const handleTouch = useCallback((e) => {
+    e.preventDefault(); // Prevent scrolling/zooming while playing
+    
+    const touches = Array.from(e.touches);
+    const currentNotes = new Set();
+
+    touches.forEach(touch => {
+      const element = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (element) {
+        const key = element.closest('.key');
+        if (key) {
+          const note = key.getAttribute('data-full-note');
+          if (note) currentNotes.add(note);
+        }
+      }
+    });
+
+    // Detect notes to start (in current but not in previous)
+    currentNotes.forEach(note => {
+      if (!touchedNotes.current.has(note)) {
+        startNote(note);
+      }
+    });
+
+    // Detect notes to stop (in previous but not in current)
+    touchedNotes.current.forEach(note => {
+      if (!currentNotes.has(note)) {
+        stopNote(note);
+      }
+    });
+
+    touchedNotes.current = currentNotes;
+  }, [startNote, stopNote]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 pt-24 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
-            Virtual Piano
+    <div className="min-h-screen bg-black relative overflow-hidden font-mono">
+      <Script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"
+        onLoad={() => {
+          console.log("Tone.js loaded from CDN");
+          setToneLoaded(true);
+        }}
+        strategy="afterInteractive"
+      />
+
+      {/* Background Effects */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <MatrixRain />
+      </div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
+      </div>
+      
+      <div className="relative z-10 max-w-6xl mx-auto pt-24 pb-8 px-4">
+        
+        {/* Cyberpunk Header */}
+        <div className="text-center mb-12 relative">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tighter">
+            <HackerText text="SONIC_SYNTHESIS_TERMINAL" />
           </h1>
-          <p className="text-gray-300 text-lg">Play beautiful melodies and discover magical songs</p>
-        </div>
-
-        {/* Piano */}
-        <div className="flex justify-center mb-8">
-          <div className="piano relative bg-gradient-to-b from-gray-800 to-gray-900 rounded-2xl p-8 shadow-2xl border border-gray-700">
-            <div className="flex relative">
-              {octaves.map((item, idx) => {
-                const isBlack = item.note.includes("#");
-                const octave = Math.floor(idx / 12) + 4;
-                const noteWithOctave = `${item.note}${octave}`;
-                const isActive = activeNotes.has(noteWithOctave);
-
-                return (
-                  <div
-                    key={idx}
-                    onPointerDown={(e) => {
-                      e.preventDefault();
-                      e.target.setPointerCapture(e.pointerId);
-                      playNote(noteWithOctave);
-                      setActiveNotes(prev => new Set(prev).add(noteWithOctave));
-                    }}
-                    onPointerUp={(e) => {
-                      e.preventDefault();
-                      e.target.releasePointerCapture(e.pointerId);
-                      setActiveNotes(prev => {
-                        const newSet = new Set(prev);
-                        newSet.delete(noteWithOctave);
-                        return newSet;
-                      });
-                    }}
-                    onPointerCancel={(e) => {
-                      e.preventDefault();
-                      setActiveNotes(prev => {
-                        const newSet = new Set(prev);
-                        newSet.delete(noteWithOctave);
-                        return newSet;
-                      });
-                    }}
-                    onTouchStart={(e) => {
-                      e.preventDefault();
-                      playNote(noteWithOctave);
-                      setActiveNotes(prev => new Set(prev).add(noteWithOctave));
-                    }}
-                    onTouchEnd={(e) => {
-                      e.preventDefault();
-                      setActiveNotes(prev => {
-                        const newSet = new Set(prev);
-                        newSet.delete(noteWithOctave);
-                        return newSet;
-                      });
-                    }}
-                    onMouseDown={(e) => {
-                      e.preventDefault();
-                      playNote(noteWithOctave);
-                      setActiveNotes(prev => new Set(prev).add(noteWithOctave));
-                    }}
-                    onMouseUp={(e) => {
-                      e.preventDefault();
-                      setActiveNotes(prev => {
-                        const newSet = new Set(prev);
-                        newSet.delete(noteWithOctave);
-                        return newSet;
-                      });
-                    }}
-                    onMouseLeave={(e) => {
-                      e.preventDefault();
-                      setActiveNotes(prev => {
-                        const newSet = new Set(prev);
-                        newSet.delete(noteWithOctave);
-                        return newSet;
-                      });
-                    }}
-                    className={`key ${isBlack ? 'black' : 'white'} ${isActive ? 'active' : ''} select-none touch-manipulation`}
-                    data-note={item.note}
-                    style={{
-                      WebkitTapHighlightColor: 'transparent',
-                      WebkitTouchCallout: 'none',
-                      WebkitUserSelect: 'none',
-                      userSelect: 'none'
-                    }}
-                  />
-                );
-              })}
-            </div>
+          <div className="flex justify-center items-center gap-4 text-xs text-green-500/60 tracking-widest">
+            <span>SYS_STATUS: {toneLoaded ? (isLoading ? "INITIALIZING..." : "ONLINE") : "CONNECTING..."}</span>
+            <span>•</span>
+            <span>AUDIO_CORE: {sampler ? "ACTIVE" : "STANDBY"}</span>
           </div>
         </div>
 
-        {/* Song Recognition */}
-        {guessedSong && (
-          <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 w-auto min-w-[320px] z-50">
-            <div className="bg-gradient-to-r from-gray-800/90 to-gray-900/90 backdrop-blur-sm border-2 border-white/30 rounded-2xl p-6 shadow-lg shadow-black/50 animate-in slide-in-from-bottom-4 duration-500">
-              <div className="flex items-center gap-4">
-                <div className="animate-pulse">
-                  <svg
-                    className="w-8 h-8 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
-                    />
-                  </svg>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-gray-300 text-sm font-medium">
-                    🎵 A magical melody appears...
-                  </span>
-                  <span className="text-white font-bold text-xl">
-                    {guessedSong}
-                  </span>
-                </div>
+        {/* The Piano Deck */}
+        <div className="flex justify-center mb-12">
+          {isLoading && (
+            <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+              <div className="text-center border border-green-500/30 p-8 rounded bg-black">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mx-auto mb-4"></div>
+                <p className="text-green-500 text-sm tracking-widest animate-pulse">INITIALIZING_AUDIO_CORE...</p>
+              </div>
+            </div>
+          )}
+          
+          <div className="relative bg-black/40 backdrop-blur-md rounded-lg p-1 border border-green-500/30 shadow-[0_0_50px_rgba(34,197,94,0.1)]">
+            {/* Decorative Top Stripe */}
+            <div className="h-2 w-full bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(34,197,94,0.1)_10px,rgba(34,197,94,0.1)_20px)] mb-1 rounded-t-sm"></div>
+            
+            <div 
+              className="flex relative px-4 py-6 bg-black/60 rounded border-t border-white/5 touch-none"
+              onTouchStart={handleTouch}
+              onTouchMove={handleTouch}
+              onTouchEnd={handleTouch}
+            >
+                {octaves.map((item, idx) => {
+                  const isBlack = item.note.includes("#");
+                  const octave = Math.floor(idx / 12) + startOctave;
+                  const noteWithOctave = `${item.note}${octave}`;
+                  const isActive = activeNotes.has(noteWithOctave);
+  
+                  return (
+                    <div
+                      key={idx}
+                      data-full-note={noteWithOctave}
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        startNote(noteWithOctave);
+                      }}
+                      onMouseUp={(e) => {
+                        e.preventDefault();
+                        stopNote(noteWithOctave);
+                      }}
+                      onMouseLeave={(e) => {
+                        e.preventDefault();
+                        if (e.buttons === 1) stopNote(noteWithOctave);
+                      }}
+                      onMouseEnter={(e) => {
+                        if (e.buttons === 1) startNote(noteWithOctave);
+                      }}
+                      className={`
+                        key relative flex items-end justify-center select-none transition-all duration-100
+                        ${isBlack 
+                          ? 'z-10 -mx-4 rounded-b-sm bg-black border border-gray-800 shadow-lg text-[8px] text-gray-600 pb-4' 
+                          : 'z-0 bg-white/5 border border-white/10 rounded-b-sm text-[10px] text-green-500/30 pb-4 hover:bg-green-500/10'}
+                        ${isActive && isBlack ? 'bg-cyan-900 border-cyan-500 shadow-[0_0_20px_rgba(6,182,212,0.5)] translate-y-[1px]' : ''}
+                        ${isActive && !isBlack ? 'bg-green-900/30 border-green-500 shadow-[0_0_30px_rgba(34,197,94,0.4)] translate-y-[2px]' : ''}
+                      `}
+                      style={{
+                        width: isBlack ? keyWidth * 0.7 : keyWidth,
+                        height: isBlack ? 120 : 180,
+                        marginLeft: isBlack ? -(keyWidth * 0.35) : 0,
+                        marginRight: isBlack ? -(keyWidth * 0.35) : 0,
+                        zIndex: isBlack ? 10 : 0,
+                      }}
+                    >
+                      {/* Key Label */}
+                      <span className={`font-mono ${isActive ? 'text-white' : ''}`}>{item.note}</span>
+                      
+                      {/* Laser Beam Effect on Active */}
+                      {isActive && !isBlack && (
+                        <div className="absolute inset-0 bg-gradient-to-t from-green-500/20 to-transparent pointer-events-none"></div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
-        )}
 
-        {/* Notes History */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6 border border-white/20">
-          <h2 className="text-xl font-semibold text-white mb-4">Recent Notes</h2>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {playedNotes.map((note, index) => (
-              <span key={index} className="px-3 py-1 bg-gray-700/80 text-gray-200 rounded-full text-sm font-medium border border-gray-500/50">
-                {note}
-              </span>
-            ))}
-            {playedNotes.length === 0 && (
-              <span className="text-gray-400 italic">Play some notes to see them here...</span>
-            )}
+        {/* HUD Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          {/* Note Log Terminal */}
+          <div className="bg-black/40 border border-white/10 rounded p-4 h-48 overflow-hidden relative">
+            <div className="absolute top-0 left-0 w-full h-1 bg-green-500/50"></div>
+            <h3 className="text-xs font-mono text-green-500 mb-2 tracking-widest flex justify-between">
+              <span>TERMINAL_LOG</span>
+              <span className="animate-pulse">REC [●]</span>
+            </h3>
+            <div className="font-mono text-xs space-y-1 h-full overflow-y-auto pb-8 text-neutral-400">
+              {playedNotes.length === 0 && <span className="opacity-30">Waiting for input...</span>}
+              {[...playedNotes].reverse().map((note, index) => (
+                <div key={index} className="flex gap-2">
+                  <span className="text-green-500/50">{`>>`}</span>
+                  <span className={index === 0 ? "text-white" : ""}>DETECTED_INPUT: {note}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <button
-            onClick={clearNotes}
-            className="px-4 py-2 bg-gray-600/80 hover:bg-gray-600 text-white rounded-lg transition-all duration-200 font-medium shadow-lg hover:shadow-xl"
-          >
-            Clear Notes
-          </button>
+
+          {/* Song Recognition / Status HUD */}
+          <div className="bg-black/40 border border-white/10 rounded p-4 h-48 relative flex flex-col justify-between group">
+            <div className="absolute top-0 right-0 w-1 h-full bg-green-500/50"></div>
+            <div>
+              <h3 className="text-xs font-mono text-green-500 mb-2 tracking-widest">PATTERN_MATCH</h3>
+              <div className="h-px w-full bg-white/10 mb-4"></div>
+            </div>
+            
+            <div className="flex-1 flex items-center justify-center">
+              {guessedSong ? (
+                <div className="text-center space-y-2 animate-pulse">
+                  <div className="text-green-400 font-bold text-xl tracking-widest border-2 border-green-500 p-2 rounded">
+                    {guessedSong.startsWith("EXECUTING:") ? "RUNNING_PROTOCOL" : "MATCH_FOUND"}
+                  </div>
+                  <div className="text-white font-mono text-lg">{guessedSong}</div>
+                </div>
+              ) : (
+                <div className="text-center opacity-30 text-xs font-mono">
+                  <div className="mb-2 text-4xl opacity-20">SCANNING</div>
+                  NO_PATTERN_MATCHED
+                </div>
+              )}
+            </div>
+          </div>
+
         </div>
 
-        {/* Sample Songs */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-          <h2 className="text-xl font-semibold text-white mb-4">Try These Songs</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        {/* Sample Songs Grid */}
+        <div className="mt-8 pb-20">
+          <h3 className="text-xs font-mono text-white/50 mb-4 tracking-widest">AVAILABLE_PROTOCOLS</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
             {sampleSongs.slice(0, 12).map((song, index) => (
-              <div key={index} className="p-3 bg-gradient-to-r from-gray-700/40 to-gray-800/40 rounded-lg border border-gray-500/30 hover:border-gray-400/60 transition-all duration-200">
-                <span className="text-gray-200 font-medium text-sm">{song.name}</span>
+              <div 
+                key={index} 
+                onClick={() => playSong(song)}
+                className={`group p-2 bg-white/5 border border-white/5 hover:border-green-500/50 hover:bg-green-500/10 rounded transition-all cursor-pointer
+                  ${isPlayingDemo ? 'opacity-50 pointer-events-none' : ''}
+                `}
+              >
+                <div className="text-[10px] text-green-500/50 mb-1 group-hover:text-green-400">FILE_ID: {index.toString().padStart(3, '0')}</div>
+                <div className="text-xs text-neutral-300 font-mono truncate group-hover:text-white">{song.name}</div>
               </div>
             ))}
           </div>
         </div>
+
       </div>
     </div>
   );
-} 
+}

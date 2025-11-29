@@ -2,11 +2,12 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { FaTerminal } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 const CommandDock = () => {
   const [activeSection, setActiveSection] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
 
   const navItems = [
     { id: "about", cmd: "cd ./bio" },
@@ -19,6 +20,11 @@ const CommandDock = () => {
   const handleNav = (item) => {
     if (item.type === "link") {
       router.push(item.path);
+      return;
+    }
+
+    if (pathname !== '/') {
+      router.push(`/#${item.id}`);
       return;
     }
 

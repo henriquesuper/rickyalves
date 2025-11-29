@@ -5,6 +5,7 @@ import Hero from '../components/Hero';
 import About from '../components/About';
 import Skills from '../components/Skills';
 import Projects from '../components/Projects';
+import Testimonials from '../components/Testimonials';
 import Contact from '../components/Contact';
 import PageTransition from './components/PageTransition';
 import { Spotlight } from '@/components/ui/Spotlight';
@@ -41,7 +42,11 @@ export default function Home() {
               <Projects />
             </section>
 
-            <section id="contact">
+            <section id="testimonials" className="py-20">
+              <Testimonials />
+            </section>
+
+            <section id="contact" className="pt-20 pb-8">
               <Contact />
             </section>
           </div>
