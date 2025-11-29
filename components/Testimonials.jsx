@@ -24,8 +24,8 @@ const testimonialsData = [
   },
   {
     id: 4,
-    name: "David Miller",
-    role: "Founder @ AppWorks",
+    name: "Abner Almeida",
+    role: "COO @ Unique On The Go",
     message: "The 'Unique Punch' app changed our workflow entirely. He is a true alchemist of code, turning ideas into gold."
   },
   {
@@ -39,7 +39,7 @@ const testimonialsData = [
 const Testimonials = () => {
   return (
     <div className="w-full relative z-10">
-      
+
       <div className="text-center mb-16">
         <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400 font-mono mb-2">
           <HackerText text="> Intercepted_Comms" />
@@ -51,7 +51,7 @@ const Testimonials = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
         {testimonialsData.map((item, index) => (
-          <TransmissionCard 
+          <TransmissionCard
             key={item.id}
             id={item.id}
             name={item.name}
@@ -61,7 +61,7 @@ const Testimonials = () => {
           />
         ))}
       </div>
-      
+
     </div>
   );
 };
