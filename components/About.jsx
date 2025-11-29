@@ -6,6 +6,7 @@ import ScrollAnimation from "../app/components/ScrollAnimation";
 import TerminalWindow from "./ui/TerminalWindow";
 import GlitchImage from "./ui/GlitchImage";
 import HackerText from "./ui/HackerText";
+import LatencySimulator from "./ui/LatencySimulator";
 
 const About = () => {
   return (
@@ -43,21 +44,47 @@ const About = () => {
 
             {/* System Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-              <div className="bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm">
-                <div className="text-xs text-neutral-500 font-mono mb-1">LOCATION</div>
-                <div className="text-sm text-green-400 font-mono">Los Angeles, CA</div>
-              </div>
-              <div className="bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm">
-                <div className="text-xs text-neutral-500 font-mono mb-1">CLASS</div>
-                <div className="text-sm text-purple-400 font-mono">Full Stack Wizard</div>
-              </div>
-              <div className="bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm col-span-2 md:col-span-1">
-                <div className="text-xs text-neutral-500 font-mono mb-1">STATUS</div>
-                <div className="text-sm text-emerald-400 font-mono flex items-center">
-                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse mr-2"></span>
-                  Online / Creating
+              
+              {/* Location Module */}
+              <div className="group bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm hover:border-green-500/30 transition-colors">
+                <div className="flex items-center justify-between mb-1">
+                  <div className="text-[10px] text-neutral-500 font-mono tracking-widest">GEO_LOCK</div>
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full opacity-50 group-hover:animate-ping"></div>
+                </div>
+                <div className="text-sm text-green-400 font-mono font-bold truncate">
+                  <HackerText text="LOS_ANGELES_[CA]" />
+                </div>
+                <div className="text-[9px] text-green-500/50 font-mono mt-1 tracking-tighter">
+                  34.0522°N, 118.2437°W
                 </div>
               </div>
+
+              {/* Class Module */}
+              <div className="group bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm hover:border-purple-500/30 transition-colors">
+                <div className="text-[10px] text-neutral-500 font-mono tracking-widest mb-1">ARCHETYPE</div>
+                <div className="text-sm text-purple-400 font-mono font-bold">
+                  <HackerText text="CODE_WIZARD" />
+                </div>
+                <div className="text-[9px] text-purple-500/50 font-mono mt-1 border border-purple-500/20 rounded px-1 inline-block">
+                  LVL.99 FULL_STACK
+                </div>
+              </div>
+
+              {/* Status Module */}
+              <div className="group bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm col-span-2 md:col-span-1 hover:border-emerald-500/30 transition-colors">
+                <div className="text-[10px] text-neutral-500 font-mono tracking-widest mb-1">CURRENT_STATE</div>
+                <div className="text-sm text-emerald-400 font-mono flex items-center font-bold">
+                  <span className="relative flex h-2 w-2 mr-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  </span>
+                  ONLINE
+                </div>
+                <div className="text-[9px] text-emerald-500/50 font-mono mt-1">
+                  <LatencySimulator />
+                </div>
+              </div>
+
             </div>
           </div>
         </ScrollAnimation>
@@ -85,6 +112,6 @@ const About = () => {
       </div>
     </div>
   )
-}
+};
 
 export default About;

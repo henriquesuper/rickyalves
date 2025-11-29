@@ -56,42 +56,66 @@ const Hero = () => {
           </ScrollAnimation>
           
           <ScrollAnimation direction="up" delay={0.6}>
-            <div className="social-icons flex justify-center md:justify-start items-center gap-6 mt-8">
-              <HoverAnimation rotate={10}>
-                <a
-                  href="https://twitter.com/henriquesuper"
-                  aria-label="Twitter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-3xl text-neutral-500 hover:text-green-400 transition-colors transform hover:scale-110"
-                >
-                  <FaXTwitter />
-                </a>
-              </HoverAnimation>
+            <div className="social-icons flex flex-wrap justify-center md:justify-start items-center gap-4 mt-10">
               
-              <HoverAnimation rotate={-10}>
-                <a
-                  href="https://github.com/henriquesuper"
-                  aria-label="GitHub"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-3xl text-neutral-500 hover:text-white transition-colors transform hover:scale-110"
-                >
-                  <FaGithub />
-                </a>
-              </HoverAnimation>
+              {/* Twitter / X Data Cartridge */}
+              <a
+                href="https://twitter.com/henriquesuper"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex items-center gap-3 p-3 bg-black/20 border border-white/10 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-500 rounded-sm overflow-hidden"
+              >
+                {/* Corner Accents */}
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
+                
+                <FaXTwitter className="text-xl text-neutral-500 group-hover:text-green-400 transition-colors duration-300 relative z-10" />
+                
+                <div className="max-w-0 overflow-hidden group-hover:max-w-[120px] transition-all duration-500 ease-out">
+                  <span className="whitespace-nowrap pl-2 pr-2 text-xs font-mono text-green-500 tracking-widest border-l border-green-500/30">
+                    :: UPLINK_X
+                  </span>
+                </div>
+              </a>
               
-              <HoverAnimation rotate={10}>
-                <a
-                  href="https://linkedin.com/in/rickyalves/"
-                  aria-label="LinkedIn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-3xl text-neutral-500 hover:text-blue-500 transition-colors transform hover:scale-110"
-                >
-                  <FaLinkedin />
-                </a>
-              </HoverAnimation>
+              {/* GitHub Data Cartridge */}
+              <a
+                href="https://github.com/henriquesuper"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex items-center gap-3 p-3 bg-black/20 border border-white/10 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-500 rounded-sm overflow-hidden delay-75"
+              >
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
+                
+                <FaGithub className="text-xl text-neutral-500 group-hover:text-green-400 transition-colors duration-300 relative z-10" />
+                
+                <div className="max-w-0 overflow-hidden group-hover:max-w-[120px] transition-all duration-500 ease-out">
+                  <span className="whitespace-nowrap pl-2 pr-2 text-xs font-mono text-green-500 tracking-widest border-l border-green-500/30">
+                    :: SRC_CODE
+                  </span>
+                </div>
+              </a>
+              
+              {/* LinkedIn Data Cartridge */}
+              <a
+                href="https://linkedin.com/in/rickyalves/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex items-center gap-3 p-3 bg-black/20 border border-white/10 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-500 rounded-sm overflow-hidden delay-150"
+              >
+                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
+                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
+                
+                <FaLinkedin className="text-xl text-neutral-500 group-hover:text-green-400 transition-colors duration-300 relative z-10" />
+                
+                <div className="max-w-0 overflow-hidden group-hover:max-w-[120px] transition-all duration-500 ease-out">
+                  <span className="whitespace-nowrap pl-2 pr-2 text-xs font-mono text-green-500 tracking-widest border-l border-green-500/30">
+                    :: NET_LINK
+                  </span>
+                </div>
+              </a>
+
             </div>
           </ScrollAnimation>
         </div>

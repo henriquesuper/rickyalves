@@ -6,7 +6,7 @@ import { AnimatePresence } from 'framer-motion';
 const AnimatedLayout = ({ children }) => {
   return (
     <AnimatePresence mode="wait">
-      <main>{children}</main>
+      {children}
     </AnimatePresence>
   );
 };
