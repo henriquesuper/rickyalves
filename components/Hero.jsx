@@ -13,7 +13,7 @@ import HumanTypewriter from "./ui/HumanTypewriter";
 
 const Hero = () => {
   return (
-    <div className="h-[45rem] w-full rounded-md flex md:items-center md:justify-center antialiased bg-transparent relative overflow-hidden">
+    <div className="h-180 w-full rounded-md flex md:items-center md:justify-center antialiased bg-transparent relative overflow-hidden">
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center p-4 max-w-7xl mx-auto z-10 w-full pt-20 md:pt-0">
         <ScrollAnimation direction="left">
@@ -30,10 +30,10 @@ const Hero = () => {
         
         <div className="text-left md:col-span-2 md:text-left relative z-10">
           <ScrollAnimation direction="right" delay={0.2}>
-            <h1 className="text-5xl md:text-7xl font-bold pb-4 font-mono tracking-tighter min-h-[5rem]">
+            <h1 className="text-5xl md:text-7xl font-bold pb-4 font-mono tracking-tighter min-h-20">
               <HumanTypewriter 
                 text="RICKY ALVES" 
-                className="bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400"
+                className="bg-clip-text text-transparent bg-linear-to-b from-white to-neutral-400"
               />
               <br />
               <span className="text-2xl md:text-4xl font-normal text-green-400 font-mono mt-2 block tracking-normal">
