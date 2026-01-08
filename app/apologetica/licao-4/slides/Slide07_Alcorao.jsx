@@ -63,26 +63,32 @@ function CrescentMoon() {
                         <stop offset="0%" stopColor={islamicColors.gold} />
                         <stop offset="100%" stopColor={islamicColors.green} />
                     </linearGradient>
+                    {/* Máscara para criar o crescente */}
+                    <mask id="crescentMask">
+                        <rect width="100" height="100" fill="white" />
+                        <circle cx="55" cy="45" r="28" fill="black" />
+                    </mask>
                 </defs>
 
-                {/* Crescente */}
-                <motion.path
-                    d="M 50 15
-                       A 35 35 0 1 0 50 85
-                       A 25 25 0 1 1 50 15"
+                {/* Crescente - círculo com máscara */}
+                <motion.circle
+                    cx="42"
+                    cy="50"
+                    r="32"
                     fill="url(#crescentGradient)"
+                    mask="url(#crescentMask)"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1 }}
                 />
 
-                {/* Estrela */}
-                <motion.path
-                    d="M 72 45 L 74.5 52 L 82 52 L 76 57 L 78.5 65 L 72 60 L 65.5 65 L 68 57 L 62 52 L 69.5 52 Z"
+                {/* Estrela de 5 pontas */}
+                <motion.polygon
+                    points="78,20 81,30 92,30 83,37 86,48 78,41 70,48 73,37 64,30 75,30"
                     fill={islamicColors.gold}
                     animate={{
                         opacity: [0.8, 1, 0.8],
-                        scale: [1, 1.1, 1],
+                        filter: ['drop-shadow(0 0 3px gold)', 'drop-shadow(0 0 8px gold)', 'drop-shadow(0 0 3px gold)'],
                     }}
                     transition={{ duration: 2, repeat: Infinity }}
                 />
