@@ -6,10 +6,10 @@ import { useState, useEffect, useCallback } from 'react';
 const isDevelopment = process.env.NODE_ENV === 'development';
 const API_BASE = '/api/apologetica';
 
-// Notas do instrutor por slide (extraídas da Lição 4.md)
+// Notas do instrutor por slide (18 slides modulares)
 const slideNotes = {
     1: {
-        title: 'Abertura',
+        title: 'Por Que a Bíblia?',
         notes: [
             'Esta lição é delicada. Vamos comparar tradições religiosas.',
             'A postura correta: "Vamos aplicar os mesmos critérios a todas as alegações, incluindo a nossa"',
@@ -17,9 +17,9 @@ const slideNotes = {
         ]
     },
     2: {
-        title: 'Nossa Postura',
+        title: 'Antes de Começar',
         notes: [
-            'Lembre a Guga: Deus encontra pessoas onde elas estão (a paciente da Umbanda)',
+            'Lembre a Guga: Deus encontra pessoas onde elas estão',
             'A pergunta não é "quem Deus ama?" (todos)',
             'A pergunta é "qual revelação nos dá o retrato mais confiável de quem Deus é?"'
         ]
@@ -32,6 +32,14 @@ const slideNotes = {
         ]
     },
     4: {
+        title: 'Panorama das Tradições',
+        notes: [
+            'Visão geral das 5 tradições que vamos analisar',
+            'Cada uma tem sua alegação de revelação',
+            'Vamos aplicar os mesmos critérios a todas'
+        ]
+    },
+    5: {
         title: 'Vedas Hindus',
         notes: [
             'Alegação: Conhecimento eterno (apaurusheya — "não de origem humana")',
@@ -39,15 +47,15 @@ const slideNotes = {
             'Realidade última (Brahman) é impessoal. Mundo material é maya (ilusão)'
         ]
     },
-    5: {
+    6: {
         title: 'Textos Budistas',
         notes: [
             'Buda não alegou falar por Deus — alegou ter descoberto a verdade através da meditação',
             'Não há Deus criador pessoal',
-            'A questão de Deus é considerada irrelevante para a libertação'
+            '⚠️ Diferente: não alega origem divina'
         ]
     },
-    6: {
+    7: {
         title: 'Alcorão',
         notes: [
             'Alegação: Ditado verbal direto de Alá. Não inspirado — ditado.',
@@ -55,169 +63,100 @@ const slideNotes = {
             'Maomé é o "selo dos profetas" — revelação final'
         ]
     },
-    7: {
+    8: {
         title: 'Livro de Mórmon',
         notes: [
             'Tradução de placas de ouro por Joseph Smith',
             'Registro de povos hebreus que migraram para as Américas',
-            'Deus tem corpo físico. Potencial humano de tornar-se como Deus'
+            '⚠️ Alega civilizações massivas — veremos as evidências'
         ]
     },
-    8: {
+    9: {
         title: 'Bíblia',
         notes: [
             'Deus não ditou (exceto casos específicos como os Dez Mandamentos)',
             'Ele inspirou pessoas que escreveram em seus próprios estilos',
-            '66 livros, ~1500 anos, ~40 autores'
-        ]
-    },
-    9: {
-        title: 'Critério 1: Coerência - Vedas e Budismo',
-        notes: [
-            'Vedas: Tensões internas (politeísmo inicial → monismo posterior)',
-            'Budismo: Diferentes escolas têm cânones diferentes',
-            'Pluralismo interno aceito; não há "ortodoxia" única'
+            '66 livros, ~1500 anos, ~40 autores — mas uma história unificada'
         ]
     },
     10: {
-        title: 'Critério 1: Coerência - Alcorão e Mórmon',
+        title: 'Critério 1: Coerência Interna',
         notes: [
-            'Alcorão: Versos "ab-rogados" (naskh) — versos posteriores cancelam anteriores',
-            'Mórmon: Anacrônicos - cita Isaías da KJV (incluindo erros do séc. XVII)',
-            'Mórmon: Mudanças textuais significativas desde 1830'
+            'Vedas: Tensões internas (politeísmo → monismo)',
+            'Mórmon: Anacrônicos - cita Isaías da KJV (erros do séc. XVII)',
+            '💡 "Como 40 pessoas em 1500 anos mantêm essa coerência sem um editor central?"'
         ]
     },
     11: {
-        title: 'Critério 1: Coerência - Bíblia',
-        notes: [
-            '40+ autores, 1500 anos — e mantém unidade teológica notável',
-            'Tensões existem (Tiago vs. Paulo?) — mas resolvíveis no contexto',
-            '💡 Ponto: "Como 40 pessoas em 1500 anos mantêm essa coerência sem um editor central?"'
-        ]
-    },
-    12: {
         title: 'Critério 2: Verificabilidade',
         notes: [
-            'Vedas: Não fazem alegações históricas verificáveis',
-            'Buda é figura histórica, mas textos compilados 400+ anos depois',
-            'Maomé bem documentado, mas nega crucificação (diverge da história)'
-        ]
-    },
-    13: {
-        title: 'Critério 2: Mórmon',
-        notes: [
-            '⚠️ FALHA GRAVE: Alega civilizações massivas nas Américas (milhões de pessoas)',
-            'Zero evidência arqueológica de nefitas, lamanitas, jareditas',
-            'Anacrônicos: cavalos, trigo, aço — inexistentes na América pré-colombiana'
-        ]
-    },
-    14: {
-        title: 'Critério 2: Bíblia - Confirmações',
-        notes: [
-            'Muitas confirmações: Estela de Merneptá, Inscrição de Tel Dan, Cilindro de Ciro',
-            'Personagens antes "lendários" foram confirmados (Casa de Davi, Pilatos)',
+            '⚠️ Mórmon: FALHA GRAVE - Zero evidência arqueológica',
+            'Bíblia: Muitas confirmações (Estela de Merneptá, Casa de Davi)',
             'A Bíblia se expõe à verificação — diferente de outras tradições'
         ]
     },
-    15: {
-        title: 'Critério 2: Bíblia - Tensões',
+    12: {
+        title: 'Critério 3: Realidade Humana',
         notes: [
-            'HONESTIDADE: Existem pontos de tensão',
-            'Jericó: Camadas arqueológicas não se alinham facilmente',
-            'Censo de Quirinius (Lucas): Dificuldade de harmonização cronológica',
-            'São problemas de datação/escala, não negações categóricas'
+            '⚠️ Este é o critério que mais ressoou na Lição 3',
+            'Vedas: Mundo é ilusão. Budismo: extinguir desejo',
+            '💡 "A Bíblia lê você" — heróis falham, vilões são complexos'
+        ]
+    },
+    13: {
+        title: 'Critério 4: Integridade das Fontes',
+        notes: [
+            'Mórmon: Placas "devolvidas ao anjo" - não verificável',
+            'NT: 5.800+ manuscritos gregos. P52: ~30 anos do original',
+            'Melhor atestado documento antigo (Platão: 1000+ anos de gap)'
+        ]
+    },
+    14: {
+        title: 'Critério 5: Frutos Históricos',
+        notes: [
+            'Todas têm frutos bons e ruins — honestidade é crucial',
+            'Pergunta-chave: isso foi "apesar" ou "por causa" do texto?',
+            'Cristianismo: hospitais, universidades, abolição — quando seguido'
+        ]
+    },
+    15: {
+        title: 'Síntese Visual',
+        notes: [
+            'Momento visual impactante com a Balança 3D',
+            'Deixar a animação falar por si',
+            'Isso não "prova" — mas mostra que merece investigação'
         ]
     },
     16: {
-        title: 'Critério 3: Realidade Humana - Outras',
+        title: 'Conclusão',
         notes: [
-            '⚠️ Este é o critério que mais ressoou com a Guga na Lição 3',
-            'Vedas: Mundo é ilusão. Desvaloriza relações pessoais',
-            'Budismo: Sofrimento vem do desejo. Solução: extinguir desejo',
-            'PROBLEMA: O sofrimento de um estupro vem do "desejo" da vítima?'
+            'NÃO dissemos: "Outras religiões são más"',
+            'DISSEMOS: Aplicamos mesmos critérios a todas',
+            'A Bíblia se destaca nesses critérios — fé RAZOÁVEL'
         ]
     },
     17: {
-        title: 'Critério 3: Realidade Humana - Bíblia',
+        title: 'Discussão',
         notes: [
-            '💡 PONTO-CHAVE: "A Bíblia é o único texto que mostra Deus entrando no sofrimento"',
-            'Jesus não explica o sofrimento de longe — Ele entra nele',
-            'Na cruz, Ele grita "Deus meu, por que me abandonaste?" Ele conhece o abandono.',
-            '⚠️ CUIDADO: Não forçar conexão com a ferida dela. Apenas apresentar.'
+            'Perguntas para reflexão em grupo',
+            '1. Qual critério é mais importante para você?',
+            '2. Alguma tradição te surpreendeu?',
+            '3. O que você diria a um cético agora?'
         ]
     },
     18: {
-        title: 'Critério 4: Integridade das Fontes',
+        title: 'Encerramento',
         notes: [
-            'Budismo: Compilados 400+ anos após Buda - problemático',
-            'Mórmon: Placas originais "levadas pelo anjo" - sem verificação',
-            'NT: 5.800+ manuscritos gregos. P52: ~30 anos do original',
-            'AT: Manuscritos do Mar Morto praticamente idênticos ao texto medieval'
-        ]
-    },
-    19: {
-        title: 'Critério 5: Frutos Históricos',
-        notes: [
-            'Todas as tradições têm frutos bons e ruins',
-            'Perguntar: "Quando os seguidores vivem de acordo com os ensinamentos, o que resulta?"',
-            'Cristianismo: Abusos contradizem Jesus. Quando seguido: abolição, hospitais, universidades',
-            '💡 "Lembra da história do bolo? Aquela mulher estava seguindo ou contradizendo Jesus?"'
-        ]
-    },
-    20: {
-        title: 'Tabela Resumo',
-        notes: [
-            'Apresentar visualmente o resumo de todos os critérios',
-            '*Com tensões cronológicas/interpretativas',
-            '**Quando ensinamentos são seguidos'
-        ]
-    },
-    21: {
-        title: 'Balança da Verdade',
-        notes: [
-            'Momento visual impactante',
-            'Deixar a animação falar por si'
-        ]
-    },
-    22: {
-        title: 'O Que Isso Significa',
-        notes: [
-            'NÃO estamos dizendo: "Todas as outras religiões são falsas"',
-            'NÃO estamos dizendo: "Cristãos são melhores"',
-            'ESTAMOS dizendo: A Bíblia passa nos critérios de forma única'
-        ]
-    },
-    23: {
-        title: 'Transição para Lição 5',
-        notes: [
-            'Pergunta de transição: "Se a Bíblia é revelação de Deus, como foi escrita?"',
-            '"O que significa dizer que ela é inspirada?"',
-            'Isso é o que vamos explorar na próxima lição'
-        ]
-    },
-    24: {
-        title: 'Discussão',
-        notes: [
-            'Perguntas para discussão:',
-            '1. Alguma tradição te surpreendeu?',
-            '2. Os critérios são justos?',
-            '3. O que você faz com Deus alcançando pessoas em tradições imperfeitas?',
-            '4. Algo sobre a Bíblia ainda te incomoda?'
-        ]
-    },
-    25: {
-        title: 'Fechamento',
-        notes: [
-            'A Bíblia se destaca quando aplicamos critérios consistentes',
-            'Ela não pede fé cega — ela se expõe à verificação',
-            'Temos boas razões para confiar que ela é o que alega ser'
+            'Continue investigando. Continue perguntando.',
+            'Próxima lição: Jesus — Histórico ou Mítico?',
+            'Temos boas razões para confiar na Bíblia'
         ]
     }
 };
 
 export function useApologeticaSync(role = 'viewer') {
     const [currentSlide, setCurrentSlide] = useState(1);
-    const [totalSlides] = useState(25);
+    const [totalSlides] = useState(18);
     const [connected, setConnected] = useState(false);
     const [attendance, setAttendance] = useState(0);
     const [currentPoll, setCurrentPoll] = useState(null);
