@@ -13,9 +13,10 @@ function Scale({ leftWeight = 50, rightWeight = 50, leftLabel = '', rightLabel =
     const beamRef = useRef();
 
     // Calcular inclinação baseada nos pesos
+    // O lado com MAIOR peso (pontuação) vai para BAIXO
     const tiltAngle = useMemo(() => {
         const diff = rightWeight - leftWeight;
-        // Max tilt de 15 graus
+        // Max tilt de 15 graus - positivo = direita desce
         return (diff / 100) * 0.26; // ~15 graus em radianos
     }, [leftWeight, rightWeight]);
 
@@ -33,15 +34,18 @@ function Scale({ leftWeight = 50, rightWeight = 50, leftLabel = '', rightLabel =
         }
 
         if (beamRef.current) {
+            // Rotação Z negativa = lado direito desce
             beamRef.current.rotation.z = THREE.MathUtils.lerp(
                 beamRef.current.rotation.z,
-                tiltAngle,
+                -tiltAngle, // Negativo para sincronizar com os pratos
                 0.05
             );
         }
 
-        // Ajustar altura dos pratos
+        // Ajustar altura dos pratos - maior peso = mais baixo
         if (leftPanRef.current && rightPanRef.current) {
+            // Se rightWeight > leftWeight: tiltAngle positivo
+            // leftY sobe (+), rightY desce (-)
             const leftY = -1.5 + Math.sin(tiltAngle) * 1.2;
             const rightY = -1.5 - Math.sin(tiltAngle) * 1.2;
 

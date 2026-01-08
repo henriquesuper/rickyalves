@@ -88,9 +88,9 @@ export default function Slide16_Conclusao() {
                     <div className="inline-block bg-[#C9A227]/10 backdrop-blur-xl px-8 py-6 rounded-2xl border border-[#C9A227]/30">
                         <FaQuoteLeft className="text-2xl text-[#C9A227] mb-3 mx-auto" />
                         <p className="text-xl text-[#E8D5B7] italic mb-3">
-                            "Venham, e argumentemos"
+                            "A glória de Deus é encobrir as coisas, mas a glória dos reis é esquadrinhá-las"
                         </p>
-                        <p className="text-[#C9A227] font-medium">— Isaías 1:18</p>
+                        <p className="text-[#C9A227] font-medium">— Provérbios 25:2</p>
                     </div>
                 </motion.div>
             </motion.div>

@@ -57,10 +57,10 @@ export default function Slide18_Encerramento() {
                 >
                     <h3 className="text-lg font-bold text-[#C9A227] mb-4">📅 Próxima Lição</h3>
                     <p className="text-[#E8D5B7] mb-4">
-                        <strong className="text-white">Lição 5:</strong> Jesus — Histórico ou Mítico?
+                        <strong className="text-white">Lição 5:</strong> A Natureza da Inspiração Bíblica
                     </p>
                     <p className="text-sm text-white/50">
-                        Evidências extrabíblicas para a existência de Jesus
+                        Como a Bíblia foi inspirada? Ditação, pensamento ou ambos?
                     </p>
                 </motion.div>
 
