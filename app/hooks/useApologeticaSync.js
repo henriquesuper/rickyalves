@@ -163,20 +163,45 @@ export function useApologeticaSync(role = 'viewer') {
     const [recentReactions, setRecentReactions] = useState([]);
     const [userId, setUserId] = useState(null);
 
-    // Buscar status (for Vercel/production)
+    // Buscar status (for Vercel/production) - apenas para viewers/participants
     const fetchStatus = useCallback(async () => {
+        // Presenter não deve sincronizar slide do servidor (ele é a fonte de verdade)
+        if (role === 'presenter') {
+            setConnected(true);
+            return;
+        }
+
         try {
             const response = await fetch(`${API_BASE}?action=status`);
             if (!response.ok) return;
 
             const data = await response.json();
 
-            setCurrentSlide(data.currentSlide || 1);
-            setAttendance(data.attendance || 0);
-            setCurrentPoll(data.currentPoll);
+            // Só atualiza o slide se for diferente (evita loops)
+            if (data.currentSlide && data.currentSlide !== currentSlide) {
+                setCurrentSlide(data.currentSlide);
+            }
 
-            if (data.recentReactions) {
-                setRecentReactions(data.recentReactions);
+            setAttendance(data.attendance || 0);
+            setCurrentPoll(data.currentPoll || null);
+
+            // Reações são apenas alertas temporários - não precisam ser persistidas
+            // O servidor envia as recentes, mas elas serão limpas automaticamente
+            if (data.recentReactions && data.recentReactions.length > 0) {
+                // Filtrar apenas reações novas (não vistas antes)
+                const newReactions = data.recentReactions.filter(
+                    r => !recentReactions.some(existing => existing.id === r.id)
+                );
+                if (newReactions.length > 0) {
+                    setRecentReactions(prev => {
+                        const updated = [...prev, ...newReactions].slice(-5);
+                        return updated;
+                    });
+                    // Auto-limpar reações após 4 segundos
+                    setTimeout(() => {
+                        setRecentReactions(prev => prev.slice(newReactions.length));
+                    }, 4000);
+                }
             }
 
             setConnected(true);
@@ -184,7 +209,7 @@ export function useApologeticaSync(role = 'viewer') {
             console.error('Erro ao buscar status:', error);
             setConnected(false);
         }
-    }, []);
+    }, [role, currentSlide, recentReactions]);
 
     // Inicialização
     useEffect(() => {
@@ -238,9 +263,9 @@ export function useApologeticaSync(role = 'viewer') {
 
             setupSocketConnection();
         } else {
-            // Polling em produção
+            // Polling em produção - menos frequente para evitar sobrecarga
             fetchStatus();
-            const interval = setInterval(fetchStatus, 1000);
+            const interval = setInterval(fetchStatus, 2000); // 2 segundos em vez de 1
             return () => clearInterval(interval);
         }
     }, [fetchStatus, role]);

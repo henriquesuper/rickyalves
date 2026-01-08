@@ -32,14 +32,15 @@ export async function GET(request) {
     cleanupUsers();
 
     if (action === 'status') {
-        // Keep only last 10 reactions
-        state.recentReactions = state.recentReactions.slice(-10);
+        // Reações são temporárias - retornar apenas as dos últimos 5 segundos
+        const fiveSecondsAgo = Date.now() - 5000;
+        const freshReactions = state.recentReactions.filter(r => r.timestamp > fiveSecondsAgo);
 
         return Response.json({
             currentSlide: state.currentSlide,
             attendance: state.attendance,
             currentPoll: state.currentPoll,
-            recentReactions: state.recentReactions,
+            recentReactions: freshReactions,
             stats: {
                 totalVotes: state.currentPoll
                     ? state.currentPoll.options.reduce((sum, opt) => sum + opt.votes, 0)
@@ -80,7 +81,7 @@ export async function POST(request) {
             }
 
             case 'change-slide': {
-                const newSlide = Math.max(1, Math.min(data.slide, 25)); // Max 25 slides
+                const newSlide = Math.max(1, Math.min(data.slide, 18)); // Max 18 slides
                 state.currentSlide = newSlide;
                 state.lastActivity = Date.now();
 
@@ -95,11 +96,13 @@ export async function POST(request) {
                     type: data.type,
                     userName: data.userName,
                     timestamp: Date.now(),
-                    id: `reaction_${Date.now()}`
+                    id: `reaction_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`
                 };
 
+                // Manter apenas reações recentes (limpar automático)
+                const fiveSecondsAgo = Date.now() - 5000;
+                state.recentReactions = state.recentReactions.filter(r => r.timestamp > fiveSecondsAgo);
                 state.recentReactions.push(reactionData);
-                state.recentReactions = state.recentReactions.slice(-20);
 
                 // Update user's last seen
                 if (data.userId && state.users[data.userId]) {
