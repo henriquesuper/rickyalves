@@ -8,7 +8,10 @@ import CommandDock from './Navigation/CommandDock';
 
 export default function LayoutContentRenderer({ children }) {
   const pathname = usePathname();
-  const showNavbarAndFooter = pathname !== '/salmos' && pathname !== '/mobile-interface';
+
+  // Rotas que devem ter layout limpo (sem header/footer)
+  const cleanLayoutRoutes = ['/salmos', '/mobile-interface', '/apologetica'];
+  const showNavbarAndFooter = !cleanLayoutRoutes.some(route => pathname?.startsWith(route));
 
   return (
     <>

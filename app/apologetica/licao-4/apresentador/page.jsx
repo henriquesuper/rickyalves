@@ -227,8 +227,8 @@ export default function ApresentadorPage() {
             </AnimatePresence>
 
             {/* Navegação */}
-            <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-xl border-t border-white/10 p-4">
-                <div className="flex items-center justify-between gap-4">
+            <div className="fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-xl border-t border-white/10 p-4 pb-6">
+                <div className="flex items-center justify-between gap-4 max-w-lg mx-auto">
                     <motion.button
                         whileTap={{ scale: 0.95 }}
                         onClick={prevSlide}
@@ -250,7 +250,7 @@ export default function ApresentadorPage() {
             </div>
 
             {/* Spacer for fixed navigation */}
-            <div className="h-24" />
+            <div className="h-32" />
         </div>
     );
 }
