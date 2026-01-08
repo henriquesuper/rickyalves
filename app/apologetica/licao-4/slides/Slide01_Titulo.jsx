@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
 import { GiScales } from 'react-icons/gi';
+import { QRCodeSVG } from 'qrcode.react';
 import { SlideWrapper, colors } from './shared';
+
+const PARTICIPATION_URL = 'https://www.rickyalves.com/apologetica/licao-4/participar';
 
 export default function Slide01_Titulo() {
     return (
@@ -70,6 +73,27 @@ export default function Slide01_Titulo() {
                     className="mt-12 h-0.5 w-48 mx-auto"
                     style={{ background: `linear-gradient(90deg, transparent, ${colors.goldAncient}, transparent)` }}
                 />
+
+                {/* QR Code para participação */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.8, duration: 0.8 }}
+                    className="mt-8 flex flex-col items-center gap-4"
+                >
+                    <div className="bg-white p-3 rounded-xl shadow-lg shadow-[#C9A227]/20">
+                        <QRCodeSVG
+                            value={PARTICIPATION_URL}
+                            size={120}
+                            bgColor="#FFFFFF"
+                            fgColor="#0D1117"
+                            level="H"
+                        />
+                    </div>
+                    <p className="text-sm text-[#E8D5B7]/70 font-medium">
+                        📱 Escaneie para participar
+                    </p>
+                </motion.div>
             </motion.div>
         </SlideWrapper>
     );

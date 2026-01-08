@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     FaUsers, FaVoteYea, FaBook, FaLightbulb,
-    FaQuestionCircle, FaSearch, FaCheckCircle, FaBookOpen
+    FaQuestionCircle, FaSearch, FaCheckCircle, FaBookOpen, FaSignOutAlt
 } from 'react-icons/fa';
 import { GiScales } from 'react-icons/gi';
 import { useApologeticaSync } from '../../../hooks/useApologeticaSync';
@@ -80,6 +80,15 @@ export default function ParticiparPage() {
         setTimeout(() => {
             setLastReaction(null);
         }, 1500);
+    };
+
+    const handleLogout = () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('apologetica_session');
+        }
+        setIsRegistered(false);
+        setUserName('');
+        setHasVoted(false);
     };
 
     // Reações contextuais para apologética
@@ -188,9 +197,18 @@ export default function ParticiparPage() {
                             <p className="text-xs text-[#E8D5B7]/60">Olá, {userName}!</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 text-sm">
-                        <FaUsers className="text-[#C9A227]" />
-                        <span>{attendance}</span>
+                    <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2 text-sm">
+                            <FaUsers className="text-[#C9A227]" />
+                            <span>{attendance}</span>
+                        </div>
+                        <button
+                            onClick={handleLogout}
+                            className="p-2 rounded-lg bg-red-500/20 border border-red-500/30 hover:bg-red-500/30 transition-colors"
+                            title="Sair"
+                        >
+                            <FaSignOutAlt className="text-red-400" />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -257,8 +275,8 @@ export default function ParticiparPage() {
                                             onClick={() => handleVote(index)}
                                             disabled={hasVoted}
                                             className={`w-full p-4 rounded-xl border transition-all duration-300 relative overflow-hidden ${hasVoted
-                                                    ? 'border-white/20 cursor-default'
-                                                    : 'border-purple-400/50 hover:border-[#00D9FF] hover:bg-purple-500/10'
+                                                ? 'border-white/20 cursor-default'
+                                                : 'border-purple-400/50 hover:border-[#00D9FF] hover:bg-purple-500/10'
                                                 }`}
                                         >
                                             {hasVoted && (
