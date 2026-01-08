@@ -59,15 +59,15 @@ export default function Slide02_Postura() {
                         <ul className="space-y-4 text-lg text-[#E8D5B7]">
                             <li className="flex items-start gap-3">
                                 <span className="mt-1">•</span>
-                                <span>"Aplicar os mesmos critérios a <strong className="text-[#00D9FF]">todas</strong> as alegações"</span>
+                                <span>"Usar os <strong className="text-[#00D9FF]">mesmos critérios</strong> para avaliar todas as alegações"</span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="mt-1">•</span>
-                                "Incluindo a nossa própria"
+                                "A Bíblia não ganha passe livre — entra na fila como qualquer outra"
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="mt-1">•</span>
-                                "Se a Bíblia não passar, seremos honestos"
+                                "Se ela não passar nos critérios, descartamos. Simples assim."
                             </li>
                         </ul>
                     </motion.div>
@@ -83,7 +83,7 @@ export default function Slide02_Postura() {
                     <div className="inline-block bg-[#1E3A5F]/30 backdrop-blur-xl px-8 py-6 rounded-2xl border border-[#C9A227]/30">
                         <FaQuoteLeft className="text-2xl text-[#C9A227] mb-3 mx-auto" />
                         <p className="text-xl text-[#E8D5B7] italic">
-                            A pergunta não é "quem Deus ama?" — é "qual revelação nos dá o retrato mais confiável de quem Deus é?"
+                            Não estamos perguntando "qual religião é certa?" — estamos perguntando "qual texto sobrevive ao escrutínio?"
                         </p>
                     </div>
                 </motion.div>
