@@ -213,9 +213,9 @@ export function useLicao6Sync(role = 'viewer') {
             if (currentQuizQuestion < TOTAL_QUIZ_QUESTIONS) {
                 goToQuizQuestion(currentQuizQuestion + 1);
             } else {
-                // Quiz complete, go to slide 1
+                // Quiz complete, go to slide 2 (slide 1 é o título que já vimos)
                 setQuizComplete(true);
-                goToSlide(1);
+                goToSlide(2);
             }
         } else {
             goToSlide(currentSlide + 1);
@@ -223,14 +223,25 @@ export function useLicao6Sync(role = 'viewer') {
     }, [currentSlide, currentQuizQuestion]);
 
     const prevSlide = useCallback(() => {
-        if (currentSlide === 1 && !quizComplete) {
-            // Go back to last quiz question
+        if (currentSlide === 0) {
+            // In quiz phase - voltar pergunta ou sair do quiz
+            if (currentQuizQuestion > 1) {
+                goToQuizQuestion(currentQuizQuestion - 1);
+            } else {
+                // Já está na primeira pergunta, volta para slide 1 (título)
+                goToSlide(1);
+            }
+        } else if (currentSlide === 2 && quizComplete) {
+            // Voltando do slide 2 após quiz, vai para última pergunta do quiz
             goToSlide(0);
             goToQuizQuestion(TOTAL_QUIZ_QUESTIONS);
+        } else if (currentSlide === 1) {
+            // No slide 1 (título), não tem para onde voltar
+            // Ou poderia ir para o quiz se quiser
         } else {
             goToSlide(currentSlide - 1);
         }
-    }, [currentSlide, quizComplete]);
+    }, [currentSlide, currentQuizQuestion, quizComplete]);
 
     // ====== QUIZ NAVIGATION (PRESENTER) ======
 

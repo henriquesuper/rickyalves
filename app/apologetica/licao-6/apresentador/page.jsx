@@ -124,9 +124,28 @@ export default function ApresentadorPage() {
                                 <p style={{ color: colors.parchmentMid }} className="mb-2">
                                     Pergunta {currentQuizQuestion} de {totalQuizQuestions}
                                 </p>
-                                <p style={{ color: colors.parchmentLight }} className="text-sm">
+                                <p style={{ color: colors.parchmentLight }} className="text-sm mb-3">
                                     {quizQuestions[currentQuizQuestion - 1]?.question}
                                 </p>
+                                
+                                {/* Navegação direta entre perguntas do quiz */}
+                                <div className="flex gap-1 mb-3">
+                                    {[...Array(totalQuizQuestions)].map((_, i) => (
+                                        <button
+                                            key={i + 1}
+                                            onClick={() => goToQuizQuestion(i + 1)}
+                                            className={`flex-1 py-1.5 rounded text-xs font-medium transition-all ${currentQuizQuestion === i + 1 ? 'ring-2 ring-offset-1' : ''}`}
+                                            style={{
+                                                background: currentQuizQuestion === i + 1 ? colors.goldLeaf : `${colors.sepia}40`,
+                                                color: currentQuizQuestion === i + 1 ? colors.bgDeep : colors.parchmentMid,
+                                                ringColor: colors.goldLeaf
+                                            }}
+                                        >
+                                            Q{i + 1}
+                                        </button>
+                                    ))}
+                                </div>
+
                                 {quizResponses[currentQuizQuestion] && (
                                     <div className="mt-3 p-3 rounded" style={{ background: `${colors.goldLeaf}20` }}>
                                         <p className="text-xs mb-2" style={{ color: colors.goldLeaf }}>Respostas:</p>
