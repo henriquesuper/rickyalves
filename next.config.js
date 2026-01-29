@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const isDev = process.env.NODE_ENV === 'development';
+
 const nextConfig = {
   reactStrictMode: true,
   // Enable the App Router
@@ -13,6 +15,12 @@ const nextConfig = {
   },
   // Security headers
   async headers() {
+    // Em desenvolvimento, permitir todas as conexões para Socket.io (localhost e LAN)
+    // Em produção, restringir apenas a HTTPS e WSS
+    const connectSrc = isDev
+      ? "connect-src *"
+      : "connect-src 'self' https: wss:";
+
     return [
       {
         // Apply to all routes
@@ -26,7 +34,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: blob: https:",
-              "connect-src 'self' https: wss:",
+              connectSrc,
               "frame-ancestors 'none'",
             ].join('; '),
           },

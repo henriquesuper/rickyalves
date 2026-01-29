@@ -2,8 +2,13 @@
 // Works in Vercel serverless environment
 
 // In-memory state (will reset on cold starts, but works for sessions)
+// Nota: Em Vercel serverless, o estado pode ser perdido entre invocações
+// Para produção real, considere usar Vercel KV, Redis, ou outro storage persistente
 let state = {
     currentSlide: 1,
+    currentQuizQuestion: 1,
+    quizResponses: {}, // { questionNumber: { sim: count, nao: count, talvez: count } }
+    quizComplete: false,
     attendance: 0,
     users: {},
     currentPoll: null,
@@ -38,6 +43,9 @@ export async function GET(request) {
 
         return Response.json({
             currentSlide: state.currentSlide,
+            currentQuizQuestion: state.currentQuizQuestion,
+            quizResponses: state.quizResponses,
+            quizComplete: state.quizComplete,
             attendance: state.attendance,
             currentPoll: state.currentPoll,
             recentReactions: freshReactions,
@@ -81,13 +89,46 @@ export async function POST(request) {
             }
 
             case 'change-slide': {
-                const newSlide = Math.max(1, Math.min(data.slide, 18)); // Max 18 slides
+                const newSlide = Math.max(0, Math.min(data.slide, 20)); // 0 = quiz, 1-20 = slides
                 state.currentSlide = newSlide;
                 state.lastActivity = Date.now();
 
                 return Response.json({
                     success: true,
                     currentSlide: state.currentSlide
+                });
+            }
+
+            case 'quiz-question-change': {
+                const newQuestion = Math.max(1, Math.min(data.question, 6)); // 6 perguntas
+                state.currentQuizQuestion = newQuestion;
+                state.currentSlide = 0; // Garante que estamos na fase do quiz
+                state.lastActivity = Date.now();
+
+                return Response.json({
+                    success: true,
+                    currentQuizQuestion: state.currentQuizQuestion
+                });
+            }
+
+            case 'quiz-response': {
+                const { question, response } = data;
+                
+                // Inicializa contagem se não existir
+                if (!state.quizResponses[question]) {
+                    state.quizResponses[question] = { sim: 0, nao: 0, talvez: 0 };
+                }
+
+                // Incrementa contagem
+                if (response in state.quizResponses[question]) {
+                    state.quizResponses[question][response]++;
+                }
+
+                return Response.json({
+                    success: true,
+                    question,
+                    responses: state.quizResponses[question],
+                    allResponses: state.quizResponses
                 });
             }
 
@@ -173,6 +214,18 @@ export async function POST(request) {
                 return Response.json({
                     success: true,
                     currentSlide: state.currentSlide,
+                    attendance: state.attendance
+                });
+            }
+
+            case 'leave': {
+                if (data.userId && state.users[data.userId]) {
+                    delete state.users[data.userId];
+                    state.attendance = Object.keys(state.users).length;
+                }
+
+                return Response.json({
+                    success: true,
                     attendance: state.attendance
                 });
             }
