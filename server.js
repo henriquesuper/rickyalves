@@ -36,6 +36,16 @@ let licao6State = {
   polls: {}
 };
 
+// Estado específico da Lição 7 (manuscritos e transmissão textual)
+let licao7State = {
+  currentSlide: 1,
+  currentQuizQuestion: 1,
+  quizResponses: {}, // { questionNumber: { sim: count, nao: count, talvez: count } }
+  quizComplete: false,
+  participants: new Set(),
+  recentReactions: [] // Armazenar reações recentes para broadcast
+};
+
 // Estatísticas em tempo real
 let stats = {
   totalVotes: 0,
@@ -78,6 +88,24 @@ io.on('connection', (socket) => {
       count: licao6State.participants.size,
       newParticipant: true
     });
+    // Para Lição 7
+  } else if (room === 'apologetica-licao-7') {
+    licao7State.participants.add(socket.id);
+
+    // Envia estado atual para o novo participante
+    socket.emit('presentation-state', {
+      currentSlide: licao7State.currentSlide,
+      currentQuizQuestion: licao7State.currentQuizQuestion,
+      quizResponses: licao7State.quizResponses,
+      quizComplete: licao7State.quizComplete,
+      attendance: licao7State.participants.size
+    });
+
+    // Notifica todos na sala sobre novo participante
+    io.to(room).emit('attendance-update', {
+      count: licao7State.participants.size,
+      newParticipant: true
+    });
   } else {
     // Envia estado atual para o novo participante (outros)
     socket.emit('presentation-state', presentationState);
@@ -90,55 +118,73 @@ io.on('connection', (socket) => {
     });
   }
 
-  // ====== LIÇÃO 6: Mudança de slide ======
+  // ====== MUDANÇA DE SLIDE (LIÇÃO 6 e 7) ======
   socket.on('change-slide', (data) => {
     const slideNumber = typeof data === 'object' ? data.slide : data;
-    console.log(`[Lição 6] Slide mudou para: ${slideNumber}`);
+    const lesson = data.lesson || 'licao-6';
 
-    licao6State.currentSlide = slideNumber;
-
-    // Broadcast para todos na sala
-    io.to('apologetica-licao-6').emit('slide-change', { slide: slideNumber });
+    if (lesson === 'licao-7') {
+      console.log(`[Lição 7] Slide mudou para: ${slideNumber}`);
+      licao7State.currentSlide = slideNumber;
+      io.to('apologetica-licao-7').emit('slide-change', { slide: slideNumber });
+    } else {
+      console.log(`[Lição 6] Slide mudou para: ${slideNumber}`);
+      licao6State.currentSlide = slideNumber;
+      io.to('apologetica-licao-6').emit('slide-change', { slide: slideNumber });
+    }
   });
 
-  // ====== LIÇÃO 6: Mudança de pergunta do quiz ======
+  // ====== MUDANÇA DE PERGUNTA DO QUIZ (LIÇÃO 6 e 7) ======
   socket.on('quiz-question-change', (data) => {
     const questionNumber = data.question;
-    console.log(`[Lição 6] Pergunta do quiz mudou para: ${questionNumber}`);
+    const lesson = data.lesson || 'licao-6';
 
-    licao6State.currentQuizQuestion = questionNumber;
-    licao6State.currentSlide = 0; // Assegura que estamos na fase do quiz
-
-    // Broadcast para todos na sala
-    io.to('apologetica-licao-6').emit('quiz-question-change', { question: questionNumber });
-    io.to('apologetica-licao-6').emit('slide-change', { slide: 0 });
+    if (lesson === 'licao-7') {
+      console.log(`[Lição 7] Pergunta do quiz mudou para: ${questionNumber}`);
+      licao7State.currentQuizQuestion = questionNumber;
+      licao7State.currentSlide = 0;
+      io.to('apologetica-licao-7').emit('quiz-question-change', { question: questionNumber });
+      io.to('apologetica-licao-7').emit('slide-change', { slide: 0 });
+    } else {
+      console.log(`[Lição 6] Pergunta do quiz mudou para: ${questionNumber}`);
+      licao6State.currentQuizQuestion = questionNumber;
+      licao6State.currentSlide = 0;
+      io.to('apologetica-licao-6').emit('quiz-question-change', { question: questionNumber });
+      io.to('apologetica-licao-6').emit('slide-change', { slide: 0 });
+    }
   });
 
-  // ====== LIÇÃO 6: Resposta do quiz (participante) ======
+  // ====== RESPOSTA DO QUIZ (LIÇÃO 6 e 7) ======
   socket.on('quiz-response', (data) => {
-    const { question, response } = data;
-    console.log(`[Lição 6] Resposta recebida - Q${question}: ${response}`);
+    const { question, response, lesson = 'licao-6' } = data;
+
+    const state = lesson === 'licao-7' ? licao7State : licao6State;
+    const room = lesson === 'licao-7' ? 'apologetica-licao-7' : 'apologetica-licao-6';
+
+    console.log(`[${lesson}] Resposta recebida - Q${question}: ${response}`);
 
     // Inicializa contagem se não existir
-    if (!licao6State.quizResponses[question]) {
-      licao6State.quizResponses[question] = { sim: 0, nao: 0, talvez: 0 };
+    if (!state.quizResponses[question]) {
+      state.quizResponses[question] = { sim: 0, nao: 0, talvez: 0 };
     }
 
     // Incrementa contagem
-    if (response in licao6State.quizResponses[question]) {
-      licao6State.quizResponses[question][response]++;
+    if (response in state.quizResponses[question]) {
+      state.quizResponses[question][response]++;
     }
 
-    // Broadcast das respostas atualizadas para todos (especialmente o apresentador)
-    io.to('apologetica-licao-6').emit('quiz-response', {
+    // Broadcast das respostas atualizadas
+    io.to(room).emit('quiz-response', {
       question,
       response,
-      responses: licao6State.quizResponses[question],
-      allResponses: licao6State.quizResponses
+      responses: state.quizResponses[question],
+      allResponses: state.quizResponses
     });
 
-    console.log(`[Lição 6] Respostas atualizadas:`, licao6State.quizResponses[question]);
+    console.log(`[${lesson}] Respostas atualizadas:`, state.quizResponses[question]);
   });
+
+
 
   // Mudança de slide genérica (para outras apresentações)
   socket.on('slide-change', (slideNumber) => {
