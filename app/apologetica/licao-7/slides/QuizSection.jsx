@@ -3,14 +3,14 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { SlideWrapper, ParchmentCard, WaxSeal, quizQuestions, colors } from './shared';
 
-export default function QuizSection({ quizAnswers = {}, totalParticipants = 0, isPresenter = false }) {
+export default function QuizSection({ quizResponses = {}, totalParticipants = 0, isPresenter = false }) {
     const getAnswerCounts = (questionId) => {
-        const answers = quizAnswers[questionId] || {};
+        const responses = quizResponses[questionId] || {};
         return {
-            sim: Object.values(answers).filter(a => a === 'sim').length,
-            nao: Object.values(answers).filter(a => a === 'nao').length,
-            talvez: Object.values(answers).filter(a => a === 'talvez').length,
-            total: Object.keys(answers).length
+            sim: Object.values(responses).filter(a => a === 'sim').length,
+            nao: Object.values(responses).filter(a => a === 'nao').length,
+            talvez: Object.values(responses).filter(a => a === 'talvez').length,
+            total: Object.keys(responses).length
         };
     };
 

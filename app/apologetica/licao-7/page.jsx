@@ -110,7 +110,7 @@ export default function Licao7Viewer() {
     const {
         currentSlide,
         currentQuizQuestion,
-        quizAnswers,
+        quizResponses,
         totalSlides,
         totalQuizQuestions,
         connected,
@@ -144,7 +144,7 @@ export default function Licao7Viewer() {
             // Quiz phase
             return (
                 <Slides.QuizSection
-                    quizAnswers={quizAnswers}
+                    quizResponses={quizResponses}
                     totalParticipants={attendance}
                     isPresenter={false}
                 />

@@ -25,7 +25,7 @@ export default function ApresentadorPage() {
     const {
         currentSlide,
         currentQuizQuestion,
-        quizAnswers,
+        quizResponses,
         totalSlides,
         totalQuizQuestions,
         connected,
@@ -37,7 +37,8 @@ export default function ApresentadorPage() {
         prevSlide,
         goToQuizQuestion,
         createPoll,
-        endPoll
+        endPoll,
+        getCurrentNotes
     } = useLicao7Sync('presenter');
 
     const [showPollCreator, setShowPollCreator] = useState(false);
@@ -73,12 +74,7 @@ export default function ApresentadorPage() {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [nextSlide, prevSlide, goToSlide, goToQuizQuestion, totalSlides]);
 
-    const getCurrentNotes = () => {
-        if (currentSlide === 0) {
-            return slideNotes[`quiz_${currentQuizQuestion}`] || { title: `Quiz Pergunta ${currentQuizQuestion}`, notes: [] };
-        }
-        return slideNotes[currentSlide] || { title: `Slide ${currentSlide}`, notes: [] };
-    };
+
 
     const notes = getCurrentNotes();
     const isQuizPhase = currentSlide === 0;
@@ -93,12 +89,12 @@ export default function ApresentadorPage() {
 
     // Helper para contar respostas do quiz
     const getQuizCounts = (questionId) => {
-        const answers = quizAnswers[questionId] || {};
+        const responses = quizResponses[questionId] || {};
         return {
-            sim: Object.values(answers).filter(a => a === 'sim').length,
-            nao: Object.values(answers).filter(a => a === 'nao').length,
-            talvez: Object.values(answers).filter(a => a === 'talvez').length,
-            total: Object.keys(answers).length
+            sim: Object.values(responses).filter(a => a === 'sim').length,
+            nao: Object.values(responses).filter(a => a === 'nao').length,
+            talvez: Object.values(responses).filter(a => a === 'talvez').length,
+            total: Object.keys(responses).length
         };
     };
 
@@ -411,7 +407,7 @@ export default function ApresentadorPage() {
                     </div>
 
                     {/* Respostas do Quiz - Resumo */}
-                    {isQuizPhase && Object.keys(quizAnswers).length > 0 && (
+                    {isQuizPhase && Object.keys(quizResponses).length > 0 && (
                         <div
                             className="p-4 rounded-xl"
                             style={{
@@ -422,7 +418,7 @@ export default function ApresentadorPage() {
                             <h3 className="font-bold mb-3" style={{ color: colors.goldAged }}>
                                 📊 Respostas do Quiz
                             </h3>
-                            {Object.keys(quizAnswers).map((qId) => {
+                            {Object.keys(quizResponses).map((qId) => {
                                 const counts = getQuizCounts(parseInt(qId));
                                 return (
                                     <div key={qId} className="mb-2">

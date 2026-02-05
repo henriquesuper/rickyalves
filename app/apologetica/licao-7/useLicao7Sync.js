@@ -8,6 +8,17 @@ const TOTAL_SLIDES = 36;
 const API_BASE = '/api/apologetica';
 const SOCKET_ROOM = 'apologetica-licao-7';
 
+// Detecta se estamos em desenvolvimento ou produção
+const isDevelopmentEnv = process.env.NODE_ENV === 'development';
+
+// Função para obter o host do Socket.io (funciona em LAN)
+const getSocketHost = () => {
+    if (typeof window === 'undefined') return 'http://localhost:3001';
+    // Usa o mesmo hostname que o usuário está acessando, mas na porta 3001
+    const hostname = window.location.hostname;
+    return `http://${hostname}:3001`;
+};
+
 export function useLicao7Sync(role = 'viewer') {
     // Estado do slide atual (0 = Quiz, 1-36 = slides)
     const [currentSlide, setCurrentSlide] = useState(1);
@@ -26,6 +37,9 @@ export function useLicao7Sync(role = 'viewer') {
     // Estado de reações
     const [recentReactions, setRecentReactions] = useState([]);
 
+    // Estado de polls/enquetes
+    const [currentPoll, setCurrentPoll] = useState(null);
+
     // Estado do participante
     const [userId, setUserId] = useState(null);
 
@@ -33,7 +47,7 @@ export function useLicao7Sync(role = 'viewer') {
     const socketRef = useRef(null);
 
     // Detectar ambiente de desenvolvimento
-    const isDevelopment = typeof window !== 'undefined' && process.env.NODE_ENV === 'development';
+    const isDevelopment = typeof window !== 'undefined' && isDevelopmentEnv;
 
     // Fetch de status via API (para produção/Vercel)
     const fetchStatus = useCallback(async () => {
@@ -90,7 +104,9 @@ export function useLicao7Sync(role = 'viewer') {
             const initSocket = async () => {
                 try {
                     const io = (await import('socket.io-client')).default;
-                    const socket = io('http://localhost:3001', {
+                    const socketHost = getSocketHost();
+                    console.log(`[Lição 7] Conectando a ${socketHost}`);
+                    const socket = io(socketHost, {
                         query: { room: SOCKET_ROOM, role }
                     });
 
@@ -160,6 +176,11 @@ export function useLicao7Sync(role = 'viewer') {
                             setRecentReactions(prev => prev.slice(1));
                         }, 4000);
                     });
+
+                    // Eventos de polls/enquetes
+                    socket.on('new-poll', (poll) => setCurrentPoll(poll));
+                    socket.on('poll-update', (poll) => setCurrentPoll(poll));
+                    socket.on('poll-ended', () => setCurrentPoll(null));
 
                     socketRef.current = socket;
                     window.licao7Socket = socket;
@@ -328,6 +349,76 @@ export function useLicao7Sync(role = 'viewer') {
     }, [isDevelopment]);
 
     // ========================================
+    // POLLS/ENQUETES
+    // ========================================
+    const createPoll = useCallback(async (question, options) => {
+        if (role !== 'presenter') return { success: false };
+
+        const pollData = {
+            id: `poll_${Date.now()}`,
+            question,
+            options: options.map(opt => ({ text: opt, votes: 0 })),
+            lessonId: 'licao-7'
+        };
+
+        if (isDevelopment && socketRef.current) {
+            socketRef.current.emit('create-poll', pollData);
+        } else {
+            try {
+                await fetch(`${API_BASE}/licao-7/poll`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'create', data: pollData })
+                });
+            } catch (error) {
+                console.error('Erro ao criar poll:', error);
+            }
+        }
+
+        setCurrentPoll(pollData);
+        return { success: true, poll: pollData };
+    }, [role, isDevelopment]);
+
+    const vote = useCallback(async (pollId, optionIndex) => {
+        if (isDevelopment && socketRef.current) {
+            socketRef.current.emit('vote', { pollId, optionIndex, lessonId: 'licao-7' });
+        } else {
+            try {
+                const response = await fetch(`${API_BASE}/licao-7/poll`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'vote', data: { pollId, optionIndex } })
+                });
+                const result = await response.json();
+                if (result.poll) setCurrentPoll(result.poll);
+            } catch (error) {
+                console.error('Erro ao votar:', error);
+            }
+        }
+        return { success: true };
+    }, [isDevelopment]);
+
+    const endPoll = useCallback(async () => {
+        if (role !== 'presenter') return;
+
+        if (isDevelopment && socketRef.current) {
+            socketRef.current.emit('end-poll', { lessonId: 'licao-7' });
+        } else {
+            try {
+                await fetch(`${API_BASE}/licao-7/poll`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'end', data: {} })
+                });
+            } catch (error) {
+                console.error('Erro ao encerrar poll:', error);
+            }
+        }
+
+        setCurrentPoll(null);
+    }, [role, isDevelopment]);
+
+    // ========================================
     // NOTAS DO INSTRUTOR
     // ========================================
     const getCurrentNotes = useCallback(() => {
@@ -351,6 +442,7 @@ export function useLicao7Sync(role = 'viewer') {
         attendance,
         userId,
         recentReactions,
+        currentPoll,
 
         // Navegação (presenter)
         goToSlide,
@@ -366,6 +458,11 @@ export function useLicao7Sync(role = 'viewer') {
         join,
         logout,
         react,
+
+        // Polls
+        createPoll,
+        vote,
+        endPoll,
 
         // Notas
         getCurrentNotes,

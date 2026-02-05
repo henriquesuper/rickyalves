@@ -9,7 +9,6 @@ export default function ParticiparPage() {
     const {
         currentSlide,
         currentQuizQuestion,
-        quizAnswers,
         totalQuizQuestions,
         connected,
         currentPoll,
