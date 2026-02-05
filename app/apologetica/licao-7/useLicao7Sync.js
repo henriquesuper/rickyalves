@@ -51,15 +51,27 @@ export function useLicao7Sync(role = 'viewer') {
 
     // Fetch de status via API (para produção/Vercel)
     const fetchStatus = useCallback(async () => {
+        if (role === 'presenter') {
+            setConnected(true);
+            return;
+        }
+
         try {
-            const response = await fetch(`${API_BASE}/licao-7/status`);
+            const response = await fetch(`${API_BASE}?action=status&lesson=licao-7`);
             if (!response.ok) return;
             const data = await response.json();
 
-            setCurrentSlide(data.currentSlide);
-            setCurrentQuizQuestion(data.currentQuizQuestion);
-            setQuizResponses(data.quizResponses || {});
+            if (data.currentSlide !== undefined && data.currentSlide !== currentSlide) {
+                setCurrentSlide(data.currentSlide);
+            }
+            if (data.currentQuizQuestion !== undefined) {
+                setCurrentQuizQuestion(data.currentQuizQuestion);
+            }
+            if (data.quizResponses) {
+                setQuizResponses(data.quizResponses);
+            }
             setAttendance(data.attendance || 0);
+            setCurrentPoll(data.currentPoll || null);
             setConnected(true);
 
             // Processar reações recentes se houver
@@ -73,10 +85,14 @@ export function useLicao7Sync(role = 'viewer') {
 
                 if (newReactions.length > 0) {
                     setRecentReactions(prev => [...prev, ...newReactions].slice(-8));
+                    setTimeout(() => {
+                        setRecentReactions(prev => prev.slice(newReactions.length));
+                    }, 4000);
                 }
             }
         } catch (error) {
-            console.log('Polling status (Vercel mode):', error.message);
+            console.error('Erro ao buscar status:', error);
+            setConnected(false);
         }
     }, [role, currentSlide, recentReactions]);
 
@@ -213,10 +229,13 @@ export function useLicao7Sync(role = 'viewer') {
             socketRef.current.emit('change-slide', { slide: slideNumber, lesson: 'licao-7' });
         } else {
             try {
-                await fetch(`${API_BASE}/licao-7/slide`, {
+                await fetch(API_BASE, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ slide: slideNumber })
+                    body: JSON.stringify({
+                        action: 'change-slide',
+                        data: { slide: slideNumber, lesson: 'licao-7' }
+                    })
                 });
             } catch (error) {
                 console.error('Erro ao mudar slide:', error);
@@ -247,10 +266,13 @@ export function useLicao7Sync(role = 'viewer') {
             socketRef.current.emit('quiz-question-change', { question: questionNumber, lesson: 'licao-7' });
         } else {
             try {
-                await fetch(`${API_BASE}/licao-7/quiz`, {
+                await fetch(API_BASE, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ question: questionNumber })
+                    body: JSON.stringify({
+                        action: 'quiz-question-change',
+                        data: { question: questionNumber, lesson: 'licao-7' }
+                    })
                 });
             } catch (error) {
                 console.error('Erro ao mudar pergunta:', error);
@@ -278,10 +300,13 @@ export function useLicao7Sync(role = 'viewer') {
             });
         } else {
             try {
-                await fetch(`${API_BASE}/licao-7/quiz/respond`, {
+                await fetch(API_BASE, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ question: questionNumber, response })
+                    body: JSON.stringify({
+                        action: 'quiz-response',
+                        data: { question: questionNumber, response, lesson: 'licao-7' }
+                    })
                 });
             } catch (error) {
                 console.error('Erro ao responder quiz:', error);
@@ -302,10 +327,13 @@ export function useLicao7Sync(role = 'viewer') {
             socketRef.current.emit('join', { userName, lesson: 'licao-7' });
         } else {
             try {
-                await fetch(`${API_BASE}/licao-7/join`, {
+                await fetch(API_BASE, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userName, oderId: newUserId })
+                    body: JSON.stringify({
+                        action: 'join',
+                        data: { userName, userId: newUserId, lessonId: 'licao-7' }
+                    })
                 });
             } catch (error) {
                 console.error('Erro ao entrar:', error);
@@ -315,13 +343,31 @@ export function useLicao7Sync(role = 'viewer') {
         return newUserId;
     }, [isDevelopment]);
 
-    const logout = useCallback(() => {
-        setUserId(null);
-        setQuizResponses({});
+    const logout = useCallback(async () => {
+        // Limpar localStorage
         localStorage.removeItem('licao7-userId');
         localStorage.removeItem('licao7-userName');
         localStorage.removeItem('licao7-quiz-responses');
-    }, []);
+
+        // Emitir evento de saída
+        if (isDevelopment && socketRef.current) {
+            socketRef.current.emit('leave', { lessonId: 'licao-7', userId });
+        } else {
+            try {
+                await fetch(API_BASE, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'leave', data: { lessonId: 'licao-7', userId } })
+                });
+            } catch (error) {
+                console.error('Erro ao sair:', error);
+            }
+        }
+
+        // Resetar estado
+        setUserId(null);
+        setQuizResponses({});
+    }, [isDevelopment, userId]);
 
     // ========================================
     // PARTICIPANTE: REAÇÕES
@@ -337,10 +383,13 @@ export function useLicao7Sync(role = 'viewer') {
             });
         } else {
             try {
-                await fetch(`${API_BASE}/licao-7/react`, {
+                await fetch(API_BASE, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ type: reactionType, userName })
+                    body: JSON.stringify({
+                        action: 'reaction',
+                        data: { type: reactionType, userName, lessonId: 'licao-7' }
+                    })
                 });
             } catch (error) {
                 console.error('Erro ao reagir:', error);
@@ -365,10 +414,10 @@ export function useLicao7Sync(role = 'viewer') {
             socketRef.current.emit('create-poll', pollData);
         } else {
             try {
-                await fetch(`${API_BASE}/licao-7/poll`, {
+                await fetch(API_BASE, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'create', data: pollData })
+                    body: JSON.stringify({ action: 'create-poll', data: pollData })
                 });
             } catch (error) {
                 console.error('Erro ao criar poll:', error);
@@ -384,7 +433,7 @@ export function useLicao7Sync(role = 'viewer') {
             socketRef.current.emit('vote', { pollId, optionIndex, lessonId: 'licao-7' });
         } else {
             try {
-                const response = await fetch(`${API_BASE}/licao-7/poll`, {
+                const response = await fetch(API_BASE, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ action: 'vote', data: { pollId, optionIndex } })
@@ -405,10 +454,10 @@ export function useLicao7Sync(role = 'viewer') {
             socketRef.current.emit('end-poll', { lessonId: 'licao-7' });
         } else {
             try {
-                await fetch(`${API_BASE}/licao-7/poll`, {
+                await fetch(API_BASE, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'end', data: {} })
+                    body: JSON.stringify({ action: 'end-poll', data: {} })
                 });
             } catch (error) {
                 console.error('Erro ao encerrar poll:', error);
