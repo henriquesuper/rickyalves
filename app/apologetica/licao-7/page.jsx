@@ -46,22 +46,104 @@ const slideComponents = {
     36: Slides.Slide36_Encerramento,
 };
 
-// Reações flutuantes
+// Mapeamento de tipos para emojis (fallback caso icon não venha)
+const reactionEmojis = {
+    fascinating: '📜',
+    wantMore: '🔍',
+    processing: '🧐',
+    makesSense: '✅',
+    stillDoubt: '❓',
+    aha: '💡',
+    love: '❤️',
+    fire: '🔥',
+    pray: '🙏',
+    wow: '😮',
+    think: '🤔',
+    clap: '👏'
+};
+
+// Cores de gradiente por tipo de reação
+const reactionColors = {
+    fascinating: 'from-amber-600 to-yellow-500',
+    wantMore: 'from-blue-600 to-cyan-500',
+    processing: 'from-purple-600 to-violet-500',
+    makesSense: 'from-green-600 to-emerald-500',
+    stillDoubt: 'from-orange-600 to-amber-500',
+    aha: 'from-yellow-500 to-amber-400',
+    love: 'from-rose-600 to-pink-500',
+    fire: 'from-orange-600 to-red-500',
+    pray: 'from-indigo-600 to-purple-500',
+    wow: 'from-cyan-600 to-blue-500',
+    think: 'from-slate-600 to-gray-500',
+    clap: 'from-emerald-600 to-teal-500'
+};
+
+// Reações flutuantes - visual moderno e bonito
 function FloatingReactions({ reactions }) {
     return (
-        <div className="fixed bottom-20 right-8 pointer-events-none z-50">
-            <AnimatePresence>
-                {reactions.map((reaction, index) => (
-                    <motion.div
-                        key={reaction.id || index}
-                        initial={{ opacity: 0, y: 50, x: 0 }}
-                        animate={{ opacity: 1, y: -100 * (index + 1), x: Math.sin(index * 2) * 30 }}
-                        exit={{ opacity: 0, y: -200 }}
-                        className="absolute bottom-0 right-0"
-                    >
-                        <span className="text-4xl">{reaction.icon || reaction.type}</span>
-                    </motion.div>
-                ))}
+        <div className="fixed bottom-24 right-6 pointer-events-none z-50 flex flex-col-reverse gap-3">
+            <AnimatePresence mode="popLayout">
+                {reactions.slice(-5).map((reaction, index) => {
+                    const emoji = reaction.icon || reactionEmojis[reaction.type] || reaction.type;
+                    const colorClass = reactionColors[reaction.type] || 'from-amber-600 to-yellow-500';
+                    const userName = reaction.userName || 'Participante';
+                    
+                    return (
+                        <motion.div
+                            key={reaction.id || `${index}-${Date.now()}`}
+                            initial={{ opacity: 0, scale: 0.5, x: 100 }}
+                            animate={{ 
+                                opacity: 1, 
+                                scale: 1, 
+                                x: 0,
+                                transition: { type: 'spring', damping: 15, stiffness: 300 }
+                            }}
+                            exit={{ 
+                                opacity: 0, 
+                                scale: 0.8, 
+                                x: 50,
+                                transition: { duration: 0.2 }
+                            }}
+                            className="flex items-center gap-2"
+                        >
+                            {/* Card da reação */}
+                            <motion.div
+                                className={`
+                                    flex items-center gap-3 px-4 py-2.5 rounded-2xl
+                                    bg-gradient-to-r ${colorClass}
+                                    shadow-lg shadow-black/30
+                                    border border-white/20
+                                    backdrop-blur-sm
+                                `}
+                                animate={{ 
+                                    boxShadow: [
+                                        '0 10px 25px -5px rgba(0,0,0,0.3)',
+                                        '0 15px 35px -5px rgba(0,0,0,0.4)',
+                                        '0 10px 25px -5px rgba(0,0,0,0.3)'
+                                    ]
+                                }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                            >
+                                {/* Emoji grande */}
+                                <motion.span 
+                                    className="text-3xl"
+                                    animate={{ 
+                                        scale: [1, 1.2, 1],
+                                        rotate: [0, 10, -10, 0]
+                                    }}
+                                    transition={{ duration: 0.5, delay: 0.2 }}
+                                >
+                                    {emoji}
+                                </motion.span>
+                                
+                                {/* Nome do usuário */}
+                                <span className="text-white font-semibold text-sm drop-shadow-md max-w-[120px] truncate">
+                                    {userName}
+                                </span>
+                            </motion.div>
+                        </motion.div>
+                    );
+                })}
             </AnimatePresence>
         </div>
     );
