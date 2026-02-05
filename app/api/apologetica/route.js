@@ -89,7 +89,9 @@ export async function POST(request) {
             }
 
             case 'change-slide': {
-                const newSlide = Math.max(0, Math.min(data.slide, 20)); // 0 = quiz, 1-20 = slides
+                // Lição 6 tem 20 slides, Lição 7 tem 36 slides
+                const maxSlides = data.lesson === 'licao-7' ? 36 : 20;
+                const newSlide = Math.max(0, Math.min(data.slide, maxSlides));
                 state.currentSlide = newSlide;
                 state.lastActivity = Date.now();
 
