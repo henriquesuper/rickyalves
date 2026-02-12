@@ -89,8 +89,8 @@ export async function POST(request) {
             }
 
             case 'change-slide': {
-                // Lição 6 tem 20 slides, Lição 7 tem 36 slides
-                const maxSlides = data.lesson === 'licao-7' ? 36 : 20;
+                // Lição 6 = 20, Lição 7 = 36, Lição 8 = 32
+                const maxSlides = data.lesson === 'licao-8' ? 32 : data.lesson === 'licao-7' ? 36 : 20;
                 const newSlide = Math.max(0, Math.min(data.slide, maxSlides));
                 state.currentSlide = newSlide;
                 state.lastActivity = Date.now();
@@ -102,7 +102,9 @@ export async function POST(request) {
             }
 
             case 'quiz-question-change': {
-                const newQuestion = Math.max(1, Math.min(data.question, 6)); // 6 perguntas
+                // Lição 6 = 6, Lição 7 = 6, Lição 8 = 5 perguntas
+                const maxQ = data.lesson === 'licao-8' ? 5 : 6;
+                const newQuestion = Math.max(1, Math.min(data.question, maxQ));
                 state.currentQuizQuestion = newQuestion;
                 state.currentSlide = 0; // Garante que estamos na fase do quiz
                 state.lastActivity = Date.now();
@@ -115,7 +117,7 @@ export async function POST(request) {
 
             case 'quiz-response': {
                 const { question, response } = data;
-                
+
                 // Inicializa contagem se não existir
                 if (!state.quizResponses[question]) {
                     state.quizResponses[question] = { sim: 0, nao: 0, talvez: 0 };

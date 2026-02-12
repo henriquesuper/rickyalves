@@ -46,6 +46,16 @@ let licao7State = {
   recentReactions: [] // Armazenar reações recentes para broadcast
 };
 
+// Estado específico da Lição 8 (tradução bíblica)
+let licao8State = {
+  currentSlide: 1,
+  currentQuizQuestion: 1,
+  quizResponses: {},
+  quizComplete: false,
+  participants: new Set(),
+  recentReactions: []
+};
+
 // Estatísticas em tempo real
 let stats = {
   totalVotes: 0,
@@ -106,6 +116,22 @@ io.on('connection', (socket) => {
       count: licao7State.participants.size,
       newParticipant: true
     });
+    // Para Lição 8
+  } else if (room === 'apologetica-licao-8') {
+    licao8State.participants.add(socket.id);
+
+    socket.emit('presentation-state', {
+      currentSlide: licao8State.currentSlide,
+      currentQuizQuestion: licao8State.currentQuizQuestion,
+      quizResponses: licao8State.quizResponses,
+      quizComplete: licao8State.quizComplete,
+      attendance: licao8State.participants.size
+    });
+
+    io.to(room).emit('attendance-update', {
+      count: licao8State.participants.size,
+      newParticipant: true
+    });
   } else {
     // Envia estado atual para o novo participante (outros)
     socket.emit('presentation-state', presentationState);
@@ -118,12 +144,16 @@ io.on('connection', (socket) => {
     });
   }
 
-  // ====== MUDANÇA DE SLIDE (LIÇÃO 6 e 7) ======
+  // ====== MUDANÇA DE SLIDE (LIÇÃO 6, 7, 8) ======
   socket.on('change-slide', (data) => {
     const slideNumber = typeof data === 'object' ? data.slide : data;
     const lesson = data.lesson || 'licao-6';
 
-    if (lesson === 'licao-7') {
+    if (lesson === 'licao-8') {
+      console.log(`[Lição 8] Slide mudou para: ${slideNumber}`);
+      licao8State.currentSlide = slideNumber;
+      io.to('apologetica-licao-8').emit('slide-change', { slide: slideNumber });
+    } else if (lesson === 'licao-7') {
       console.log(`[Lição 7] Slide mudou para: ${slideNumber}`);
       licao7State.currentSlide = slideNumber;
       io.to('apologetica-licao-7').emit('slide-change', { slide: slideNumber });
@@ -134,12 +164,18 @@ io.on('connection', (socket) => {
     }
   });
 
-  // ====== MUDANÇA DE PERGUNTA DO QUIZ (LIÇÃO 6 e 7) ======
+  // ====== MUDANÇA DE PERGUNTA DO QUIZ (LIÇÃO 6, 7, 8) ======
   socket.on('quiz-question-change', (data) => {
     const questionNumber = data.question;
     const lesson = data.lesson || 'licao-6';
 
-    if (lesson === 'licao-7') {
+    if (lesson === 'licao-8') {
+      console.log(`[Lição 8] Pergunta do quiz mudou para: ${questionNumber}`);
+      licao8State.currentQuizQuestion = questionNumber;
+      licao8State.currentSlide = 0;
+      io.to('apologetica-licao-8').emit('quiz-question-change', { question: questionNumber });
+      io.to('apologetica-licao-8').emit('slide-change', { slide: 0 });
+    } else if (lesson === 'licao-7') {
       console.log(`[Lição 7] Pergunta do quiz mudou para: ${questionNumber}`);
       licao7State.currentQuizQuestion = questionNumber;
       licao7State.currentSlide = 0;
@@ -154,12 +190,12 @@ io.on('connection', (socket) => {
     }
   });
 
-  // ====== RESPOSTA DO QUIZ (LIÇÃO 6 e 7) ======
+  // ====== RESPOSTA DO QUIZ (LIÇÃO 6, 7, 8) ======
   socket.on('quiz-response', (data) => {
     const { question, response, lesson = 'licao-6' } = data;
 
-    const state = lesson === 'licao-7' ? licao7State : licao6State;
-    const room = lesson === 'licao-7' ? 'apologetica-licao-7' : 'apologetica-licao-6';
+    const state = lesson === 'licao-8' ? licao8State : lesson === 'licao-7' ? licao7State : licao6State;
+    const room = lesson === 'licao-8' ? 'apologetica-licao-8' : lesson === 'licao-7' ? 'apologetica-licao-7' : 'apologetica-licao-6';
 
     console.log(`[${lesson}] Resposta recebida - Q${question}: ${response}`);
 
@@ -296,6 +332,24 @@ io.on('connection', (socket) => {
       licao6State.participants.delete(socket.id);
       io.to('apologetica-licao-6').emit('attendance-update', {
         count: licao6State.participants.size,
+        participantLeft: true
+      });
+    }
+
+    // Remove de Lição 7
+    if (licao7State.participants.has(socket.id)) {
+      licao7State.participants.delete(socket.id);
+      io.to('apologetica-licao-7').emit('attendance-update', {
+        count: licao7State.participants.size,
+        participantLeft: true
+      });
+    }
+
+    // Remove de Lição 8
+    if (licao8State.participants.has(socket.id)) {
+      licao8State.participants.delete(socket.id);
+      io.to('apologetica-licao-8').emit('attendance-update', {
+        count: licao8State.participants.size,
         participantLeft: true
       });
     }
