@@ -57,18 +57,64 @@ export default function Slide04_Hebraico() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.5 }}
-                    className="text-center p-4 rounded-lg"
+                    className="w-full max-w-3xl p-5 rounded-lg text-center"
                     style={{
-                        background: `${colors.hebrewPrimary}15`,
+                        background: `${colors.hebrewPrimary}10`,
                         border: `1px solid ${colors.hebrewPrimary}30`
                     }}
                 >
-                    <p style={{ color: colors.hebrewPrimary }} className="font-bold text-lg">
-                        Gênesis 1:1 em hebraico = 7 palavras
+                    <p className="text-xs uppercase tracking-widest mb-3" style={{ color: colors.goldAged }}>
+                        Gênesis 1:1 — Exemplo ao vivo
                     </p>
-                    <p style={{ color: colors.textMedium }}>
-                        Em português = 10+ palavras
-                    </p>
+
+                    {/* Hebraico original */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.8 }}
+                        className="text-2xl md:text-3xl mb-1"
+                        style={{ color: colors.hebrewPrimary, direction: 'rtl', fontFamily: 'serif' }}
+                    >
+                        בְּרֵאשִׁ֖ית בָּרָ֣א אֱלֹהִ֑ים אֵ֥ת הַשָּׁמַ֖יִם וְאֵ֥ת הָאָֽרֶץ
+                    </motion.p>
+
+                    {/* Transliteração */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 2.1 }}
+                        className="text-sm italic mb-3"
+                        style={{ color: colors.hebrewLight }}
+                    >
+                        Bereshít bará Elohím et hashamáyim ve'ét ha'árets
+                    </motion.p>
+
+                    {/* Tradução */}
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 2.4 }}
+                        className="text-base mb-3"
+                        style={{ color: colors.textLight }}
+                    >
+                        «No princípio, criou Deus os céus e a terra.»
+                    </motion.p>
+
+                    {/* Comparação */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 2.7 }}
+                        className="flex items-center justify-center gap-6 text-sm"
+                    >
+                        <span style={{ color: colors.hebrewPrimary }}>
+                            <strong>7</strong> palavras em hebraico
+                        </span>
+                        <span style={{ color: colors.textMedium }}>→</span>
+                        <span style={{ color: colors.portPrimary }}>
+                            <strong>10</strong> palavras em português
+                        </span>
+                    </motion.div>
                 </motion.div>
             </div>
         </SlideWrapper>

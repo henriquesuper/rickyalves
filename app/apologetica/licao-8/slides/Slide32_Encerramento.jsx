@@ -1,94 +1,107 @@
-// Slide 32 - Encerramento — A Cadeia de Fidelidade
+// Slide 32 - Encerramento — A Cadeia de Fidelidade (recap completo)
 'use client';
 import { motion } from 'framer-motion';
 import { SlideWrapper, WaxSeal, ScribeWriting, colors } from './shared';
 
-const chain = [
-    { text: 'DEUS inspirou', color: colors.goldBright },
-    { text: 'HUMANOS escreveram em Hebraico / Grego', color: colors.hebrewPrimary },
-    { text: 'ESCRIBAS copiaram fielmente', color: colors.goldAged },
-    { text: 'MANUSCRITOS sobreviveram (Lição 7 ✓)', color: colors.greekPrimary },
-    { text: 'TRADUTORES verteram para o português', color: colors.portPrimary },
-    { text: 'VOCÊ lê — com confiança.', color: colors.goldBright },
+const journey = [
+    { lesson: '1', text: 'Deus existe — a razão aponta para Ele', color: '#a78bfa', icon: '🌌' },
+    { lesson: '2', text: 'Ele se comunica — revelação é esperada', color: '#818cf8', icon: '💬' },
+    { lesson: '3', text: 'Podemos avaliar revelações com critérios objetivos', color: '#6366f1', icon: '⚖️' },
+    { lesson: '4', text: 'A Bíblia é única entre os textos sagrados', color: colors.goldAged, icon: '🔍' },
+    { lesson: '5', text: 'Deus inspirou os pensamentos, não ditou palavras', color: colors.goldBright, icon: '✨' },
+    { lesson: '6', text: 'O cânon foi reconhecido, não inventado', color: colors.hebrewPrimary, icon: '📜' },
+    { lesson: '7', text: 'Os manuscritos foram copiados fielmente', color: colors.greekPrimary, icon: '🏛️' },
+    { lesson: '8', text: 'As traduções preservam o essencial', color: colors.portPrimary, icon: '🔬' },
 ];
 
 export default function Slide32_Encerramento() {
     return (
         <SlideWrapper variant="golden">
-            <div className="flex flex-col items-center justify-center px-8 max-w-4xl mx-auto text-center">
-                <WaxSeal number={8} size="md" delay={0.2} className="mb-6" />
+            <div className="flex flex-col items-center justify-center px-6 max-w-4xl mx-auto text-center">
+                <WaxSeal number={8} size="md" delay={0.2} className="mb-4" />
 
                 <motion.h2
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
-                    className="text-3xl md:text-4xl font-bold mb-8"
+                    className="text-2xl md:text-3xl font-bold mb-6"
                     style={{ color: colors.textLight }}
                 >
                     A CADEIA DE <span style={{ color: colors.goldBright }}>FIDELIDADE</span>
                 </motion.h2>
 
-                <div className="space-y-2 mb-8">
-                    {chain.map((c, i) => (
+                {/* Journey recap — todas as lições */}
+                <div className="space-y-2 mb-6 w-full max-w-2xl">
+                    {journey.map((step, i) => (
                         <motion.div
                             key={i}
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.5 + i * 0.2 }}
-                            className="flex items-center gap-3"
+                            transition={{ delay: 0.5 + i * 0.25 }}
+                            className="flex items-center gap-3 text-left"
                         >
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center"
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
                                 style={{
-                                    background: `${c.color}20`,
-                                    border: `1px solid ${c.color}60`
+                                    background: `${step.color}20`,
+                                    border: `1px solid ${step.color}60`
                                 }}
                             >
-                                <span className="text-xs font-bold" style={{ color: c.color }}>{i + 1}</span>
+                                <span className="text-xs">{step.icon}</span>
                             </div>
-                            <span className="text-base" style={{ color: c.color }}>{c.text}</span>
-                            {i < chain.length - 1 && (
-                                <motion.span
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 0.5 }}
-                                    transition={{ delay: 0.7 + i * 0.2 }}
-                                    className="text-xs"
-                                    style={{ color: colors.textMedium }}
-                                >→</motion.span>
-                            )}
+                            <div className="flex-1">
+                                <span className="text-xs font-bold" style={{ color: step.color }}>
+                                    Lição {step.lesson}:
+                                </span>
+                                <span className="text-sm ml-1" style={{ color: colors.textLight }}>
+                                    {step.text}
+                                </span>
+                            </div>
+                            <span className="text-xs" style={{ color: '#22c55e' }}>✓</span>
                         </motion.div>
                     ))}
                 </div>
 
-                {/* Citação final */}
+                {/* Próximo passo */}
+                <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 1.8 }}
+                    className="flex items-center gap-3 text-left w-full max-w-2xl mb-6 p-3 rounded-lg"
+                    style={{
+                        background: `${colors.goldAged}10`,
+                        border: `1px dashed ${colors.goldAged}40`
+                    }}
+                >
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                        style={{
+                            background: `${colors.goldBright}20`,
+                            border: `2px solid ${colors.goldBright}60`
+                        }}
+                    >
+                        <span className="text-xs">📖</span>
+                    </div>
+                    <div className="flex-1">
+                        <span className="text-xs font-bold" style={{ color: colors.goldBright }}>
+                            Lição 9:
+                        </span>
+                        <span className="text-sm ml-1" style={{ color: colors.textLight }}>
+                            Quem escreveu e por quê? — Autoria Bíblica
+                        </span>
+                    </div>
+                    <span className="text-xs" style={{ color: colors.goldAged }}>→</span>
+                </motion.div>
+
+                {/* Citação final — nova, sem repetir a "janela" do Slide 20 */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 2.0 }}
-                    className="mb-6"
+                    transition={{ delay: 2.2 }}
+                    className="mb-4"
                 >
                     <ScribeWriting
-                        text="«A tradução é uma janela. Não é o céu — mas por ela, você vê o céu.»"
-                        className="text-xl md:text-2xl"
+                        text="«Das mãos de Deus ao coração de quem lê — cada elo dessa cadeia foi guardado com amor.»"
+                        className="text-lg md:text-xl"
                     />
-                </motion.div>
-
-                {/* Preview da próxima lição */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 2.5 }}
-                    className="p-4 rounded-lg"
-                    style={{
-                        background: `${colors.textLight}05`,
-                        border: `1px solid ${colors.goldAged}20`
-                    }}
-                >
-                    <p className="text-xs uppercase tracking-widest mb-1" style={{ color: colors.goldAged }}>
-                        Próxima lição
-                    </p>
-                    <p className="text-sm" style={{ color: colors.textMedium }}>
-                        Lição 9 — A Bíblia e a Ciência
-                    </p>
                 </motion.div>
             </div>
         </SlideWrapper>
