@@ -15,7 +15,7 @@ export default function Slide23_AberturaNT() {
                     📂
                 </motion.div>
 
-                <CaseHeader
+                <DarkCaseHeader
                     title="Novo Testamento"
                     subtitle="O corpus mais datável da Antiguidade"
                     icon=""

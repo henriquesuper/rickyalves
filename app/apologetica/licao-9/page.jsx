@@ -169,9 +169,12 @@ export default function Licao9Viewer() {
         connected,
         attendance,
         recentReactions,
-    } = useLicao9Sync('viewer');
+        nextSlide,
+        prevSlide,
+        goToSlide,
+    } = useLicao9Sync('presenter');
 
-    // Fullscreen com tecla F
+    // Fullscreen (F) + navegação por teclado
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === 'f' || e.key === 'F') {
@@ -180,11 +183,17 @@ export default function Licao9Viewer() {
                 } else {
                     document.exitFullscreen?.();
                 }
+            } else if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
             }
         };
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
+    }, [nextSlide, prevSlide]);
 
     const SlideComponent = slideComponents[currentSlide];
 
@@ -213,12 +222,46 @@ export default function Licao9Viewer() {
             </AnimatePresence>
 
             <FloatingReactions recentReactions={recentReactions} />
-            <StatusBar
-                connected={connected}
-                currentSlide={currentSlide}
-                totalSlides={totalSlides}
-                attendance={attendance}
-            />
+
+            {/* Navegação on-screen */}
+            <div
+                className="fixed bottom-0 left-0 right-0 z-50 px-6 py-3 flex items-center justify-between"
+                style={{
+                    background: `${colors.bgDossier}EE`,
+                    borderTop: `1px solid ${colors.amber}20`,
+                }}
+            >
+                <button
+                    onClick={prevSlide}
+                    disabled={currentSlide <= 1}
+                    className="px-4 py-2 rounded text-sm font-medium transition-opacity"
+                    style={{
+                        background: colors.bgSurface,
+                        color: colors.textLight,
+                        border: `1px solid ${colors.amber}30`,
+                        opacity: currentSlide <= 1 ? 0.3 : 1,
+                        cursor: currentSlide <= 1 ? 'default' : 'pointer',
+                    }}
+                >
+                    ← Anterior
+                </button>
+                <span className="text-sm" style={{ color: colors.amber }}>
+                    {currentSlide} / {totalSlides}
+                </span>
+                <button
+                    onClick={nextSlide}
+                    disabled={currentSlide >= totalSlides}
+                    className="px-4 py-2 rounded text-sm font-medium transition-opacity"
+                    style={{
+                        background: colors.amber,
+                        color: colors.bgDossier,
+                        opacity: currentSlide >= totalSlides ? 0.3 : 1,
+                        cursor: currentSlide >= totalSlides ? 'default' : 'pointer',
+                    }}
+                >
+                    Próximo →
+                </button>
+            </div>
         </div>
     );
 }
