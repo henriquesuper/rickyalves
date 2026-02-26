@@ -15,7 +15,7 @@ export default function Slide15_AberturaAT() {
                     📁
                 </motion.div>
 
-                <CaseHeader
+                <DarkCaseHeader
                     title="Antigo Testamento"
                     subtitle="Abrindo os dossiês"
                     icon=""
