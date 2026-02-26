@@ -1,6 +1,9 @@
 'use client';
 import { motion } from 'framer-motion';
+import { QRCodeSVG } from 'qrcode.react';
 import { SlideWrapper, DossierSeal, DarkCaseHeader, colors } from './shared';
+
+const SITE_URL = 'https://www.rickyalves.com/apologetica/licao-9';
 
 export default function Slide01_Capa() {
     return (
@@ -91,15 +94,28 @@ export default function Slide01_Capa() {
                     CASO ABERTO
                 </motion.div>
 
-                {/* QR Code info */}
+                {/* QR Code + URL */}
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.6 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.5 }}
-                    className="mt-8 text-sm"
-                    style={{ color: colors.textMuted }}
+                    className="mt-8 flex flex-col items-center gap-3"
                 >
-                    Acesse: rickyalves.vercel.app/apologetica/licao-9/participar
+                    <div
+                        className="p-3 rounded-xl inline-block"
+                        style={{ background: '#FFFFFF' }}
+                    >
+                        <QRCodeSVG
+                            value={SITE_URL}
+                            size={120}
+                            bgColor="#FFFFFF"
+                            fgColor="#1A1410"
+                            level="M"
+                        />
+                    </div>
+                    <p className="text-sm" style={{ color: colors.textMuted }}>
+                        Acesse: <span style={{ color: colors.amber }}>rickyalves.com/apologetica/licao-9</span>
+                    </p>
                 </motion.div>
             </div>
         </SlideWrapper>

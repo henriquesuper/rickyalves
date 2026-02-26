@@ -85,10 +85,10 @@ export default function Slide45_Encerramento() {
                         Próxima semana:
                     </p>
                     <p className="text-xl font-bold" style={{ color: colors.amber, fontFamily: "'Playfair Display', Georgia, serif" }}>
-                        Caso #10 — A Transmissão do Texto
+                        Caso #10 — Contexto Histórico e Cultural
                     </p>
                     <p className="text-sm italic" style={{ color: colors.textMuted }}>
-                        De papiro a pixel.
+                        Entendendo o cenário por trás do texto.
                     </p>
                 </motion.div>
 
