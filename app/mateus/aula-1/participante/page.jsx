@@ -70,19 +70,21 @@ function JoinScreen({ onJoin }) {
 // REACTION BAR
 // ========================================
 function ReactionBar({ onReact }) {
-  const lastReactRef = useRef(0);
-  const [cooldown, setCooldown] = useState(false);
+  const timerRef = useRef(null);
+  const [pending, setPending] = useState(null);
 
-  const handleReact = (emoji) => {
-    const now = Date.now();
-    if (now - lastReactRef.current < 3000) {
-      setCooldown(true);
-      setTimeout(() => setCooldown(false), 1000);
-      return;
-    }
-    lastReactRef.current = now;
-    onReact(emoji);
-  };
+  const handleReact = useCallback((emoji) => {
+    // Always update to the latest emoji
+    setPending(emoji);
+
+    // Clear any existing timer and set a new one
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => {
+      onReact(emoji);
+      setPending(null);
+      timerRef.current = null;
+    }, 400);
+  }, [onReact]);
 
   return (
     <div
@@ -98,12 +100,20 @@ function ReactionBar({ onReact }) {
           onClick={() => handleReact(r.emoji)}
           whileTap={{ scale: 1.3 }}
           className="flex flex-col items-center gap-0.5"
-          style={{ opacity: cooldown ? 0.4 : 1 }}
         >
           <span className="text-3xl">{r.emoji}</span>
           <span className="text-[10px]" style={{ color: colors.graphiteLight }}>
             {r.label}
           </span>
+          {pending === r.emoji && (
+            <motion.span
+              layoutId="reaction-pending"
+              className="w-1 h-1 rounded-full"
+              style={{ background: colors.gold }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+            />
+          )}
         </motion.button>
       ))}
     </div>

@@ -14,27 +14,39 @@ import {
 // ========================================
 // TIMER COMPONENT
 // ========================================
-function Timer({ startedAt }) {
+function Timer({ startedAt, sessionStatus }) {
   const [elapsed, setElapsed] = useState(0);
+  const frozenRef = useRef(null);
 
   useEffect(() => {
     if (!startedAt) return;
+    if (sessionStatus === 'ended') {
+      // Freeze the timer at the current elapsed value
+      if (frozenRef.current === null) {
+        frozenRef.current = Math.floor((Date.now() - startedAt.getTime()) / 1000);
+        setElapsed(frozenRef.current);
+      }
+      return;
+    }
+    frozenRef.current = null;
     const interval = setInterval(() => {
       setElapsed(Math.floor((Date.now() - startedAt.getTime()) / 1000));
     }, 1000);
     return () => clearInterval(interval);
-  }, [startedAt]);
+  }, [startedAt, sessionStatus]);
 
   if (!startedAt) return <span style={{ color: colors.graphiteLight }}>--:--:--</span>;
 
+  const ended = sessionStatus === 'ended';
   const h = Math.floor(elapsed / 3600);
   const m = Math.floor((elapsed % 3600) / 60);
   const s = elapsed % 60;
 
   return (
-    <span style={{ color: colors.gold, fontVariantNumeric: 'tabular-nums' }}>
+    <span style={{ color: ended ? colors.graphiteLight : colors.gold, fontVariantNumeric: 'tabular-nums' }}>
       {h > 0 ? `${h}:` : ''}
       {String(m).padStart(2, '0')}:{String(s).padStart(2, '0')}
+      {ended && ' ✓'}
     </span>
   );
 }
@@ -42,17 +54,19 @@ function Timer({ startedAt }) {
 // ========================================
 // SECTION NAVIGATOR
 // ========================================
-function SectionNav({ currentSection, totalSections, prevSection, nextSection, sessionStatus, startSession }) {
+function SectionNav({ currentSection, totalSections, prevSection, nextSection, sessionStatus, startSession, endSession }) {
   const section = sectionData[currentSection];
   const isWaiting = sessionStatus === 'waiting';
+  const isEnded = sessionStatus === 'ended';
+  const isLastSection = currentSection === totalSections - 1;
 
   return (
     <WarmCard>
       <div className="flex items-center justify-between mb-3">
         <span className="text-xs uppercase tracking-wider" style={{ color: colors.graphiteLight }}>
-          Seção {currentSection} de {totalSections - 1}
+          {isEnded ? 'Aula encerrada' : `Seção ${currentSection} de ${totalSections - 1}`}
         </span>
-        {section?.duration && (
+        {section?.duration && !isEnded && (
           <span className="text-xs" style={{ color: colors.graphiteLight }}>
             ~{section.duration}
           </span>
@@ -63,7 +77,11 @@ function SectionNav({ currentSection, totalSections, prevSection, nextSection, s
         {section?.title || ''}
       </p>
 
-      {isWaiting ? (
+      {isEnded ? (
+        <div className="text-center py-2">
+          <span className="text-sm" style={{ color: colors.olive }}>✓ Aula finalizada</span>
+        </div>
+      ) : isWaiting ? (
         <button
           onClick={startSession}
           className="w-full py-3 rounded-xl text-white font-medium text-sm transition-opacity hover:opacity-90"
@@ -72,23 +90,35 @@ function SectionNav({ currentSection, totalSections, prevSection, nextSection, s
           Iniciar Aula
         </button>
       ) : (
-        <div className="flex gap-2">
-          <button
-            onClick={prevSection}
-            disabled={currentSection === 0}
-            className="flex-1 py-2.5 rounded-xl text-sm font-medium transition-opacity disabled:opacity-30"
-            style={{ background: colors.offWhiteDark, color: colors.graphite }}
-          >
-            ← Anterior
-          </button>
-          <button
-            onClick={nextSection}
-            disabled={currentSection === totalSections - 1}
-            className="flex-1 py-2.5 rounded-xl text-white text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-30"
-            style={{ background: colors.gold }}
-          >
-            Próxima →
-          </button>
+        <div className="space-y-2">
+          <div className="flex gap-2">
+            <button
+              onClick={prevSection}
+              disabled={currentSection === 0}
+              className="flex-1 py-2.5 rounded-xl text-sm font-medium transition-opacity disabled:opacity-30"
+              style={{ background: colors.offWhiteDark, color: colors.graphite }}
+            >
+              ← Anterior
+            </button>
+            <button
+              onClick={nextSection}
+              disabled={isLastSection}
+              className="flex-1 py-2.5 rounded-xl text-white text-sm font-medium transition-opacity hover:opacity-90 disabled:opacity-30"
+              style={{ background: colors.gold }}
+            >
+              Próxima →
+            </button>
+          </div>
+
+          {isLastSection && (
+            <button
+              onClick={endSession}
+              className="w-full py-2.5 rounded-xl text-sm font-medium transition-opacity hover:opacity-90"
+              style={{ background: colors.terracotta, color: colors.white }}
+            >
+              Encerrar Aula
+            </button>
+          )}
         </div>
       )}
     </WarmCard>
@@ -293,6 +323,66 @@ function ReactionsFeed({ reactions }) {
 }
 
 // ========================================
+// CARD RESPONSES FEED
+// ========================================
+function CardResponsesFeed({ cardResponses }) {
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [cardResponses]);
+
+  if (cardResponses.length === 0) return null;
+
+  return (
+    <WarmCard>
+      <p className="text-sm font-semibold mb-3" style={{ color: colors.charcoal }}>
+        💬 Respostas aos Cards
+      </p>
+
+      <div ref={scrollRef} className="max-h-48 overflow-y-auto space-y-2">
+        {cardResponses.map((r) => {
+          const time = r.timestamp?.toDate
+            ? r.timestamp.toDate().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })
+            : '';
+          const isScale = r.cardType === 'scale';
+          return (
+            <div
+              key={r.id}
+              className="text-xs p-2.5 rounded-lg"
+              style={{
+                background: `${colors.blue}08`,
+                borderLeft: `3px solid ${colors.blue}`,
+                color: colors.graphite,
+              }}
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex-1">
+                  <span className="font-medium" style={{ color: colors.blue }}>{r.from}</span>
+                  {r.cardContent && (
+                    <p className="mt-0.5" style={{ color: colors.graphiteLight }}>
+                      Re: &ldquo;{r.cardContent.length > 50 ? r.cardContent.slice(0, 50) + '…' : r.cardContent}&rdquo;
+                    </p>
+                  )}
+                  <p className="mt-1 text-sm" style={{ color: colors.graphite }}>
+                    {isScale ? `${r.response}/5` : r.response}
+                  </p>
+                </div>
+                {time && (
+                  <span className="shrink-0" style={{ color: colors.graphiteLight }}>{time}</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </WarmCard>
+  );
+}
+
+// ========================================
 // CARD SENDER
 // ========================================
 function CardSender({ sendCard, dismissCard, activeCard, cardResponses }) {
@@ -410,6 +500,7 @@ export default function ApresentadorPage() {
     prevSection,
     nextSection,
     startSession,
+    endSession,
     addNote,
     sendCard,
     dismissCard,
@@ -438,7 +529,7 @@ export default function ApresentadorPage() {
           </div>
           <div className="text-right">
             <div className="text-sm font-mono">
-              <Timer startedAt={startedAt} />
+              <Timer startedAt={startedAt} sessionStatus={sessionStatus} />
             </div>
             <div className="flex items-center gap-1 justify-end mt-0.5">
               <span
@@ -464,6 +555,7 @@ export default function ApresentadorPage() {
           nextSection={nextSection}
           sessionStatus={sessionStatus}
           startSession={startSession}
+          endSession={endSession}
         />
 
         <GuideQuestions currentSection={currentSection} />
@@ -471,6 +563,8 @@ export default function ApresentadorPage() {
         <NotesPanel notes={notes} addNote={addNote} />
 
         <ReactionsFeed reactions={reactions} />
+
+        <CardResponsesFeed cardResponses={cardResponses} />
 
         <CardSender
           sendCard={sendCard}
