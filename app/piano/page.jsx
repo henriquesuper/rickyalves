@@ -5,6 +5,7 @@ import Script from "next/script";
 import MatrixRain from '@/components/ui/MatrixRain';
 import { Spotlight } from '@/components/ui/Spotlight';
 import HackerText from '@/components/ui/HackerText';
+import { sampleSongs } from './songLibrary';
 
 const notes = [
   { note: "C", frequency: 261.63 },
@@ -19,209 +20,6 @@ const notes = [
   { note: "A", frequency: 440.00 },
   { note: "A#", frequency: 466.16 },
   { note: "B", frequency: 493.88 }
-];
-
-const sampleSongs = [
-  {
-    name: "Twinkle Twinkle Little Star",
-    notes: [
-      { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "G", duration: 400 }, { note: "G", duration: 400 },
-      { note: "A", duration: 400 }, { note: "A", duration: 400 }, { note: "G", duration: 800 },
-      { note: "F", duration: 400 }, { note: "F", duration: 400 }, { note: "E", duration: 400 }, { note: "E", duration: 400 },
-      { note: "D", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 800 }
-    ]
-  },
-  {
-    name: "Happy Birthday",
-    notes: [
-      { note: "C", duration: 300 }, { note: "C", duration: 150 }, { note: "D", duration: 450 }, { note: "C", duration: 450 }, { note: "F", duration: 450 }, { note: "E", duration: 900 },
-      { note: "C", duration: 300 }, { note: "C", duration: 150 }, { note: "D", duration: 450 }, { note: "C", duration: 450 }, { note: "G", duration: 450 }, { note: "F", duration: 900 },
-      { note: "C", duration: 300 }, { note: "C", duration: 150 }, { note: "C", duration: 450 }, { note: "A", duration: 450 }, { note: "F", duration: 450 }, { note: "E", duration: 450 }, { note: "D", duration: 900 },
-      { note: "A#", duration: 300 }, { note: "A#", duration: 150 }, { note: "A", duration: 450 }, { note: "F", duration: 450 }, { note: "G", duration: 450 }, { note: "F", duration: 900 }
-    ]
-  },
-  {
-    name: "Ode to Joy",
-    notes: [
-      { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 400 },
-      { note: "G", duration: 400 }, { note: "F", duration: 400 }, { note: "E", duration: 400 }, { note: "D", duration: 400 },
-      { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "D", duration: 400 }, { note: "E", duration: 400 },
-      { note: "E", duration: 600 }, { note: "D", duration: 200 }, { note: "D", duration: 800 },
-      { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 400 },
-      { note: "G", duration: 400 }, { note: "F", duration: 400 }, { note: "E", duration: 400 }, { note: "D", duration: 400 },
-      { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "D", duration: 400 }, { note: "E", duration: 400 },
-      { note: "D", duration: 600 }, { note: "C", duration: 200 }, { note: "C", duration: 800 }
-    ]
-  },
-  {
-    name: "Mary Had a Little Lamb",
-    notes: [
-      { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 400 }, { note: "D", duration: 400 },
-      { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "E", duration: 800 },
-      { note: "D", duration: 400 }, { note: "D", duration: 400 }, { note: "D", duration: 800 },
-      { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "E", duration: 800 },
-      { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 400 }, { note: "D", duration: 400 },
-      { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "E", duration: 400 },
-      { note: "D", duration: 400 }, { note: "D", duration: 400 }, { note: "E", duration: 400 }, { note: "D", duration: 400 },
-      { note: "C", duration: 800 }
-    ]
-  },
-  {
-    name: "Jingle Bells",
-    notes: [
-      { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 600 },
-      { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 600 },
-      { note: "E", duration: 300 }, { note: "G", duration: 300 }, { note: "C", duration: 450 }, { note: "D", duration: 150 }, { note: "E", duration: 1200 },
-      { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 150 }, { note: "E", duration: 150 },
-      { note: "E", duration: 300 }, { note: "D", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 600 }, { note: "G", duration: 1200 }
-    ]
-  },
-  {
-    name: "Row Row Row Your Boat",
-    notes: [
-      { note: "C", duration: 600 },
-      { note: "C", duration: 400 }, { note: "C", duration: 200 }, { note: "D", duration: 400 }, { note: "E", duration: 600 },
-      { note: "E", duration: 400 }, { note: "D", duration: 200 }, { note: "E", duration: 400 }, { note: "F", duration: 200 }, { note: "G", duration: 1200 },
-      { note: "C", duration: 200 }, { note: "C", duration: 200 }, { note: "C", duration: 200 }, { note: "G", duration: 200 }, { note: "G", duration: 200 }, { note: "G", duration: 200 },
-      { note: "E", duration: 200 }, { note: "E", duration: 200 }, { note: "E", duration: 200 }, { note: "C", duration: 200 }, { note: "C", duration: 200 }, { note: "C", duration: 200 },
-      { note: "G", duration: 400 }, { note: "F", duration: 200 }, { note: "E", duration: 400 }, { note: "D", duration: 200 }, { note: "C", duration: 1200 }
-    ]
-  },
-  {
-    name: "Frère Jacques",
-    notes: [
-      { note: "C", duration: 400 }, { note: "D", duration: 400 }, { note: "E", duration: 400 }, { note: "C", duration: 400 },
-      { note: "C", duration: 400 }, { note: "D", duration: 400 }, { note: "E", duration: 400 }, { note: "C", duration: 400 },
-      { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 800 },
-      { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 800 },
-      { note: "G", duration: 200 }, { note: "A", duration: 200 }, { note: "G", duration: 200 }, { note: "F", duration: 200 }, { note: "E", duration: 400 }, { note: "C", duration: 400 },
-      { note: "G", duration: 200 }, { note: "A", duration: 200 }, { note: "G", duration: 200 }, { note: "F", duration: 200 }, { note: "E", duration: 400 }, { note: "C", duration: 400 },
-      { note: "C", duration: 400 }, { note: "G", duration: 400 }, { note: "C", duration: 800 },
-      { note: "C", duration: 400 }, { note: "G", duration: 400 }, { note: "C", duration: 800 }
-    ]
-  },
-  {
-    name: "London Bridge",
-    notes: [
-      { note: "G", duration: 400 }, { note: "A", duration: 400 }, { note: "G", duration: 400 }, { note: "F", duration: 400 },
-      { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 800 },
-      { note: "D", duration: 400 }, { note: "E", duration: 400 }, { note: "F", duration: 800 },
-      { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 800 },
-      { note: "G", duration: 400 }, { note: "A", duration: 400 }, { note: "G", duration: 400 }, { note: "F", duration: 400 },
-      { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 1200 }
-    ]
-  },
-  {
-    name: "Old MacDonald",
-    notes: [
-      { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "G", duration: 400 },
-      { note: "A", duration: 400 }, { note: "A", duration: 400 }, { note: "G", duration: 800 },
-      { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "D", duration: 400 },
-      { note: "C", duration: 800 }
-    ]
-  },
-  {
-    name: "Yankee Doodle",
-    notes: [
-      { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "D", duration: 400 }, { note: "E", duration: 400 },
-      { note: "C", duration: 400 }, { note: "E", duration: 400 }, { note: "D", duration: 800 },
-      { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "D", duration: 400 }, { note: "E", duration: 400 },
-      { note: "C", duration: 1200 }
-    ]
-  },
-  {
-    name: "Itsy Bitsy Spider",
-    notes: [
-      { note: "G", duration: 400 }, { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "C", duration: 400 },
-      { note: "D", duration: 400 }, { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "E", duration: 400 },
-      { note: "D", duration: 400 }, { note: "C", duration: 800 },
-      { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 800 },
-      { note: "G", duration: 400 }, { note: "F", duration: 400 }, { note: "E", duration: 400 }, { note: "F", duration: 400 }, { note: "G", duration: 800 }
-    ]
-  },
-  {
-    name: "Baa Baa Black Sheep",
-    notes: [
-      { note: "G", duration: 400 }, { note: "G", duration: 400 }, { note: "D", duration: 400 }, { note: "D", duration: 400 },
-      { note: "E", duration: 400 }, { note: "E", duration: 400 }, { note: "D", duration: 800 },
-      { note: "C", duration: 400 }, { note: "C", duration: 400 }, { note: "B", duration: 400 }, { note: "B", duration: 400 },
-      { note: "A", duration: 400 }, { note: "A", duration: 400 }, { note: "G", duration: 800 }
-    ]
-  },
-  {
-    name: "Hot Cross Buns",
-    notes: [
-      { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 800 },
-      { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 800 },
-      { note: "C", duration: 200 }, { note: "C", duration: 200 }, { note: "C", duration: 200 }, { note: "C", duration: 200 },
-      { note: "D", duration: 200 }, { note: "D", duration: 200 }, { note: "D", duration: 200 }, { note: "D", duration: 200 },
-      { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 800 }
-    ]
-  },
-  {
-    name: "Three Blind Mice",
-    notes: [
-      { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 800 },
-      { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 800 },
-      { note: "G", duration: 600 }, { note: "F", duration: 200 }, { note: "F", duration: 800 },
-      { note: "E", duration: 600 }, { note: "D", duration: 200 }, { note: "D", duration: 800 }
-    ]
-  },
-  {
-    name: "Hickory Dickory Dock",
-    notes: [
-      { note: "C", duration: 600 }, { note: "D", duration: 200 }, { note: "E", duration: 600 },
-      { note: "E", duration: 400 }, { note: "E", duration: 400 },
-      { note: "E", duration: 600 }, { note: "F", duration: 200 }, { note: "G", duration: 1200 },
-      { note: "G", duration: 300 }, { note: "F", duration: 100 }, { note: "E", duration: 600 }, { note: "D", duration: 200 }, { note: "C", duration: 1200 }
-    ]
-  },
-  {
-    name: "Pop Goes the Weasel",
-    notes: [
-      { note: "G", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 300 },
-      { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "E", duration: 600 },
-      { note: "E", duration: 300 }, { note: "D", duration: 300 }, { note: "C", duration: 300 }, { note: "D", duration: 300 },
-      { note: "E", duration: 300 }, { note: "C", duration: 600 }
-    ]
-  },
-  {
-    name: "If You're Happy",
-    notes: [
-      { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "F", duration: 300 },
-      { note: "F", duration: 300 }, { note: "G", duration: 300 }, { note: "A", duration: 800 },
-      { note: "A", duration: 300 }, { note: "G", duration: 300 }, { note: "F", duration: 300 }, { note: "G", duration: 300 },
-      { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "C", duration: 800 }
-    ]
-  },
-  {
-    name: "This Old Man",
-    notes: [
-      { note: "C", duration: 400 }, { note: "E", duration: 400 }, { note: "G", duration: 400 }, { note: "E", duration: 400 },
-      { note: "C", duration: 400 }, { note: "E", duration: 400 }, { note: "G", duration: 800 },
-      { note: "G", duration: 200 }, { note: "A", duration: 200 }, { note: "G", duration: 200 }, { note: "F", duration: 200 },
-      { note: "E", duration: 400 }, { note: "D", duration: 400 }, { note: "C", duration: 800 }
-    ]
-  },
-  {
-    name: "Ring Around the Rosie",
-    notes: [
-      { note: "C", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 300 },
-      { note: "E", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 300 },
-      { note: "E", duration: 300 }, { note: "D", duration: 300 }, { note: "E", duration: 300 }, { note: "C", duration: 300 },
-      { note: "G", duration: 600 }, { note: "E", duration: 600 }, { note: "C", duration: 1200 }
-    ]
-  },
-  {
-    name: "Hey Diddle Diddle",
-    notes: [
-      { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "G", duration: 300 }, { note: "E", duration: 300 },
-      { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 300 },
-      { note: "C", duration: 300 }, { note: "C", duration: 300 }, { note: "G", duration: 300 }, { note: "E", duration: 300 },
-      { note: "F", duration: 300 }, { note: "F", duration: 300 }, { note: "E", duration: 300 }, { note: "D", duration: 300 },
-      { note: "C", duration: 1200 }
-    ]
-  }
 ];
 
 export default function Piano() {
@@ -745,7 +543,7 @@ export default function Piano() {
         <div className="mt-8 pb-20">
           <h3 className="text-xs font-mono text-white/50 mb-4 tracking-widest">AVAILABLE_PROTOCOLS</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {sampleSongs.slice(0, 12).map((song, index) => (
+            {sampleSongs.map((song, index) => (
               <div
                 key={index}
                 onClick={() => playSong(song)}
