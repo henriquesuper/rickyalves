@@ -54,7 +54,7 @@ function Timer({ startedAt, sessionStatus }) {
 // ========================================
 // SECTION NAVIGATOR
 // ========================================
-function SectionNav({ currentSection, totalSections, prevSection, nextSection, sessionStatus, startSession, endSession }) {
+function SectionNav({ currentSection, totalSections, prevSection, nextSection, sessionStatus, startSession, endSession, resetSession }) {
   const section = sectionData[currentSection];
   const isWaiting = sessionStatus === 'waiting';
   const isEnded = sessionStatus === 'ended';
@@ -78,8 +78,17 @@ function SectionNav({ currentSection, totalSections, prevSection, nextSection, s
       </p>
 
       {isEnded ? (
-        <div className="text-center py-2">
-          <span className="text-sm" style={{ color: colors.olive }}>✓ Aula finalizada</span>
+        <div className="space-y-2">
+          <div className="text-center py-2">
+            <span className="text-sm" style={{ color: colors.olive }}>✓ Aula finalizada</span>
+          </div>
+          <button
+            onClick={resetSession}
+            className="w-full py-2.5 rounded-xl text-sm font-medium transition-opacity hover:opacity-90"
+            style={{ background: colors.offWhiteDark, color: colors.graphite }}
+          >
+            Reiniciar Aula
+          </button>
         </div>
       ) : isWaiting ? (
         <button
@@ -501,6 +510,7 @@ export default function ApresentadorPage() {
     nextSection,
     startSession,
     endSession,
+    resetSession,
     addNote,
     sendCard,
     dismissCard,
@@ -556,6 +566,7 @@ export default function ApresentadorPage() {
           sessionStatus={sessionStatus}
           startSession={startSession}
           endSession={endSession}
+          resetSession={resetSession}
         />
 
         <GuideQuestions currentSection={currentSection} />

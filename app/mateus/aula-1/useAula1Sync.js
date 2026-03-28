@@ -200,6 +200,15 @@ export function useAula1Sync(role = 'viewer') {
     updateDoc(doc(db, 'sessions', LESSON_ID), { status: 'ended' });
   }, [role]);
 
+  const resetSession = useCallback(() => {
+    if (role !== 'presenter') return;
+    setDoc(doc(db, 'sessions', LESSON_ID), {
+      status: 'waiting',
+      currentSection: 0,
+      presenterConnected: true,
+    });
+  }, [role]);
+
   const addNote = useCallback(
     ({ text, category }) => {
       if (role !== 'presenter' || !text.trim()) return;
@@ -303,6 +312,7 @@ export function useAula1Sync(role = 'viewer') {
       prevSection,
       startSession,
       endSession,
+      resetSession,
       addNote,
       sendCard,
       dismissCard,
