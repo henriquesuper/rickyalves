@@ -19,7 +19,7 @@ const nextConfig = {
     // Em produção, restringir apenas a HTTPS e WSS
     const connectSrc = isDev
       ? "connect-src *"
-      : "connect-src 'self' https: wss:";
+      : "connect-src 'self' https: wss: https://*.firebaseio.com https://*.googleapis.com https://*.firestore.googleapis.com";
 
     return [
       {

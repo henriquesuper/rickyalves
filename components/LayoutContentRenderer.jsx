@@ -10,7 +10,7 @@ export default function LayoutContentRenderer({ children }) {
   const pathname = usePathname();
 
   // Rotas que devem ter layout limpo (sem header/footer)
-  const cleanLayoutRoutes = ['/salmos', '/mobile-interface', '/apologetica'];
+  const cleanLayoutRoutes = ['/salmos', '/mobile-interface', '/apologetica', '/mateus'];
   const showNavbarAndFooter = !cleanLayoutRoutes.some(route => pathname?.startsWith(route));
 
   return (
