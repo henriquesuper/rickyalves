@@ -1,0 +1,22 @@
+{
+  "name": "S.E.E.P.",
+  "short_name": "SEEP",
+  "description": "Serviço Executivo de Eficiência Pessoal",
+  "start_url": "/seep/app/contratante",
+  "display": "standalone",
+  "background_color": "#1B1B2F",
+  "theme_color": "#C6A94D",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/seep/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/seep/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
