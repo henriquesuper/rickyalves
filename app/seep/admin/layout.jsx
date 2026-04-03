@@ -11,6 +11,7 @@ import {
   DollarSign,
   ShieldCheck,
   FileText,
+  FolderArchive,
   Settings,
   LogOut,
   Menu,
@@ -19,12 +20,13 @@ import {
 
 const navItems = [
   { label: 'Dashboard', icon: LayoutDashboard, href: '/seep/admin/dashboard' },
+  { label: 'Diagnóstico', icon: ClipboardList, href: '/seep/admin/diagnostico' },
   { label: 'Agentes', icon: Users, href: '/seep/admin/agentes' },
   { label: 'Contratantes', icon: Building2, href: '/seep/admin/contratantes' },
-  { label: 'Diagnóstico', icon: ClipboardList, href: '/seep/admin/diagnostico' },
+  { label: 'Contratos', icon: FileText, href: '/seep/admin/contratos' },
+  { label: 'Documentos', icon: FolderArchive, href: '/seep/admin/documentos' },
   { label: 'Financeiro', icon: DollarSign, href: '/seep/admin/financeiro' },
   { label: 'Compliance', icon: ShieldCheck, href: '/seep/admin/compliance' },
-  { label: 'Contratos', icon: FileText, href: '/seep/admin/contratos' },
 ];
 
 const bottomItems = [

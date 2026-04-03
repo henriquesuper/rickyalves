@@ -15,6 +15,8 @@ import {
   CheckCircle,
   AlertTriangle,
   Crosshair,
+  CreditCard,
+  Calendar,
 } from 'lucide-react';
 import Card, { CardBody, CardHeader } from '../../../components/ui/Card';
 import Badge from '../../../components/ui/Badge';
@@ -26,6 +28,26 @@ const tabs = [
   { key: 'operacoes', label: 'Operações', icon: MapPin },
   { key: 'documentos', label: 'Documentos', icon: FileText },
   { key: 'financeiro', label: 'Financeiro', icon: DollarSign },
+];
+
+// Mock data for expanded tabs
+const mockOperacoes = [
+  { id: 1, contratante: 'Dr. Henrique Fernandes', periodo: 'Fev 2026 — Atual', horas: 186, status: 'ativa' },
+  { id: 2, contratante: 'Monteiro Corp', periodo: 'Nov 2025 — Jan 2026', horas: 312, status: 'concluida' },
+  { id: 3, contratante: 'Família Rodrigues', periodo: 'Ago 2025 — Out 2025', horas: 240, status: 'concluida' },
+];
+
+const mockDocumentosAgente = [
+  { id: 1, nome: 'Contrato de Prestação de Serviços', tipo: 'Contrato', data: '2026-01-10', status: 'vigente' },
+  { id: 2, nome: 'Certificado Curso Condução Evasiva', tipo: 'Certificação', data: '2025-08-20', status: 'valido' },
+  { id: 3, nome: 'CRAF - Registro de Arma', tipo: 'Documento', data: '2025-06-15', status: 'vigente' },
+  { id: 4, nome: 'Ficha Cadastral Completa', tipo: 'Cadastro', data: '2026-01-10', status: 'completo' },
+];
+
+const mockFinanceiro = [
+  { id: 1, mes: 'Março 2026', horas: 168, valorHora: 65, total: 10920, status: 'pago' },
+  { id: 2, mes: 'Fevereiro 2026', horas: 176, valorHora: 65, total: 11440, status: 'pago' },
+  { id: 3, mes: 'Janeiro 2026', horas: 152, valorHora: 65, total: 9880, status: 'pago' },
 ];
 
 export default function AgenteProfilePage() {
@@ -220,33 +242,97 @@ export default function AgenteProfilePage() {
 
       {activeTab === 'operacoes' && (
         <Card>
-          <CardBody className="text-center py-12">
-            <Clock className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--seep-text-med)' }} />
-            <p className="text-sm" style={{ color: 'var(--seep-text-med)' }}>
-              Histórico de operações será exibido aqui.
-            </p>
+          <CardHeader>
+            <h2 className="text-base font-bold" style={{ color: 'var(--seep-text-dark)', fontFamily: 'var(--font-montserrat)' }}>
+              Histórico de Operações
+            </h2>
+          </CardHeader>
+          <CardBody className="!p-0">
+            <div className="divide-y divide-[var(--seep-border)]">
+              {mockOperacoes.map((op) => (
+                <div key={op.id} className="flex items-center justify-between px-6 py-4 hover:bg-[var(--seep-light-bg)] transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--seep-light-gold)' }}>
+                      <Shield className="w-5 h-5" style={{ color: 'var(--seep-gold)' }} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium" style={{ color: 'var(--seep-text-dark)' }}>{op.contratante}</p>
+                      <p className="text-xs" style={{ color: 'var(--seep-text-med)' }}>{op.periodo}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm" style={{ color: 'var(--seep-text-med)', fontFamily: 'var(--font-mono)' }}>
+                      {op.horas}h
+                    </span>
+                    <Badge color={op.status === 'ativa' ? 'green' : 'gray'} dot>
+                      {op.status === 'ativa' ? 'Ativa' : 'Concluída'}
+                    </Badge>
+                  </div>
+                </div>
+              ))}
+            </div>
           </CardBody>
         </Card>
       )}
 
       {activeTab === 'documentos' && (
         <Card>
-          <CardBody className="text-center py-12">
-            <FileText className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--seep-text-med)' }} />
-            <p className="text-sm" style={{ color: 'var(--seep-text-med)' }}>
-              Documentos e certificações serão gerenciados aqui.
-            </p>
+          <CardHeader>
+            <h2 className="text-base font-bold" style={{ color: 'var(--seep-text-dark)', fontFamily: 'var(--font-montserrat)' }}>
+              Documentos e Contratos
+            </h2>
+          </CardHeader>
+          <CardBody className="!p-0">
+            <div className="divide-y divide-[var(--seep-border)]">
+              {mockDocumentosAgente.map((doc) => (
+                <div key={doc.id} className="flex items-center justify-between px-6 py-4 hover:bg-[var(--seep-light-bg)] transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--seep-light-gold)' }}>
+                      <FileText className="w-5 h-5" style={{ color: 'var(--seep-gold)' }} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium" style={{ color: 'var(--seep-text-dark)' }}>{doc.nome}</p>
+                      <p className="text-xs flex items-center gap-1" style={{ color: 'var(--seep-text-med)' }}>
+                        {doc.tipo} &middot; {new Date(doc.data).toLocaleDateString('pt-BR')}
+                      </p>
+                    </div>
+                  </div>
+                  <Badge color={doc.status === 'vigente' || doc.status === 'valido' || doc.status === 'completo' ? 'green' : 'yellow'}>
+                    {doc.status === 'vigente' ? 'Vigente' : doc.status === 'valido' ? 'Válido' : 'Completo'}
+                  </Badge>
+                </div>
+              ))}
+            </div>
           </CardBody>
         </Card>
       )}
 
       {activeTab === 'financeiro' && (
         <Card>
-          <CardBody className="text-center py-12">
-            <DollarSign className="w-10 h-10 mx-auto mb-3" style={{ color: 'var(--seep-text-med)' }} />
-            <p className="text-sm" style={{ color: 'var(--seep-text-med)' }}>
-              Histórico financeiro será exibido aqui.
-            </p>
+          <CardHeader>
+            <h2 className="text-base font-bold" style={{ color: 'var(--seep-text-dark)', fontFamily: 'var(--font-montserrat)' }}>
+              Histórico Financeiro
+            </h2>
+          </CardHeader>
+          <CardBody className="!p-0">
+            <div className="divide-y divide-[var(--seep-border)]">
+              {mockFinanceiro.map((f) => (
+                <div key={f.id} className="flex items-center justify-between px-6 py-4 hover:bg-[var(--seep-light-bg)] transition-colors">
+                  <div>
+                    <p className="text-sm font-medium" style={{ color: 'var(--seep-text-dark)' }}>{f.mes}</p>
+                    <p className="text-xs" style={{ color: 'var(--seep-text-med)' }}>
+                      {f.horas}h &times; R$ {f.valorHora},00
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-bold" style={{ color: 'var(--seep-text-dark)', fontFamily: 'var(--font-mono)' }}>
+                      R$ {f.total.toLocaleString('pt-BR')}
+                    </span>
+                    <Badge color="green">Pago</Badge>
+                  </div>
+                </div>
+              ))}
+            </div>
           </CardBody>
         </Card>
       )}

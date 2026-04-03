@@ -66,6 +66,45 @@ export function Select({ label, options = [], error, className = '', ...props })
   );
 }
 
+export function CheckboxGroup({ label, options = [], selected = [], onChange, className = '' }) {
+  const toggle = (value) => {
+    const next = selected.includes(value)
+      ? selected.filter((v) => v !== value)
+      : [...selected, value];
+    onChange(next);
+  };
+
+  return (
+    <div className={`flex flex-col gap-2 ${className}`}>
+      {label && (
+        <label className="text-sm font-medium text-[var(--seep-text-dark)]">
+          {label}
+        </label>
+      )}
+      <div className="flex flex-wrap gap-2">
+        {options.map((opt) => {
+          const isSelected = selected.includes(opt.value);
+          return (
+            <button
+              key={opt.value}
+              type="button"
+              onClick={() => toggle(opt.value)}
+              className="px-4 py-2 text-sm rounded-lg border-2 transition-all duration-200 font-medium"
+              style={{
+                borderColor: isSelected ? 'var(--seep-gold)' : 'var(--seep-border)',
+                backgroundColor: isSelected ? 'rgba(198,169,77,0.1)' : 'transparent',
+                color: isSelected ? 'var(--seep-gold)' : 'var(--seep-text-med)',
+              }}
+            >
+              {opt.label}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function Toggle({ label, checked, onChange, className = '' }) {
   return (
     <label className={`flex items-center gap-3 cursor-pointer ${className}`}>

@@ -20,6 +20,15 @@ import {
   Crown,
   Target,
   Lock,
+  Clock,
+  Briefcase,
+  Route,
+  HeartHandshake,
+  Users,
+  Lightbulb,
+  BookOpen,
+  Globe,
+  RefreshCw,
 } from 'lucide-react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import Button from './components/ui/Button';
@@ -238,7 +247,8 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.2 }}
         >
-          O silêncio que domina a selva. Proteção executiva com a filosofia
+          Eficiência Pessoal Executiva e Mobilidade Segura.
+          Proteção com a filosofia
           <span style={{ color: '#C6A94D' }}> Silverback</span> — presença firme,
           resposta calibrada, excelência inabalável.
         </motion.p>
@@ -288,22 +298,22 @@ const services = [
   {
     icon: Car,
     title: 'Condução Evasiva',
-    desc: 'Motoristas especializados em rotas alternativas, direção evasiva e contra-vigilância veicular.',
+    desc: 'Condução tática defensiva e evasiva com planejamento de rotas, contra-vigilância veicular e protocolos de evasão.',
   },
   {
     icon: ShieldCheck,
     title: 'Proteção Direta',
-    desc: 'Agentes de segurança pessoal com treinamento avançado para proteção executiva e familiar.',
+    desc: 'Agentes de segurança pessoal com treinamento avançado para proteção executiva e familiar em ambientes dinâmicos.',
   },
   {
-    icon: Brain,
-    title: 'Decisão Estratégica',
-    desc: 'Análise de risco, inteligência operacional e planejamento de segurança personalizado.',
+    icon: Route,
+    title: 'Inteligência de Itinerário',
+    desc: 'Monitoramento de rotas em tempo real, sincronia com compromissos e pontualidade absoluta em deslocamentos.',
   },
   {
-    icon: UserCheck,
-    title: 'Perfil Multifuncional',
-    desc: 'Profissionais versáteis: segurança, logística, comunicação e gestão de crises integradas.',
+    icon: Briefcase,
+    title: 'Concierge Executivo',
+    desc: 'Gestão de reservas, triagem de prestadores, apoio a tarefas operacionais — devolvemos tempo ao executivo.',
   },
 ];
 
@@ -332,9 +342,9 @@ function ServicesSection() {
           </h2>
           <GoldDivider />
           <p className="mt-6 text-base max-w-2xl mx-auto" style={{ color: 'var(--seep-text-med)' }}>
-            Não é um segurança comum. É um profissional multi-skilled que combina
-            proteção pessoal, condução evasiva, decisão estratégica e perfil executivo
-            em uma única solução.
+            Um profissional multifuncional que integra mobilidade, estratégia e proteção.
+            Disciplina, postura, discrição e capacidade de percepção de riscos com
+            tomada de decisão real, analítica e preventiva.
           </p>
         </motion.div>
 
@@ -446,16 +456,21 @@ function SilverbackSection() {
               viewport={{ once: true, margin: '-80px' }}
             >
               <p className="text-base leading-relaxed mb-6" style={{ color: '#B0B0C0' }}>
+                Assim como o cão-guia é treinado para <strong className="text-white">proteger e não apenas obedecer</strong>,
+                o Agente Dinâmico da SANTEEX atua com <strong className="text-white">autonomia, inteligência e responsabilidade</strong>.
+                O diferencial operacional está na atuação em ambientes dinâmicos e imprevisíveis, com leitura constante do cenário.
+              </p>
+              <p className="text-base leading-relaxed mb-6" style={{ color: '#B0B0C0' }}>
                 O termo &ldquo;Silverback&rdquo; vem do gorila-das-costas-prateadas — o macho dominante
                 do grupo. Ele não lidera pelo medo, mas pela <strong className="text-white">presença imponente</strong> e
                 pela <strong className="text-white">calma sob pressão</strong>. Quando um Silverback se levanta,
                 o silêncio domina a selva.
               </p>
               <p className="text-base leading-relaxed mb-8" style={{ color: '#9A9AB0' }}>
-                Assim como o Silverback protege seu grupo com serenidade e força inabalável,
-                o agente SEEP opera com <strong style={{ color: 'var(--seep-gold)' }}>autoridade silenciosa</strong>.
-                Proteção não é ostentação — é preparação constante, resposta calibrada e
-                compromisso absoluto com a segurança de quem está sob nossa responsabilidade.
+                <strong style={{ color: 'var(--seep-gold)' }}>Antecipar é proteger.</strong>{' '}
+                O Serviço Executivo de Eficiência Pessoal representa a evolução da segurança moderna:
+                integra mobilidade, estratégia e proteção — prevenção acima da reação,
+                eficiência em deslocamentos críticos.
               </p>
             </motion.div>
 
@@ -647,6 +662,162 @@ function CharacteristicsSection() {
   );
 }
 
+// ─── Competências Section ───────────────────────────────────
+const competencias = [
+  { icon: HeartHandshake, label: 'Ética', desc: 'Integridade como base de cada decisão' },
+  { icon: Users, label: 'Trabalho em Equipe', desc: 'Sinergia operacional coordenada' },
+  { icon: Brain, label: 'Inteligência Emocional', desc: 'Controle sob pressão extrema' },
+  { icon: Lightbulb, label: 'Criatividade', desc: 'Soluções táticas não convencionais' },
+  { icon: Shield, label: 'Resiliência', desc: 'Firmeza diante da adversidade' },
+  { icon: UserCheck, label: 'Liderança', desc: 'Comando com autoridade natural' },
+  { icon: Target, label: 'Resolução de Problemas', desc: 'Análise rápida, ação precisa' },
+  { icon: Eye, label: 'Pensamento Crítico', desc: 'Avaliação constante do cenário' },
+  { icon: BookOpen, label: 'Aprendizagem Ativa', desc: 'Evolução contínua e adaptável' },
+  { icon: Globe, label: 'Diversidade Cultural', desc: 'Atuação em qualquer contexto' },
+  { icon: RefreshCw, label: 'Adaptabilidade', desc: 'Resposta fluida ao inesperado' },
+  { icon: Lock, label: 'Autoconhecimento', desc: 'Consciência total de capacidades' },
+];
+
+function CompetenciasSection() {
+  return (
+    <section className="relative py-28 px-6 overflow-hidden" style={{ backgroundColor: 'var(--seep-dark)' }}>
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute -top-40 -right-40 w-96 h-96 rounded-full opacity-[0.03]"
+          style={{ background: 'radial-gradient(circle, var(--seep-gold) 0%, transparent 70%)' }}
+        />
+        <div
+          className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full opacity-[0.03]"
+          style={{ background: 'radial-gradient(circle, var(--seep-gold) 0%, transparent 70%)' }}
+        />
+        {/* Subtle grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(198,169,77,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(198,169,77,0.3) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <motion.div
+          className="text-center mb-20"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          <h3
+            className="text-sm font-bold tracking-[0.3em] uppercase mb-3"
+            style={{ color: 'var(--seep-gold)' }}
+          >
+            Valorização
+          </h3>
+          <h2
+            className="text-3xl md:text-5xl font-bold mb-4"
+            style={{ fontFamily: 'var(--font-montserrat)', color: '#FFFFFF' }}
+          >
+            Competências do Agente
+          </h2>
+          <div className="flex items-center justify-center gap-3 my-6">
+            <div className="h-px w-12" style={{ backgroundColor: 'rgba(198,169,77,0.3)' }} />
+            <div className="w-2 h-2 rotate-45" style={{ backgroundColor: 'var(--seep-gold)' }} />
+            <div className="h-px w-12" style={{ backgroundColor: 'rgba(198,169,77,0.3)' }} />
+          </div>
+          <p className="text-base max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.5)' }}>
+            Observando sempre postura e disciplina, valorizamos as competências
+            que formam o profissional de excelência.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          {competencias.map((c, i) => (
+            <motion.div
+              key={c.label}
+              className="group relative flex items-center gap-4 p-5 rounded-xl border transition-all duration-500 cursor-default"
+              variants={scaleIn}
+              custom={i}
+              whileHover={{ scale: 1.02, transition: { duration: 0.25 } }}
+              style={{
+                backgroundColor: 'rgba(198,169,77,0.03)',
+                borderColor: 'rgba(198,169,77,0.1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(198,169,77,0.08)';
+                e.currentTarget.style.borderColor = 'rgba(198,169,77,0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(198,169,77,0.03)';
+                e.currentTarget.style.borderColor = 'rgba(198,169,77,0.1)';
+              }}
+            >
+              {/* Gold number index */}
+              <span
+                className="absolute top-2.5 right-3.5 text-[10px] font-bold tracking-wider"
+                style={{ color: 'rgba(198,169,77,0.15)', fontFamily: 'var(--font-mono)' }}
+              >
+                {String(i + 1).padStart(2, '0')}
+              </span>
+
+              {/* Icon */}
+              <div
+                className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-all duration-500"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(198,169,77,0.15) 0%, rgba(198,169,77,0.05) 100%)',
+                  border: '1px solid rgba(198,169,77,0.15)',
+                }}
+              >
+                <c.icon className="w-5 h-5" style={{ color: 'var(--seep-gold)' }} />
+              </div>
+
+              {/* Text */}
+              <div className="flex-1 min-w-0">
+                <h4
+                  className="text-sm font-bold mb-0.5"
+                  style={{ color: '#FFFFFF', fontFamily: 'var(--font-montserrat)' }}
+                >
+                  {c.label}
+                </h4>
+                <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                  {c.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Bottom accent line */}
+        <motion.div
+          className="mt-16 flex items-center justify-center"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-4">
+            <div className="h-px w-20" style={{ background: 'linear-gradient(90deg, transparent, rgba(198,169,77,0.3))' }} />
+            <span
+              className="text-xs font-bold tracking-[0.25em] uppercase"
+              style={{ color: 'rgba(198,169,77,0.4)' }}
+            >
+              12 Competências Fundamentais
+            </span>
+            <div className="h-px w-20" style={{ background: 'linear-gradient(90deg, rgba(198,169,77,0.3), transparent)' }} />
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Despertar do Silverback Section ────────────────────────
 function DespertarSection() {
   return (
@@ -762,25 +933,25 @@ function DespertarSection() {
   );
 }
 
-// ─── Pillars Section (Updated) ──────────────────────────────
+// ─── Pillars Section — Os 3 Pilares Reais da SANTEEX ────────
 const pilares = [
   {
-    icon: Crown,
-    title: 'Autoridade de Presença',
+    icon: Car,
+    title: 'Mobilidade Segura',
     num: '01',
-    desc: 'O Silverback não precisa falar para ser notado. Sua presença é suficiente para mudar o ambiente. Postura, olhar e preparo transmitem uma mensagem clara: aqui, a segurança é inegociável.',
+    desc: 'Condução veicular evasiva e tática. Gestão técnica de ativos — manutenção e mecânica. Planejamento tático de rotas e protocolos de evasão para deslocamentos de alto risco.',
   },
   {
-    icon: Target,
-    title: 'Domínio do Processo',
+    icon: Clock,
+    title: 'Logística e Gestão de Tempo',
     num: '02',
-    desc: 'Cada operação segue protocolos rigorosos. Do diagnóstico de risco ao debriefing pós-missão, cada etapa é documentada, analisada e aperfeiçoada. Excelência é um processo, não um acidente.',
+    desc: 'Elaboração de relatórios de viabilidade para deslocamentos complexos. Monitoramento de rotas em tempo real para garantir pontualidade absoluta. Sincronia total com compromissos.',
   },
   {
-    icon: Lock,
-    title: 'Sincronização Forçada',
+    icon: Briefcase,
+    title: 'Concierge Pessoal Executivo',
     num: '03',
-    desc: 'Agente, contratante e central operam como um só organismo. Comunicação em tempo real, protocolos compartilhados e confiança mútua. Quando um se move, todos se movem.',
+    desc: 'Assunção de tarefas burocráticas e operacionais do executivo. Gestão de reservas e triagem de prestadores de serviço. Devolvemos tempo ao cliente para que foque na tomada de decisão.',
   },
 ];
 
@@ -799,13 +970,13 @@ function PillarsSection() {
             className="text-sm font-bold tracking-[0.3em] uppercase mb-3"
             style={{ color: 'var(--seep-gold)' }}
           >
-            Pilares
+            Estrutura
           </h3>
           <h2
             className="text-3xl md:text-5xl font-bold mb-4"
             style={{ fontFamily: 'var(--font-montserrat)', color: 'var(--seep-text-dark)' }}
           >
-            Pilares da Atuação
+            Os 3 Pilares da SANTEEX
           </h2>
           <GoldDivider />
         </motion.div>
@@ -870,6 +1041,88 @@ function PillarsSection() {
   );
 }
 
+// ─── Mentalidade SEEP Section ───────────────────────────────
+const mentalidade = [
+  'Organização Absoluta',
+  'Tomada de Decisão Eficiente',
+  'Controle Operacional',
+  'Disciplina Pessoal',
+  'Gestão de Rotina',
+  'Aumento de Performance',
+  'Solução Estrutural de Problemas',
+  'Comportamento de Alto Padrão',
+  'Transparência e Direção',
+];
+
+function MentalidadeSection() {
+  return (
+    <section className="py-24 px-6" style={{ backgroundColor: '#0D0D1A' }}>
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          className="text-center mb-16"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          <h3
+            className="text-sm font-bold tracking-[0.3em] uppercase mb-3"
+            style={{ color: 'var(--seep-gold)' }}
+          >
+            Mentalidade
+          </h3>
+          <h2
+            className="text-3xl md:text-5xl font-bold text-white mb-4"
+            style={{ fontFamily: 'var(--font-montserrat)' }}
+          >
+            A Mentalidade S.E.E.P.
+          </h2>
+          <motion.div
+            className="w-20 h-0.5 mx-auto"
+            style={{ backgroundColor: 'var(--seep-gold)' }}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          />
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          {mentalidade.map((m, i) => (
+            <motion.div
+              key={m}
+              className="flex items-center gap-3 px-5 py-4 rounded-xl border"
+              style={{
+                borderColor: 'rgba(198,169,77,0.15)',
+                backgroundColor: 'rgba(27,27,47,0.5)',
+              }}
+              variants={fadeUp}
+              custom={i}
+              whileHover={{
+                borderColor: 'rgba(198,169,77,0.4)',
+                backgroundColor: 'rgba(198,169,77,0.05)',
+                transition: { duration: 0.3 },
+              }}
+            >
+              <div
+                className="w-2 h-2 rounded-full shrink-0"
+                style={{ backgroundColor: 'var(--seep-gold)' }}
+              />
+              <span className="text-sm font-medium text-white">{m}</span>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Values Section ─────────────────────────────────────────
 const valores = ['RESPEITO', 'CONFIANÇA', 'LEALDADE', 'TRABALHO'];
 
@@ -924,6 +1177,67 @@ function ValuesSection() {
               )}
             </motion.div>
           ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Credenciais Section ────────────────────────────────────
+function CredenciaisSection() {
+  return (
+    <section className="py-20 px-6" style={{ backgroundColor: 'var(--seep-dark)' }}>
+      <div className="max-w-4xl mx-auto">
+        <motion.div
+          className="rounded-2xl p-10 border text-center"
+          style={{
+            borderColor: 'rgba(198,169,77,0.2)',
+            background: 'linear-gradient(135deg, rgba(22,36,71,0.4) 0%, rgba(27,27,47,0.6) 100%)',
+          }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <h3
+            className="text-sm font-bold tracking-[0.3em] uppercase mb-6"
+            style={{ color: 'var(--seep-gold)' }}
+          >
+            Diferencial Competitivo
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <p className="text-4xl font-bold mb-2" style={{ color: 'var(--seep-gold)', fontFamily: 'var(--font-montserrat)' }}>
+                <AnimatedCounter value="30" suffix="+" />
+              </p>
+              <p className="text-sm" style={{ color: '#B0B0C0' }}>
+                Anos em Segurança Pública (PMESP)
+              </p>
+            </div>
+            <div>
+              <p className="text-4xl font-bold mb-2" style={{ color: 'var(--seep-gold)', fontFamily: 'var(--font-montserrat)' }}>
+                <AnimatedCounter value="10" suffix="+" />
+              </p>
+              <p className="text-sm" style={{ color: '#B0B0C0' }}>
+                Anos em Segurança Executiva Privada
+              </p>
+            </div>
+            <div>
+              <p className="text-4xl font-bold mb-2" style={{ color: 'var(--seep-gold)', fontFamily: 'var(--font-montserrat)' }}>
+                <ShieldCheck className="w-10 h-10 mx-auto" style={{ color: 'var(--seep-gold)' }} />
+              </p>
+              <p className="text-sm" style={{ color: '#B0B0C0' }}>
+                Aperfeiçoamento Acadêmico em Gestão
+              </p>
+            </div>
+          </div>
+          <motion.p
+            className="text-base mt-8 max-w-2xl mx-auto leading-relaxed"
+            style={{ color: '#8B8BA0' }}
+          >
+            &ldquo;Segurança não é apenas a ausência de incidentes,
+            é a presença de tranquilidade para produzir mais.&rdquo;
+          </motion.p>
         </motion.div>
       </div>
     </section>
@@ -1021,9 +1335,26 @@ function HowItWorksSection() {
 }
 
 // ─── CTA Section ────────────────────────────────────────────
+const objetivosPills = [
+  { value: 'patrimonial', label: 'Patrimonial' },
+  { value: 'eletronica', label: 'Eletrônica' },
+  { value: 'acesso', label: 'Acesso' },
+  { value: 'monitoramento', label: 'Monitoramento' },
+  { value: 'incendio', label: 'Incêndios' },
+];
+
 function CTASection() {
-  const [form, setForm] = useState({ nome: '', telefone: '', email: '', tipo: 'PF' });
+  const [form, setForm] = useState({ nome: '', telefone: '', email: '', tipo: 'PF', objetivos: [] });
   const [sent, setSent] = useState(false);
+
+  const toggleObjetivo = (val) => {
+    setForm((prev) => ({
+      ...prev,
+      objetivos: prev.objetivos.includes(val)
+        ? prev.objetivos.filter((o) => o !== val)
+        : [...prev.objetivos, val],
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -1101,7 +1432,7 @@ function CTASection() {
                 className="w-full px-4 py-3.5 rounded-xl text-sm bg-(--seep-dark) border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-(--seep-gold)/50 focus:border-transparent transition-all"
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <input
                 type="email"
                 placeholder="E-mail"
@@ -1119,6 +1450,32 @@ function CTASection() {
                 <option value="PJ">Pessoa Jurídica</option>
               </select>
             </div>
+
+            {/* Objetivo pills */}
+            <div className="mb-6">
+              <p className="text-xs text-white/40 mb-3 text-left">Objetivo da avaliação (opcional)</p>
+              <div className="flex flex-wrap gap-2">
+                {objetivosPills.map((o) => {
+                  const isActive = form.objetivos.includes(o.value);
+                  return (
+                    <button
+                      key={o.value}
+                      type="button"
+                      onClick={() => toggleObjetivo(o.value)}
+                      className="px-3 py-1.5 rounded-full text-xs border transition-all duration-200"
+                      style={{
+                        borderColor: isActive ? 'var(--seep-gold)' : 'rgba(255,255,255,0.1)',
+                        backgroundColor: isActive ? 'rgba(198,169,77,0.1)' : 'transparent',
+                        color: isActive ? '#C6A94D' : 'rgba(255,255,255,0.4)',
+                      }}
+                    >
+                      {o.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             <Button size="lg" className="w-full" type="submit">
               Enviar solicitação
             </Button>
@@ -1197,9 +1554,12 @@ export default function SeepLandingPage() {
       <ServicesSection />
       <SilverbackSection />
       <CharacteristicsSection />
+      <CompetenciasSection />
       <DespertarSection />
+      <MentalidadeSection />
       <PillarsSection />
       <ValuesSection />
+      <CredenciaisSection />
       <HowItWorksSection />
       <CTASection />
       <Footer />

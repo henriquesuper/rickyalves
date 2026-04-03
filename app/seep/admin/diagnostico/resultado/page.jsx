@@ -9,6 +9,10 @@ import {
   AlertTriangle,
   CheckCircle,
   Minus,
+  MapPin,
+  User,
+  Target,
+  Check,
 } from 'lucide-react';
 import Button from '../../../components/ui/Button';
 import Card, { CardBody, CardHeader } from '../../../components/ui/Card';
@@ -26,7 +30,6 @@ function RiskGauge({ score, nivel }) {
     <div className="flex flex-col items-center">
       <div className="relative w-52 h-52">
         <svg viewBox="0 0 200 200" className="w-full h-full -rotate-[135deg]">
-          {/* Background arc */}
           <circle
             cx="100"
             cy="100"
@@ -37,7 +40,6 @@ function RiskGauge({ score, nivel }) {
             strokeLinecap="round"
             strokeDasharray={`${circumference * 0.75} ${circumference * 0.25}`}
           />
-          {/* Progress arc */}
           <motion.circle
             cx="100"
             cy="100"
@@ -52,7 +54,6 @@ function RiskGauge({ score, nivel }) {
             transition={{ duration: 1.5, ease: 'easeOut', delay: 0.3 }}
           />
         </svg>
-        {/* Score number */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <motion.span
             className="text-5xl font-bold"
@@ -119,6 +120,47 @@ function PriorityIcon({ prioridade }) {
   }
 }
 
+// ─── Solution Checkbox ──────────────────────────────────────
+function SolutionItem({ label, checked, onChange }) {
+  return (
+    <button
+      type="button"
+      onClick={() => onChange(!checked)}
+      className="flex items-center gap-3 px-4 py-3 rounded-lg border-2 transition-all duration-200 text-left w-full"
+      style={{
+        borderColor: checked ? 'var(--seep-gold)' : 'var(--seep-border)',
+        backgroundColor: checked ? 'rgba(198,169,77,0.06)' : 'transparent',
+      }}
+    >
+      <div
+        className="w-5 h-5 rounded flex items-center justify-center shrink-0 transition-all duration-200"
+        style={{
+          backgroundColor: checked ? 'var(--seep-gold)' : 'transparent',
+          border: checked ? 'none' : '2px solid var(--seep-border)',
+        }}
+      >
+        {checked && <Check className="w-3.5 h-3.5 text-white" />}
+      </div>
+      <span
+        className="text-sm font-medium"
+        style={{ color: checked ? 'var(--seep-gold)' : 'var(--seep-text-dark)' }}
+      >
+        {label}
+      </span>
+    </button>
+  );
+}
+
+// ─── All available solutions ────────────────────────────────
+const allSolutions = [
+  'Instalação de câmeras',
+  'Sistema de alarme',
+  'Controle de acesso',
+  'Monitoramento remoto',
+  'Portaria remota',
+  'Treinamento de equipe',
+];
+
 // ─── Default mock result ────────────────────────────────────
 const defaultResult = {
   score: 78,
@@ -140,6 +182,7 @@ const defaultResult = {
     { prioridade: 'baixa', texto: 'Considerar treinamento de equipe interna para procedimentos de emergência' },
     { prioridade: 'baixa', texto: 'Elaborar plano de evacuação e rotas de fuga sinalizadas' },
   ],
+  solucoes_propostas: ['Instalação de câmeras', 'Controle de acesso', 'Sistema de alarme', 'Monitoramento remoto', 'Treinamento de equipe'],
 };
 
 const breakdownLabels = {
@@ -150,24 +193,40 @@ const breakdownLabels = {
   eletronico: 'Segurança Eletrônica',
 };
 
+const objetivoLabels = {
+  patrimonial: 'Segurança Patrimonial',
+  eletronica: 'Segurança Eletrônica',
+  controle_acesso: 'Controle de Acesso',
+  monitoramento: 'Monitoramento',
+  incendio: 'Prevenção de Incêndios',
+  outros: 'Outros',
+};
+
 // ─── Main Page ──────────────────────────────────────────────
 export default function ResultadoPage() {
   const [result, setResult] = useState(null);
+  const [diagData, setDiagData] = useState(null);
+  const [solucoes, setSolucoes] = useState([]);
+  const [declaracao, setDeclaracao] = useState({
+    responsavel: '',
+    data: new Date().toISOString().split('T')[0],
+  });
 
   useEffect(() => {
-    // Try to get result from API or use default
     const fetchResult = async () => {
       try {
-        const diagData = sessionStorage.getItem('seep-diagnostico');
-        if (diagData) {
+        const raw = sessionStorage.getItem('seep-diagnostico');
+        if (raw) {
+          setDiagData(JSON.parse(raw));
           const res = await fetch('/api/seep/diagnostico', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: diagData,
+            body: raw,
           });
           if (res.ok) {
             const data = await res.json();
             setResult(data);
+            setSolucoes(data.solucoes_propostas || []);
             return;
           }
         }
@@ -175,9 +234,16 @@ export default function ResultadoPage() {
         // Fallback to default
       }
       setResult(defaultResult);
+      setSolucoes(defaultResult.solucoes_propostas);
     };
     fetchResult();
   }, []);
+
+  const toggleSolucao = (sol) => {
+    setSolucoes((prev) =>
+      prev.includes(sol) ? prev.filter((s) => s !== sol) : [...prev, sol]
+    );
+  };
 
   if (!result) {
     return (
@@ -200,6 +266,50 @@ export default function ResultadoPage() {
           Análise gerada pelo sistema de inteligência SEEP
         </p>
       </div>
+
+      {/* Client Info Header */}
+      {diagData && (
+        <Card>
+          <CardBody className="!py-4">
+            <div className="flex flex-wrap gap-6">
+              <div className="flex items-center gap-2">
+                <User className="w-4 h-4" style={{ color: 'var(--seep-gold)' }} />
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--seep-text-med)' }}>Cliente</p>
+                  <p className="text-sm font-medium" style={{ color: 'var(--seep-text-dark)' }}>{diagData.nome || '—'}</p>
+                </div>
+              </div>
+              {diagData.endereco && (
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4" style={{ color: 'var(--seep-gold)' }} />
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--seep-text-med)' }}>Local</p>
+                    <p className="text-sm font-medium" style={{ color: 'var(--seep-text-dark)' }}>
+                      {[diagData.endereco, diagData.numero, diagData.bairro, diagData.cidade].filter(Boolean).join(', ')}
+                    </p>
+                  </div>
+                </div>
+              )}
+              {diagData.objetivos?.length > 0 && (
+                <div className="flex items-center gap-2">
+                  <Target className="w-4 h-4" style={{ color: 'var(--seep-gold)' }} />
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wider" style={{ color: 'var(--seep-text-med)' }}>Objetivos</p>
+                    <p className="text-sm font-medium" style={{ color: 'var(--seep-text-dark)' }}>
+                      {diagData.objetivos.map((o) => objetivoLabels[o] || o).join(', ')}
+                    </p>
+                  </div>
+                </div>
+              )}
+              <div className="flex items-center gap-2">
+                <Badge color={diagData.tipoLocal === 'residencia' ? 'green' : 'yellow'}>
+                  {diagData.tipoLocal === 'residencia' ? 'Residência' : 'Empresa'}
+                </Badge>
+              </div>
+            </div>
+          </CardBody>
+        </Card>
+      )}
 
       {/* Score + Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -238,7 +348,7 @@ export default function ResultadoPage() {
             className="text-lg font-bold"
             style={{ color: 'var(--seep-text-dark)', fontFamily: 'var(--font-montserrat)' }}
           >
-            Recomendações da IA
+            Recomendações Técnicas
           </h2>
         </CardHeader>
         <CardBody className="!p-0">
@@ -264,6 +374,107 @@ export default function ResultadoPage() {
                 </Badge>
               </motion.div>
             ))}
+          </div>
+        </CardBody>
+      </Card>
+
+      {/* Soluções Propostas */}
+      <Card>
+        <CardHeader>
+          <h2
+            className="text-lg font-bold"
+            style={{ color: 'var(--seep-text-dark)', fontFamily: 'var(--font-montserrat)' }}
+          >
+            Soluções Propostas
+          </h2>
+        </CardHeader>
+        <CardBody>
+          <p className="text-sm mb-4" style={{ color: 'var(--seep-text-med)' }}>
+            Selecione as soluções recomendadas para incluir na proposta técnica.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {allSolutions.map((sol) => (
+              <SolutionItem
+                key={sol}
+                label={sol}
+                checked={solucoes.includes(sol)}
+                onChange={() => toggleSolucao(sol)}
+              />
+            ))}
+          </div>
+        </CardBody>
+      </Card>
+
+      {/* Declaração e Aceite */}
+      <Card>
+        <CardHeader>
+          <h2
+            className="text-lg font-bold"
+            style={{ color: 'var(--seep-text-dark)', fontFamily: 'var(--font-montserrat)' }}
+          >
+            Declaração e Aceite
+          </h2>
+        </CardHeader>
+        <CardBody className="space-y-5">
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--seep-text-med)' }}>
+            Declaro que as informações acima são verdadeiras e autorizo a elaboração da proposta
+            com base nesta avaliação. Este formulário deve ser utilizado como base para elaboração
+            de proposta técnica e contrato de prestação de serviços.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium text-[var(--seep-text-dark)]">
+                Responsável pela Avaliação
+              </label>
+              <input
+                type="text"
+                className="w-full px-4 py-2.5 text-sm border border-[var(--seep-border)] rounded-lg bg-white text-[var(--seep-text-dark)] placeholder:text-[var(--seep-text-med)]/50 focus:outline-none focus:ring-2 focus:ring-[var(--seep-gold)] focus:border-transparent transition-all duration-200"
+                placeholder="Nome do técnico avaliador"
+                value={declaracao.responsavel}
+                onChange={(e) => setDeclaracao((p) => ({ ...p, responsavel: e.target.value }))}
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-sm font-medium text-[var(--seep-text-dark)]">
+                Data
+              </label>
+              <input
+                type="date"
+                className="w-full px-4 py-2.5 text-sm border border-[var(--seep-border)] rounded-lg bg-white text-[var(--seep-text-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--seep-gold)] focus:border-transparent transition-all duration-200"
+                value={declaracao.data}
+                onChange={(e) => setDeclaracao((p) => ({ ...p, data: e.target.value }))}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4 border-t border-[var(--seep-border)]">
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] uppercase tracking-wider font-medium" style={{ color: 'var(--seep-text-med)' }}>
+                Assinatura do Avaliador
+              </label>
+              <div
+                className="h-20 rounded-lg border-2 border-dashed flex items-center justify-center"
+                style={{ borderColor: 'var(--seep-border)' }}
+              >
+                <span className="text-xs" style={{ color: 'var(--seep-text-med)' }}>
+                  Assinatura digital (PDF)
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="text-[10px] uppercase tracking-wider font-medium" style={{ color: 'var(--seep-text-med)' }}>
+                Assinatura do Contratante
+              </label>
+              <div
+                className="h-20 rounded-lg border-2 border-dashed flex items-center justify-center"
+                style={{ borderColor: 'var(--seep-border)' }}
+              >
+                <span className="text-xs" style={{ color: 'var(--seep-text-med)' }}>
+                  Assinatura digital (PDF)
+                </span>
+              </div>
+            </div>
           </div>
         </CardBody>
       </Card>
