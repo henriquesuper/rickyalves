@@ -13,7 +13,7 @@ import MatrixRain from '@/components/ui/MatrixRain';
 
 export default function Home() {
   return (
-    <main className="w-full bg-black/[0.96] antialiased relative overflow-x-hidden text-white">
+    <main className="w-full bg-black/96 antialiased relative overflow-x-hidden text-white">
       <div className="fixed inset-0 z-0 pointer-events-none">
         <MatrixRain />
       </div>

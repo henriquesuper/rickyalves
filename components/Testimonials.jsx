@@ -41,7 +41,7 @@ const Testimonials = () => {
     <div className="w-full relative z-10">
 
       <div className="text-center mb-16">
-        <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400 font-mono mb-2">
+        <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white to-neutral-400 font-mono mb-2">
           <HackerText text="> Intercepted_Comms" />
         </h2>
         <div className="text-xs font-mono text-green-500/60 tracking-widest">

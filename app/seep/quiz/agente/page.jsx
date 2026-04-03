@@ -119,7 +119,7 @@ export default function QuizAgentePage() {
         </div>
 
         <Card>
-          <CardBody className="!p-8">
+          <CardBody className="p-8!">
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <Input label="Nome completo *" required value={data.nome} onChange={(e) => update('nome', e.target.value)} placeholder="Seu nome completo" />

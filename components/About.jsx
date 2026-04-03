@@ -16,7 +16,7 @@ const About = () => {
         {/* Left Column: Terminal Bio */}
         <ScrollAnimation direction="left">
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-600 mb-2 font-mono">
+            <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-green-400 to-emerald-600 mb-2 font-mono">
               <HackerText text="Identity_Log_v1.0" />
             </h2>
             

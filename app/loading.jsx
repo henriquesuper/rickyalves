@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black font-mono">
+    <div className="fixed inset-0 z-100 flex flex-col items-center justify-center bg-black font-mono">
       
       {/* Loader Container */}
       <div className="relative h-32 w-32">
@@ -12,7 +12,7 @@ export default function Loading() {
         <div className="absolute inset-4 rounded-full border-2 border-green-500/40 border-b-green-500 border-l-green-500 animate-[spin_2s_linear_infinite_reverse]"></div>
         
         {/* Inner Ring - Fast Rotation */}
-        <div className="absolute inset-8 rounded-full border-4 border-transparent border-t-green-400 animate-[spin_1s_linear_infinite]"></div>
+        <div className="absolute inset-8 rounded-full border-4 border-transparent border-t-green-400 animate-spin"></div>
         
         {/* Center Pulse */}
         <div className="absolute inset-0 flex items-center justify-center">

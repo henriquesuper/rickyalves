@@ -224,7 +224,7 @@ function HeroSection() {
         </motion.p>
 
         <motion.div
-          className="w-24 h-[1px] mx-auto mb-8"
+          className="w-24 h-px mx-auto mb-8"
           style={{ backgroundColor: 'rgba(198,169,77,0.4)' }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -348,7 +348,7 @@ function ServicesSection() {
           {services.map((s, i) => (
             <motion.div
               key={s.title}
-              className="bg-white rounded-xl p-8 border border-[var(--seep-border)] group relative overflow-hidden"
+              className="bg-white rounded-xl p-8 border border-(--seep-border) group relative overflow-hidden"
               variants={fadeUp}
               custom={i}
               whileHover={{ y: -8, transition: { duration: 0.3 } }}
@@ -696,7 +696,7 @@ function DespertarSection() {
         </motion.h2>
 
         <motion.div
-          className="w-16 h-[1px] mx-auto mb-10"
+          className="w-16 h-px mx-auto mb-10"
           style={{ backgroundColor: 'rgba(198,169,77,0.4)' }}
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
@@ -814,7 +814,7 @@ function PillarsSection() {
           {pilares.map((p, i) => (
             <motion.div
               key={p.title}
-              className="bg-white rounded-2xl overflow-hidden border border-[var(--seep-border)]"
+              className="bg-white rounded-2xl overflow-hidden border border-(--seep-border)"
               variants={i % 2 === 0 ? slideFromLeft : slideFromRight}
               initial="hidden"
               whileInView="visible"
@@ -906,7 +906,7 @@ function ValuesSection() {
               custom={i}
             >
               <motion.span
-                className="text-2xl md:text-5xl font-bold tracking-[0.1em] px-4 md:px-6"
+                className="text-2xl md:text-5xl font-bold tracking-widest px-4 md:px-6"
                 style={{ fontFamily: 'var(--font-montserrat)', color: 'var(--seep-text-dark)' }}
                 whileHover={{ color: '#C6A94D', transition: { duration: 0.3 } }}
               >
@@ -1090,7 +1090,7 @@ function CTASection() {
                 required
                 value={form.nome}
                 onChange={(e) => setForm({ ...form, nome: e.target.value })}
-                className="w-full px-4 py-3.5 rounded-xl text-sm bg-[var(--seep-dark)] border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--seep-gold)]/50 focus:border-transparent transition-all"
+                className="w-full px-4 py-3.5 rounded-xl text-sm bg-(--seep-dark) border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-(--seep-gold)/50 focus:border-transparent transition-all"
               />
               <input
                 type="tel"
@@ -1098,7 +1098,7 @@ function CTASection() {
                 required
                 value={form.telefone}
                 onChange={(e) => setForm({ ...form, telefone: e.target.value })}
-                className="w-full px-4 py-3.5 rounded-xl text-sm bg-[var(--seep-dark)] border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--seep-gold)]/50 focus:border-transparent transition-all"
+                className="w-full px-4 py-3.5 rounded-xl text-sm bg-(--seep-dark) border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-(--seep-gold)/50 focus:border-transparent transition-all"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -1108,12 +1108,12 @@ function CTASection() {
                 required
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full px-4 py-3.5 rounded-xl text-sm bg-[var(--seep-dark)] border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-[var(--seep-gold)]/50 focus:border-transparent transition-all"
+                className="w-full px-4 py-3.5 rounded-xl text-sm bg-(--seep-dark) border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-(--seep-gold)/50 focus:border-transparent transition-all"
               />
               <select
                 value={form.tipo}
                 onChange={(e) => setForm({ ...form, tipo: e.target.value })}
-                className="w-full px-4 py-3.5 rounded-xl text-sm bg-[var(--seep-dark)] border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-[var(--seep-gold)]/50 focus:border-transparent transition-all"
+                className="w-full px-4 py-3.5 rounded-xl text-sm bg-(--seep-dark) border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-(--seep-gold)/50 focus:border-transparent transition-all"
               >
                 <option value="PF">Pessoa Física</option>
                 <option value="PJ">Pessoa Jurídica</option>
@@ -1155,10 +1155,10 @@ function Footer() {
           <div>
             <h5 className="text-sm font-bold uppercase tracking-wider text-white mb-4">Links</h5>
             <ul className="space-y-2 text-sm" style={{ color: '#B0B0C0' }}>
-              <li><a href="#silverback" className="hover:text-[var(--seep-gold)] transition-colors">Filosofia Silverback</a></li>
-              <li><a href="#servicos" className="hover:text-[var(--seep-gold)] transition-colors">Serviços</a></li>
-              <li><Link href="/seep/login" className="hover:text-[var(--seep-gold)] transition-colors">Área do Contratante</Link></li>
-              <li><Link href="/seep/quiz/agente" className="hover:text-[var(--seep-gold)] transition-colors">Seja um Agente</Link></li>
+              <li><a href="#silverback" className="hover:text-(--seep-gold) transition-colors">Filosofia Silverback</a></li>
+              <li><a href="#servicos" className="hover:text-(--seep-gold) transition-colors">Serviços</a></li>
+              <li><Link href="/seep/login" className="hover:text-(--seep-gold) transition-colors">Área do Contratante</Link></li>
+              <li><Link href="/seep/quiz/agente" className="hover:text-(--seep-gold) transition-colors">Seja um Agente</Link></li>
             </ul>
           </div>
           <div>

@@ -10,10 +10,10 @@ const Contact = () => {
     <div className="flex flex-col items-center py-10 px-4 w-full max-w-4xl mx-auto relative z-10">
 
       {/* HUD Container */}
-      <div className="relative w-full p-1 bg-gradient-to-r from-transparent via-green-500/20 to-transparent rounded-xl">
+      <div className="relative w-full p-1 bg-linear-to-r from-transparent via-green-500/20 to-transparent rounded-xl">
         <div className="absolute inset-0 bg-black/80 backdrop-blur-md rounded-xl border border-white/10 clip-path-polygon"></div>
 
-        <div className="relative z-10 flex flex-col items-center p-10 md:p-16 text-center border-y border-white/5 bg-[linear-gradient(45deg,transparent_25%,rgba(0,255,0,0.02)_50%,transparent_75%,transparent_100%)] bg-[length:20px_20px]">
+        <div className="relative z-10 flex flex-col items-center p-10 md:p-16 text-center border-y border-white/5 bg-[linear-gradient(45deg,transparent_25%,rgba(0,255,0,0.02)_50%,transparent_75%,transparent_100%)] bg-size-[20px_20px]">
 
           {/* Signal Strength Indicator */}
           <div className="flex gap-1 mb-8 opacity-70">
@@ -41,7 +41,7 @@ const Contact = () => {
             href="mailto:hello@rickyalves.com"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex h-16 overflow-hidden rounded-none p-[1px] focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+            className="group relative inline-flex h-16 overflow-hidden rounded-none p-px focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-slate-50"
           >
             <span className="absolute inset-0 animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#000000_0%,#22c55e_50%,#000000_100%)]" />
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center bg-black px-8 py-1 text-base font-bold text-white backdrop-blur-3xl transition-all group-hover:bg-black/80 group-hover:text-green-400 border border-green-500/30">
