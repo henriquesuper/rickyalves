@@ -195,7 +195,7 @@ export default function DashboardPage() {
                 style={{
                   borderColor: alerta.severidade === 'vermelho' ? 'var(--seep-danger)' : 'var(--seep-gold)',
                   backgroundColor:
-                    alerta.severidade === 'vermelho' ? 'rgba(201,68,68,0.05)' : 'rgba(198,169,77,0.05)',
+                    alerta.severidade === 'vermelho' ? 'rgba(201,68,68,0.05)' : 'rgba(139,35,54,0.05)',
                 }}
               >
                 <div className="flex items-start justify-between gap-3 mb-2">

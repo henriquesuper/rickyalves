@@ -42,7 +42,7 @@ function SidebarContent({ pathname, onClose }) {
         <Link href="/seep" className="block">
           <h1
             className="text-2xl font-bold tracking-wider"
-            style={{ color: '#C6A94D', fontFamily: 'var(--font-montserrat)' }}
+            style={{ color: '#8B2336', fontFamily: 'var(--font-montserrat)' }}
           >
             S.E.E.P.
           </h1>
@@ -71,14 +71,14 @@ function SidebarContent({ pathname, onClose }) {
               }`}
               style={
                 isActive
-                  ? { backgroundColor: 'rgba(198,169,77,0.15)', color: '#C6A94D' }
+                  ? { backgroundColor: 'rgba(139,35,54,0.15)', color: '#8B2336' }
                   : undefined
               }
             >
               {isActive && (
                 <div
                   className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 rounded-r-full"
-                  style={{ backgroundColor: '#C6A94D' }}
+                  style={{ backgroundColor: '#8B2336' }}
                 />
               )}
               <item.icon className="w-5 h-5 shrink-0" />

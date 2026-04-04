@@ -89,7 +89,7 @@ export default function FinanceiroPage() {
           icon={Users}
           label="Custo Agentes"
           value={formatCurrency(financeiro.custoAgentes)}
-          iconColor="#C6A94D"
+          iconColor="#8B2336"
         />
         <KPICard
           icon={DollarSign}
@@ -119,8 +119,8 @@ export default function FinanceiroPage() {
             <AreaChart data={chartData}>
               <defs>
                 <linearGradient id="goldGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#C6A94D" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#C6A94D" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#8B2336" stopOpacity={0.3} />
+                  <stop offset="95%" stopColor="#8B2336" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="grayGrad" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#9CA3AF" stopOpacity={0.2} />
@@ -146,7 +146,7 @@ export default function FinanceiroPage() {
                 type="monotone"
                 dataKey="receita"
                 name="Receita"
-                stroke="#C6A94D"
+                stroke="#8B2336"
                 strokeWidth={2}
                 fill="url(#goldGrad)"
               />

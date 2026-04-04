@@ -151,7 +151,7 @@ export default function ContratanteAppPage() {
                 <div className="px-5 pt-12 pb-6" style={{ background: 'linear-gradient(135deg, #1B1B2F, #162447)' }}>
                   <div className="flex items-center justify-between mb-1">
                     <p className="text-sm" style={{ color: '#B0B0C0' }}>Olá,</p>
-                    <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: 'rgba(198,169,77,0.15)', color: '#C6A94D', fontFamily: 'var(--font-montserrat)', fontWeight: 700, fontSize: 10 }}>
+                    <span className="text-xs px-2 py-1 rounded" style={{ backgroundColor: 'rgba(139,35,54,0.15)', color: '#8B2336', fontFamily: 'var(--font-montserrat)', fontWeight: 700, fontSize: 10 }}>
                       S.E.E.P.
                     </span>
                   </div>
@@ -165,7 +165,7 @@ export default function ContratanteAppPage() {
                   <div className="bg-white rounded-xl p-4 shadow-sm border border-[var(--seep-border)]">
                     <p className="text-xs font-medium mb-3" style={{ color: 'var(--seep-text-med)' }}>Seu agente</p>
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold" style={{ backgroundColor: 'var(--seep-light-gold)', color: '#8B7028', fontFamily: 'var(--font-montserrat)' }}>
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold" style={{ backgroundColor: 'var(--seep-light-gold)', color: '#6B1A2A', fontFamily: 'var(--font-montserrat)' }}>
                         F
                       </div>
                       <div className="flex-1">
@@ -213,7 +213,7 @@ export default function ContratanteAppPage() {
                       <button
                         onClick={() => setActiveTab('financeiro')}
                         className="px-4 py-2 rounded-lg text-sm font-semibold text-white"
-                        style={{ background: 'linear-gradient(135deg, #C6A94D 0%, #D4B96A 100%)' }}
+                        style={{ background: 'linear-gradient(135deg, #8B2336 0%, #A02840 100%)' }}
                       >
                         Pagar agora
                       </button>
@@ -308,7 +308,7 @@ export default function ContratanteAppPage() {
                       key={i}
                       className="bg-white rounded-xl p-4 border border-[var(--seep-border)] flex items-center gap-3"
                     >
-                      <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(198,169,77,0.1)' }}>
+                      <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: 'rgba(139,35,54,0.1)' }}>
                         <FileText className="w-5 h-5" style={{ color: 'var(--seep-gold)' }} />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -357,7 +357,7 @@ export default function ContratanteAppPage() {
                       {f.status === 'Pendente' && (
                         <button
                           className="mt-3 w-full py-2.5 rounded-lg text-sm font-semibold text-white"
-                          style={{ background: 'linear-gradient(135deg, #C6A94D 0%, #D4B96A 100%)' }}
+                          style={{ background: 'linear-gradient(135deg, #8B2336 0%, #A02840 100%)' }}
                         >
                           Pagar agora
                         </button>

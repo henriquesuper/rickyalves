@@ -52,7 +52,7 @@ const estadosBR = [
 // ─── Risk Level Selector ────────────────────────────────────
 function RiskLevel({ label, value, onChange }) {
   const levels = ['Baixo', 'Médio', 'Alto'];
-  const colors = { Baixo: '#4A9B6E', Médio: '#C6A94D', Alto: '#C94444' };
+  const colors = { Baixo: '#4A9B6E', Médio: '#8B2336', Alto: '#C94444' };
 
   return (
     <div className="flex flex-col gap-2">

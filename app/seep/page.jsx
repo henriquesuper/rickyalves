@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import Image from 'next/image';
 import {
   Shield,
   ShieldCheck,
@@ -128,74 +129,61 @@ function HeroSection() {
     target: ref,
     offset: ['start start', 'end start'],
   });
-  const yBg = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
     <section
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: 'linear-gradient(135deg, #1B1B2F 0%, #0D0D1A 50%, #1B1B2F 100%)' }}
+      style={{ background: '#0A0A0E' }}
     >
-      {/* Parallax geometric pattern */}
-      <motion.div className="absolute inset-0 opacity-[0.04]" style={{ y: yBg }}>
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.35 }}
+        >
+          <source src="/seep/seep_video.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay gradient */}
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage:
-              'linear-gradient(30deg, #C6A94D 12%, transparent 12.5%, transparent 87%, #C6A94D 87.5%, #C6A94D), linear-gradient(150deg, #C6A94D 12%, transparent 12.5%, transparent 87%, #C6A94D 87.5%, #C6A94D), linear-gradient(30deg, #C6A94D 12%, transparent 12.5%, transparent 87%, #C6A94D 87.5%, #C6A94D), linear-gradient(150deg, #C6A94D 12%, transparent 12.5%, transparent 87%, #C6A94D 87.5%, #C6A94D)',
-            backgroundSize: '80px 140px',
-            backgroundPosition: '0 0, 0 0, 40px 70px, 40px 70px',
+            background: 'linear-gradient(to bottom, rgba(10,10,14,0.4) 0%, rgba(10,10,14,0.7) 50%, rgba(10,10,14,0.95) 100%)',
           }}
         />
-      </motion.div>
+      </div>
 
-      {/* Animated gold accent lines */}
+      {/* Animated accent line top */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-[2px]"
-        style={{ background: 'linear-gradient(90deg, transparent 0%, #C6A94D 50%, transparent 100%)' }}
+        className="absolute top-0 left-0 right-0 h-[2px] z-20"
+        style={{ background: 'linear-gradient(90deg, transparent 0%, #8B2336 50%, transparent 100%)' }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 1.5, ease: 'easeInOut' }}
       />
 
-      {/* Floating orbs */}
-      <motion.div
-        className="absolute top-1/4 left-[10%] w-64 h-64 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(198,169,77,0.06) 0%, transparent 70%)' }}
-        animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-[10%] w-80 h-80 rounded-full"
-        style={{ background: 'radial-gradient(circle, rgba(198,169,77,0.04) 0%, transparent 70%)' }}
-        animate={{ y: [0, 15, 0], x: [0, -10, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      {/* Subtle vignette */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 40%, rgba(10,10,14,0.6) 100%)',
+        }}
       />
 
       <motion.div className="relative z-10 text-center px-6 max-w-5xl mx-auto" style={{ opacity }}>
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 border"
-          style={{ borderColor: 'rgba(198,169,77,0.3)', backgroundColor: 'rgba(198,169,77,0.08)' }}
-        >
-          <Shield className="w-3.5 h-3.5" style={{ color: '#C6A94D' }} />
-          <span className="text-xs font-medium tracking-wider uppercase" style={{ color: '#C6A94D' }}>
-            Santeex Executive Service
-          </span>
-        </motion.div>
-
-        {/* Main title with character stagger */}
+        {/* Main title */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: [0.25, 0.4, 0.25, 1] }}
+          transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           <h1
-            className="text-7xl md:text-9xl font-bold tracking-wider mb-2"
+            className="text-6xl md:text-8xl font-bold tracking-wider mb-2"
             style={{ fontFamily: 'var(--font-montserrat)', color: '#FFFFFF' }}
           >
             {'S.E.E.P.'.split('').map((char, i) => (
@@ -203,7 +191,7 @@ function HeroSection() {
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + i * 0.06, ease: [0.25, 0.4, 0.25, 1] }}
+                transition={{ duration: 0.5, delay: 0.6 + i * 0.06, ease: [0.25, 0.4, 0.25, 1] }}
                 className="inline-block"
               >
                 {char}
@@ -213,51 +201,40 @@ function HeroSection() {
         </motion.div>
 
         <motion.h2
-          className="text-xl md:text-2xl font-medium tracking-[0.25em] uppercase mb-3"
-          style={{ color: '#C6A94D', fontFamily: 'var(--font-montserrat)' }}
+          className="text-lg md:text-xl font-medium tracking-[0.25em] uppercase mb-3"
+          style={{ color: '#B8B8C4', fontFamily: 'var(--font-montserrat)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          Serviço Executivo de Eficiência Pessoal
-        </motion.h2>
-
-        <motion.p
-          className="text-sm md:text-base mb-3 tracking-widest uppercase"
-          style={{ color: '#8B8BA0' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1 }}
         >
-          Powered by Santeex Group
-        </motion.p>
+          Serviço Executivo | Eficiência Pessoal
+        </motion.h2>
 
         <motion.div
           className="w-24 h-px mx-auto mb-8"
-          style={{ backgroundColor: 'rgba(198,169,77,0.4)' }}
+          style={{ backgroundColor: 'rgba(139,35,54,0.5)' }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
         />
 
         <motion.p
           className="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
-          style={{ color: '#B0B0C0' }}
+          style={{ color: 'rgba(255,255,255,0.6)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
         >
-          Eficiência Pessoal Executiva e Mobilidade Segura.
-          Proteção com a filosofia
-          <span style={{ color: '#C6A94D' }}> Silverback</span> — presença firme,
-          resposta calibrada, excelência inabalável.
+          Mobilidade segura, proteção executiva e eficiência pessoal
+          com a filosofia <span className="font-semibold text-white">Silverback</span> —
+          presença firme, resposta calibrada, excelência inabalável.
         </motion.p>
 
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.4 }}
+          transition={{ duration: 0.6, delay: 1.5 }}
         >
           <a href="#silverback">
             <Button size="lg">
@@ -275,15 +252,16 @@ function HeroSection() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
       >
-        <div className="w-6 h-10 border-2 border-[#C6A94D]/30 rounded-full flex justify-center pt-2">
+        <div className="w-6 h-10 border-2 border-white/20 rounded-full flex justify-center pt-2">
           <motion.div
-            className="w-1.5 h-3 bg-[#C6A94D]/50 rounded-full"
+            className="w-1.5 h-3 rounded-full"
+            style={{ backgroundColor: 'rgba(139,35,54,0.7)' }}
             animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
@@ -367,7 +345,7 @@ function ServicesSection() {
               {/* Hover glow */}
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                style={{ background: 'radial-gradient(circle at 50% 0%, rgba(198,169,77,0.06) 0%, transparent 60%)' }}
+                style={{ background: 'radial-gradient(circle at 50% 0%, rgba(139,35,54,0.06) 0%, transparent 60%)' }}
               />
               <div className="relative z-10">
                 <motion.div
@@ -410,7 +388,7 @@ function SilverbackSection() {
       <div
         className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(198,169,77,0.04) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(139,35,54,0.04) 0%, transparent 70%)',
           transform: 'translate(30%, -30%)',
         }}
       />
@@ -498,41 +476,26 @@ function SilverbackSection() {
             viewport={{ once: true, margin: '-80px' }}
           >
             <div className="relative">
-              {/* Outer ring - rotating */}
-              <motion.div
-                className="absolute inset-[-20px] rounded-full"
+              {/* Glow behind logo */}
+              <div
+                className="absolute inset-0 blur-3xl opacity-20"
                 style={{
-                  border: '1px solid rgba(198,169,77,0.15)',
+                  background: 'radial-gradient(circle, rgba(139,35,54,0.6) 0%, transparent 70%)',
                 }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-              >
-                <div
-                  className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
-                  style={{ backgroundColor: 'var(--seep-gold)' }}
-                />
-              </motion.div>
+              />
 
-              {/* Main circle */}
+              {/* Logo */}
               <motion.div
-                className="w-72 h-72 md:w-80 md:h-80 rounded-full flex flex-col items-center justify-center relative"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(22,36,71,0.8) 0%, rgba(27,27,47,0.9) 100%)',
-                  border: '2px solid rgba(198,169,77,0.3)',
-                  boxShadow: '0 0 80px rgba(198,169,77,0.1), inset 0 0 40px rgba(198,169,77,0.05)',
-                }}
-                whileHover={{ scale: 1.03, transition: { duration: 0.4 } }}
+                className="relative"
+                whileHover={{ scale: 1.05, transition: { duration: 0.4 } }}
               >
-                <Shield className="w-20 h-20 mb-3" style={{ color: 'var(--seep-gold)', opacity: 0.7 }} />
-                <p
-                  className="text-sm font-bold tracking-[0.2em] uppercase"
-                  style={{ color: 'var(--seep-gold)', fontFamily: 'var(--font-montserrat)' }}
-                >
-                  Silverback
-                </p>
-                <p className="text-[10px] tracking-widest uppercase mt-1" style={{ color: '#8B8BA0' }}>
-                  O Silêncio que Domina
-                </p>
+                <Image
+                  src="/seep/seep_black_bg.png"
+                  alt="SANTEEX Silverback"
+                  width={320}
+                  height={320}
+                  className="object-contain drop-shadow-2xl"
+                />
               </motion.div>
             </div>
           </motion.div>
@@ -549,7 +512,7 @@ const characteristics = [
     title: 'Calma Sob Fogo',
     subtitle: 'Controle absoluto',
     desc: 'O Silverback não reage por impulso. Cada movimento é calculado. Sob pressão, a calma é a arma mais poderosa — e a diferença entre proteger e falhar.',
-    color: '#C6A94D',
+    color: '#8B2336',
   },
   {
     icon: Shield,
@@ -569,7 +532,7 @@ const characteristics = [
 
 function CharacteristicsSection() {
   return (
-    <section className="py-28 px-6" style={{ backgroundColor: '#0D0D1A' }}>
+    <section className="py-28 px-6" style={{ backgroundColor: '#0C0C10' }}>
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-20"
@@ -614,11 +577,11 @@ function CharacteristicsSection() {
               <motion.div
                 className="rounded-2xl p-8 h-full border relative overflow-hidden"
                 style={{
-                  backgroundColor: 'rgba(27,27,47,0.6)',
-                  borderColor: 'rgba(198,169,77,0.1)',
+                  backgroundColor: 'rgba(20,20,28,0.6)',
+                  borderColor: 'rgba(139,35,54,0.1)',
                 }}
                 whileHover={{
-                  borderColor: 'rgba(198,169,77,0.3)',
+                  borderColor: 'rgba(139,35,54,0.3)',
                   transition: { duration: 0.3 },
                 }}
               >
@@ -695,7 +658,7 @@ function CompetenciasSection() {
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: 'linear-gradient(rgba(198,169,77,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(198,169,77,0.3) 1px, transparent 1px)',
+            backgroundImage: 'linear-gradient(rgba(139,35,54,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(139,35,54,0.3) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
           }}
         />
@@ -722,9 +685,9 @@ function CompetenciasSection() {
             Competências do Agente
           </h2>
           <div className="flex items-center justify-center gap-3 my-6">
-            <div className="h-px w-12" style={{ backgroundColor: 'rgba(198,169,77,0.3)' }} />
+            <div className="h-px w-12" style={{ backgroundColor: 'rgba(139,35,54,0.3)' }} />
             <div className="w-2 h-2 rotate-45" style={{ backgroundColor: 'var(--seep-gold)' }} />
-            <div className="h-px w-12" style={{ backgroundColor: 'rgba(198,169,77,0.3)' }} />
+            <div className="h-px w-12" style={{ backgroundColor: 'rgba(139,35,54,0.3)' }} />
           </div>
           <p className="text-base max-w-2xl mx-auto" style={{ color: 'rgba(255,255,255,0.5)' }}>
             Observando sempre postura e disciplina, valorizamos as competências
@@ -747,22 +710,22 @@ function CompetenciasSection() {
               custom={i}
               whileHover={{ scale: 1.02, transition: { duration: 0.25 } }}
               style={{
-                backgroundColor: 'rgba(198,169,77,0.03)',
-                borderColor: 'rgba(198,169,77,0.1)',
+                backgroundColor: 'rgba(139,35,54,0.03)',
+                borderColor: 'rgba(139,35,54,0.1)',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(198,169,77,0.08)';
-                e.currentTarget.style.borderColor = 'rgba(198,169,77,0.3)';
+                e.currentTarget.style.backgroundColor = 'rgba(139,35,54,0.08)';
+                e.currentTarget.style.borderColor = 'rgba(139,35,54,0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgba(198,169,77,0.03)';
-                e.currentTarget.style.borderColor = 'rgba(198,169,77,0.1)';
+                e.currentTarget.style.backgroundColor = 'rgba(139,35,54,0.03)';
+                e.currentTarget.style.borderColor = 'rgba(139,35,54,0.1)';
               }}
             >
               {/* Gold number index */}
               <span
                 className="absolute top-2.5 right-3.5 text-[10px] font-bold tracking-wider"
-                style={{ color: 'rgba(198,169,77,0.15)', fontFamily: 'var(--font-mono)' }}
+                style={{ color: 'rgba(139,35,54,0.15)', fontFamily: 'var(--font-mono)' }}
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
@@ -771,8 +734,8 @@ function CompetenciasSection() {
               <div
                 className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 transition-all duration-500"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(198,169,77,0.15) 0%, rgba(198,169,77,0.05) 100%)',
-                  border: '1px solid rgba(198,169,77,0.15)',
+                  background: 'linear-gradient(135deg, rgba(139,35,54,0.15) 0%, rgba(139,35,54,0.05) 100%)',
+                  border: '1px solid rgba(139,35,54,0.15)',
                 }}
               >
                 <c.icon className="w-5 h-5" style={{ color: 'var(--seep-gold)' }} />
@@ -803,14 +766,14 @@ function CompetenciasSection() {
           viewport={{ once: true }}
         >
           <div className="flex items-center gap-4">
-            <div className="h-px w-20" style={{ background: 'linear-gradient(90deg, transparent, rgba(198,169,77,0.3))' }} />
+            <div className="h-px w-20" style={{ background: 'linear-gradient(90deg, transparent, rgba(139,35,54,0.3))' }} />
             <span
               className="text-xs font-bold tracking-[0.25em] uppercase"
-              style={{ color: 'rgba(198,169,77,0.4)' }}
+              style={{ color: 'rgba(139,35,54,0.4)' }}
             >
               12 Competências Fundamentais
             </span>
-            <div className="h-px w-20" style={{ background: 'linear-gradient(90deg, rgba(198,169,77,0.3), transparent)' }} />
+            <div className="h-px w-20" style={{ background: 'linear-gradient(90deg, rgba(139,35,54,0.3), transparent)' }} />
           </div>
         </motion.div>
       </div>
@@ -827,7 +790,7 @@ function DespertarSection() {
         <div
           className="absolute inset-0"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(198,169,77,0.06) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse at center, rgba(139,35,54,0.06) 0%, transparent 60%)',
           }}
         />
       </div>
@@ -868,7 +831,7 @@ function DespertarSection() {
 
         <motion.div
           className="w-16 h-px mx-auto mb-10"
-          style={{ backgroundColor: 'rgba(198,169,77,0.4)' }}
+          style={{ backgroundColor: 'rgba(139,35,54,0.4)' }}
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
@@ -909,12 +872,12 @@ function DespertarSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <div className="relative py-8 px-10 rounded-2xl" style={{
-            background: 'linear-gradient(135deg, rgba(198,169,77,0.08) 0%, rgba(198,169,77,0.02) 100%)',
-            border: '1px solid rgba(198,169,77,0.15)',
+            background: 'linear-gradient(135deg, rgba(139,35,54,0.08) 0%, rgba(139,35,54,0.02) 100%)',
+            border: '1px solid rgba(139,35,54,0.15)',
           }}>
             <div
               className="absolute top-4 left-6 text-5xl leading-none"
-              style={{ color: 'rgba(198,169,77,0.2)', fontFamily: 'Georgia, serif' }}
+              style={{ color: 'rgba(139,35,54,0.2)', fontFamily: 'Georgia, serif' }}
             >
               &ldquo;
             </div>
@@ -998,7 +961,7 @@ function PillarsSection() {
                 <div
                   className="flex items-center justify-center px-8 py-6 md:py-0 md:min-w-[140px]"
                   style={{
-                    background: 'linear-gradient(135deg, #1B1B2F 0%, #162447 100%)',
+                    background: 'linear-gradient(135deg, #141418 0%, #1A1A22 100%)',
                   }}
                 >
                   <div className="text-center">
@@ -1056,7 +1019,7 @@ const mentalidade = [
 
 function MentalidadeSection() {
   return (
-    <section className="py-24 px-6" style={{ backgroundColor: '#0D0D1A' }}>
+    <section className="py-24 px-6" style={{ backgroundColor: '#0C0C10' }}>
       <div className="max-w-5xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -1099,14 +1062,14 @@ function MentalidadeSection() {
               key={m}
               className="flex items-center gap-3 px-5 py-4 rounded-xl border"
               style={{
-                borderColor: 'rgba(198,169,77,0.15)',
-                backgroundColor: 'rgba(27,27,47,0.5)',
+                borderColor: 'rgba(139,35,54,0.15)',
+                backgroundColor: 'rgba(20,20,28,0.5)',
               }}
               variants={fadeUp}
               custom={i}
               whileHover={{
-                borderColor: 'rgba(198,169,77,0.4)',
-                backgroundColor: 'rgba(198,169,77,0.05)',
+                borderColor: 'rgba(139,35,54,0.4)',
+                backgroundColor: 'rgba(139,35,54,0.05)',
                 transition: { duration: 0.3 },
               }}
             >
@@ -1161,7 +1124,7 @@ function ValuesSection() {
               <motion.span
                 className="text-2xl md:text-5xl font-bold tracking-widest px-4 md:px-6"
                 style={{ fontFamily: 'var(--font-montserrat)', color: 'var(--seep-text-dark)' }}
-                whileHover={{ color: '#C6A94D', transition: { duration: 0.3 } }}
+                whileHover={{ color: '#8B2336', transition: { duration: 0.3 } }}
               >
                 {v}
               </motion.span>
@@ -1191,8 +1154,8 @@ function CredenciaisSection() {
         <motion.div
           className="rounded-2xl p-10 border text-center"
           style={{
-            borderColor: 'rgba(198,169,77,0.2)',
-            background: 'linear-gradient(135deg, rgba(22,36,71,0.4) 0%, rgba(27,27,47,0.6) 100%)',
+            borderColor: 'rgba(139,35,54,0.2)',
+            background: 'linear-gradient(135deg, rgba(26,26,34,0.4) 0%, rgba(20,20,28,0.6) 100%)',
           }}
           variants={fadeUp}
           initial="hidden"
@@ -1281,7 +1244,7 @@ function HowItWorksSection() {
           {/* Connector line */}
           <div
             className="hidden md:block absolute top-[60px] left-[calc(16.67%+28px)] right-[calc(16.67%+28px)] h-[2px]"
-            style={{ backgroundColor: 'rgba(198,169,77,0.2)' }}
+            style={{ backgroundColor: 'rgba(139,35,54,0.2)' }}
           />
           <motion.div
             className="hidden md:block absolute top-[60px] left-[calc(16.67%+28px)] right-[calc(16.67%+28px)] h-[2px]"
@@ -1309,8 +1272,8 @@ function HowItWorksSection() {
                 <motion.div
                   className="w-[60px] h-[60px] rounded-full flex items-center justify-center mx-auto mb-6 relative z-10"
                   style={{
-                    background: 'linear-gradient(135deg, #C6A94D 0%, #D4B96A 100%)',
-                    boxShadow: '0 4px 20px rgba(198,169,77,0.3)',
+                    background: 'linear-gradient(135deg, #8B2336 0%, #A02840 100%)',
+                    boxShadow: '0 4px 20px rgba(139,35,54,0.3)',
                   }}
                   whileHover={{ scale: 1.15, transition: { duration: 0.2 } }}
                 >
@@ -1387,7 +1350,7 @@ function CTASection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="rounded-2xl p-10 border"
-            style={{ backgroundColor: 'rgba(22,36,71,0.5)', borderColor: 'rgba(198,169,77,0.2)' }}
+            style={{ backgroundColor: 'rgba(26,26,34,0.5)', borderColor: 'rgba(139,35,54,0.2)' }}
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -1407,7 +1370,7 @@ function CTASection() {
           <motion.form
             onSubmit={handleSubmit}
             className="rounded-2xl p-8 border"
-            style={{ backgroundColor: 'rgba(22,36,71,0.3)', borderColor: 'rgba(198,169,77,0.15)' }}
+            style={{ backgroundColor: 'rgba(26,26,34,0.3)', borderColor: 'rgba(139,35,54,0.15)' }}
             variants={fadeUp}
             custom={1}
             initial="hidden"
@@ -1465,8 +1428,8 @@ function CTASection() {
                       className="px-3 py-1.5 rounded-full text-xs border transition-all duration-200"
                       style={{
                         borderColor: isActive ? 'var(--seep-gold)' : 'rgba(255,255,255,0.1)',
-                        backgroundColor: isActive ? 'rgba(198,169,77,0.1)' : 'transparent',
-                        color: isActive ? '#C6A94D' : 'rgba(255,255,255,0.4)',
+                        backgroundColor: isActive ? 'rgba(139,35,54,0.1)' : 'transparent',
+                        color: isActive ? '#8B2336' : 'rgba(255,255,255,0.4)',
                       }}
                     >
                       {o.label}
@@ -1491,7 +1454,7 @@ function Footer() {
   return (
     <footer
       className="py-16 px-6"
-      style={{ backgroundColor: '#0D0D1A', borderTop: '1px solid rgba(198,169,77,0.12)' }}
+      style={{ backgroundColor: '#0C0C10', borderTop: '1px solid rgba(139,35,54,0.12)' }}
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
@@ -1536,7 +1499,7 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className="border-t pt-6 text-center" style={{ borderColor: 'rgba(198,169,77,0.1)' }}>
+        <div className="border-t pt-6 text-center" style={{ borderColor: 'rgba(139,35,54,0.1)' }}>
           <p className="text-xs" style={{ color: '#6B7280' }}>
             Todos os direitos reservados &copy; 2026 S.E.E.P. — Santeex Executive Service
           </p>

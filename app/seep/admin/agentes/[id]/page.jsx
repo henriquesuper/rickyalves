@@ -86,7 +86,7 @@ export default function AgenteProfilePage() {
               className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold shrink-0"
               style={{
                 backgroundColor: 'var(--seep-light-gold)',
-                color: '#8B7028',
+                color: '#6B1A2A',
                 fontFamily: 'var(--font-montserrat)',
               }}
             >
@@ -226,7 +226,7 @@ export default function AgenteProfilePage() {
                   <div
                     key={i}
                     className="p-3 rounded-lg flex items-center gap-2"
-                    style={{ backgroundColor: 'rgba(198,169,77,0.1)', border: '1px solid rgba(198,169,77,0.2)' }}
+                    style={{ backgroundColor: 'rgba(139,35,54,0.1)', border: '1px solid rgba(139,35,54,0.2)' }}
                   >
                     <AlertTriangle className="w-4 h-4 shrink-0" style={{ color: 'var(--seep-gold)' }} />
                     <span className="text-sm" style={{ color: 'var(--seep-gold)' }}>

@@ -125,7 +125,7 @@ export default function DocumentosPage() {
               className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200 border"
               style={{
                 borderColor: isActive ? 'var(--seep-gold)' : 'var(--seep-border)',
-                backgroundColor: isActive ? 'rgba(198,169,77,0.08)' : 'white',
+                backgroundColor: isActive ? 'rgba(139,35,54,0.08)' : 'white',
                 color: isActive ? 'var(--seep-gold)' : 'var(--seep-text-med)',
               }}
             >
@@ -241,8 +241,8 @@ export default function DocumentosPage() {
       <div
         className="flex items-start gap-3 p-4 rounded-lg border"
         style={{
-          backgroundColor: 'rgba(198,169,77,0.05)',
-          borderColor: 'rgba(198,169,77,0.2)',
+          backgroundColor: 'rgba(139,35,54,0.05)',
+          borderColor: 'rgba(139,35,54,0.2)',
         }}
       >
         <Lock className="w-5 h-5 shrink-0 mt-0.5" style={{ color: 'var(--seep-gold)' }} />

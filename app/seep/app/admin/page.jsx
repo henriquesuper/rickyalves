@@ -64,7 +64,7 @@ export default function AdminMobilePage() {
             {activeTab === 'dashboard' && (
               <div>
                 <div className="px-5 pt-12 pb-6" style={{ background: 'linear-gradient(135deg, #1B1B2F, #162447)' }}>
-                  <p className="text-xs mb-1" style={{ color: '#C6A94D', fontFamily: 'var(--font-montserrat)', fontWeight: 700 }}>S.E.E.P.</p>
+                  <p className="text-xs mb-1" style={{ color: '#8B2336', fontFamily: 'var(--font-montserrat)', fontWeight: 700 }}>S.E.E.P.</p>
                   <h1 className="text-xl font-bold text-white" style={{ fontFamily: 'var(--font-montserrat)' }}>Central de Comando</h1>
                 </div>
 
@@ -73,9 +73,9 @@ export default function AdminMobilePage() {
                   <div className="grid grid-cols-2 gap-3">
                     {[
                       { icon: Users, label: 'Agentes Ativos', value: agentesAtivos.length, color: '#4A9B6E' },
-                      { icon: Building2, label: 'Contratantes', value: contratantes.length, color: '#C6A94D' },
+                      { icon: Building2, label: 'Contratantes', value: contratantes.length, color: '#8B2336' },
                       { icon: TrendingUp, label: 'Receita', value: formatCurrency(financeiro.receitaMensal), color: '#4A9B6E' },
-                      { icon: AlertTriangle, label: 'Alertas', value: alertasAtivos.length, color: '#C6A94D' },
+                      { icon: AlertTriangle, label: 'Alertas', value: alertasAtivos.length, color: '#8B2336' },
                     ].map((kpi, i) => (
                       <div key={i} className="bg-white rounded-xl p-3 border border-[var(--seep-border)]">
                         <kpi.icon className="w-5 h-5 mb-2" style={{ color: kpi.color }} />
@@ -136,7 +136,7 @@ export default function AdminMobilePage() {
                   {agentes.map((a) => (
                     <div key={a.id} className="bg-white rounded-xl p-4 border border-[var(--seep-border)] flex items-center gap-3">
                       <div className="w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold shrink-0"
-                        style={{ backgroundColor: 'var(--seep-light-gold)', color: '#8B7028', fontFamily: 'var(--font-montserrat)' }}>
+                        style={{ backgroundColor: 'var(--seep-light-gold)', color: '#6B1A2A', fontFamily: 'var(--font-montserrat)' }}>
                         {a.nomeGuerra[0]}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -189,7 +189,7 @@ export default function AdminMobilePage() {
                 <div className="px-5 pt-12 pb-6" style={{ background: 'linear-gradient(135deg, #1B1B2F, #162447)' }}>
                   <h1 className="text-xl font-bold text-white" style={{ fontFamily: 'var(--font-montserrat)' }}>Financeiro</h1>
                   <div className="mt-3 flex gap-3">
-                    <div className="flex-1 rounded-lg p-3" style={{ backgroundColor: 'rgba(198,169,77,0.15)' }}>
+                    <div className="flex-1 rounded-lg p-3" style={{ backgroundColor: 'rgba(139,35,54,0.15)' }}>
                       <p className="text-[10px] text-white/60">Receita</p>
                       <p className="text-base font-bold text-white" style={{ fontFamily: 'var(--font-mono)' }}>
                         {formatCurrency(financeiro.receitaMensal)}

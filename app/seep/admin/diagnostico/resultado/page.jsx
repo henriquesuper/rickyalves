@@ -23,7 +23,7 @@ function RiskGauge({ score, nivel }) {
   const radius = 80;
   const circumference = 2 * Math.PI * radius;
   const progress = (score / 100) * circumference * 0.75; // 270 degrees
-  const getColor = (s) => (s <= 35 ? '#4A9B6E' : s <= 60 ? '#C6A94D' : '#C94444');
+  const getColor = (s) => (s <= 35 ? '#4A9B6E' : s <= 60 ? '#8B2336' : '#C94444');
   const color = getColor(score);
 
   return (
@@ -84,7 +84,7 @@ function RiskGauge({ score, nivel }) {
 
 // ─── Breakdown Bar ──────────────────────────────────────────
 function BreakdownBar({ label, value, delay = 0 }) {
-  const getColor = (v) => (v <= 35 ? '#4A9B6E' : v <= 60 ? '#C6A94D' : '#C94444');
+  const getColor = (v) => (v <= 35 ? '#4A9B6E' : v <= 60 ? '#8B2336' : '#C94444');
   return (
     <div className="space-y-1.5">
       <div className="flex justify-between text-sm">
@@ -129,7 +129,7 @@ function SolutionItem({ label, checked, onChange }) {
       className="flex items-center gap-3 px-4 py-3 rounded-lg border-2 transition-all duration-200 text-left w-full"
       style={{
         borderColor: checked ? 'var(--seep-gold)' : 'var(--seep-border)',
-        backgroundColor: checked ? 'rgba(198,169,77,0.06)' : 'transparent',
+        backgroundColor: checked ? 'rgba(139,35,54,0.06)' : 'transparent',
       }}
     >
       <div

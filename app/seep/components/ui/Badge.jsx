@@ -3,7 +3,7 @@
 const badgeStyles = {
   gold: {
     backgroundColor: 'var(--seep-light-gold)',
-    color: '#8B7028',
+    color: '#6B1A2A',
     borderColor: 'var(--seep-gold)',
   },
   green: {

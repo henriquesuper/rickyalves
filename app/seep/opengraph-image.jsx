@@ -24,7 +24,7 @@ export default function Image() {
           style={{
             fontSize: 80,
             fontWeight: 700,
-            color: '#C6A94D',
+            color: '#8B2336',
             letterSpacing: 12,
           }}
         >
@@ -35,7 +35,7 @@ export default function Image() {
             display: 'flex',
             width: 120,
             height: 2,
-            background: '#C6A94D',
+            background: '#8B2336',
             marginTop: 24,
             marginBottom: 24,
             opacity: 0.5,

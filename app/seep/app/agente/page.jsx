@@ -187,7 +187,7 @@ export default function AgenteAppPage() {
                       style={{
                         background: checkedIn
                           ? 'linear-gradient(135deg, #C94444, #B73A3A)'
-                          : 'linear-gradient(135deg, #C6A94D, #D4B96A)',
+                          : 'linear-gradient(135deg, #8B2336, #A02840)',
                       }}
                     >
                       {checkedIn ? (
@@ -242,7 +242,7 @@ export default function AgenteAppPage() {
                     <p className="text-sm font-medium mb-2" style={{ color: 'var(--seep-text-dark)' }}>Tipo</p>
                     <div className="grid grid-cols-3 gap-2">
                       {[
-                        { key: 'alerta', label: 'Alerta', icon: AlertTriangle, color: '#C6A94D' },
+                        { key: 'alerta', label: 'Alerta', icon: AlertTriangle, color: '#8B2336' },
                         { key: 'incidente', label: 'Incidente', icon: AlertOctagon, color: '#C94444' },
                         { key: 'observacao', label: 'Observação', icon: CheckCircle, color: '#4A9B6E' },
                       ].map((t) => (
@@ -292,7 +292,7 @@ export default function AgenteAppPage() {
 
                   <button
                     className="w-full py-3 rounded-xl text-sm font-bold text-white"
-                    style={{ background: 'linear-gradient(135deg, #C6A94D, #D4B96A)' }}
+                    style={{ background: 'linear-gradient(135deg, #8B2336, #A02840)' }}
                   >
                     Registrar Ocorrência
                   </button>

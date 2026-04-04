@@ -49,9 +49,9 @@ export default function ContratantesPage() {
                         style={{ backgroundColor: 'var(--seep-light-gold)' }}
                       >
                         {c.tipo === 'Pessoa Jurídica' ? (
-                          <Building2 className="w-5 h-5" style={{ color: '#8B7028' }} />
+                          <Building2 className="w-5 h-5" style={{ color: '#6B1A2A' }} />
                         ) : (
-                          <User className="w-5 h-5" style={{ color: '#8B7028' }} />
+                          <User className="w-5 h-5" style={{ color: '#6B1A2A' }} />
                         )}
                       </div>
                       <div>

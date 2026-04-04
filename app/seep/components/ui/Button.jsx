@@ -37,7 +37,7 @@ export default function Button({
           ? {
               background: disabled
                 ? '#9CA3AF'
-                : 'linear-gradient(135deg, #C6A94D 0%, #D4B96A 50%, #C6A94D 100%)',
+                : 'linear-gradient(135deg, #7B1E2D 0%, #A02840 50%, #7B1E2D 100%)',
               cursor: disabled ? 'not-allowed' : 'pointer',
             }
           : { cursor: disabled ? 'not-allowed' : 'pointer' }

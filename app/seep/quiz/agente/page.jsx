@@ -86,7 +86,7 @@ export default function QuizAgentePage() {
           </p>
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium"
-            style={{ backgroundColor: 'var(--seep-light-gold)', color: '#8B7028' }}
+            style={{ backgroundColor: 'var(--seep-light-gold)', color: '#6B1A2A' }}
           >
             <Shield className="w-4 h-4" />
             S.E.E.P. — Serviço Executivo de Eficiência Pessoal
@@ -159,7 +159,7 @@ export default function QuizAgentePage() {
                       className="flex items-center gap-2 p-3 rounded-lg border cursor-pointer transition-all duration-200"
                       style={{
                         borderColor: data.certificacoes.includes(cert) ? 'var(--seep-gold)' : 'var(--seep-border)',
-                        backgroundColor: data.certificacoes.includes(cert) ? 'rgba(198,169,77,0.08)' : 'transparent',
+                        backgroundColor: data.certificacoes.includes(cert) ? 'rgba(139,35,54,0.08)' : 'transparent',
                       }}
                     >
                       <input

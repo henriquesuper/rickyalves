@@ -32,7 +32,7 @@ export default function LoginPage() {
           <Link href="/seep">
             <h1
               className="text-5xl font-bold tracking-wider mb-2"
-              style={{ color: '#C6A94D', fontFamily: 'var(--font-montserrat)' }}
+              style={{ color: '#8B2336', fontFamily: 'var(--font-montserrat)' }}
             >
               S.E.E.P.
             </h1>
@@ -46,7 +46,7 @@ export default function LoginPage() {
         <form
           onSubmit={handleSubmit}
           className="rounded-xl p-8 border"
-          style={{ backgroundColor: 'rgba(22,36,71,0.5)', borderColor: 'rgba(198,169,77,0.15)' }}
+          style={{ backgroundColor: 'rgba(22,36,71,0.5)', borderColor: 'rgba(139,35,54,0.15)' }}
         >
           <div className="space-y-4">
             <div>
@@ -97,8 +97,8 @@ export default function LoginPage() {
           </div>
 
           {/* Demo hint */}
-          <div className="mt-6 p-3 rounded-lg text-center" style={{ backgroundColor: 'rgba(198,169,77,0.08)' }}>
-            <p className="text-xs" style={{ color: '#C6A94D' }}>
+          <div className="mt-6 p-3 rounded-lg text-center" style={{ backgroundColor: 'rgba(139,35,54,0.08)' }}>
+            <p className="text-xs" style={{ color: '#8B2336' }}>
               Demo: clique em Entrar com qualquer credencial
             </p>
           </div>
@@ -109,7 +109,7 @@ export default function LoginPage() {
           <Link
             href="/seep/app/contratante"
             className="text-sm block hover:underline"
-            style={{ color: '#C6A94D' }}
+            style={{ color: '#8B2336' }}
           >
             Portal do Contratante (App)
           </Link>

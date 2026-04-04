@@ -87,9 +87,9 @@ export default function ContratanteProfilePage() {
               style={{ backgroundColor: 'var(--seep-light-gold)' }}
             >
               {contratante.tipo === 'Pessoa Jurídica' ? (
-                <Building2 className="w-8 h-8" style={{ color: '#8B7028' }} />
+                <Building2 className="w-8 h-8" style={{ color: '#6B1A2A' }} />
               ) : (
-                <User className="w-8 h-8" style={{ color: '#8B7028' }} />
+                <User className="w-8 h-8" style={{ color: '#6B1A2A' }} />
               )}
             </div>
             <div className="flex-1">
@@ -166,7 +166,7 @@ export default function ContratanteProfilePage() {
                 <div className="flex items-center gap-4">
                   <div
                     className="w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold"
-                    style={{ backgroundColor: 'var(--seep-light-gold)', color: '#8B7028', fontFamily: 'var(--font-montserrat)' }}
+                    style={{ backgroundColor: 'var(--seep-light-gold)', color: '#6B1A2A', fontFamily: 'var(--font-montserrat)' }}
                   >
                     {agente.nomeGuerra[0]}
                   </div>

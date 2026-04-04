@@ -92,7 +92,7 @@ export function CheckboxGroup({ label, options = [], selected = [], onChange, cl
               className="px-4 py-2 text-sm rounded-lg border-2 transition-all duration-200 font-medium"
               style={{
                 borderColor: isSelected ? 'var(--seep-gold)' : 'var(--seep-border)',
-                backgroundColor: isSelected ? 'rgba(198,169,77,0.1)' : 'transparent',
+                backgroundColor: isSelected ? 'rgba(139,35,54,0.1)' : 'transparent',
                 color: isSelected ? 'var(--seep-gold)' : 'var(--seep-text-med)',
               }}
             >

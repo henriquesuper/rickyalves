@@ -58,7 +58,7 @@ export default function OperationsMap({ agentes = [] }) {
             padding: 6px 14px;
             border-radius: 24px;
             white-space: nowrap;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.3), 0 0 0 2px rgba(198,169,77,0.4);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.3), 0 0 0 2px rgba(139,35,54,0.4);
             font-family: var(--font-montserrat), system-ui;
             text-transform: uppercase;
           ">
@@ -135,7 +135,7 @@ export default function OperationsMap({ agentes = [] }) {
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                 <div style={{
                   width: 36, height: 36, borderRadius: '50%',
-                  background: 'linear-gradient(135deg, #C6A94D, #D4B96A)',
+                  background: 'linear-gradient(135deg, #8B2336, #A02840)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: '#1B1B2F', fontWeight: 800, fontSize: 14,
                   fontFamily: 'var(--font-montserrat), system-ui',
@@ -155,7 +155,7 @@ export default function OperationsMap({ agentes = [] }) {
                 background: '#F8F7F4', borderRadius: 8, padding: '8px 10px',
                 border: '1px solid #E5E0D4',
               }}>
-                <p style={{ fontSize: 11, color: '#8B7028', fontWeight: 600, margin: '0 0 2px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <p style={{ fontSize: 11, color: '#6B1A2A', fontWeight: 600, margin: '0 0 2px 0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Operação
                 </p>
                 <p style={{ fontSize: 12, color: '#2C2C2C', margin: 0 }}>

@@ -72,7 +72,7 @@ export default function CompliancePage() {
         </Card>
         <Card>
           <CardBody className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(198,169,77,0.1)' }}>
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'rgba(139,35,54,0.1)' }}>
               <Clock className="w-5 h-5" style={{ color: 'var(--seep-gold)' }} />
             </div>
             <div>

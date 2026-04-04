@@ -94,7 +94,7 @@ export default function AgentesPage() {
                       className="w-14 h-14 rounded-full flex items-center justify-center shrink-0 text-lg font-bold"
                       style={{
                         backgroundColor: agente.status === 'ativo' ? 'var(--seep-light-gold)' : 'var(--seep-light-bg)',
-                        color: agente.status === 'ativo' ? '#8B7028' : 'var(--seep-text-med)',
+                        color: agente.status === 'ativo' ? '#6B1A2A' : 'var(--seep-text-med)',
                         fontFamily: 'var(--font-montserrat)',
                       }}
                     >
@@ -141,7 +141,7 @@ export default function AgentesPage() {
                   </div>
 
                   {hasAlerts && (
-                    <div className="mt-2 flex items-center gap-1.5 px-2.5 py-1.5 rounded-md" style={{ backgroundColor: 'rgba(198,169,77,0.1)' }}>
+                    <div className="mt-2 flex items-center gap-1.5 px-2.5 py-1.5 rounded-md" style={{ backgroundColor: 'rgba(139,35,54,0.1)' }}>
                       <AlertTriangle className="w-3.5 h-3.5" style={{ color: 'var(--seep-gold)' }} />
                       <span className="text-xs font-medium" style={{ color: 'var(--seep-gold)' }}>
                         {agente.alertas[0].mensagem}
