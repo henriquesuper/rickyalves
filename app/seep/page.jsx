@@ -183,7 +183,7 @@ function HeroSection() {
           transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           <h1
-            className="text-6xl md:text-8xl font-bold tracking-wider mb-2"
+            className="text-5xl md:text-8xl font-bold tracking-wider mb-2"
             style={{ fontFamily: 'var(--font-montserrat)', color: '#FFFFFF' }}
           >
             {'S.E.E.P.'.split('').map((char, i) => (
@@ -201,7 +201,7 @@ function HeroSection() {
         </motion.div>
 
         <motion.h2
-          className="text-lg md:text-xl font-medium tracking-[0.25em] uppercase mb-3"
+          className="text-xs md:text-xl font-medium tracking-[0.15em] md:tracking-[0.25em] uppercase mb-3"
           style={{ color: '#B8B8C4', fontFamily: 'var(--font-montserrat)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -219,7 +219,7 @@ function HeroSection() {
         />
 
         <motion.p
-          className="text-lg md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
+          className="text-base md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
           style={{ color: 'rgba(255,255,255,0.6)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
