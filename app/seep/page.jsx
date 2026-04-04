@@ -175,7 +175,7 @@ function HeroSection() {
         }}
       />
 
-      <motion.div className="relative z-10 text-center px-6 max-w-5xl mx-auto" style={{ opacity }}>
+      <motion.div className="relative z-10 w-full max-w-md md:max-w-5xl mx-auto px-5 md:px-6 pt-16 md:pt-0 text-center" style={{ opacity }}>
         {/* Main title */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -183,7 +183,7 @@ function HeroSection() {
           transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
         >
           <h1
-            className="text-5xl md:text-8xl font-bold tracking-wider mb-2"
+            className="text-4xl sm:text-5xl md:text-8xl font-bold tracking-[0.08em] sm:tracking-[0.12em] md:tracking-wider mb-3 md:mb-2"
             style={{ fontFamily: 'var(--font-montserrat)', color: '#FFFFFF' }}
           >
             {'S.E.E.P.'.split('').map((char, i) => (
@@ -201,7 +201,7 @@ function HeroSection() {
         </motion.div>
 
         <motion.h2
-          className="text-xs md:text-xl font-medium tracking-[0.15em] md:tracking-[0.25em] uppercase mb-3"
+          className="text-[11px] sm:text-xs md:text-xl font-medium tracking-[0.1em] sm:tracking-[0.15em] md:tracking-[0.25em] uppercase mb-4 md:mb-3"
           style={{ color: '#B8B8C4', fontFamily: 'var(--font-montserrat)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -211,7 +211,7 @@ function HeroSection() {
         </motion.h2>
 
         <motion.div
-          className="w-24 h-px mx-auto mb-8"
+          className="w-20 md:w-24 h-px mx-auto mb-6 md:mb-8"
           style={{ backgroundColor: 'rgba(139,35,54,0.5)' }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -219,7 +219,7 @@ function HeroSection() {
         />
 
         <motion.p
-          className="text-base md:text-xl mb-12 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg sm:text-xl md:text-xl mb-10 md:mb-12 max-w-[19rem] sm:max-w-xl md:max-w-2xl mx-auto leading-[1.45] md:leading-relaxed"
           style={{ color: 'rgba(255,255,255,0.6)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -231,19 +231,19 @@ function HeroSection() {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-sm sm:max-w-none mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.5 }}
         >
-          <a href="#silverback">
-            <Button size="lg">
+          <a href="#silverback" className="w-full sm:w-auto">
+            <Button size="lg" className="w-full sm:w-auto">
               Descubra a Filosofia Silverback
               <ChevronRight className="ml-2 w-5 h-5" />
             </Button>
           </a>
-          <Link href="/seep/login">
-            <Button variant="outline" size="lg">
+          <Link href="/seep/login" className="w-full sm:w-auto">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
               Área do contratante
             </Button>
           </Link>
@@ -252,7 +252,7 @@ function HeroSection() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:block"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
         initial={{ opacity: 0 }}
@@ -1512,7 +1512,7 @@ function Footer() {
 // ─── Main Page ──────────────────────────────────────────────
 export default function SeepLandingPage() {
   return (
-    <main>
+    <main className="w-full max-w-full overflow-x-hidden">
       <HeroSection />
       <ServicesSection />
       <SilverbackSection />

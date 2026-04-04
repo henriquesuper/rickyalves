@@ -27,10 +27,15 @@ export default function SeepLayout({ children }) {
       <style jsx global>{`
         html.cursor-none { cursor: auto !important; }
         html.cursor-none * { cursor: inherit !important; }
+        html,
+        body {
+          max-width: 100%;
+          overflow-x: hidden;
+        }
         body { background: transparent !important; }
       `}</style>
       <div
-        className={`${inter.variable} ${montserrat.variable} ${jetbrains.variable}`}
+        className={`${inter.variable} ${montserrat.variable} ${jetbrains.variable} w-full max-w-full overflow-x-hidden`}
         style={{
           '--seep-dark': '#141418',
           '--seep-accent': '#1A1A22',
