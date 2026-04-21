@@ -9,30 +9,54 @@ const LETTERS = ['A', 'B', 'C', 'D'];
 const CORRECT_DELAY = 700;
 const WRONG_DELAY = 2200;
 
+function shuffledOrder(size) {
+  const arr = Array.from({ length: size }, (_, i) => i);
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function buildRound(questionsList) {
+  const order = shuffledOrder(questionsList.length);
+  const optionOrders = order.map((qIdx) => shuffledOrder(questionsList[qIdx].options.length));
+  return { order, optionOrders };
+}
+
 export default function FirebaseQuizPage() {
+  const [round, setRound] = useState(null);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState(null);
   const [phase, setPhase] = useState('playing');
   const timerRef = useRef(null);
 
-  useEffect(() => () => clearTimeout(timerRef.current), []);
+  useEffect(() => {
+    setRound(buildRound(questions));
+    return () => clearTimeout(timerRef.current);
+  }, []);
 
-  const current = questions[index];
+  if (!round) return null;
+
   const total = questions.length;
+  const current = questions[round.order[index]];
+  const optPerm = round.optionOrders[index];
+  const correctDisplayIdx = optPerm.indexOf(current.answer);
   const progress = phase === 'won' ? 100 : (index / total) * 100;
 
   const reset = () => {
+    setRound(buildRound(questions));
     setIndex(0);
     setSelected(null);
     setPhase('playing');
   };
 
-  const handleSelect = (optionIndex) => {
+  const handleSelect = (displayIdx) => {
     if (phase !== 'playing') return;
-    setSelected(optionIndex);
+    setSelected(displayIdx);
     setPhase('reveal');
 
-    const isCorrect = optionIndex === current.answer;
+    const isCorrect = optPerm[displayIdx] === current.answer;
     clearTimeout(timerRef.current);
 
     if (isCorrect) {
@@ -57,7 +81,7 @@ export default function FirebaseQuizPage() {
   }
 
   const isRevealing = phase === 'reveal';
-  const erred = isRevealing && selected !== current.answer;
+  const erred = isRevealing && selected !== correctDisplayIdx;
 
   return (
     <main className="min-h-screen text-white relative overflow-hidden" style={{ background: 'radial-gradient(ellipse at top, #1f1d3a 0%, #0b0b13 55%, #050509 100%)' }}>
@@ -114,9 +138,9 @@ export default function FirebaseQuizPage() {
               </h2>
 
               <div className="space-y-3">
-                {current.options.map((opt, i) => {
-                  const isCorrect = i === current.answer;
-                  const isSelected = i === selected;
+                {optPerm.map((origIdx, displayPos) => {
+                  const isCorrect = displayPos === correctDisplayIdx;
+                  const isSelected = displayPos === selected;
 
                   let state = 'idle';
                   if (isRevealing) {
@@ -127,12 +151,12 @@ export default function FirebaseQuizPage() {
 
                   return (
                     <OptionButton
-                      key={i}
-                      letter={LETTERS[i]}
-                      label={opt}
+                      key={`${index}-${displayPos}`}
+                      letter={LETTERS[displayPos]}
+                      label={current.options[origIdx]}
                       state={state}
                       disabled={isRevealing}
-                      onClick={() => handleSelect(i)}
+                      onClick={() => handleSelect(displayPos)}
                     />
                   );
                 })}
@@ -154,7 +178,7 @@ export default function FirebaseQuizPage() {
               <div className="text-sm">
                 <p className="font-semibold text-red-300 mb-1">Errou! Reiniciando do zero...</p>
                 <p className="text-white/60 leading-relaxed">
-                  A resposta correta é a alternativa <span className="font-bold text-white">{LETTERS[current.answer]}</span>.
+                  A resposta correta é a alternativa <span className="font-bold text-white">{LETTERS[correctDisplayIdx]}</span>.
                 </p>
               </div>
             </motion.div>
