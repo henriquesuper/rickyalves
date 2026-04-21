@@ -1,0 +1,127 @@
+const pt = {
+  meta: {
+    title: 'O Eixo da História Humana',
+    subtitle: 'As Visões Proféticas de Daniel',
+  },
+  kingdoms: {
+    babylon: 'Babilônia',
+    medoPersia: 'Medo-Pérsia',
+    greece: 'Grécia',
+    rome: 'Roma',
+    divided: 'Reinos Divididos',
+    godsKingdom: 'Reino de Deus',
+  },
+  kingdomDescriptions: {
+    babylon: 'Unidade Imperial',
+    medoPersia: 'Hegemonia Dual',
+    greece: 'Universalização Cultural',
+    rome: 'Império Legal',
+    divided: 'Cristandade Fragmentada',
+    godsKingdom: 'Reino Eterno',
+  },
+  daniel2Symbols: {
+    gold_head: 'Cabeça de ouro',
+    silver_chest: 'Peito e braços de prata',
+    bronze_belly: 'Ventre e coxas de bronze',
+    iron_legs: 'Pernas de ferro',
+    iron_clay_feet: 'Pés de ferro e barro',
+    stone: 'Pedra cortada sem mãos',
+  },
+  daniel7Symbols: {
+    lion: 'Leão com asas de águia',
+    bear: 'Urso levantado de um lado',
+    leopard: 'Leopardo com 4 asas',
+    terribleBeast: 'Besta terrível, dentes de ferro',
+    tenHorns: '10 chifres',
+    ancientOfDays: 'Ancião de Dias',
+  },
+  daniel8Symbols: {
+    ram: 'Carneiro com dois chifres',
+    goat: 'Bode com grande chifre',
+    littleHorn: 'Chifre pequeno',
+  },
+  daniel11Symbols: {
+    kingOfSouth: 'Rei do Sul',
+    kingOfNorth: 'Rei do Norte',
+    michaelStands: 'Miguel se levanta',
+  },
+  chapters: {
+    daniel2: 'Daniel 2',
+    daniel7: 'Daniel 7',
+    daniel8: 'Daniel 8',
+    daniel9: 'Daniel 9',
+    daniel11: 'Daniel 11',
+  },
+  prophecies: {
+    seventyWeeks: '70 Semanas',
+    twelveSixty: '1.260 Anos',
+    twentyThreeHundred: '2.300 Anos',
+  },
+  prophecySubtitles: {
+    seventyWeeks: 'O cronograma do Messias',
+    twelveSixty: 'Perseguição dos santos',
+    twentyThreeHundred: 'A maior profecia bíblica',
+  },
+  events: {
+    decree: 'Decreto para reconstruir Jerusalém',
+    baptism: 'Batismo de Jesus',
+    crucifixion: 'Crucificação',
+    stoning: 'Apedrejamento de Estêvão',
+    papalRise: 'Ascensão da supremacia papal',
+    papalWound: 'Ferida mortal',
+    judgment: 'Início do juízo investigativo',
+  },
+  steps: {
+    theDream: {
+      title: 'O Sonho',
+      subtitle: 'Daniel 2',
+      text: 'O rei Nabucodonosor sonhou com uma grande estátua feita de diferentes metais — cada um representando um império mundial que surgiria e cairia em sucessão.',
+    },
+    theBeasts: {
+      title: 'As Bestas',
+      subtitle: 'Daniel 7',
+      text: 'Anos depois, o próprio Daniel recebeu uma visão de quatro bestas surgindo do mar — símbolos diferentes, mesmos reinos. Cada profecia confirma a mesma história.',
+    },
+    ramAndGoat: {
+      title: 'Carneiro e Bode',
+      subtitle: 'Daniel 8',
+      text: 'Na terceira visão de Daniel, um carneiro e um bode retratam o conflito entre Medo-Pérsia e Grécia, introduzindo a profecia dos 2.300 anos — a maior profecia temporal das Escrituras.',
+    },
+    seventyWeeks: {
+      title: '70 Semanas',
+      subtitle: 'Daniel 9',
+      text: "O anjo Gabriel explicou: 'Setenta semanas estão determinadas para o teu povo.' Esta profecia indica o ano exato da chegada do Messias.",
+    },
+    twelveSixtyYears: {
+      title: '1.260 Anos',
+      subtitle: 'Daniel 7 e Apocalipse',
+      text: "Um poder se levantaria que 'consumiria os santos do Altíssimo' por 1.260 anos — de 538 d.C. a 1798 d.C.",
+    },
+    theKings: {
+      title: 'Os Reis',
+      subtitle: 'Daniel 11',
+      text: 'Daniel 11 apresenta a profecia mais detalhada de toda a Escritura — um relato minucioso do Rei do Norte contra o Rei do Sul, estendendo-se da Pérsia até o tempo do fim.',
+    },
+    theStone: {
+      title: 'A Pedra',
+      subtitle: 'O Reino de Deus',
+      text: 'Uma pedra cortada sem mãos atingiu a estátua nos pés e a despedaçou. A pedra se tornou uma grande montanha que encheu toda a terra — o reino eterno de Deus que jamais será destruído.',
+    },
+  },
+  ui: {
+    narrativeMode: 'Jornada',
+    explorerMode: 'Explorador',
+    next: 'Próximo',
+    previous: 'Anterior',
+    skip: 'Ir para o Explorador',
+    explore: 'Explorar Livremente',
+    resetView: 'Restaurar Vista',
+    share: 'Compartilhar',
+    step: 'Passo',
+    of: 'de',
+    rotateHint: 'Arraste para girar a estátua',
+    correlationTitle: 'Mesmos reinos, símbolos diferentes',
+  },
+};
+
+export default pt;

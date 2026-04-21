@@ -1,0 +1,127 @@
+const en = {
+  meta: {
+    title: 'The Axis of Human History',
+    subtitle: "Daniel's Prophetic Visions",
+  },
+  kingdoms: {
+    babylon: 'Babylon',
+    medoPersia: 'Medo-Persia',
+    greece: 'Greece',
+    rome: 'Rome',
+    divided: 'Divided Kingdoms',
+    godsKingdom: "God's Kingdom",
+  },
+  kingdomDescriptions: {
+    babylon: 'Imperial Unity',
+    medoPersia: 'Dual Hegemony',
+    greece: 'Cultural Universalization',
+    rome: 'Legal Empire',
+    divided: 'Fragmented Christendom',
+    godsKingdom: 'Eternal Kingdom',
+  },
+  daniel2Symbols: {
+    gold_head: 'Gold head',
+    silver_chest: 'Silver chest & arms',
+    bronze_belly: 'Bronze belly & thighs',
+    iron_legs: 'Iron legs',
+    iron_clay_feet: 'Iron & clay feet',
+    stone: 'Stone cut without hands',
+  },
+  daniel7Symbols: {
+    lion: 'Lion with eagle wings',
+    bear: 'Bear raised on one side',
+    leopard: 'Leopard with 4 wings',
+    terribleBeast: 'Terrible beast, iron teeth',
+    tenHorns: '10 horns',
+    ancientOfDays: 'Ancient of Days',
+  },
+  daniel8Symbols: {
+    ram: 'Ram with two horns',
+    goat: 'Goat with great horn',
+    littleHorn: 'Little horn',
+  },
+  daniel11Symbols: {
+    kingOfSouth: 'King of the South',
+    kingOfNorth: 'King of the North',
+    michaelStands: 'Michael stands up',
+  },
+  chapters: {
+    daniel2: 'Daniel 2',
+    daniel7: 'Daniel 7',
+    daniel8: 'Daniel 8',
+    daniel9: 'Daniel 9',
+    daniel11: 'Daniel 11',
+  },
+  prophecies: {
+    seventyWeeks: '70 Weeks',
+    twelveSixty: '1,260 Years',
+    twentyThreeHundred: '2,300 Years',
+  },
+  prophecySubtitles: {
+    seventyWeeks: "The Messiah's timetable",
+    twelveSixty: 'Persecution of the saints',
+    twentyThreeHundred: 'The longest biblical prophecy',
+  },
+  events: {
+    decree: 'Decree to rebuild Jerusalem',
+    baptism: 'Baptism of Jesus',
+    crucifixion: 'Crucifixion',
+    stoning: 'Stoning of Stephen',
+    papalRise: 'Rise of papal supremacy',
+    papalWound: 'Deadly wound',
+    judgment: 'Investigative judgment begins',
+  },
+  steps: {
+    theDream: {
+      title: 'The Dream',
+      subtitle: 'Daniel 2',
+      text: 'King Nebuchadnezzar dreamed of a great statue made of different metals — each representing a world empire that would rise and fall in succession.',
+    },
+    theBeasts: {
+      title: 'The Beasts',
+      subtitle: 'Daniel 7',
+      text: 'Years later, Daniel himself received a vision of four beasts rising from the sea — different symbols, same kingdoms. Every prophecy confirms the same story.',
+    },
+    ramAndGoat: {
+      title: 'Ram & Goat',
+      subtitle: 'Daniel 8',
+      text: "In Daniel's third vision, a ram and a goat depict the conflict between Medo-Persia and Greece, introducing the 2,300-year prophecy — the longest time prophecy in Scripture.",
+    },
+    seventyWeeks: {
+      title: '70 Weeks',
+      subtitle: 'Daniel 9',
+      text: "The angel Gabriel explained: 'Seventy weeks are determined for your people.' This prophecy pinpoints the exact year of the Messiah's arrival.",
+    },
+    twelveSixtyYears: {
+      title: '1,260 Years',
+      subtitle: 'Daniel 7 & Revelation',
+      text: "A power would arise that would 'wear out the saints of the Most High' for 1,260 years — from 538 AD to 1798 AD.",
+    },
+    theKings: {
+      title: 'The Kings',
+      subtitle: 'Daniel 11',
+      text: "Daniel 11 provides the most detailed prophecy in all of Scripture — a blow-by-blow account of the King of the North versus the King of the South, stretching from Persia to the time of the end.",
+    },
+    theStone: {
+      title: 'The Stone',
+      subtitle: "God's Kingdom",
+      text: "A stone cut without hands struck the statue on its feet and broke it to pieces. The stone became a great mountain and filled the whole earth — God's eternal kingdom that will never be destroyed.",
+    },
+  },
+  ui: {
+    narrativeMode: 'Journey',
+    explorerMode: 'Explorer',
+    next: 'Next',
+    previous: 'Previous',
+    skip: 'Skip to Explorer',
+    explore: 'Explore Freely',
+    resetView: 'Reset View',
+    share: 'Share',
+    step: 'Step',
+    of: 'of',
+    rotateHint: 'Drag to rotate the statue',
+    correlationTitle: 'Same kingdoms, different symbols',
+  },
+};
+
+export default en;
