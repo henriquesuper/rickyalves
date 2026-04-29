@@ -1,0 +1,10 @@
+export { Section0_Waiting } from './Section0_Waiting';
+export { Section1_Welcome } from './Section1_Welcome';
+export { Section2_Abertura } from './Section2_Abertura';
+export { Section3_QuemFoiPaulo } from './Section3_QuemFoiPaulo';
+export { Section4_AsDuasCoisas } from './Section4_AsDuasCoisas';
+export { Section5_TextosChave } from './Section5_TextosChave';
+export { Section6_EspelhoSabao } from './Section6_EspelhoSabao';
+export { Section7_ExPrisioneiro } from './Section7_ExPrisioneiro';
+export { Section8_PauloContinuouGuardando } from './Section8_PauloContinuouGuardando';
+export { Section9_Closing } from './Section9_Closing';
