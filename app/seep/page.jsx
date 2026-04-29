@@ -225,9 +225,9 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.3 }}
         >
-          Mobilidade segura, proteção executiva e eficiência pessoal
-          com a filosofia <span className="font-semibold text-white">Silverback</span> —
-          presença firme, resposta calibrada, excelência inabalável.
+          Mobilidade tática, gestão da integridade e eficiência pessoal
+          com a <span className="font-semibold text-white">identidade SANTEEX</span>:
+          presença firme, eficiência e tranquilidade.
         </motion.p>
 
         <motion.div
@@ -236,9 +236,9 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.5 }}
         >
-          <a href="#silverback" className="w-full sm:w-auto">
+          <a href="#identidade" className="w-full sm:w-auto">
             <Button size="lg" className="w-full sm:w-auto">
-              Descubra a Filosofia Silverback
+              Conheça a Identidade SANTEEX
               <ChevronRight className="ml-2 w-5 h-5" />
             </Button>
           </a>
@@ -275,18 +275,18 @@ function HeroSection() {
 const services = [
   {
     icon: Car,
-    title: 'Condução Evasiva',
-    desc: 'Condução tática defensiva e evasiva com planejamento de rotas, contra-vigilância veicular e protocolos de evasão.',
+    title: 'Mobilidade Tática',
+    desc: 'Condução veicular de forma defensiva e evasiva.',
   },
   {
     icon: ShieldCheck,
-    title: 'Proteção Direta',
-    desc: 'Agentes de segurança pessoal com treinamento avançado para proteção executiva e familiar em ambientes dinâmicos.',
+    title: 'Gestão da Integridade',
+    desc: 'O Agente se disponibiliza a manter as técnicas e táticas para que a integridade seja absoluta.',
   },
   {
     icon: Route,
-    title: 'Inteligência de Itinerário',
-    desc: 'Monitoramento de rotas em tempo real, sincronia com compromissos e pontualidade absoluta em deslocamentos.',
+    title: 'S.E.E.P. - Serviço Executivo de Eficiência Pessoal',
+    desc: 'O Agente pratica a modalidade de forma profissional, para garantir a eficiência do resultado.',
   },
   {
     icon: Briefcase,
@@ -320,9 +320,8 @@ function ServicesSection() {
           </h2>
           <GoldDivider />
           <p className="mt-6 text-base max-w-2xl mx-auto" style={{ color: 'var(--seep-text-med)' }}>
-            Um profissional multifuncional que integra mobilidade, estratégia e proteção.
-            Disciplina, postura, discrição e capacidade de percepção de riscos com
-            tomada de decisão real, analítica e preventiva.
+            Ser um Agente Dinâmico requer um feeling profissional, resultado de
+            experiência, treinamento e conhecimento, que traz eficiência e tranquilidade.
           </p>
         </motion.div>
 
@@ -373,8 +372,8 @@ function ServicesSection() {
   );
 }
 
-// ─── Silverback Philosophy Section ──────────────────────────
-function SilverbackSection() {
+// ─── SANTEEX Identity Section ───────────────────────────────
+function IdentitySection() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -383,7 +382,7 @@ function SilverbackSection() {
   const yText = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   return (
-    <section id="silverback" ref={ref} className="relative py-32 px-6 overflow-hidden" style={{ backgroundColor: 'var(--seep-dark)' }}>
+    <section id="identidade" ref={ref} className="relative py-32 px-6 overflow-hidden" style={{ backgroundColor: 'var(--seep-dark)' }}>
       {/* Background glow */}
       <div
         className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full"
@@ -406,15 +405,15 @@ function SilverbackSection() {
                 className="text-sm font-bold tracking-[0.3em] uppercase mb-3"
                 style={{ color: 'var(--seep-gold)' }}
               >
-                Filosofia
+                Identidade
               </h3>
               <h2
                 className="text-3xl md:text-5xl font-bold text-white mb-3"
                 style={{ fontFamily: 'var(--font-montserrat)', lineHeight: 1.1 }}
               >
-                A Filosofia
+                Identidade
                 <br />
-                <span style={{ color: 'var(--seep-gold)' }}>Silverback</span>
+                <span style={{ color: 'var(--seep-gold)' }}>SANTEEX</span>
               </h2>
               <motion.div
                 className="w-16 h-0.5 mb-8"
@@ -434,21 +433,20 @@ function SilverbackSection() {
               viewport={{ once: true, margin: '-80px' }}
             >
               <p className="text-base leading-relaxed mb-6" style={{ color: '#B0B0C0' }}>
-                Assim como o cão-guia é treinado para <strong className="text-white">proteger e não apenas obedecer</strong>,
-                o Agente Dinâmico da SANTEEX atua com <strong className="text-white">autonomia, inteligência e responsabilidade</strong>.
-                O diferencial operacional está na atuação em ambientes dinâmicos e imprevisíveis, com leitura constante do cenário.
+                A <strong className="text-white">Identidade SANTEEX</strong> representa
+                um padrão profissional baseado em experiência, preparo e leitura
+                precisa do cenário. O Agente Dinâmico atua com discrição,
+                responsabilidade e presença firme.
               </p>
               <p className="text-base leading-relaxed mb-6" style={{ color: '#B0B0C0' }}>
-                O termo &ldquo;Silverback&rdquo; vem do gorila-das-costas-prateadas — o macho dominante
-                do grupo. Ele não lidera pelo medo, mas pela <strong className="text-white">presença imponente</strong> e
-                pela <strong className="text-white">calma sob pressão</strong>. Quando um Silverback se levanta,
-                o silêncio domina a selva.
+                Esse posicionamento une <strong className="text-white">mobilidade tática</strong>,
+                gestão da integridade e eficiência pessoal para atender o contratante
+                com inteligência prática, postura e tranquilidade em cada deslocamento.
               </p>
               <p className="text-base leading-relaxed mb-8" style={{ color: '#9A9AB0' }}>
                 <strong style={{ color: 'var(--seep-gold)' }}>Antecipar é proteger.</strong>{' '}
-                O Serviço Executivo de Eficiência Pessoal representa a evolução da segurança moderna:
-                integra mobilidade, estratégia e proteção — prevenção acima da reação,
-                eficiência em deslocamentos críticos.
+                O Serviço Executivo de Eficiência Pessoal entrega prevenção,
+                organização e resposta profissional para garantir eficiência no resultado.
               </p>
             </motion.div>
 
@@ -461,13 +459,13 @@ function SilverbackSection() {
               transition={{ duration: 0.7, delay: 0.4 }}
             >
               <p className="text-xl italic leading-relaxed" style={{ color: 'var(--seep-light-gold)' }}>
-                &ldquo;Ser um Silverback não é sobre ter a voz mais alta,
-                mas sobre ter a presença mais firme.&rdquo;
+                &ldquo;Profissionalismo, presença e estratégia geram eficiência
+                e tranquilidade.&rdquo;
               </p>
             </motion.blockquote>
           </motion.div>
 
-          {/* Silverback visual */}
+          {/* SANTEEX visual */}
           <motion.div
             className="flex justify-center"
             variants={slideFromRight}
@@ -491,7 +489,7 @@ function SilverbackSection() {
               >
                 <Image
                   src="/seep/seep_black_bg.png"
-                  alt="SANTEEX Silverback"
+                  alt="Identidade SANTEEX"
                   width={320}
                   height={320}
                   className="object-contain drop-shadow-2xl"
@@ -505,27 +503,27 @@ function SilverbackSection() {
   );
 }
 
-// ─── Silverback Characteristics Section ─────────────────────
+// ─── SANTEEX Characteristics Section ────────────────────────
 const characteristics = [
   {
     icon: Eye,
     title: 'Calma Sob Fogo',
     subtitle: 'Controle absoluto',
-    desc: 'O Silverback não reage por impulso. Cada movimento é calculado. Sob pressão, a calma é a arma mais poderosa — e a diferença entre proteger e falhar.',
+    desc: 'O Agente não reage por impulso. Cada movimento é calculado. Sob pressão, a calma é essencial para preservar a eficiência e a integridade.',
     color: '#8B2336',
   },
   {
     icon: Shield,
     title: 'Proteção como Propósito',
     subtitle: 'Missão inegociável',
-    desc: 'Não é um trabalho. É uma vocação. O Silverback existe para garantir que quem está sob sua guarda volte para casa em segurança, todos os dias.',
+    desc: 'É uma missão conduzida com responsabilidade. O compromisso é garantir presença técnica, prevenção e tranquilidade a quem está sob seus cuidados.',
     color: '#4A9B6E',
   },
   {
     icon: Crosshair,
     title: 'Visão Estratégica',
     subtitle: 'Antecipação constante',
-    desc: 'Enxerga o que outros não veem. Mapeia riscos antes que se materializem. Age antes que a ameaça se torne perigo — prevenção é a essência da proteção.',
+    desc: 'Enxerga o que outros não veem. Mapeia riscos antes que se materializem. Age antes da necessidade para sustentar a integridade com prevenção.',
     color: '#5B8DEF',
   },
 ];
@@ -551,7 +549,7 @@ function CharacteristicsSection() {
             className="text-3xl md:text-5xl font-bold text-white mb-4"
             style={{ fontFamily: 'var(--font-montserrat)' }}
           >
-            O DNA do Silverback
+            A Essência SANTEEX
           </h2>
           <motion.div
             className="w-20 h-0.5 mx-auto"
@@ -781,7 +779,7 @@ function CompetenciasSection() {
   );
 }
 
-// ─── Despertar do Silverback Section ────────────────────────
+// ─── Propósito SANTEEX Section ──────────────────────────────
 function DespertarSection() {
   return (
     <section className="relative py-32 px-6 overflow-hidden" style={{ backgroundColor: 'var(--seep-dark)' }}>
@@ -813,7 +811,7 @@ function DespertarSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          O Despertar do Silverback
+          Propósito SANTEEX
         </motion.h3>
 
         <motion.h2
@@ -824,9 +822,9 @@ function DespertarSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          &ldquo;Não é um cargo.
+          &ldquo;Não é apenas uma função.
           <br />
-          <span style={{ color: 'var(--seep-gold)' }}>É um chamado.&rdquo;</span>
+          <span style={{ color: 'var(--seep-gold)' }}>É compromisso profissional.&rdquo;</span>
         </motion.h2>
 
         <motion.div
@@ -846,9 +844,9 @@ function DespertarSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          Tornar-se um Silverback não acontece da noite para o dia. É o resultado de
-          anos de disciplina, treinamento e decisões difíceis. É acordar todos os dias
-          com a certeza de que alguém depende da sua excelência para estar seguro.
+          Ser um Agente Dinâmico é resultado de experiência, treinamento,
+          conhecimento e postura profissional. Essa preparação é o que sustenta
+          a eficiência e a tranquilidade em cada missão.
         </motion.p>
 
         <motion.p
@@ -859,9 +857,9 @@ function DespertarSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          O Silverback carrega o peso da responsabilidade sem reclamar. Não busca
-          reconhecimento — busca resultados. Quando todos entram em pânico, ele é a
-          âncora. Quando o inesperado acontece, ele já antecipou.
+          O profissional atua com responsabilidade, discrição e foco em resultado.
+          Quando o cenário exige precisão, a resposta já foi preparada com leitura,
+          técnica e estratégia.
         </motion.p>
 
         <motion.blockquote
@@ -885,9 +883,9 @@ function DespertarSection() {
               className="text-xl md:text-2xl italic leading-relaxed relative z-10"
               style={{ color: 'var(--seep-light-gold)', fontFamily: 'var(--font-montserrat)' }}
             >
-              Não é sobre fazer muito...
+              Não é sobre aparência...
               <br />
-              é sobre nunca parar de fazer.
+              é sobre entregar resultado com eficiência.
             </p>
           </div>
         </motion.blockquote>
@@ -914,7 +912,7 @@ const pilares = [
     icon: Briefcase,
     title: 'Concierge Pessoal Executivo',
     num: '03',
-    desc: 'Assunção de tarefas burocráticas e operacionais do executivo. Gestão de reservas e triagem de prestadores de serviço. Devolvemos tempo ao cliente para que foque na tomada de decisão.',
+    desc: 'Assunção de tarefas burocráticas e operacionais do executivo. Gestão de reservas e triagem de prestadores de serviço. Esta opção pode ser contratada de forma opcional, conforme a necessidade do cliente.',
   },
 ];
 
@@ -1087,7 +1085,7 @@ function MentalidadeSection() {
 }
 
 // ─── Values Section ─────────────────────────────────────────
-const valores = ['RESPEITO', 'CONFIANÇA', 'LEALDADE', 'TRABALHO'];
+const valores = ['RESPEITO', 'CONFIANÇA', 'LEALDADE'];
 
 function ValuesSection() {
   return (
@@ -1174,15 +1172,15 @@ function CredenciaisSection() {
                 <AnimatedCounter value="30" suffix="+" />
               </p>
               <p className="text-sm" style={{ color: '#B0B0C0' }}>
-                Anos em Segurança Pública (PMESP)
+                Anos de experiência e profissionalismo
               </p>
             </div>
             <div>
               <p className="text-4xl font-bold mb-2" style={{ color: 'var(--seep-gold)', fontFamily: 'var(--font-montserrat)' }}>
-                <AnimatedCounter value="10" suffix="+" />
+                S.E.E.P.
               </p>
               <p className="text-sm" style={{ color: '#B0B0C0' }}>
-                Anos em Segurança Executiva Privada
+                Serviço de Eficiência Pessoal
               </p>
             </div>
             <div>
@@ -1209,9 +1207,9 @@ function CredenciaisSection() {
 
 // ─── How It Works Section ───────────────────────────────────
 const steps = [
-  { num: '01', title: 'Diagnóstico', desc: 'Análise completa do cenário de risco, perfil do contratante e necessidades específicas de segurança.', icon: Search },
-  { num: '02', title: 'Plano de Segurança', desc: 'Elaboração de estratégia personalizada com protocolos operacionais, rotas e procedimentos de emergência.', icon: FileText },
-  { num: '03', title: 'Operação Ativa', desc: 'Execução com monitoramento em tempo real, comunicação criptografada e relatórios contínuos.', icon: Radio },
+  { num: '01', title: 'Diagnóstico', desc: 'Analisar o contratante, montar estratégia que mais se adequa ao perfil.', icon: Search },
+  { num: '02', title: 'Prestadora de Serviço de Eficiência Pessoal', desc: 'Estratégia personalizada para entregar organização, mobilidade, presença técnica e eficiência no resultado.', icon: FileText },
+  { num: '03', title: 'Operação Ativa', desc: 'Execução com acompanhamento profissional, podendo ser opcional ao contratante conforme a necessidade da operação.', icon: Radio },
 ];
 
 function HowItWorksSection() {
@@ -1475,7 +1473,7 @@ function Footer() {
           <div>
             <h5 className="text-sm font-bold uppercase tracking-wider text-white mb-4">Links</h5>
             <ul className="space-y-2 text-sm" style={{ color: '#B0B0C0' }}>
-              <li><a href="#silverback" className="hover:text-(--seep-gold) transition-colors">Filosofia Silverback</a></li>
+              <li><a href="#identidade" className="hover:text-(--seep-gold) transition-colors">Identidade SANTEEX</a></li>
               <li><a href="#servicos" className="hover:text-(--seep-gold) transition-colors">Serviços</a></li>
               <li><Link href="/seep/login" className="hover:text-(--seep-gold) transition-colors">Área do Contratante</Link></li>
               <li><Link href="/seep/quiz/agente" className="hover:text-(--seep-gold) transition-colors">Seja um Agente</Link></li>
@@ -1486,11 +1484,11 @@ function Footer() {
             <ul className="space-y-2 text-sm" style={{ color: '#B0B0C0' }}>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4" style={{ color: 'var(--seep-gold)' }} />
-                (11) 99999-0000
+                11 9 76285742
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4" style={{ color: 'var(--seep-gold)' }} />
-                contato@seep.com.br
+                santeex.santeex@gmail.com
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" style={{ color: 'var(--seep-gold)' }} />
@@ -1515,7 +1513,7 @@ export default function SeepLandingPage() {
     <main className="w-full max-w-full overflow-x-hidden">
       <HeroSection />
       <ServicesSection />
-      <SilverbackSection />
+      <IdentitySection />
       <CharacteristicsSection />
       <CompetenciasSection />
       <DespertarSection />
