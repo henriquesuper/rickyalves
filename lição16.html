@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Lição 16 — O Mundo Quebrado — Briefing para Agente Visual</title>
+<style>
+  body {
+    max-width: 820px;
+    margin: 2rem auto;
+    padding: 0 1.5rem 4rem;
+    font-family: Georgia, serif;
+    line-height: 1.65;
+    color: #2A1810;
+    background: #FAF7F0;
+  }
+  header.doc-header {
+    border-bottom: 2px solid #2A1810;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
+  header.doc-header .meta {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    color: #8B7355;
+    letter-spacing: 0.05em;
+  }
+  h1 { font-size: 2rem; margin: 0.5rem 0; }
+  h2 { font-size: 1.5rem; margin-top: 2.5rem; border-bottom: 1px solid #B8860B; padding-bottom: 0.3rem; }
+  h3 { font-size: 1.2rem; margin-top: 1.8rem; color: #722F37; }
+  h4 { font-size: 1.05rem; margin-top: 1.3rem; }
+  blockquote {
+    border-left: 3px solid #B8860B;
+    padding: 0.2rem 1rem;
+    margin: 1rem 0;
+    font-style: italic;
+    color: #3E2C1C;
+  }
+  blockquote cite {
+    display: block;
+    font-style: normal;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #8B7355;
+    margin-top: 0.4rem;
+  }
+  .lesson-content {
+    background: #FFFDF8;
+    border: 1px solid #DDC9A0;
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0 1.5rem;
+  }
+  .lesson-content::before {
+    content: "CONTEÚDO DA LIÇÃO";
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: #8B6914;
+    margin-bottom: 0.8rem;
+  }
+  .brief {
+    background: #2A1810;
+    color: #F4E8D0;
+    padding: 1.2rem 1.5rem;
+    margin: 1rem 0 2rem;
+    border-radius: 2px;
+  }
+  .brief::before {
+    content: "▶ BRIEFING VISUAL — INSTRUÇÕES PARA O AGENTE";
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: #B8860B;
+    margin-bottom: 0.8rem;
+  }
+  .brief h4 { color: #B8860B; margin-top: 1rem; }
+  .brief a { color: #B8860B; }
+  .brief strong { color: #B8860B; }
+  .pastoral {
+    background: #FBF1F1;
+    border-left: 4px solid #722F37;
+    padding: 1rem 1.3rem;
+    margin: 1.2rem 0;
+    font-size: 0.95rem;
+  }
+  .pastoral::before {
+    content: "Nota pastoral (apenas instrutor)";
+    display: block;
+    font-style: italic;
+    color: #722F37;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+  .honesty {
+    background: #F4EDDC;
+    border: 1px dashed #8B7355;
+    padding: 1rem 1.3rem;
+    margin: 1.2rem 0;
+    font-size: 0.95rem;
+  }
+  .honesty::before {
+    content: "Honestidade intelectual";
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: #8B6914;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .slide-spec {
+    border-top: 1px dotted rgba(244, 232, 208, 0.3);
+    padding: 0.6rem 0;
+    font-size: 0.92rem;
+  }
+  .slide-spec:first-of-type { border-top: none; }
+  .slide-num {
+    display: inline-block;
+    background: #722F37;
+    color: #F4E8D0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    padding: 0.1rem 0.5rem;
+    margin-right: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+  table.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.92rem;
+  }
+  table.spec-table td, table.spec-table th {
+    border: 1px solid #DDC9A0;
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  table.spec-table th {
+    background: #F4EDDC;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: #3E2C1C;
+  }
+  ul, ol { padding-left: 1.5rem; }
+  li { margin-bottom: 0.4rem; }
+  code {
+    background: #F4EDDC;
+    padding: 0.1rem 0.4rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    color: #722F37;
+  }
+  hr {
+    border: none;
+    border-top: 1px dashed #8B7355;
+    margin: 3rem 0;
+  }
+  .swatch {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #2A1810;
+    vertical-align: middle;
+    margin-right: 0.3rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+  <div class="meta">CURSO APOLOGÉTICO BÍBLICO · GUGA · LIÇÃO 16 DE 19</div>
+  <h1>O Mundo Quebrado</h1>
+  <div class="meta">Solidão, Sofrimento e a Aposta Cósmica · Documento de referência para o agente visual</div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     VISÃO GERAL E CONTEXTO
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>1. Visão geral</h2>
+
+<p><strong>Aluna:</strong> Guga — terapeuta, cética, "nerd", relação com Deus marcada por ferida existencial (sente que Deus a abandonou na infância), em jornada de reaproximação. Estudiosa: pesquisará por conta própria depois da aula.</p>
+
+<p><strong>Eixo desta lição:</strong> Apresentar o quadro bíblico do sofrimento em três escalas (individual / coletiva / divina), sem oferecer resolução filosófica fechada. Honestidade intelectual em todos os pontos onde existam debates exegéticos legítimos.</p>
+
+<p><strong>Contexto pastoral imediato:</strong></p>
+<ul>
+  <li>A Guga leu o Salmo 88 com seu paciente Marcos esta semana (este é o ponto de partida orgânico da lição).</li>
+  <li>Solidão entrou em cena: ela é divorciada, vê o namorado só nos fins de semana (casado), e se identifica com a solidão do Marcos.</li>
+  <li>O Marcos foi à igreja adventista dois sábados consecutivos e está amando — primeira experiência consistente de comunidade. O Sábado <em>não</em> é tema desta aula; pode emergir se ela trouxer.</li>
+  <li>A Guga, o Marcel e a Dona Marlene já pesquisaram Jó por conta própria depois da Lição 9.</li>
+</ul>
+
+<p><strong>Estrutura:</strong> 5 movimentos · aproximadamente 42 slides.</p>
+
+<ol>
+  <li><strong>Movimento I</strong> — O Salmo 88 (lamento individual sem resolução)</li>
+  <li><strong>Movimento II</strong> — Jó 1-2 (a aposta em escala pessoal)</li>
+  <li><strong>Movimento III</strong> — O Exílio Babilônico (a aposta em escala coletiva — seção mais longa, contém o material histórico-arqueológico)</li>
+  <li><strong>Movimento IV</strong> — A Cruz (a aposta em escala divina)</li>
+  <li><strong>Movimento V</strong> — Solidão e direção (Gênesis 2:18 → Apocalipse 21:3, sem fechamento)</li>
+</ol>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SISTEMA VISUAL
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>2. Sistema visual</h2>
+
+<p>Manter a identidade já estabelecida do curso (estética dossiê / pergaminho / Georgia), com elementos específicos para esta lição que tem peso histórico-arqueológico forte.</p>
+
+<h3>2.1 Paleta</h3>
+
+<table class="spec-table">
+  <tr><th>Token</th><th>Hex</th><th>Uso</th></tr>
+  <tr><td><span class="swatch" style="background:#F4E8D0"></span>Parchment (base)</td><td><code>#F4E8D0</code></td><td>Fundo padrão de slides</td></tr>
+  <tr><td><span class="swatch" style="background:#EBDDB8"></span>Parchment-deep</td><td><code>#EBDDB8</code></td><td>Cards, áreas secundárias</td></tr>
+  <tr><td><span class="swatch" style="background:#2A1810"></span>Ink-deep</td><td><code>#2A1810</code></td><td>Texto principal, fundos escuros dramáticos</td></tr>
+  <tr><td><span class="swatch" style="background:#3E2C1C"></span>Ink-body</td><td><code>#3E2C1C</code></td><td>Texto corrido</td></tr>
+  <tr><td><span class="swatch" style="background:#B8860B"></span>Gold</td><td><code>#B8860B</code></td><td>Acentos, textos hebraicos, palavras-chave</td></tr>
+  <tr><td><span class="swatch" style="background:#1F4068"></span>Lapis</td><td><code>#1F4068</code></td><td>Tudo babilônico — mapas, artefatos, Nabucodonosor, conselho celestial</td></tr>
+  <tr><td><span class="swatch" style="background:#722F37"></span>Wine</td><td><code>#722F37</code></td><td>Lamento, exílio, Jeremias, crucifixão</td></tr>
+  <tr><td><span class="swatch" style="background:#8B7355"></span>Ink-soft</td><td><code>#8B7355</code></td><td>Metadados, legendas, citações tipográficas</td></tr>
+</table>
+
+<p><strong>Princípio cromático:</strong> a cor conta a história sem palavras. Wine acompanha o luto. Lapis acompanha tudo babilônico. Gold acompanha a voz hebraica. Quando os dois últimos aparecem lado a lado no Movimento III (intertextualidade Daniel ↔ Isaías), a aproximação cromática <em>é</em> o ponto teológico.</p>
+
+<h3>2.2 Tipografia</h3>
+
+<ul>
+  <li><strong>Display</strong> — Cormorant Garamond (500/600). Para títulos, citações destacadas, frases-âncora.</li>
+  <li><strong>Body</strong> — Georgia. Para texto corrido (já padrão do curso).</li>
+  <li><strong>Mono</strong> — JetBrains Mono ou Courier New. Para metadados, labels, datas, referências bibliográficas.</li>
+  <li><strong>Caligrafia/manuscritos</strong> — Crimson Text italic, para passagens em estilo "scriptorium".</li>
+</ul>
+
+<h3>2.3 Animação — princípios</h3>
+
+<ul>
+  <li><strong>Fades, sempre.</strong> Transições deslizantes, zooms agressivos, partículas, parallax pesado — todos proibidos. Esta é uma aula sobre sofrimento e Deus, não uma apresentação corporativa.</li>
+  <li><strong>Velocidade lenta.</strong> Slides "pesados" (39, 41, 27, 3) precisam de tempo de tela maior. O silêncio é parte do conteúdo.</li>
+  <li><strong>Staggered fade-ins</strong> em listas e elementos múltiplos: 0.6-1.2s entre elementos.</li>
+  <li><strong>Sem música em momentos de gravidade.</strong> Citações como Sl 88:18, Jr 20, Mt 27:46, Jo 11:35 ficam em silêncio absoluto. Música ambiente sutil (drone de corda hebraica ou piano contemplativo) é aceitável apenas em transições entre movimentos.</li>
+</ul>
+
+<h3>2.4 Imagens</h3>
+
+<ul>
+  <li><strong>Artefatos arqueológicos</strong> (Movimento III): priorizar fotos reais quando licenciáveis. Crônica Babilônica BM 21946, Cilindro de Ciro, tabletes de Jeoaquim, ostraca de Laquis — todas têm fotos públicas disponíveis em sites de museus. Quando indisponível, ilustração estilizada em estilo de gravura antiga (linha sépia fina, sem sombreamento moderno).</li>
+  <li><strong>Cenas narrativas</strong> (Jó, Jeremias, Nabucodonosor): silhuetas estilizadas, sem detalhes faciais. Evitar renderizações 3D, ilustração estilo livro infantil, ou IA-genérico. Buscar linha gráfica sóbria, quase de iluminura medieval.</li>
+  <li><strong>Mapas</strong>: estilo pergaminho envelhecido, contornos em sépia. Sem fronteiras políticas modernas.</li>
+</ul>
+
+<h3>2.5 Layout responsivo</h3>
+
+<ul>
+  <li><strong>Tela principal:</strong> 16:9 padrão, layout amplo.</li>
+  <li><strong>Painel do presenter (Ricky, mobile):</strong> notas pastorais visíveis ao lado de cada slide. Nunca exibidas na tela principal nem no celular dos participantes.</li>
+  <li><strong>Participante (Guga, mobile):</strong> texto principal em escala maior, animações reduzidas, imagens com largura total da tela.</li>
+</ul>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MOVIMENTO I
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>3. Movimento I — O Salmo 88</h2>
+<p class="meta"><em>O lamento sem saída</em></p>
+
+<div class="lesson-content">
+
+<h3>Conteúdo</h3>
+
+<p>Você leu este salmo com o Marcos esta semana. Talvez sem saber, escolheu o texto mais escuro da Bíblia inteira.</p>
+
+<p>O Saltério hebraico tem 150 salmos. A maioria dos salmos de lamento — Salmo 13, 22, 42, 77 — atravessa a escuridão e termina em algum tipo de luz: <em>"contudo confiarei"</em>, <em>"ainda esperarei"</em>, <em>"Tu és o meu Deus"</em>. O autor briga com Deus, chora, acusa, e no fim encontra uma frase de aterragem.</p>
+
+<p>O Salmo 88 é o único salmo do Saltério que não tem aterragem. Ele desce, desce, e não sobe. A última linha é:</p>
+
+<blockquote>
+  <p>"Tiraste de mim os amigos e os companheiros; as trevas são as minhas únicas amigas."</p>
+  <cite>Salmo 88:18 — NVI</cite>
+</blockquote>
+
+<p>E acaba. Sem virada. Sem "mas". Sem consolação.</p>
+
+<h4>O que isso significa</h4>
+
+<p>A Bíblia <em>canonizou</em> este salmo. Israel o cantava na liturgia. Sinagogas o recitavam. A Igreja primitiva o incluiu no Saltério cristão. Por séculos, este texto sem resolução foi considerado palavra de Deus.</p>
+
+<p>O que a Bíblia está dizendo, ao colocar este salmo entre os outros 149, não é <em>"olha como é fácil chegar à esperança"</em>. É o oposto: <em>"há lugar no culto a Deus para a oração que não chega lugar nenhum."</em></p>
+
+<p>Para um cético que espera religião empacotada — Deus respondendo perguntas, tudo no controle, sempre há esperança — o Salmo 88 é desconcertante. A própria Escritura tem espaço para o lamento que termina em escuridão.</p>
+
+<div class="pastoral">
+  A Guga escolheu este salmo por uma razão que talvez nem ela tenha articulado. Quando o trouxer na aula, deixe ela falar primeiro do que sentiu. Não corra para a resolução. O ponto desta seção não é dizer <em>"mas Deus está com você"</em> — é dizer <em>"a Bíblia tem o vocabulário da sua mãe morrendo, da sua infância sem conforto, da sua sala de terapia. Você não precisa traduzir nada."</em>
+  <br><br>
+  A solidão do Marcos também cabe aqui. Ele encontrou prece como antídoto à solidão; o Salmo 88 mostra que oração honesta nem sempre é antídoto — às vezes é só companhia para a escuridão. E isso já é muito.
+</div>
+
+</div>
+
+<div class="brief">
+  <h4>5 slides</h4>
+  <div class="slide-spec"><span class="slide-num">SLIDE 01</span><strong>Title card.</strong> "O Mundo Quebrado" em Cormorant Garamond grande, parchment sobre fundo gradiente parchment → ink-deep nas bordas. Subtítulo em italic wine. Sem ornamentos.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 02</span><strong>Apresentação.</strong> Texto: "150 salmos. Um deles desce e não sobe." Animação: lista vertical fina dos 150 salmos numerados em mono pequena, com o nº 88 marcado em wine, ficando isolado lentamente enquanto os outros desaparecem.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 03</span><strong>A citação central.</strong> Salmo 88:18 centrado em italic, Cormorant Garamond grande. Fundo: ink-deep. Cor texto: parchment. Fade-in linha por linha (2s entre linhas). <strong>SILÊNCIO ABSOLUTO.</strong> Tempo de tela: 12-15s.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 04</span><strong>Está no cânon.</strong> Texto: "Israel cantou este salmo. A Igreja o leu por séculos. A Bíblia canonizou o lamento sem saída." Sem imagem. Espaço respiratório alto.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 05</span><strong>Pergunta-ponte.</strong> "E se a sua oração mais escura cabe na Bíblia?" Italic, centralizado. Transição lenta para o próximo movimento.</div>
+  <p style="margin-top:1rem;"><strong>Atmosfera geral:</strong> contemplativa, contida. Cor dominante: ink-deep com wine. Velocidade: lenta. Nenhuma transição animada chamativa.</p>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MOVIMENTO II
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>4. Movimento II — Jó 1-2</h2>
+<p class="meta"><em>A aposta em escala pessoal</em></p>
+
+<div class="lesson-content">
+
+<h3>Conteúdo</h3>
+
+<p>Você, a Dona Marlene e o Marcel estudaram Jó depois da Lição 9. Voltamos a ele agora com uma pergunta nova.</p>
+
+<p>O livro de Jó faz uma coisa estranha. Antes de o herói aparecer, o narrador nos mostra uma cena que Jó <em>nunca</em> saberá que aconteceu. Não é flashback, não é sonho — é informação privilegiada que o leitor recebe e que o protagonista nunca terá.</p>
+
+<p>A cena: um conselho celestial. Os "filhos de Deus" — <em>bənê hāʾelōhīm</em>, expressão que em outros textos do antigo Oriente designa membros de uma corte divina — se reúnem diante de YHWH. Entre eles vem <em>ha-satan</em>, "o Acusador" (note o artigo: não é nome próprio ainda, é uma função — algo como "o promotor"). E ele faz uma pergunta corrosiva:</p>
+
+<blockquote>
+  <p>"Acaso é sem motivo que Jó teme a Deus? Não puseste tu uma cerca em torno dele, da casa dele e de tudo o que ele tem? Tu abençoaste o trabalho das suas mãos, e os seus rebanhos cobrem a terra. Mas estende a tua mão e fere tudo o que ele tem, e ele te amaldiçoará na tua face."</p>
+  <cite>Jó 1:9-11 — NVI adaptado</cite>
+</blockquote>
+
+<h4>A aposta</h4>
+
+<p>O Acusador está fazendo uma alegação cínica sobre a natureza do amor humano: ninguém ama Deus de graça. Toda devoção é interesseira. Jó é devoto porque está sendo pago para sê-lo — saúde, riqueza, família, segurança. Tire o salário, e a devoção evapora.</p>
+
+<p>A aposta é cósmica em escopo, mas o objeto é íntimo: <strong>existe amor humano genuíno, ou todo amor é transação disfarçada?</strong></p>
+
+<p>Deus aposta que existe. E o sofrimento de Jó — perder filhos, gado, saúde, dignidade — entra na narrativa como parte dessa aposta. <strong>Jó não está sendo punido. Não está sendo abandonado. Está, sem saber, segurando uma das pontas de uma disputa sobre se humanos são capazes de amar.</strong></p>
+
+<h4>A implicação que reorganiza tudo</h4>
+
+<p>Quase toda teologia popular do sofrimento opera com duas hipóteses: (a) você sofreu porque pecou, ou (b) Deus não se importa. Jó 1-2 abre uma terceira hipótese que não estava no menu: <strong>(c) seu sofrimento pode ser parte de uma disputa sobre o caráter de Deus e sobre a possibilidade humana de amor desinteressado — uma disputa que você não viu e talvez nunca veja.</strong></p>
+
+<p>Para a Guga, isso vale pensar: e se a infância dela, ou parte dela, foi parte de uma aposta que nem ela nem Deus puderam explicar para uma criança? Não estamos afirmando que foi. Estamos dizendo: a Bíblia abre essa possibilidade, e ela é menos cruel do que "você merecia" ou "a Deus tanto faz".</p>
+
+<div class="honesty">
+  A cena celestial de Jó 1-2 usa linguagem do conselho divino comum no antigo Oriente Médio (Ugarit, Mesopotâmia). Estudiosos discutem se Jó pretende descrever uma cena "literal" ou se está usando convenção literária para enquadrar uma pergunta moral. As duas leituras existem entre estudiosos sérios, judeus e cristãos.
+  <br><br>
+  O ponto teológico do livro se sustenta nas duas leituras: existe uma dimensão moral cósmica que excede a nossa contabilidade humana do sofrimento. Não somos espectadores neutros num cosmos indiferente, e não somos contabilistas que sabem exatamente o que merecemos. Estamos em uma história que é maior do que nós.
+</div>
+
+<h4>Não é só Jó</h4>
+
+<p>O quadro do cosmos contestado aparece em outros lugares da Bíblia, em gêneros diferentes:</p>
+
+<ul>
+  <li><strong>Efésios 6:12</strong> — "Nossa luta não é contra carne e sangue, mas contra os principados, contra as potestades, contra os dominadores deste mundo tenebroso."</li>
+  <li><strong>Romanos 8:18-22</strong> — A criação inteira "geme em dores de parto"; o universo não é como Deus o quis.</li>
+  <li><strong>Apocalipse 12</strong> — Linguagem apocalíptica de uma guerra celestial cujo desfecho ainda está em curso.</li>
+</ul>
+
+<p>Os gêneros são diferentes — epístola, narrativa, apocalíptica — mas o quadro é coerente: <strong>o mundo presente não é o mundo como Deus o quis.</strong> Há resistência ativa à bondade. Sua dor não é necessariamente seu fracasso. Pode ser que você esteja num campo de batalha.</p>
+
+</div>
+
+<div class="brief">
+  <h4>7 slides</h4>
+  <div class="slide-spec"><span class="slide-num">SLIDE 06</span><strong>Title card.</strong> "Jó 1-2 — A Aposta em Escala Pessoal". Wine sobre parchment. Linha decorativa fina em gold abaixo.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 07</span><strong>O que Jó nunca soube.</strong> Composição em duas camadas verticais. Embaixo, em parchment dourado: silhueta da casa de Jó em Uz. Acima, separado por linha fina horizontal, fundo lapis profundo: silhuetas estilizadas do conselho celestial. Animação: "véu" entre as camadas é revelado lentamente — câmera "sobe" do plano terreno para o celeste. Sem rostos detalhados.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 08</span><strong>A pergunta do Acusador.</strong> Jó 1:9 em destaque grande, italic, Cormorant. Texto: "Acaso é sem motivo que Jó teme a Deus?" Fundo: lapis profundo. Cor da letra: parchment. Fade-in lento.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 09</span><strong>A aposta.</strong> Texto curto: "Não é punição. Não é indiferença. É uma disputa sobre se humanos são capazes de amar." Fundo parchment normal. Layout assimétrico — texto à esquerda, espaço à direita.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 10</span><strong>Honestidade exegética.</strong> Card "honestidade intelectual" sobre o conselho divino no antigo Oriente. Tipografia menor, mais densa — sinaliza modo "investigação intelectual". Fundo parchment com leve textura de papel envelhecido.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 11</span><strong>Não é só Jó.</strong> Três cards horizontais lado a lado, cada um com uma referência (Ef 6:12, Rm 8:18-22, Ap 12). Fade-in em sequência da esquerda para a direita (1s de intervalo). Cores dos cards: lapis suave, gold suave, wine suave.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 12</span><strong>Síntese.</strong> "O mundo presente não é o mundo como Deus o quis." Frase única, grande, centralizada. Fundo: gradiente parchment → ink-deep. Espera longa antes do próximo movimento.</div>
+  <p style="margin-top:1rem;"><strong>Atmosfera:</strong> conceitualmente densa, mas com respiração. Slides 7, 8 e 12 são "respiradouros visuais" — tempo de tela maior. Slide 10 é o único momento "textual denso" do movimento.</p>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MOVIMENTO III
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>5. Movimento III — O Exílio Babilônico</h2>
+<p class="meta"><em>A aposta em escala coletiva — seção mais longa, com material histórico-arqueológico</em></p>
+
+<div class="lesson-content">
+
+<h3>Conteúdo</h3>
+
+<p>Se Jó é a aposta em uma vida, o exílio babilônico é a aposta em uma civilização inteira. Em 19 anos, o povo de Deus perdeu rei, templo, terra e narrativa. A teologia bíblica do sofrimento — como a conhecemos hoje — nasceu nessas duas décadas.</p>
+
+<p>E mais: este é um dos períodos do Antigo Testamento <strong>mais bem atestados historicamente</strong>. Bíblia, crônicas babilônicas e arqueologia convergem. Para uma cética que pesa evidência, isso conta.</p>
+
+<h4>Três invasões em dezenove anos</h4>
+
+<ul>
+  <li><strong>605 a.C. — Primeira invasão.</strong> Depois da Batalha de Carquemis, Nabucodonosor derrota o Egito e marcha para o sul. Jeoaquim de Judá se torna vassalo. Daniel e seus companheiros — adolescentes da nobreza — são levados a Babilônia como reféns políticos e estudantes em sua academia (Daniel 1:1-7).</li>
+  <li><strong>597 a.C. — Segunda invasão.</strong> Depois que Jeoaquim se rebela, Nabucodonosor cerca Jerusalém. O novo rei, Joaquim (Jeconias), entrega-se em três meses. Ele, a mãe, a elite técnica e Ezequiel (futuro profeta) são deportados. Zedequias é instalado como rei-fantoche (2 Reis 24:10-17).</li>
+  <li><strong>586 a.C. — Terceira invasão.</strong> Zedequias também se rebela. Cerco de dezoito meses. Fome dentro dos muros. A cidade cai em julho. O Templo é queimado. Os filhos de Zedequias são executados diante dele antes de seus olhos serem arrancados. Massa do povo deportada (2 Reis 25; Jeremias 39; 52).</li>
+  <li><strong>582 a.C. — Deportação residual.</strong> Pequena deportação adicional após o assassinato do governador Gedalias. Os sobreviventes fogem para o Egito, levando Jeremias contra a vontade dele (Jeremias 52:30; 43:5-7).</li>
+</ul>
+
+<h4>Sustentação histórica externa</h4>
+
+<p>Cinco fontes externas independentes confirmam o quadro:</p>
+
+<ol>
+  <li><strong>Crônica Babilônica (BM 21946)</strong> — Museu Britânico. Tablete cuneiforme dos anais de Nabucodonosor. Registra explicitamente a campanha de 597 a.C.: <em>"No sétimo ano, o rei de Akkad reuniu suas tropas, marchou para a terra de Hatti, acampou contra a cidade de Judá, e no segundo dia do mês de Adar capturou a cidade e prendeu o rei. Designou um rei de sua escolha."</em> Bate com 2 Reis 24 detalhe por detalhe.</li>
+  <li><strong>Tabletes de Ração de Jeoaquim</strong> — Berlim. Quatro tabletes encontrados nas ruínas do palácio sul de Babilônia. Listam o rei deportado "Yaukin, rei de Judá" recebendo rações regulares de óleo e cevada da corte babilônica. Confirma 2 Reis 25:27-30.</li>
+  <li><strong>Cartas de Laquis</strong> — Museu de Israel. Vinte e uma cartas em hebraico, em fragmentos de cerâmica. Uma delas, escrita pouco antes de 586, diz: <em>"Estamos vigiando os sinais de fogo de Laquis, porque não vemos os sinais de Azeca."</em> Bate com Jeremias 34:7.</li>
+  <li><strong>Camadas arqueológicas de destruição em 586</strong> — Jerusalém, Laquis, Azeca, En-Gedi e Ramat Rahel. Vestígios de incêndio massivo, pontas de flecha babilônicas, abandono populacional. "Casa Queimada" e "Casa das Bullae" em Jerusalém são exemplos amplamente documentados.</li>
+  <li><strong>Cilindro de Ciro (539 a.C.)</strong> — Museu Britânico. Documenta a política do imperador persa de devolver povos exilados às suas terras. Bate com Esdras 1:1-4.</li>
+</ol>
+
+<p>Para a Guga: <strong>não estamos pedindo fé num evento sem evidência.</strong> Estamos lendo um período em que a Bíblia, os registros do inimigo e a arqueologia contam a mesma história — com convergência de detalhes pequenos. Isso é raro em história antiga.</p>
+
+<h4>Jeremias — o profeta solitário dentro da catástrofe</h4>
+
+<p>Enquanto a tragédia se desenrolava, um homem em Jerusalém estava prevendo-a — em voz alta, no espaço público, sozinho.</p>
+
+<p>Jeremias começou a profetizar em 627 a.C. e continuou até depois de 586. Quarenta anos. Sua mensagem era impopular ao ponto de ser perigosa: <em>Jerusalém vai cair. Babilônia é o instrumento de Deus. Submetam-se ao exílio em vez de resistir.</em> Para os patriotas religiosos da época, isso era traição teológica e política simultaneamente.</p>
+
+<p>O resultado foi sistemático:</p>
+
+<ul>
+  <li><strong>Proibido por Deus de casar.</strong> Em Jeremias 16:1-9, Deus dá a ele a ordem mais estranha do AT: "Não tomarás mulher, e não terás filhos neste lugar." Também é proibido de ir a velórios e a casamentos. A vida do profeta vira sinal: enquanto o juízo vier, não há núpcias para celebrar nem mortes para chorar normalmente. <strong>A própria solidão de Jeremias é a profecia.</strong></li>
+  <li><strong>Posto no tronco.</strong> O sacerdote Pasur o açoita e o coloca no cepo público (Jr 20:1-2).</li>
+  <li><strong>Jogado em cisterna.</strong> Em Jeremias 38, oficiais o descem por cordas em uma cisterna lamacenta para que morra de fome. Um eunuco etíope (Ebede-Meleque, um estrangeiro) o resgata.</li>
+  <li><strong>Levado contra a vontade para o Egito</strong> depois de 586. Desaparece da história lá.</li>
+</ul>
+
+<p>As "Confissões de Jeremias" (Jr 15:10-18; 17:14-18; 18:18-23; 20:7-18) são algumas das passagens mais cruas da Bíblia:</p>
+
+<blockquote>
+  <p>"Tu me enganaste, Senhor, e eu fui enganado; foste mais forte do que eu, e prevaleceste... Maldito o dia em que nasci! Não seja bendito o dia em que minha mãe me deu à luz... Por que saí do ventre materno? Só para ver dificuldades e tristezas, e terminar minha vida na vergonha?"</p>
+  <cite>Jeremias 20:7, 14-15, 18 — NVI</cite>
+</blockquote>
+
+<p>Esta oração está em uma Bíblia que diz que devemos amar a Deus. Não foi censurada. Foi preservada. <strong>Há lugar no cânon para o profeta amaldiçoando o próprio nascimento.</strong> O Salmo 88 não está sozinho.</p>
+
+<h4>Lamentações 3 — o arco do exílio em miniatura</h4>
+
+<p>A tradição atribui a Jeremias o livro de Lamentações. O capítulo 3, no coração do livro, é um acróstico hebraico de 66 versos.</p>
+
+<p>Os primeiros 17 versos descem em espiral de desespero absoluto: <em>"Sou homem que viu a aflição da vara do furor do Senhor. Levou-me e me fez andar em trevas e não em luz... Tornou-se para mim um urso de tocaia, leão escondido."</em></p>
+
+<p>O verso 18 chega ao fundo: <em>"Então eu disse: Já se foi a minha força, e a esperança que eu tinha no Senhor."</em></p>
+
+<p>E aí, sem aviso, sem ponte lógica, o verso 21 dá a volta:</p>
+
+<blockquote>
+  <p>"Quero, porém, trazer à memória o que me pode dar esperança. As misericórdias do Senhor são a causa de não sermos consumidos, porque as suas misericórdias não têm fim; renovam-se cada manhã. Grande é a tua fidelidade."</p>
+  <cite>Lamentações 3:21-23 — ARA</cite>
+</blockquote>
+
+<p>O autor não nega o desespero do verso 18. Não explica. Não resolve. Ele <em>lembra</em>. A esperança em Lamentações não é uma conclusão lógica do sofrimento — é uma memória que interrompe o sofrimento. Isso é teologicamente honesto de um jeito que poucas tradições conseguem ser.</p>
+
+<div class="pastoral">
+  Lamentações 3:21-23 é o verso que virou hino evangélico ("Great is Thy Faithfulness"). Mas o hino corta o contexto. Os 17 versos anteriores são o cenário, e sem eles a esperança vira positividade barata. Para a Guga: a Bíblia conhece a sua mãe morrendo, conhece a Alice quase morrendo, conhece a infância sem conforto. O texto não diz "você não devia ter sentido isso". Ele diz: <em>"sente. E quando puder, lembra-se de outra coisa também."</em>
+</div>
+
+<h4>Nabuzaradã — o pagão que pregou Jeremias para Jeremias</h4>
+
+<p>Um dos momentos mais estranhos do AT inteiro. Quando Jerusalém cai em 586, Nabucodonosor envia seu comandante da guarda imperial, <strong>Nabuzaradã</strong>, para administrar a destruição. Nabuzaradã queima o Templo, quebra os muros, organiza a deportação.</p>
+
+<p>E entre os prisioneiros encontra Jeremias.</p>
+
+<p>O comandante babilônico tem uma ordem direta de Nabucodonosor: "trate-o bem" (Jeremias 39:11-12). Em vez de deportá-lo, Nabuzaradã o solta. Dá comida e dinheiro. E faz um discurso que precisa ser lido devagar, porque é o discurso de um pagão genocida:</p>
+
+<blockquote>
+  <p>"O Senhor, o teu Deus, decretou esta desgraça contra este lugar, e agora o Senhor cumpriu o que disse. Tudo isso aconteceu porque vocês pecaram contra o Senhor e não obedeceram à sua voz. Agora eu o estou libertando das correntes que estão em suas mãos. Se quiser vir comigo para Babilônia, venha, e eu cuidarei de você."</p>
+  <cite>Jeremias 40:2-4 — NVI</cite>
+</blockquote>
+
+<p>Pare aqui. Um soldado babilônico está fazendo a teologia da história de Israel — e está fazendo <strong>exatamente</strong> a teologia que Jeremias vinha pregando sozinho havia quarenta anos sem ninguém ouvir: YHWH é Senhor, o povo pecou, o juízo é justo, o cumprimento veio.</p>
+
+<p>A primeira pessoa a confirmar publicamente Jeremias depois da queda de Jerusalém é um inimigo estrangeiro. Os sacerdotes não ouviram. Os reis não ouviram. Os profetas falsos chamaram Jeremias de traidor. Mas um capitão pagão entendeu — e teve o respeito de soltar Jeremias para que pudesse permanecer com o resto que ficou.</p>
+
+<div class="pastoral">
+  Para a Guga e o Marcos: a verdade às vezes chega pela boca de quem você menos espera. Os religiosos descartaram Jeremias; o pagão entendeu. O Marcos está achando a igreja boa em parte porque é o primeiro lugar onde ele não está sozinho — mas Nabuzaradã é o lembrete de que Deus às vezes fala pela porta de fora, não pela da frente.
+</div>
+
+<h4>Nabucodonosor — o rei solitário</h4>
+
+<p>Jeremias, em três ocasiões, chama Nabucodonosor de "meu servo" (Jr 25:9; 27:6; 43:10). Título escandaloso: o imperador genocida que queimou o Templo é chamado de servo de YHWH.</p>
+
+<p>Como entender isso? A Bíblia trata Nabucodonosor não como o inimigo final, mas como um instrumento que Deus usa — e, espantosamente, como alguém que o próprio Deus vai converter.</p>
+
+<p><strong>Daniel 4 — sete anos como fera.</strong> No ápice do reinado, Nabucodonosor tem um sonho perturbador: uma árvore enorme que abriga os animais do mundo é cortada, e um homem é deixado entre as feras do campo. Daniel interpreta: "A árvore és tu. Você será humilhado, viverá como animal por sete tempos, até que reconheça que o Altíssimo reina."</p>
+
+<p>Doze meses depois, no terraço de seu palácio, Nabucodonosor declara: <em>"Não é esta a grande Babilônia que eu edifiquei com minha força e para a glória da minha majestade?"</em> (Dn 4:30). E aí o juízo cai. Sete anos:</p>
+
+<blockquote>
+  <p>"Foi expulso do meio dos homens, comeu erva como os bois, e o seu corpo foi molhado pelo orvalho do céu, até que os seus cabelos cresceram como as penas das águias, e as suas unhas como as das aves."</p>
+  <cite>Daniel 4:33 — NVI adaptado</cite>
+</blockquote>
+
+<p>O homem que tinha exércitos, esposas, escribas, palácios, conselheiros — completamente sozinho. Sem palavra. Sem dignidade. Sem reconhecimento. Pelo tempo de uma criança crescer. <strong>O poder absoluto produzindo solidão absoluta.</strong></p>
+
+<p>Ao final dos sete tempos, ele "ergue os olhos para o céu". A razão volta. E o que ele diz — em primeira pessoa, no que é literalmente uma confissão imperial publicada por decreto pelo próprio Nabucodonosor — soa como um salmista hebreu:</p>
+
+<blockquote>
+  <p>"O seu domínio é um domínio eterno; o seu reino dura de geração em geração. Todos os habitantes da terra são considerados como nada. Ele faz o que quer com os exércitos dos céus e com os habitantes da terra. Ninguém pode deter a sua mão ou dizer-lhe: 'O que fizeste?'"</p>
+  <cite>Daniel 4:34-35 — NVI</cite>
+</blockquote>
+
+<h4>Intertextualidade — Nabucodonosor falando como profeta</h4>
+
+<p>O imperador da nação que destruiu Jerusalém terminou seus dias confessando o Deus de Jerusalém com o vocabulário dos profetas de Jerusalém. Compare:</p>
+
+<table class="spec-table">
+  <tr>
+    <th>Daniel 4:34-35 — Nabucodonosor</th>
+    <th>Isaías 40:15, 17 — O Profeta</th>
+  </tr>
+  <tr>
+    <td><em>"O seu domínio é um domínio eterno... todos os habitantes da terra são considerados como nada... ninguém pode deter a sua mão."</em></td>
+    <td><em>"As nações são como a gota que cai de um balde... todas as nações são como nada perante ele; são consideradas por ele menos que nada."</em></td>
+  </tr>
+</table>
+
+<table class="spec-table">
+  <tr>
+    <th>Daniel 4:3 — Nabucodonosor</th>
+    <th>Salmo 145:13 — Davi</th>
+  </tr>
+  <tr>
+    <td><em>"O seu reino é um reino eterno, e o seu domínio dura de geração em geração."</em></td>
+    <td><em>"O teu reino é um reino eterno; o teu domínio dura por todas as gerações."</em></td>
+  </tr>
+</table>
+
+<p><strong>A solidão da loucura ensinou ao rei o que o poder absoluto não conseguia.</strong></p>
+
+<div class="honesty">
+  Daniel 4 tem um paralelo curioso descoberto entre os Manuscritos do Mar Morto: a "Oração de Nabonido" (4Q242), texto fragmentário que descreve o último rei babilônico, <strong>Nabonido</strong> (não Nabucodonosor), sendo afligido com uma doença por sete anos em Tema (Arábia) e curado por um exorcista judeu. Críticos da datação tardia de Daniel argumentam que Daniel 4 seria uma transferência literária dessa tradição, aplicando ao mais famoso Nabucodonosor o que originalmente teria acontecido com Nabonido.
+  <br><br>
+  Defesa: as crônicas babilônicas têm um silêncio conspícuo de aproximadamente trinta anos no fim do reinado de Nabucodonosor; a confusão entre os dois reis é comum em fontes antigas tardias (Beroso, Megástenes); e o texto de Daniel 4 é apresentado como decreto imperial, gênero conhecido na Babilônia.
+  <br><br>
+  O debate não se fecha. Mas o quadro maior — que o exílio aconteceu, que produziu a maior reorganização teológica do AT, que Babilônia caiu, e que houve um retorno — é independente dessa discussão.
+</div>
+
+<h4>Dois tipos de solidão, um Senhor</h4>
+
+<p>Olhe os dois retratos lado a lado:</p>
+
+<p><strong>Jeremias</strong> — o profeta solitário. Fiel, perseguido, isolado por mandato divino. Proibido de constituir família. Jogado em cisterna. Levado à força para o Egito. Termina anônimo. <em>O santo sozinho.</em></p>
+
+<p><strong>Nabucodonosor</strong> — o rei solitário. Poderoso, soberbo, autossuficiente. Reduzido a animal. Sete anos sozinho no campo. Recupera a razão olhando para o céu. <em>O pecador sozinho.</em></p>
+
+<p>Os dois homens estão em lados opostos da história — um é a vítima do exílio, o outro é a sua causa. Mas ambos terminam no mesmo lugar: <strong>o fim da capacidade própria.</strong> Jeremias chegou lá pela fidelidade; Nabucodonosor chegou lá pela soberba. Mas é no <em>mesmo</em> lugar — esse vazio onde a pessoa não pode mais sustentar a si mesma — que ambos encontram a voz do mesmo Deus.</p>
+
+<p>O Marcos pode reconhecer Nabucodonosor. Jeremias é a outra metade que talvez ainda esteja por vir. E você, Guga, talvez se reconheça em Jeremias mais do que esperasse — alguém que viu antes do tempo, que falou e não foi ouvida, que carregou o luto pelo que ninguém queria luto.</p>
+
+</div>
+
+<div class="brief">
+  <h4>24 slides — seção mais longa, com material histórico-arqueológico</h4>
+  <div class="slide-spec"><span class="slide-num">SLIDE 13</span><strong>Title card.</strong> "O Exílio Babilônico — A Aposta em Escala Coletiva". Gradiente parchment → lapis profundo nas bordas. Cormorant Garamond grande em wine.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 14</span><strong>Mapa animado.</strong> Mapa estilizado do antigo Oriente Médio com Jerusalém e Babilônia destacados. Três arcos animados saindo de Babilônia para Jerusalém, surgindo em sequência (605, 597, 586). Datas aparecendo como pontos no arco. Estilo: pergaminho envelhecido, contornos sépia, sem detalhes geográficos modernos.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 15</span><strong>Timeline vertical das 3 invasões + residual.</strong> Cada evento aparece em sequência (fade-in da mais antiga para a mais recente, 0.8s entre eventos). Datas em wine, títulos em ink-deep. Descrição curta de cada uma.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 16</span><strong>"E não é só a Bíblia que conta."</strong> Texto curto em italic centralizado. Fundo escurecido. Prepara para a sequência arqueológica.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 17</span><strong>Crônica Babilônica (BM 21946).</strong> Foto do tablete cuneiforme (Museu Britânico — imagem pública disponível). Citação direta sobreposta em parchment translúcido. Label tipográfico em mono. Estilo museu: minimalista, contemplativo.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 18</span><strong>Tabletes de Ração de Jeoaquim.</strong> Mesma estética. Foto do tablete (Pergamon, Berlim). Citação "Yaukin, rei de Judá" destacada. Conexão com 2 Reis 25:27-30 no rodapé.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 19</span><strong>Cartas de Laquis.</strong> Foto de um ostracon. Tradução do texto-chave ("não vemos mais os sinais de Azeca"). Conexão com Jeremias 34:7.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 20</span><strong>Camadas arqueológicas de 586.</strong> Foto/ilustração de estrato de destruição (Jerusalém ou Laquis). Texto breve sobre a "Casa Queimada".</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 21</span><strong>Cilindro de Ciro.</strong> Foto do cilindro (Museu Britânico). Conexão com Esdras 1.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 22</span><strong>Síntese histórica.</strong> "Bíblia + Babilônia + Arqueologia = mesma história, mesmos detalhes." Texto, espaço amplo.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 23</span><strong>Jeremias — title card.</strong> "O Profeta Solitário Dentro da Catástrofe". Wine sobre parchment escuro. Animação: silhueta única no centro, ampliando lentamente.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 24</span><strong>A proibição de Jeremias 16.</strong> Texto curto: "Proibido por Deus de casar, de chorar em velórios, de celebrar em casamentos. A própria solidão do profeta é a profecia." Imagem sutil ao fundo: silhueta isolada.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 25</span><strong>A cisterna (Jeremias 38).</strong> Ilustração estilizada: vista de cima de uma cisterna, figura única no fundo. Cor: deep ink, sombras profundas. Texto curto.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 26</span><strong>As Confissões.</strong> Jeremias 20:14-15, 18 destacada. "Maldito o dia em que nasci." Tratamento similar ao slide do Salmo 88 (silêncio, espaço, peso). Wine sobre fundo deep.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 27</span><strong>Lamentações 3 — descida e virada.</strong> Visualização em duas partes. À esquerda, versos 1-18 em ink-deep (descida, lista compacta). À direita, versos 21-23 em gold (memória). Animação: parte direita aparece com atraso, depois de silêncio. <strong>NÃO MUSICAR.</strong></div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 28</span><strong>Nabuzaradã — title card.</strong> "O Pagão que Pregou Jeremias para Jeremias". Lapis sobre parchment.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 29</span><strong>O discurso de Nabuzaradã.</strong> Jeremias 40:2-4 em destaque grande. Imagem ao fundo: silhueta de soldado e profeta lado a lado, sem detalhes faciais. Fade-in linha por linha.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 30</span><strong>"A primeira pessoa a confirmar Jeremias foi um pagão."</strong> Frase única, grande, centralizada. Espaço respiratório alto.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 31</span><strong>Nabucodonosor — title card.</strong> "O Rei Solitário". Lapis profundo. Imagem sutil ao fundo: coroa estilizada.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 32</span><strong>Daniel 4 — a transformação.</strong> Três frames lado a lado: rei coroado → fera no campo → rei humilhado olhando para o céu. Estilo ilustração: contornos finos, sem detalhamento facial. A transição entre os frames é a estória.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 33</span><strong>O retorno: a confissão imperial.</strong> Daniel 4:34-35 em destaque. Fundo: gradiente lapis → parchment (do escuro para a luz).</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 34</span><strong>Intertextualidade lado a lado.</strong> Duas linhas, cada uma com Daniel ao lado de fonte hebraica. Linha 1: Dn 4:34-35 ↔ Is 40:15, 17. Linha 2: Dn 4:3 ↔ Sl 145:13. Setas finas conectando frases similares. Cor: lapis (Daniel) ao lado de gold (texto hebraico). Animação: aparecem em paralelo, depois as conexões se desenham.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 35</span><strong>Honestidade: paralelo com Nabonido em Qumran.</strong> Card de honestidade intelectual. Imagem de fragmento do 4Q242 se disponível. Texto explicando o debate sem fechá-lo.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 36</span><strong>Síntese — dois retratos.</strong> Dois painéis lado a lado. Esquerda: Jeremias (silhueta de profeta, em parchment com wine). Direita: Nabucodonosor (silhueta de rei, em lapis profundo). Texto entre eles: "Um chegou pela fidelidade. Outro pela soberba. Ambos chegaram ao mesmo lugar."</div>
+  <p style="margin-top:1rem;"><strong>Princípio cromático crítico desta seção:</strong> lapis = tudo babilônico (mapas, artefatos, Nabucodonosor); wine = Jeremias e o luto; gold = textos hebraicos. <strong>O contraste cromático conta a história sem palavras.</strong> Quando os dois aparecem juntos no slide 34, o ponto teológico está sendo dito visualmente. Imagens de artefatos: priorizar fotos reais. Quando não disponível, gravura em linha sépia (não 3D, não ilustração infantil, não IA-genérica).</p>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MOVIMENTO IV
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>6. Movimento IV — A Cruz</h2>
+<p class="meta"><em>A aposta em escala divina</em></p>
+
+<div class="lesson-content">
+
+<h3>Conteúdo</h3>
+
+<p>A Bíblia até aqui mostrou a aposta cósmica em duas escalas: individual (Jó) e nacional (o exílio). O Novo Testamento adiciona uma escala que nenhuma religião antiga jamais propôs: <strong>a aposta em escala divina.</strong> Deus não fica de fora da Sua própria aposta. Ele entra.</p>
+
+<h4>Gethsêmani — a noite antes</h4>
+
+<p>Antes do julgamento, antes da cruz, no jardim, Jesus diz aos três discípulos mais próximos:</p>
+
+<blockquote>
+  <p>"A minha alma está profundamente triste, numa tristeza mortal. Fiquem aqui e vigiem comigo."</p>
+  <cite>Mateus 26:38 — NVI</cite>
+</blockquote>
+
+<p>Ele pede companhia humana, do jeito mais simples possível. Volta três vezes. Três vezes os encontra dormindo. A última vez ele desiste: "Estais dormindo, e descansando? Eis que é chegada a hora..."</p>
+
+<p>Aqui está a primeira camada da solidão divina: <strong>nem os mais próximos conseguiram ficar acordados.</strong> O Filho de Deus entrou na experiência humana de pedir presença e receber ausência.</p>
+
+<h4>A Cruz — o grito que cita o Saltério</h4>
+
+<p>Mateus 27:46. Aproximadamente três da tarde de uma sexta-feira em torno do ano 30. Jesus está pregado a uma cruz romana havia seis horas. Ele grita em aramaico — a língua dele de casa, não o grego dos evangelhos, não o hebraico das Escrituras, o aramaico do dia-a-dia:</p>
+
+<blockquote>
+  <p><em>"Eloí, Eloí, lamá sabactâni?"</em> — que significa: "Meu Deus, meu Deus, por que me abandonaste?"</p>
+  <cite>Mateus 27:46 / Marcos 15:34</cite>
+</blockquote>
+
+<p>Isso não é uma frase improvisada. Jesus está citando o Salmo 22:1. Ele tem acesso ao Saltério dentro da agonia, e escolhe o salmo que abre com abandono. Como o leitor judeu da época sabia, esse salmo tem um arco completo — começa com abandono, atravessa zombaria, mãos furadas, vestes divididas pelos soldados (versos 16-18 — em um salmo escrito mil anos antes da crucificação), e termina com vitória.</p>
+
+<p>Mas Jesus cita só o começo. A parte que importa naquele instante é o começo. <strong>Ele está usando o vocabulário bíblico do abandono — e ao fazer isso, está nos dizendo que a sensação de abandono divino é uma experiência que a Bíblia já previu, já preservou, já incluiu na própria revelação.</strong></p>
+
+<p>Nenhum deus do panteão grego ou romano fez isso. Os deuses olímpicos riam dos mortais, manipulavam, conspiravam. Mitra não chorava. Apolo não gritava de abandono. O Deus de Israel — e mais especificamente, Deus encarnado em Jesus — é o único Deus da história religiosa que se permitiu sentir o que o Salmo 88 articula.</p>
+
+<h4>João 11 — Jesus chorou</h4>
+
+<p>Antes da cruz, na narrativa de João, Jesus vai ao túmulo do amigo Lázaro. Já decidiu que vai ressuscitá-lo. Já sabe que em alguns minutos a morte vai recuar. E mesmo assim:</p>
+
+<blockquote>
+  <p>"Jesus chorou."</p>
+  <cite>João 11:35</cite>
+</blockquote>
+
+<p>O verso mais curto da Bíblia. E o que ele revela é decisivo: <strong>o Deus encarnado não responde à dor explicando-a, mesmo quando tem o poder de revertê-la em segundos.</strong> Ele entra nela primeiro. Chora antes de ressuscitar.</p>
+
+<p>Para uma terapeuta, isto vale o curso inteiro. É o oposto de presença instrumental. Ele não diz a Maria e Marta "calma, em cinco minutos resolvo". Ele chora com elas, e <em>depois</em> ressuscita o irmão. A ordem importa.</p>
+
+<h4>Hebreus 4:15 — o Sumo Sacerdote compadecido</h4>
+
+<blockquote>
+  <p>"Porque não temos um sumo sacerdote que não possa compadecer-se das nossas fraquezas; antes, foi ele tentado em todas as coisas, à nossa semelhança, mas sem pecado."</p>
+  <cite>Hebreus 4:15 — ARA</cite>
+</blockquote>
+
+<p>"Compadecer-se" no original grego é <em>sympatheō</em> — "sentir com", "sofrer junto". O Sumo Sacerdote do cristianismo não é alguém que olha o sofrimento de fora; é alguém que <em>sofreu mais</em> que a pessoa que vem orar. Esta é a aposta cósmica em sua forma mais radical: <strong>Deus apostou que valeria a pena sofrer Ele mesmo para confirmar que o amor humano é possível.</strong></p>
+
+</div>
+
+<div class="brief">
+  <h4>6 slides — coração teológico da lição</h4>
+  <div class="slide-spec"><span class="slide-num">SLIDE 37</span><strong>Title card.</strong> "A Cruz — A Solidão de Deus". Wine e gold sobre fundo deep. Tipografia em escala maior — este é o ápice estrutural.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 38</span><strong>Gethsêmani.</strong> Ilustração estilizada de figura sozinha ajoelhada, com três figuras dormindo ao fundo. Tons noturnos, deep + azul-cinza. Mateus 26:38 em destaque.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 39</span><strong>O grito.</strong> Texto: <em>"Eloí, Eloí, lamá sabactâni?"</em> em aramaico transliterado, italic, Cormorant grande. Abaixo, em menor: "Meu Deus, meu Deus, por que me abandonaste?" Fundo: deep ink, escuridão de meio-dia (Mateus 27:45). <strong>SEM ANIMAÇÃO além do fade-in lentíssimo. Tempo de tela mais longo da lição (15-20s).</strong></div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 40</span><strong>Salmo 22 — a fonte.</strong> Intertextualidade Mateus 27:46 ao lado de Salmo 22:1. Aramaico ao lado de hebraico transliterado. Texto: "Jesus cita o Saltério dentro da agonia."</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 41</span><strong>João 11:35.</strong> Slide minimalista. "Jesus chorou." em centro de tela. Nada mais. Espaço total. Fundo parchment. Cor: wine. <strong>Tempo de tela longo. Este slide pesa mais do que parece.</strong></div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 42</span><strong>Hebreus 4:15.</strong> Citação destacada. <em>sympatheō</em> em grego em lapis. Fechamento do movimento.</div>
+  <p style="margin-top:1rem;"><strong>Atmosfera:</strong> velocidade mais lenta que qualquer seção anterior. Slides 39 e 41 são, individualmente, os dois mais pesados da lição. Não acelere. Não preencha o silêncio. O silêncio <em>é</em> o conteúdo.</p>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MOVIMENTO V
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>7. Movimento V — Solidão e Direção</h2>
+<p class="meta"><em>O arco aberto</em></p>
+
+<div class="lesson-content">
+
+<h3>Conteúdo</h3>
+
+<p>A Bíblia inteira começa com solidão, e termina com habitação.</p>
+
+<h4>O começo</h4>
+
+<p>Gênesis 2:18. A primeira coisa que Deus chama de "não boa" em toda a Sua criação não é violência, não é morte, não é a desobediência ainda futura. É solidão:</p>
+
+<blockquote>
+  <p>"Disse mais o Senhor Deus: Não é bom que o homem esteja só."</p>
+  <cite>Gênesis 2:18 — ARA</cite>
+</blockquote>
+
+<p>Antes do pecado, antes da queda, antes de qualquer coisa estar errada na criação — a solidão já era um problema. Não é castigo. É reconhecimento. Deus desenhou o ser humano para companhia.</p>
+
+<h4>O fim</h4>
+
+<p>Apocalipse 21:3. Penúltimo capítulo da Bíblia. João tem uma visão da consumação final:</p>
+
+<blockquote>
+  <p>"Eis o tabernáculo de Deus com os homens. Deus habitará com eles. Eles serão o seu povo, e o próprio Deus estará com eles e será o seu Deus."</p>
+  <cite>Apocalipse 21:3 — NVI</cite>
+</blockquote>
+
+<p>"Habitará" — em grego, <em>skēnōsei</em>, da raiz de "tabernáculo", "tenda". Deus armando Sua tenda no meio da humanidade. O fim da solidão cósmica não é o fim do silêncio com explicação adequada — é Deus instalando-se permanentemente na vizinhança.</p>
+
+<h4>Entre as duas pontas</h4>
+
+<p>A aposta segue aberta. O mundo ainda é contestado. A solidão é real. O Salmo 88 continua no cânon. Jeremias continua sem casa no fim do livro. Nabucodonosor passou por sete anos no campo. Cristo gritou no madeiro.</p>
+
+<p>Mas a trajetória da Escritura tem direção. <strong>Nenhuma resposta filosófica fechada. Mas há uma narrativa em movimento — e nela, Deus não é o espectador. É o personagem que mais sofre.</strong></p>
+
+<p>Essa é a oferta da Bíblia para a sua pergunta sobre o sofrimento, Guga. Não é uma explicação. É uma direção, e um companheiro de viagem.</p>
+
+</div>
+
+<div class="brief">
+  <h4>4 slides — fechamento</h4>
+  <div class="slide-spec"><span class="slide-num">SLIDE 43</span><strong>Title card.</strong> "Solidão e Direção". Gold sobre parchment.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 44</span><strong>Gênesis 2:18.</strong> Citação destacada. Cor: parchment com toque de wine. "A primeira coisa que Deus chamou de 'não boa'."</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 45</span><strong>O arco.</strong> Visualização horizontal de uma linha que vai de "Gênesis 2:18" à esquerda até "Apocalipse 21:3" à direita. Pontos marcados ao longo: Jó · Salmo 88 · Exílio · Jeremias · Nabucodonosor · Cruz · João 11:35. Animação: os pontos aparecem em sequência, e a linha conectando-os se desenha do começo ao fim. Cor: gold para a linha, wine para os pontos.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 46</span><strong>Apocalipse 21:3.</strong> Citação destacada. Fundo: gradiente lento de deep para parchment claro (do escuro para a luz). Tempo de tela longo.</div>
+  <div class="slide-spec"><span class="slide-num">SLIDE 47</span><strong>Fechamento — sem fechamento.</strong> Texto: "A aposta segue aberta. O mundo ainda é contestado. A solidão é real. <em>Mas há direção. E Deus é o personagem que mais sofre.</em>" Fundo parchment, layout assimétrico, espaço amplo.</div>
+  <p style="margin-top:1rem;"><strong>Atmosfera:</strong> abertura, não conclusão. Não fechar com hino, com música solene, com "amém". Terminar como o Salmo 88 termina — com espaço. O silêncio depois do último slide é parte do design.</p>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MAPA COMPLETO DOS SLIDES
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>8. Mapa completo — 47 slides</h2>
+
+<table class="spec-table">
+  <tr>
+    <th style="width:6%">#</th>
+    <th style="width:18%">Movimento</th>
+    <th style="width:38%">Conteúdo</th>
+    <th style="width:38%">Tom visual</th>
+  </tr>
+  <tr><td>01</td><td>I</td><td>Title card — "O Mundo Quebrado"</td><td>parchment + ink-deep, gradiente</td></tr>
+  <tr><td>02</td><td>I</td><td>"150 salmos. Um deles desce e não sobe."</td><td>mono pequena, lista de 150 isolando o 88</td></tr>
+  <tr><td>03</td><td>I</td><td>Salmo 88:18 — citação central</td><td>deep + parchment, silêncio absoluto</td></tr>
+  <tr><td>04</td><td>I</td><td>"A Bíblia canonizou o lamento sem saída."</td><td>texto sobre parchment, espaço amplo</td></tr>
+  <tr><td>05</td><td>I</td><td>Pergunta-ponte para Movimento II</td><td>italic centralizado, transição lenta</td></tr>
+  <tr><td>06</td><td>II</td><td>Title card — "Jó 1-2"</td><td>wine sobre parchment, linha gold</td></tr>
+  <tr><td>07</td><td>II</td><td>O que Jó nunca soube — conselho celestial</td><td>duas camadas: terra (parchment) + céu (lapis)</td></tr>
+  <tr><td>08</td><td>II</td><td>Jó 1:9 — pergunta do Acusador</td><td>lapis profundo, italic parchment grande</td></tr>
+  <tr><td>09</td><td>II</td><td>A aposta — "não é punição, não é indiferença"</td><td>parchment, layout assimétrico</td></tr>
+  <tr><td>10</td><td>II</td><td>Honestidade exegética — conselho divino no Oriente</td><td>card denso, textura papel envelhecido</td></tr>
+  <tr><td>11</td><td>II</td><td>Não é só Jó — Ef 6, Rm 8, Ap 12</td><td>três cards: lapis, gold, wine suaves</td></tr>
+  <tr><td>12</td><td>II</td><td>"O mundo presente não é o mundo como Deus o quis."</td><td>gradiente parchment → deep, frase única</td></tr>
+  <tr><td>13</td><td>III</td><td>Title card — "O Exílio Babilônico"</td><td>gradiente parchment → lapis</td></tr>
+  <tr><td>14</td><td>III</td><td>Mapa animado — três invasões</td><td>pergaminho sépia, arcos animados</td></tr>
+  <tr><td>15</td><td>III</td><td>Timeline vertical — 605, 597, 586, 582</td><td>wine + ink-deep, fade-in sequencial</td></tr>
+  <tr><td>16</td><td>III</td><td>"E não é só a Bíblia que conta"</td><td>italic, transição para sequência arqueológica</td></tr>
+  <tr><td>17</td><td>III</td><td>Crônica Babilônica BM 21946</td><td>foto do tablete, citação sobreposta</td></tr>
+  <tr><td>18</td><td>III</td><td>Tabletes de Ração de Jeoaquim</td><td>foto, "Yaukin, rei de Judá" destacado</td></tr>
+  <tr><td>19</td><td>III</td><td>Cartas de Laquis</td><td>foto ostracon, "sinais de Azeca"</td></tr>
+  <tr><td>20</td><td>III</td><td>Camadas arqueológicas de 586</td><td>foto/ilustração estrato de destruição</td></tr>
+  <tr><td>21</td><td>III</td><td>Cilindro de Ciro</td><td>foto cilindro, conexão com Esdras 1</td></tr>
+  <tr><td>22</td><td>III</td><td>Síntese histórica — convergência</td><td>texto, espaço amplo</td></tr>
+  <tr><td>23</td><td>III</td><td>Title card — Jeremias</td><td>wine + parchment escuro, silhueta única</td></tr>
+  <tr><td>24</td><td>III</td><td>A proibição de Jeremias 16</td><td>silhueta isolada, texto curto</td></tr>
+  <tr><td>25</td><td>III</td><td>A cisterna (Jeremias 38)</td><td>deep ink, sombras profundas, vista de cima</td></tr>
+  <tr><td>26</td><td>III</td><td>Confissões — "Maldito o dia em que nasci"</td><td>wine sobre fundo deep, silêncio</td></tr>
+  <tr><td>27</td><td>III</td><td>Lamentações 3 — descida e virada</td><td>duas partes: ink-deep + gold, virada com atraso</td></tr>
+  <tr><td>28</td><td>III</td><td>Title card — Nabuzaradã</td><td>lapis sobre parchment</td></tr>
+  <tr><td>29</td><td>III</td><td>Jeremias 40:2-4 — o discurso pagão</td><td>silhuetas soldado+profeta, fade-in linha por linha</td></tr>
+  <tr><td>30</td><td>III</td><td>"A primeira pessoa a confirmar Jeremias foi um pagão"</td><td>frase única, espaço amplo</td></tr>
+  <tr><td>31</td><td>III</td><td>Title card — Nabucodonosor</td><td>lapis profundo, coroa estilizada</td></tr>
+  <tr><td>32</td><td>III</td><td>Daniel 4 — transformação em três frames</td><td>rei → fera → rei humilhado</td></tr>
+  <tr><td>33</td><td>III</td><td>Daniel 4:34-35 — a confissão imperial</td><td>gradiente lapis → parchment</td></tr>
+  <tr><td>34</td><td>III</td><td>Intertextualidade Dn ↔ Is/Sl</td><td>lapis + gold lado a lado, setas finas</td></tr>
+  <tr><td>35</td><td>III</td><td>Honestidade — Nabonido em Qumran</td><td>card investigativo, fragmento 4Q242</td></tr>
+  <tr><td>36</td><td>III</td><td>Síntese — dois retratos</td><td>Jeremias (wine) + Nabucodonosor (lapis)</td></tr>
+  <tr><td>37</td><td>IV</td><td>Title card — A Cruz</td><td>wine + gold sobre deep, escala maior</td></tr>
+  <tr><td>38</td><td>IV</td><td>Gethsêmani</td><td>tons noturnos, deep + azul-cinza</td></tr>
+  <tr><td>39</td><td>IV</td><td>"Eloí, Eloí, lamá sabactâni?"</td><td>deep ink, italic, silêncio absoluto, 15-20s</td></tr>
+  <tr><td>40</td><td>IV</td><td>Salmo 22 — a fonte da citação</td><td>aramaico + hebraico, intertextualidade</td></tr>
+  <tr><td>41</td><td>IV</td><td>"Jesus chorou."</td><td>parchment, wine, minimalista, tempo longo</td></tr>
+  <tr><td>42</td><td>IV</td><td>Hebreus 4:15 — sympatheō</td><td>citação + grego em lapis</td></tr>
+  <tr><td>43</td><td>V</td><td>Title card — Solidão e Direção</td><td>gold sobre parchment</td></tr>
+  <tr><td>44</td><td>V</td><td>Gênesis 2:18 — "não é bom"</td><td>parchment + wine, citação destacada</td></tr>
+  <tr><td>45</td><td>V</td><td>O arco da Bíblia — linha cronológica</td><td>linha gold, pontos wine, animação sequencial</td></tr>
+  <tr><td>46</td><td>V</td><td>Apocalipse 21:3 — "habitará com eles"</td><td>gradiente deep → parchment claro</td></tr>
+  <tr><td>47</td><td>V</td><td>Fechamento — "a aposta segue aberta"</td><td>parchment, layout assimétrico, sem música</td></tr>
+</table>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NOTAS FINAIS
+     ═══════════════════════════════════════════════════════════════ -->
+
+<h2>9. Notas finais para o agente</h2>
+
+<ol>
+  <li><strong>O presenter mostra as notas pastorais.</strong> Tudo que está em caixa rosa <code>.pastoral</code> neste documento aparece apenas no painel do Ricky (instrutor), nunca na tela principal nem no celular dos participantes.</li>
+  <li><strong>O participante vê uma versão simplificada.</strong> Texto principal em escala maior, animações reduzidas. Citações bíblicas com referência tipográfica visível.</li>
+  <li><strong>Imagens: priorizar fotos reais de artefatos.</strong> Crônica Babilônica BM 21946, Cilindro de Ciro, Cartas de Laquis e tabletes de Jeoaquim têm imagens públicas em sites de museus (British Museum, Pergamon, Museu de Israel). Quando não disponíveis, usar gravura sépia estilizada — nunca renderização 3D nem ilustração estilo livro infantil nem imagem genérica de IA.</li>
+  <li><strong>Música: silêncio é o padrão.</strong> Drones discretos de corda ou piano contemplativo são aceitáveis apenas em transições entre movimentos. Slides 03, 26, 27, 39 e 41 são silêncio absoluto.</li>
+  <li><strong>Não fechar com hino.</strong> O Movimento V termina como o Salmo 88 termina — com espaço. Não acrescentar slide de oração final, agradecimento, "amém" ou call-to-action. O silêncio depois do slide 47 é parte do design.</li>
+  <li><strong>Tempo total estimado:</strong> 50-60 minutos de exposição com pausas pastorais. Não acelerar para encaixar em menos.</li>
+</ol>
+
+<hr>
+
+<p class="meta" style="text-align:center; margin-top: 2rem;">Lição 16 · O Mundo Quebrado · Documento de referência v.1<br>Curso Apologético Bíblico para Guga · Maio de 2026</p>
+
+</body>
+</html>
