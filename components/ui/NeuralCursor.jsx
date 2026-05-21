@@ -2,8 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 const NeuralCursor = () => {
+  const pathname = usePathname();
+  if (pathname?.startsWith('/presentation')) return null;
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
