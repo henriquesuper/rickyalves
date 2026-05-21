@@ -86,7 +86,7 @@ export function Slide56() {
                         className="text-base md:text-lg"
                         style={{ color: colors.textLight, fontFamily: "'Playfair Display', Georgia, serif" }}
                     >
-                        Aula 14 · <em>a gente leva um texto real, junto, até o fim.</em>
+                        Aula 14 · <em>Nós entregamos um texto real, junto, até o fim.</em>
                     </p>
                 </motion.div>
             </div>

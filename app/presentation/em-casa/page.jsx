@@ -93,6 +93,68 @@ const EmCasaPresentationPage = () => {
   // Active Slide Index inside the active chapter
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
 
+  // Dashboard mock data state
+  const [dashboardTab, setDashboardTab] = useState('outflow'); // 'outflow', 'inventory', 'trends'
+  const [dashboardSearch, setDashboardSearch] = useState('');
+  const [dashboardRevenue, setDashboardRevenue] = useState(2450.80);
+  const [dashboardOrders, setDashboardOrders] = useState(42);
+  
+  // List of sold items
+  const [soldItems, setSoldItems] = useState([
+    { id: 'item-1', name: 'Coca-Cola Lata 350ml', category: 'Bebidas', salesCount: 142, revenue: 852.00, lastSold: 'há 2 min' },
+    { id: 'item-2', name: 'Leite Integral Itambé 1L', category: 'Laticínios', salesCount: 98, revenue: 588.00, lastSold: 'há 5 min' },
+    { id: 'item-3', name: 'Pão de Forma Bauducco 500g', category: 'Padaria', salesCount: 75, revenue: 600.00, lastSold: 'há 12 min' },
+    { id: 'item-4', name: 'Arroz Prato Fino 5kg', category: 'Mercearia', salesCount: 43, revenue: 1075.00, lastSold: 'há 20 min' },
+  ]);
+
+  // List of inventory items / stock alerts
+  const [stockAlerts, setStockAlerts] = useState([
+    { id: 'alert-1', name: 'Azeite de Oliva Gallo 500ml', stock: 0, minStock: 5, category: 'Mercearia', status: 'FALTA', replacement: 'Azeite Andorinha 500ml', replacementStock: 18, replacedCount: 12 },
+    { id: 'alert-2', name: 'Café Pilão a Vácuo 500g', stock: 2, minStock: 10, category: 'Mercearia', status: 'CRÍTICO', replacement: 'Café Melitta 500g', replacementStock: 24, replacedCount: 8 },
+    { id: 'alert-3', name: 'Detergente Limpol Coco 500ml', stock: 0, minStock: 8, category: 'Limpeza', status: 'FALTA', replacement: 'Detergente Ypê Coco 500ml', replacementStock: 32, replacedCount: 15 },
+  ]);
+
+  // List of searched items
+  const [searchedItems, setSearchedItems] = useState([
+    { id: 'search-1', name: 'Sorvete Kibon Creme 1.5L', searches: 280, growth: '+15%', status: 'Disponível' },
+    { id: 'search-2', name: 'Cerveja Heineken Long Neck 330ml', searches: 195, growth: '+22%', status: 'Disponível' },
+    { id: 'search-3', name: 'Pão de Alho Zinho Tradicional', searches: 124, growth: '+8%', status: 'Disponível' },
+    { id: 'search-4', name: 'Chocolate Lacta Barra 90g', searches: 95, growth: '+5%', status: 'Poucas unidades' },
+  ]);
+
+  const [terminalLogs, setTerminalLogs] = useState([
+    'Uplink operacional estabelecido.',
+    'Porta 3001 ativa: escutando eventos socket.io.',
+    'Insira dados ou simule uma venda.'
+  ]);
+
+  const addTerminalLog = (logText) => {
+    const time = new Date().toLocaleTimeString('pt-BR');
+    setTerminalLogs(prev => [`[${time}] ${logText}`, ...prev.slice(0, 15)]);
+  };
+
+  const simulateSale = () => {
+    const randomIndex = Math.floor(Math.random() * soldItems.length);
+    const itemToUpdate = soldItems[randomIndex];
+    const unitPrice = itemToUpdate.revenue / itemToUpdate.salesCount;
+    
+    const updatedSold = soldItems.map((item, idx) => {
+      if (idx === randomIndex) {
+        return {
+          ...item,
+          salesCount: item.salesCount + 1,
+          revenue: item.revenue + unitPrice,
+          lastSold: 'agora mesmo'
+        };
+      }
+      return item;
+    });
+    setSoldItems(updatedSold);
+    setDashboardRevenue(prev => prev + unitPrice);
+    setDashboardOrders(prev => prev + 1);
+    addTerminalLog(`UPLINK: +1 ${itemToUpdate.name} vendido (${formatBRL(unitPrice)})`);
+  };
+
   // Refs for scrolling elements
   const scrollContainerRef = useRef(null);
   const chapterViewRef = useRef(null);
@@ -119,7 +181,7 @@ const EmCasaPresentationPage = () => {
       title: 'O DESAFIO',
       subtitle: 'Taxas altas e margens estreitas no varejo alimentar.',
       description: 'Como as plataformas de entrega tradicionais sufocam a lucratividade dos supermercados locais.',
-      image: '/images/cover_o_desafio_clean.png',
+      image: '/images/cover_o_desafio_clean_pt.png',
       bgColor: 'from-red-950/70 via-black/95 to-black'
     },
     {
@@ -141,7 +203,7 @@ const EmCasaPresentationPage = () => {
       title: 'SHARED SUCCESS',
       subtitle: 'Pronto para vender mais sem pagar mais?',
       description: 'Coloque o seu supermercado na era digital sem taxas e com recebimento imediato.',
-      image: '/images/cover_parceria_clean.png',
+      image: '/images/cover_parceria_clean_pt.png',
       bgColor: 'from-emerald-900/60 via-black/95 to-black'
     }
   ];
@@ -227,7 +289,7 @@ const EmCasaPresentationPage = () => {
   }
 
   const getSlideCount = (chapterNumber) => {
-    return chapterNumber === 1 ? 4 : 3;
+    return (chapterNumber === 1 || chapterNumber === 3) ? 4 : 3;
   };
 
   // Formatting currency helper
@@ -302,19 +364,19 @@ const EmCasaPresentationPage = () => {
 
         {/* Sidebar Vertical text */}
         <div className="flex-1 flex items-center justify-center">
-          <div className="writing-mode-vertical text-emerald-400/40 text-xs tracking-[0.4em] font-mono uppercase">
-            <style jsx>{`
-              .writing-mode-vertical {
-                writing-mode: vertical-lr;
-                text-orientation: mixed;
-              }
-            `}</style>
+          <div 
+            style={{ writingMode: 'vertical-lr', textOrientation: 'mixed', whiteSpace: 'nowrap' }}
+            className="text-emerald-400/40 text-xs tracking-[0.4em] font-mono uppercase"
+          >
             Em Casa — Parceria Comercial
           </div>
         </div>
 
-        <div className="writing-mode-vertical text-white/30 text-xs tracking-[0.2em] font-light uppercase">
-          A gente leva, você fatura
+        <div 
+          style={{ writingMode: 'vertical-lr', textOrientation: 'mixed', whiteSpace: 'nowrap' }}
+          className="text-white/30 text-xs tracking-[0.2em] font-light uppercase"
+        >
+          Nós entregamos, você fatura
         </div>
       </div>
 
@@ -392,7 +454,12 @@ const EmCasaPresentationPage = () => {
 
               {/* Bottom Visual Element / Action prompt */}
               <div className="flex items-center space-x-2 text-xs font-mono text-emerald-500/60 group-hover:text-emerald-400 transition-colors duration-300">
-                <span>INICIAR APRESENTAÇÃO</span>
+                <span>
+                  {index === 0 && "INICIAR APRESENTAÇÃO"}
+                  {index === 1 && "VER O DESAFIO"}
+                  {index === 2 && "VER A SOLUÇÃO"}
+                  {index === 3 && "VER PARCERIA"}
+                </span>
                 <span className="group-hover:translate-x-2 transition-transform duration-300">→</span>
               </div>
             </div>
@@ -626,13 +693,13 @@ const EmCasaPresentationPage = () => {
                             <div className="relative w-24 h-24 mx-auto rounded-full overflow-hidden border-2 border-white/10 group-hover:border-emerald-400 transition-all flex items-center justify-center">
                               <Image 
                                 src="/images/ana_paula.png" 
-                                alt="Ana Paula Torres" 
+                                alt="Hyleana Paula Torres" 
                                 fill 
                                 className="object-cover opacity-80 group-hover:opacity-100 transition-opacity" 
                               />
                             </div>
                             <div>
-                              <h4 className="text-lg font-mono font-medium text-white group-hover:text-emerald-400 transition-colors">Ana Paula Torres</h4>
+                              <h4 className="text-lg font-mono font-medium text-white group-hover:text-emerald-400 transition-colors">Hyleana Paula Torres</h4>
                               <p className="text-xs text-emerald-500 font-mono">Comercial & Trade Marketing</p>
                             </div>
                             <p className="text-gray-400 font-light text-xs leading-relaxed">
@@ -754,8 +821,8 @@ const EmCasaPresentationPage = () => {
                     <div className="w-screen h-full snap-start flex items-center justify-center px-16 relative">
                       <div className="max-w-5xl w-full space-y-8">
                         <div className="text-left space-y-2">
-                          <h2 className="text-3xl font-mono text-red-400 uppercase tracking-widest">Os Quatro Vilões das Margens</h2>
-                          <p className="text-gray-400 font-light font-mono text-xs">// Problemas cruciais da operação tradicional no meio digital</p>
+                          <h2 className="text-3xl font-mono text-red-400 uppercase tracking-widest">Os Quatro Vilões do Delivery Tradicional</h2>
+                          <p className="text-gray-400 font-light font-mono text-xs">// O que trava a operação de quem vende por plataformas de terceiros</p>
                         </div>
                         
                         <motion.div 
@@ -769,9 +836,9 @@ const EmCasaPresentationPage = () => {
                           <motion.div variants={cardItemVariant} className="bg-white/5 border border-white/5 p-6 rounded-xl flex items-start space-x-4 border-l-2 border-l-red-500/40">
                             <div className="text-2xl text-red-500 font-mono font-bold">01</div>
                             <div className="space-y-1">
-                              <h4 className="text-lg font-mono text-white">Comissões que chegam a 28%</h4>
+                              <h4 className="text-lg font-mono text-white">Comissões recorrentes sobre cada venda</h4>
                               <p className="text-gray-400 text-sm font-light leading-relaxed">
-                                Aplicativos consolidados cobram taxas exorbitantes por pedido. No setor alimentar, essa taxa absorve quase todo o ganho real do lojista.
+                                As plataformas tradicionais cobram comissão de dois dígitos sobre cada pedido, somada à taxa de processamento de pagamento. Mesmo com poder de negociação, essa fatia se repete em toda venda e corrói o resultado de um setor que já trabalha com margem apertada.
                               </p>
                             </div>
                           </motion.div>
@@ -780,9 +847,9 @@ const EmCasaPresentationPage = () => {
                           <motion.div variants={cardItemVariant} className="bg-white/5 border border-white/5 p-6 rounded-xl flex items-start space-x-4 border-l-2 border-l-red-500/40">
                             <div className="text-2xl text-red-500 font-mono font-bold">02</div>
                             <div className="space-y-1">
-                              <h4 className="text-lg font-mono text-white">Margem Estreita de 3% a 4%</h4>
+                              <h4 className="text-lg font-mono text-white">Margem estreita do varejo alimentar</h4>
                               <p className="text-gray-400 text-sm font-light leading-relaxed">
-                                O varejo alimentar opera com margem líquida média muito estreita. Dividir essa rentabilidade com comissões de delivery torna o canal inviável.
+                                O varejo alimentar opera com margem líquida média de 3% a 4%. Dividir essa rentabilidade com as comissões do delivery torna cada pedido pouco lucrativo ou até deficitário.
                               </p>
                             </div>
                           </motion.div>
@@ -791,9 +858,9 @@ const EmCasaPresentationPage = () => {
                           <motion.div variants={cardItemVariant} className="bg-white/5 border border-white/5 p-6 rounded-xl flex items-start space-x-4 border-l-2 border-l-red-500/40">
                             <div className="text-2xl text-red-500 font-mono font-bold">03</div>
                             <div className="space-y-1">
-                              <h4 className="text-lg font-mono text-white">Logística Complexa e Pesada</h4>
+                              <h4 className="text-lg font-mono text-white">Dependência e perda do cliente</h4>
                               <p className="text-gray-400 text-sm font-light leading-relaxed">
-                                Entregar compras pesadas e volumosas é caro. Contratar frota e motoboys próprios gera custo fixo que mata a operação do comércio.
+                                Nos apps tradicionais, o relacionamento e os dados do cliente ficam com a plataforma, não com a rede. O supermercado vira mais um fornecedor dentro do marketplace de um terceiro, sem controle sobre precificação, fidelização e marca. Quando o volume migra para o app de terceiro, a rede fica refém das regras dele.
                               </p>
                             </div>
                           </motion.div>
@@ -802,9 +869,9 @@ const EmCasaPresentationPage = () => {
                           <motion.div variants={cardItemVariant} className="bg-white/5 border border-white/5 p-6 rounded-xl flex items-start space-x-4 border-l-2 border-l-red-500/40">
                             <div className="text-2xl text-red-500 font-mono font-bold">04</div>
                             <div className="space-y-1">
-                              <h4 className="text-lg font-mono text-white">Repasse Demorado de Vendas</h4>
+                              <h4 className="text-lg font-mono text-white">Logística pesada e custo de última milha</h4>
                               <p className="text-gray-400 text-sm font-light leading-relaxed">
-                                Plataformas tradicionais retêm o seu dinheiro por 15 a 30 dias. Esse atraso no fluxo de caixa prejudica o pagamento de fornecedores e a reposição do estoque.
+                                Entregar compras pesadas e volumosas é caro. Manter frota própria gera custo fixo elevado, e terceirizar pela plataforma significa pagar caro e abrir mão do controle da operação de entrega.
                               </p>
                             </div>
                           </motion.div>
@@ -898,7 +965,7 @@ const EmCasaPresentationPage = () => {
 
                 {/* ==================== CHAPTER III: A SOLUÇÃO ==================== */}
                 {activePanel.chapterNumber === 3 && (
-                  <div className="flex h-full min-w-[300%]">
+                  <div className="flex h-full min-w-[400%]">
                     {/* Slide 1: Cover with Hero Mockup */}
                     <div className="w-screen h-full snap-start flex items-center justify-center px-16 relative">
                       <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
@@ -1120,6 +1187,242 @@ const EmCasaPresentationPage = () => {
                         </div>
                       </div>
                     </div>
+
+                    {/* Slide 4: Painel de Dados & Insights Interativo */}
+                    <div className="w-screen h-full snap-start flex items-center justify-center px-16 relative">
+                      <div className="max-w-6xl w-full grid lg:grid-cols-12 gap-8 items-stretch h-[80vh]">
+                        {/* Left Column: Context & Controls */}
+                        <div className="lg:col-span-4 flex flex-col justify-between space-y-6 py-2">
+                          <div className="space-y-4">
+                            <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase block">// INTELIGÊNCIA OPERACIONAL</span>
+                            <h3 className="text-3xl font-mono text-white tracking-wider font-light">
+                              PAINEL DE <span className="text-emerald-400 font-cursive lowercase text-4xl block">dados & insights</span>
+                            </h3>
+                            <p className="text-gray-400 font-light text-sm leading-relaxed">
+                              Diferente dos sistemas tradicionais, nossa plataforma oferece inteligência em tempo real. Identifique produtos sem giro, alertas de ruptura na gôndola e o comportamento de busca do cliente.
+                            </p>
+                          </div>
+
+                          {/* Interactive simulation actions */}
+                          <div className="space-y-4 bg-white/[0.02] border border-white/10 rounded-xl p-4">
+                            <h4 className="text-xs font-mono text-gray-400 uppercase tracking-widest">Painel de Testes do Lojista</h4>
+                            
+                            <button
+                              onClick={simulateSale}
+                              className="w-full flex items-center justify-center gap-3 p-3.5 rounded-lg border border-emerald-500/20 bg-emerald-950/10 hover:bg-emerald-500/25 hover:border-emerald-500/50 hover:shadow-[0_0_15px_rgba(16,185,129,0.15)] text-emerald-400 transition-all cursor-pointer group"
+                            >
+                              <span className="text-xl group-hover:scale-110 transition-transform">🛒</span>
+                              <span className="text-xs font-mono font-bold uppercase tracking-wider">Simular Novo Pedido</span>
+                            </button>
+                          </div>
+
+                          {/* Cyberpunk terminal logs */}
+                          <div className="bg-black border border-white/5 rounded-xl p-3 flex-1 flex flex-col min-h-[120px] max-h-[180px] overflow-hidden">
+                            <div className="flex items-center justify-between border-b border-white/5 pb-1.5 mb-2 text-[10px] font-mono text-gray-500 uppercase tracking-wider">
+                              <span>System Logs</span>
+                              <span className="flex items-center gap-1.5">
+                                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping" />
+                                LIVE
+                              </span>
+                            </div>
+                            <div className="flex-1 font-mono text-[10px] text-emerald-400/80 overflow-y-auto space-y-1.5 pr-2 select-text scrollbar-thin">
+                              {terminalLogs.map((log, index) => (
+                                <div key={index} className="leading-tight break-all border-l-2 border-emerald-500/20 pl-1.5">
+                                  {log}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right Column: High fidelity cyberpunk dashboard panel */}
+                        <div className="lg:col-span-8 flex flex-col bg-neutral-950/80 border border-white/10 rounded-2xl shadow-[0_0_40px_rgba(16,185,129,0.05)] overflow-hidden">
+                          {/* Window header */}
+                          <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/10 select-none">
+                            <div className="flex space-x-1.5">
+                              <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
+                            </div>
+                            <span className="font-mono text-[10px] text-gray-400 tracking-wider">MERCADO_INSIGHTS_UPLINK_v1.0.9</span>
+                            <span className="font-mono text-[9px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">ESTADO: CONECTADO</span>
+                          </div>
+
+                          {/* KPIs Header bar */}
+                          <div className="grid grid-cols-3 border-b border-white/10 bg-black/40">
+                            <div className="p-4 border-r border-white/10 space-y-1">
+                              <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest">FATURAMENTO HOJE</span>
+                              <div className="text-xl font-mono font-bold text-white flex items-baseline gap-1">
+                                {formatBRL(dashboardRevenue)}
+                                <span className="text-[9px] text-emerald-400 font-light">+12.4%</span>
+                              </div>
+                            </div>
+                            <div className="p-4 border-r border-white/10 space-y-1">
+                              <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest">PEDIDOS ENTREGUES</span>
+                              <div className="text-xl font-mono font-bold text-emerald-400">
+                                {dashboardOrders} <span className="text-[9px] text-gray-500 font-light">pedidos</span>
+                              </div>
+                            </div>
+                            <div className="p-4 space-y-1">
+                              <span className="text-[9px] font-mono text-gray-500 uppercase tracking-widest">ALERTAS EM ABERTO</span>
+                              <div className="text-xl font-mono font-bold text-red-500 flex items-center gap-1.5">
+                                <span>3 itens</span>
+                                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Controls bar (Search & Tab triggers) */}
+                          <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center p-3 border-b border-white/10 gap-3 bg-black/20">
+                            {/* Tabs */}
+                            <div className="flex space-x-1 font-mono text-xs">
+                              <button
+                                onClick={() => setDashboardTab('outflow')}
+                                className={`px-3 py-1.5 rounded transition-all cursor-pointer ${
+                                  dashboardTab === 'outflow'
+                                    ? 'bg-emerald-500 text-black font-bold'
+                                    : 'text-gray-400 hover:text-white bg-white/5'
+                                }`}
+                              >
+                                [01_SAÍDAS]
+                              </button>
+                              <button
+                                onClick={() => setDashboardTab('inventory')}
+                                className={`px-3 py-1.5 rounded transition-all cursor-pointer ${
+                                  dashboardTab === 'inventory'
+                                    ? 'bg-red-500 text-white font-bold'
+                                    : 'text-gray-400 hover:text-white bg-white/5'
+                                }`}
+                              >
+                                [02_ESTOQUE]
+                              </button>
+                              <button
+                                onClick={() => setDashboardTab('trends')}
+                                className={`px-3 py-1.5 rounded transition-all cursor-pointer ${
+                                  dashboardTab === 'trends'
+                                    ? 'bg-purple-500 text-white font-bold'
+                                    : 'text-gray-400 hover:text-white bg-white/5'
+                                }`}
+                              >
+                                [03_BUSCAS]
+                              </button>
+                            </div>
+
+                            {/* Search input */}
+                            <div className="relative">
+                              <input
+                                type="text"
+                                placeholder="PROMPT_PESQUISA_> "
+                                value={dashboardSearch}
+                                onChange={(e) => setDashboardSearch(e.target.value)}
+                                className="bg-black border border-white/10 rounded px-3 py-1.5 text-xs font-mono text-emerald-400 focus:outline-none focus:border-emerald-500 w-full sm:w-48 placeholder:text-gray-600 transition-colors"
+                              />
+                            </div>
+                          </div>
+
+                          {/* Dashboard content area */}
+                          <div className="flex-1 overflow-y-auto p-4 scrollbar-thin">
+                            {/* Tab 1: Outflow (Sold) */}
+                            {dashboardTab === 'outflow' && (
+                              <div className="space-y-2">
+                                <div className="grid grid-cols-12 text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2 pb-1 border-b border-white/5">
+                                  <span className="col-span-5">Produto</span>
+                                  <span className="col-span-3 text-right">Saídas</span>
+                                  <span className="col-span-2 text-right">Receita</span>
+                                  <span className="col-span-2 text-right">Última</span>
+                                </div>
+                                {soldItems
+                                  .filter(item => item.name.toLowerCase().includes(dashboardSearch.toLowerCase()))
+                                  .map((item) => (
+                                    <div key={item.id} className="grid grid-cols-12 items-center text-xs font-mono py-2.5 px-2 hover:bg-white/5 rounded border border-transparent hover:border-white/5 transition-all">
+                                      <div className="col-span-5 flex items-center gap-2">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
+                                        <span className="text-white truncate font-sans">{item.name}</span>
+                                      </div>
+                                      <span className="col-span-3 text-right text-emerald-400 font-bold">{item.salesCount}x</span>
+                                      <span className="col-span-2 text-right text-gray-300">{formatBRL(item.revenue)}</span>
+                                      <span className="col-span-2 text-right text-gray-500 text-[10px]">{item.lastSold}</span>
+                                    </div>
+                                  ))}
+                              </div>
+                            )}
+
+                            {/* Tab 2: Inventory Stock Alerts */}
+                            {dashboardTab === 'inventory' && (
+                              <div className="space-y-3">
+                                {stockAlerts
+                                  .filter(item => item.name.toLowerCase().includes(dashboardSearch.toLowerCase()))
+                                  .map((item) => (
+                                    <div key={item.id} className="p-3 border border-red-500/20 bg-red-950/5 rounded-xl space-y-3 hover:border-red-500/40 transition-colors">
+                                      {/* Alert header */}
+                                      <div className="flex justify-between items-center text-xs font-mono">
+                                        <div className="flex items-center gap-2">
+                                          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                                          <span className="text-white font-bold font-sans">{item.name}</span>
+                                        </div>
+                                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                          item.status === 'FALTA' ? 'bg-red-500/20 text-red-400' : 'bg-yellow-500/20 text-yellow-400'
+                                        }`}>
+                                          {item.status}
+                                        </span>
+                                      </div>
+
+                                      {/* Progress Stock bar */}
+                                      <div className="space-y-1.5">
+                                        <div className="flex justify-between text-[10px] font-mono text-gray-500">
+                                          <span>Estoque Atual: {item.stock} / {item.minStock} (Mínimo)</span>
+                                          <span>Substituições Efetuadas: {item.replacedCount}</span>
+                                        </div>
+                                        <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                          <div 
+                                            className="h-full bg-red-500" 
+                                            style={{ width: `${Math.max(4, (item.stock / item.minStock) * 100)}%` }}
+                                          />
+                                        </div>
+                                      </div>
+
+                                      {/* AI Replacement Offer info */}
+                                      <div className="p-2 border border-purple-500/20 bg-purple-950/10 rounded flex justify-between items-center gap-2">
+                                        <div className="space-y-0.5">
+                                          <span className="text-[9px] font-mono text-purple-400 block tracking-wider">// IA RECOMENDAÇÃO DE SUBSTITUIÇÃO</span>
+                                          <span className="text-xs text-white font-sans font-medium">{item.replacement}</span>
+                                          <span className="text-[10px] font-mono text-gray-500 block">Estoque do Substituto: {item.replacementStock} unidades</span>
+                                        </div>
+                                        <div className="text-right">
+                                          <span className="text-[10px] font-mono font-bold bg-purple-500/20 text-purple-400 px-2 py-1 rounded">ATIVO NO APP</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
+                              </div>
+                            )}
+
+                            {/* Tab 3: Demand Trends (Searches) */}
+                            {dashboardTab === 'trends' && (
+                              <div className="space-y-3">
+                                <div className="grid grid-cols-12 text-[10px] font-mono text-gray-500 uppercase tracking-widest px-2 pb-1 border-b border-white/5">
+                                  <span className="col-span-6">Termo de Busca</span>
+                                  <span className="col-span-3 text-right">Buscas (Semana)</span>
+                                  <span className="col-span-3 text-right">Tendência</span>
+                                </div>
+                                {searchedItems
+                                  .filter(item => item.name.toLowerCase().includes(dashboardSearch.toLowerCase()))
+                                  .map((item) => (
+                                    <div key={item.id} className="grid grid-cols-12 items-center text-xs font-mono py-2.5 px-2 hover:bg-white/5 rounded border border-transparent hover:border-white/5 transition-all">
+                                      <div className="col-span-6 flex items-center gap-2">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+                                        <span className="text-white font-sans">{item.name}</span>
+                                      </div>
+                                      <span className="col-span-3 text-right text-white font-bold">{item.searches}</span>
+                                      <span className="col-span-3 text-right text-emerald-400 font-bold">{item.growth}</span>
+                                    </div>
+                                  ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
 
@@ -1288,7 +1591,7 @@ const EmCasaPresentationPage = () => {
                         </div>
 
                         <div className="text-xs text-white/30 font-mono tracking-[0.2em] uppercase pt-4">
-                          EM CASA. A GENTE LEVA, VOCÊ FATURA.
+                          EM CASA. NÓS ENTREGAMOS, VOCÊ FATURA.
                         </div>
                       </div>
                     </div>
