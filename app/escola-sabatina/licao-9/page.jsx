@@ -118,16 +118,6 @@ export default function Licao9Viewer() {
                     >
                         Mov. {mov.roman} · {mov.label} — {displayNumber} / {totalSlides}
                     </span>
-                    <span
-                        className="text-[10px] mt-0.5"
-                        style={{
-                            color: colors.inkMuted,
-                            fontFamily: fonts.body,
-                            letterSpacing: '0.1em',
-                        }}
-                    >
-                        Lição 9 · setas ↕ para navegar · &quot;F&quot; fullscreen
-                    </span>
                 </div>
                 <button
                     onClick={nextSlide}
