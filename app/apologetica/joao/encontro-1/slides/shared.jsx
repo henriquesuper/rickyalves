@@ -18,9 +18,9 @@ export {
 
 import { colors, fonts } from '../../../licao-16/slides/shared';
 
-export const TOTAL_SLIDES = 56;
+export const TOTAL_SLIDES = 94;
 
-export const ENCONTRO_LABEL = 'Encontro 1 · João 1–3';
+export const ENCONTRO_LABEL = 'Encontro 1 · João 1–6';
 
 export function EncontroNumber({ size = 'md', delay = 0, color, label = ENCONTRO_LABEL }) {
     const sizeMap = {
@@ -508,13 +508,22 @@ export function GreekGloss({
     tone = 'lapis',
     size = 'md',
     delay = 0,
+    dark = false,
 }) {
-    const toneColor = {
-        lapis: colors.lapis,
-        wine:  colors.wine,
-        gold:  colors.gold,
-        ink:   colors.inkDeep,
-    }[tone] || colors.lapis;
+    const isDark = dark;
+    const toneColor = isDark
+        ? {
+            lapis: colors.lapisSoft,
+            wine:  colors.wineSoft,
+            gold:  colors.goldFaint,
+            ink:   colors.parchment,
+          }[tone] || colors.goldFaint
+        : {
+            lapis: colors.lapis,
+            wine:  colors.wine,
+            gold:  colors.gold,
+            ink:   colors.inkDeep,
+          }[tone] || colors.lapis;
 
     const sizeMap = {
         sm: { word: 'text-2xl md:text-3xl',  gloss: 'text-base md:text-lg' },
@@ -546,7 +555,7 @@ export function GreekGloss({
                 <p
                     className="mt-2 text-xs tracking-[0.4em] uppercase"
                     style={{
-                        color: colors.inkMuted,
+                        color: isDark ? colors.parchmentEdge : colors.inkMuted,
                         fontFamily: fonts.mono,
                     }}
                 >
@@ -557,7 +566,7 @@ export function GreekGloss({
                 <p
                     className={`mt-5 ${sz.gloss} italic`}
                     style={{
-                        color: colors.inkBody,
+                        color: isDark ? colors.parchment : colors.inkBody,
                         fontFamily: fonts.display,
                         lineHeight: 1.45,
                     }}
@@ -569,7 +578,7 @@ export function GreekGloss({
                 <p
                     className="mt-4 text-xs md:text-sm"
                     style={{
-                        color: colors.inkSoft,
+                        color: isDark ? colors.inkMuted : colors.inkSoft,
                         fontFamily: fonts.body,
                         lineHeight: 1.55,
                         letterSpacing: '0.01em',
@@ -581,3 +590,56 @@ export function GreekGloss({
         </motion.div>
     );
 }
+
+export function EuSouProgress({ lit = 1, delay = 0.5 }) {
+    const labels = [
+        "Pão da Vida",
+        "Luz do Mundo",
+        "Porta",
+        "Bom Pastor",
+        "Ressurreição e Vida",
+        "Caminho, Verdade e Vida",
+        "Videira Verdadeira"
+    ];
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay, duration: 0.8 }}
+            className="flex flex-wrap justify-center items-center gap-4 md:gap-6 mt-12 mb-4"
+        >
+            {labels.map((lbl, idx) => {
+                const isLit = idx + 1 <= lit;
+                return (
+                    <div
+                        key={idx}
+                        className="flex flex-col items-center"
+                        style={{ opacity: isLit ? 1 : 0.3 }}
+                    >
+                        <div
+                            className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-all duration-500"
+                            style={{
+                                background: isLit ? colors.gold : 'transparent',
+                                border: `1px solid ${isLit ? colors.gold : colors.inkSoft}`,
+                                color: isLit ? colors.parchment : colors.inkSoft,
+                                boxShadow: isLit ? `0 0 8px ${colors.gold}88` : 'none',
+                            }}
+                        >
+                            {idx + 1}
+                        </div>
+                        <span
+                            className="text-[8px] uppercase tracking-wider mt-1.5 text-center font-medium block max-w-[70px] leading-tight"
+                            style={{
+                                color: isLit ? colors.gold : colors.inkMuted,
+                                fontFamily: fonts.mono,
+                            }}
+                        >
+                            {lbl}
+                        </span>
+                    </div>
+                );
+            })}
+        </motion.div>
+    );
+}
+
