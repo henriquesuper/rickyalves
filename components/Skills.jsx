@@ -18,7 +18,7 @@ const Skills = () => {
   ];
 
   return (
-    <div className="py-20 relative flex flex-col antialiased items-center justify-center overflow-hidden z-10">
+    <div className="relative flex flex-col antialiased items-center justify-center overflow-hidden z-10">
        <div className="text-center mb-10">
          <h2 className="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white to-neutral-400 font-mono mb-2">
           <HackerText text="> Neural_Extensions" />

@@ -6,13 +6,23 @@ import HackerText from "./HackerText";
 const TransmissionCard = ({ id, name, role, message, delay = 0 }) => {
   const [isDecrypted, setIsDecrypted] = useState(false);
 
+  // Touch devices have no hover: decrypt automatically once the card is
+  // well inside the viewport, cascading card by card.
+  const handleViewportEnter = () => {
+    if (window.matchMedia('(hover: none)').matches) {
+      setTimeout(() => setIsDecrypted(true), 400 + delay * 250);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: delay * 0.1 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-80px" }}
+      onViewportEnter={handleViewportEnter}
       onMouseEnter={() => setIsDecrypted(true)}
+      onClick={() => setIsDecrypted(true)}
       className="relative group w-full bg-black/40 border border-white/10 hover:border-green-500/50 p-6 rounded-lg overflow-hidden transition-colors duration-300"
     >
       {/* Background Scanline */}

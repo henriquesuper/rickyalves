@@ -61,6 +61,17 @@ const nextConfig = {
           },
         ],
       },
+      {
+        // Bible-study/presentation routes: keep out of search engines.
+        // These are slated to move to teologicas.com; until then, noindex.
+        source: '/:prefix(salmos|apologetica|mateus|escola-sabatina|daniel|seep|firebase-quiz|presentation|lideranca|mobile-interface)/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
+      },
     ];
   },
 };

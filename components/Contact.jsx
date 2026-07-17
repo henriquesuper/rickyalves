@@ -7,7 +7,7 @@ import LatencySimulator from "./ui/LatencySimulator";
 
 const Contact = () => {
   return (
-    <div className="flex flex-col items-center py-10 px-4 w-full max-w-4xl mx-auto relative z-10">
+    <div className="flex flex-col items-center px-4 w-full max-w-4xl mx-auto relative z-10">
 
       {/* HUD Container */}
       <div className="relative w-full p-1 bg-linear-to-r from-transparent via-green-500/20 to-transparent rounded-xl">

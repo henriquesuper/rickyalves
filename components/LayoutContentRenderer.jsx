@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { MotionConfig } from 'framer-motion';
 import Footer from './Footer';
 import AnimatedLayout from './AnimatedLayout';
 import SystemHeader from './Navigation/SystemHeader';
@@ -14,7 +15,7 @@ export default function LayoutContentRenderer({ children }) {
   const showNavbarAndFooter = !cleanLayoutRoutes.some(route => pathname?.startsWith(route));
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       {showNavbarAndFooter && <SystemHeader />}
       <AnimatedLayout>
         {children}
@@ -25,6 +26,6 @@ export default function LayoutContentRenderer({ children }) {
           <Footer />
         </>
       )}
-    </>
+    </MotionConfig>
   );
-} 
+}

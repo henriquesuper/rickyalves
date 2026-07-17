@@ -3,6 +3,10 @@
 
 @import "tailwindcss";
 
+@theme inline {
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
 @theme {
   --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
   
@@ -20,6 +24,20 @@ body {
 /* Hide default cursor globally for custom NeuralCursor */
 html, body, a, button, input, select, textarea, [role="button"] {
   cursor: none !important;
+}
+
+/* Respect reduced-motion: stop decorative CSS animations and restore the cursor */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html, body, a, button, input, select, textarea, [role="button"] {
+    cursor: auto !important;
+  }
 }
 
 /* Enhanced Piano Styles */

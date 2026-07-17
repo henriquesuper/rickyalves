@@ -13,17 +13,17 @@ import HumanTypewriter from "./ui/HumanTypewriter";
 
 const Hero = () => {
   return (
-    <div className="h-180 w-full rounded-md flex md:items-center md:justify-center antialiased bg-transparent relative overflow-hidden">
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center p-4 max-w-7xl mx-auto z-10 w-full pt-20 md:pt-0">
+    <div className="min-h-svh w-full rounded-md flex items-center justify-center antialiased bg-transparent relative overflow-hidden py-16 md:py-24">
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center p-4 max-w-7xl mx-auto z-10 w-full">
         <ScrollAnimation direction="left">
           <div className="relative flex justify-center md:justify-start md:col-span-1">
-            <CyberGlitchImage 
-              src='/images/profile.jpeg' 
-              width={350} 
-              height={350} 
+            <CyberGlitchImage
+              src='/images/profile.jpeg'
+              width={350}
+              height={350}
               alt="Ricky's personal headshot"
-              className="border border-white/10 shadow-2xl shadow-black/50" 
+              className="shadow-2xl shadow-black/50 w-full max-w-[240px] md:max-w-none"
             />
           </div>
         </ScrollAnimation>
@@ -31,13 +31,16 @@ const Hero = () => {
         <div className="text-left md:col-span-2 md:text-left relative z-10">
           <ScrollAnimation direction="right" delay={0.2}>
             <h1 className="text-5xl md:text-7xl font-bold pb-4 font-mono tracking-tighter min-h-20">
-              <HumanTypewriter 
-                text="RICKY ALVES" 
-                className="bg-clip-text text-transparent bg-linear-to-b from-white to-neutral-400"
-              />
-              <br />
-              <span className="text-2xl md:text-4xl font-normal text-green-400 font-mono mt-2 block tracking-normal">
-                <HackerText text="> The Digital Alchemist" />
+              <span className="sr-only">Ricky Alves — The Digital Alchemist, software engineer based in Los Angeles</span>
+              <span aria-hidden="true">
+                <HumanTypewriter
+                  text="RICKY ALVES"
+                  className="bg-clip-text text-transparent bg-linear-to-b from-white to-neutral-400"
+                />
+                <br />
+                <span className="text-2xl md:text-4xl font-normal text-green-400 font-mono mt-2 block tracking-normal">
+                  <HackerText text="> The Digital Alchemist" />
+                </span>
               </span>
             </h1>
           </ScrollAnimation>
@@ -45,7 +48,7 @@ const Hero = () => {
           <ScrollAnimation direction="up" delay={0.4}>
             <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg leading-relaxed font-mono">
               <span className="text-green-500/50 mr-2">01</span>
-              I'm a software wizard from Los Angeles.
+              I'm a software wizard based in Los Angeles.
               <br/>
               <span className="text-green-500/50 mr-2">02</span>
               Conjuring exceptional digital magic.

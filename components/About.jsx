@@ -10,7 +10,7 @@ import LatencySimulator from "./ui/LatencySimulator";
 
 const About = () => {
   return (
-    <div className="relative z-10 py-16 px-4 md:px-8">
+    <div className="relative z-10 px-4 md:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         {/* Left Column: Terminal Bio */}
@@ -101,7 +101,7 @@ const About = () => {
               alt="Ricky's Secure ID" 
               width={500} 
               height={600}
-              className="border-2 border-white/5 shadow-2xl shadow-green-500/10"
+              className="shadow-2xl shadow-green-500/10"
             />
             {/* Decorative Elements */}
             <div className="absolute -bottom-4 -right-4 w-24 h-24 border-b-2 border-r-2 border-green-500/30 rounded-br-xl"></div>

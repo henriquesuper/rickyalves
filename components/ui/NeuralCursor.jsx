@@ -54,7 +54,7 @@ const NeuralCursor = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-6 h-6 border-2 border-emerald-400 rounded-full pointer-events-none z-[9999] flex items-center justify-center mix-blend-difference"
+      className="fixed top-0 left-0 w-6 h-6 border-2 border-emerald-400 rounded-full pointer-events-none z-[9999] flex items-center justify-center mix-blend-difference motion-reduce:hidden"
       style={{
         x: cursorXSpring,
         y: cursorYSpring,

@@ -26,27 +26,27 @@ export default function Home() {
       </div>
 
       <PageTransition>
-        <div className="max-w-7xl mx-auto relative z-10 w-full pt-20 md:pt-0">
+        <div className="max-w-7xl mx-auto relative z-10 w-full">
           <Hero />
 
           <div className="px-8">
-            <section id="about" className="py-20">
+            <section id="about" className="py-14 md:py-20">
               <About />
             </section>
 
-            <section id="skills" className="py-10">
+            <section id="skills" className="py-14 md:py-20">
               <Skills />
             </section>
 
-            <section id="projects" className="py-20">
+            <section id="projects" className="py-14 md:py-20">
               <Projects />
             </section>
 
-            <section id="testimonials" className="py-20">
+            <section id="testimonials" className="py-14 md:py-20">
               <Testimonials />
             </section>
 
-            <section id="contact" className="pt-20 pb-8">
+            <section id="contact" className="pt-14 md:pt-20 pb-8">
               <Contact />
             </section>
           </div>
