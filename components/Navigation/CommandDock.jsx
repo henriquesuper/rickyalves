@@ -15,6 +15,7 @@ const SKILLS = ["JavaScript", "React", "Node", "Python", "Swift", "Flutter", "HT
 const COMMANDS = [
   "help",
   "whoami",
+  "neofetch",
   "cd ./bio",
   "cat skills.json",
   "ls ./work",
@@ -22,6 +23,8 @@ const COMMANDS = [
   "run ./piano.exe",
   "sudo hire_ricky",
   "matrix",
+  "ping",
+  "history",
   "clear",
   "exit",
 ];
@@ -70,7 +73,20 @@ const CommandDock = () => {
   // Command interpreter. Returns an array of output lines.
   // A line is a string, or { text, href } for links.
   const execute = (raw) => {
-    const cmd = raw.trim().toLowerCase().replace(/\s+/g, " ");
+    const trimmed = raw.trim();
+    const cmd = trimmed.toLowerCase().replace(/\s+/g, " ");
+
+    if (cmd.startsWith("echo ")) {
+      return [trimmed.replace(/^\s*\S+\s+/, "")];
+    }
+
+    if (cmd.startsWith("sudo rm")) {
+      return [
+        "rm: cannot remove '/': Permission denied",
+        "COUNTERMEASURES DEPLOYED :: visitor traced to [REDACTED]",
+        "Nice try, though. I respect the audacity.",
+      ];
+    }
 
     switch (cmd) {
       case "help":
@@ -79,6 +95,7 @@ const CommandDock = () => {
           "AVAILABLE PROTOCOLS:",
           "  help              this manual",
           "  whoami            identify current user",
+          "  neofetch          system information",
           "  cd ./bio          jump to identity log",
           "  cat skills.json   dump loaded modules",
           "  ls ./work         list deployed constructs",
@@ -87,7 +104,64 @@ const CommandDock = () => {
           "  sudo hire_ricky   escalate privileges",
           "  matrix            [REDACTED]",
           "  clear / exit      housekeeping",
+          "",
+          "hint: the filesystem hides things. try 'ls -la'.",
         ];
+
+      case "neofetch":
+        return [
+          "visitor@ricky-os",
+          "────────────────────────────",
+          "OS........ RICKY_OS v2.0 LTS",
+          "KERNEL.... matrix-6.7.4-neo",
+          "HOST...... Los Angeles, CA",
+          "UPTIME.... since 'Hello, World!'",
+          "SHELL..... alchemy.sh",
+          "PKGS...... react next node swift flutter",
+          "THEME..... phosphor-green [locked]",
+          "CPU....... caffeine @ 12 cores",
+          "MEM....... 99% music / 1% var names",
+        ];
+
+      case "ls -la":
+      case "ls -a":
+        return [
+          "total 5",
+          "drwxr-xr-x  visitor  bio/",
+          "drwxr-xr-x  visitor  work/",
+          "-rw-r--r--  visitor  skills.json",
+          "-rwx------  root     piano.exe",
+          "-rw-------  root     .secret",
+        ];
+
+      case "cat .secret":
+      case "cat secret":
+        return [
+          "DECRYPTING... ACCESS GRANTED.",
+          "You actually explored. That's the whole point of this site.",
+          { text: "Mention \"ricky-os\" in your message — it gets priority routing.", href: "mailto:hello@rickyalves.com?subject=ricky-os" },
+        ];
+
+      case "ping":
+        return [
+          "PING rickyalves.com (34.0522°N, 118.2437°W): time=12ms",
+          "PONG — uplink healthy.",
+        ];
+
+      case "pwd":
+        return ["/home/visitor/rickyalves.com"];
+
+      case "date":
+        return [new Date().toUTCString()];
+
+      case "history":
+        return cmdHistory.length
+          ? cmdHistory.map((c, i) => `  ${String(i + 1).padStart(3)}  ${c}`)
+          : ["history: empty. make some."];
+
+      case "coffee":
+      case "brew install coffee":
+        return ["brewing... ERROR: coffee.exe already consumed by developer.", "Try again tomorrow at 06:00 PST."];
 
       case "whoami":
         return [
@@ -151,7 +225,12 @@ const CommandDock = () => {
         return ["usage: sudo hire_ricky"];
 
       case "matrix":
-        return ["There is no spoon. You have been inside it the whole time."];
+        window.dispatchEvent(new Event("ricky:matrix-burst"));
+        return [
+          "Wake up, Neo...",
+          "Reality recalibrated :: rain intensity boosted for 8 seconds.",
+          "There is no spoon. Look behind the glass.",
+        ];
 
       case "github":
         return [{ text: "github.com/henriquesuper", href: "https://github.com/henriquesuper" }];
