@@ -1,11 +1,21 @@
 'use client';
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HackerText from "./ui/HackerText";
 import { motion } from "framer-motion";
 import LatencySimulator from "./ui/LatencySimulator";
+import { getLAStatus } from "@/lib/la-status";
 
 const Contact = () => {
+  const [isSabbath, setIsSabbath] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsSabbath(getLAStatus().mode === "sabbath");
+    check();
+    const interval = setInterval(check, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex flex-col items-center px-4 w-full max-w-4xl mx-auto relative z-10">
 
@@ -56,6 +66,13 @@ const Contact = () => {
             <span>•</span>
             <LatencySimulator />
           </div>
+
+          {isSabbath && (
+            <div className="mt-4 flex items-center gap-2 text-xs font-mono text-violet-400/90">
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-400"></span>
+              SABBATH_MODE :: messages received — replies resume after sundown
+            </div>
+          )}
 
         </div>
 

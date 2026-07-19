@@ -4,6 +4,19 @@ import { cn } from "@/lib/utils";
 import { FaTerminal } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { getLAStatus } from "@/lib/la-status";
+
+const MODE_LABELS = {
+  uplink: "UPLINK_OPEN",
+  sabbath: "OBSERVING_SABBATH",
+  async: "ASYNC_MODE",
+};
+
+const MODE_NOTES = {
+  uplink: "operator online — expect a fast reply.",
+  sabbath: "sabbath in progress — replies resume after sundown.",
+  async: "async hours — reply lands on the next uplink window.",
+};
 
 const PROJECTS = [
   { name: "unique-punch", desc: "GPS time clock & attendance app", href: "https://www.uniquepunch.app" },
@@ -16,6 +29,7 @@ const COMMANDS = [
   "help",
   "whoami",
   "neofetch",
+  "status",
   "cd ./bio",
   "cat skills.json",
   "ls ./work",
@@ -96,6 +110,7 @@ const CommandDock = () => {
           "  help              this manual",
           "  whoami            identify current user",
           "  neofetch          system information",
+          "  status            availability + local time",
           "  cd ./bio          jump to identity log",
           "  cat skills.json   dump loaded modules",
           "  ls ./work         list deployed constructs",
@@ -108,13 +123,16 @@ const CommandDock = () => {
           "hint: the filesystem hides things. try 'ls -la'.",
         ];
 
-      case "neofetch":
+      case "neofetch": {
+        const la = getLAStatus();
         return [
           "visitor@ricky-os",
           "────────────────────────────",
           "OS........ RICKY_OS v2.0 LTS",
           "KERNEL.... matrix-6.7.4-neo",
           "HOST...... Los Angeles, CA",
+          `STATUS.... ${MODE_LABELS[la.mode]}`,
+          `CLOCK..... ${la.time} PT`,
           "UPTIME.... since 'Hello, World!'",
           "SHELL..... alchemy.sh",
           "PKGS...... react next node swift flutter",
@@ -122,6 +140,19 @@ const CommandDock = () => {
           "CPU....... caffeine @ 12 cores",
           "MEM....... 99% music / 1% var names",
         ];
+      }
+
+      case "status":
+      case "uptime": {
+        const la = getLAStatus();
+        return [
+          `UPLINK STATUS :: ${MODE_LABELS[la.mode]}`,
+          `LOCAL TIME... LOS_ANGELES ${la.time} PT`,
+          "WINDOW....... Mon-Fri 08:00-18:00 PT",
+          "SABBATH...... Friday sundown -> Saturday sundown (system rests)",
+          `NOTE......... ${MODE_NOTES[la.mode]}`,
+        ];
+      }
 
       case "ls -la":
       case "ls -a":
@@ -135,12 +166,17 @@ const CommandDock = () => {
         ];
 
       case "cat .secret":
-      case "cat secret":
-        return [
+      case "cat secret": {
+        const lines = [
           "DECRYPTING... ACCESS GRANTED.",
           "You actually explored. That's the whole point of this site.",
           { text: "Mention \"ricky-os\" in your message — it gets priority routing.", href: "mailto:hello@rickyalves.com?subject=ricky-os" },
         ];
+        if (getLAStatus().mode === "sabbath") {
+          lines.push("(sabbath in progress — your message is safe; the reply comes after sundown.)");
+        }
+        return lines;
+      }
 
       case "ping":
         return [
@@ -203,6 +239,7 @@ const CommandDock = () => {
         return [
           "Establishing encrypted tunnel... OK",
           { text: "  hello@rickyalves.com  [click to transmit]", href: "mailto:hello@rickyalves.com" },
+          `note: ${MODE_NOTES[getLAStatus().mode]}`,
         ];
 
       case "run ./piano.exe":
@@ -309,11 +346,15 @@ const CommandDock = () => {
   useEffect(() => {
     if (terminalOpen) {
       inputRef.current?.focus();
-      setHistory((prev) =>
-        prev.length === 0
-          ? [{ cmd: null, lines: ["RICKY_OS v2.0 :: unauthorized access detected... just kidding, welcome.", "type 'help' to see available protocols"] }]
-          : prev
-      );
+      setHistory((prev) => {
+        if (prev.length > 0) return prev;
+        const greeting = ["RICKY_OS v2.0 :: unauthorized access detected... just kidding, welcome."];
+        if (getLAStatus().mode === "sabbath") {
+          greeting.push(":: system observing sabbath — everything still works, replies resume after sundown ::");
+        }
+        greeting.push("type 'help' to see available protocols");
+        return [{ cmd: null, lines: greeting }];
+      });
     }
   }, [terminalOpen]);
 
