@@ -26,10 +26,10 @@ const CyberGlitchImage = ({ src, alt, width, height, className }) => {
 
         {/* Glitch Layers - hover only */}
         <div className="absolute inset-0 z-30 opacity-0 mix-blend-color-dodge animate-glitch-1 pointer-events-none">
-          <Image src={src} alt="" width={width} height={height} className="w-full h-full object-cover opacity-60 -translate-x-2 filter blur-[1px]" />
+          <Image src={src} alt="" width={width} height={height} loading="eager" className="w-full h-full object-cover opacity-60 -translate-x-2 filter blur-[1px]" />
         </div>
         <div className="absolute inset-0 z-30 opacity-0 mix-blend-color-dodge animate-glitch-2 pointer-events-none">
-          <Image src={src} alt="" width={width} height={height} className="w-full h-full object-cover opacity-60 translate-x-2 filter blur-[1px]" />
+          <Image src={src} alt="" width={width} height={height} loading="eager" className="w-full h-full object-cover opacity-60 translate-x-2 filter blur-[1px]" />
         </div>
 
         {/* Subtle scanlines - barely-there texture */}

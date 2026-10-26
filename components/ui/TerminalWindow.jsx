@@ -10,15 +10,15 @@ export const TerminalWindow = ({ children, title = "user@system:~", className })
     )}>
       {/* Terminal Header */}
       <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/5">
-        <div className="flex space-x-2">
+        <div className="flex shrink-0 space-x-2">
           <div className="w-3 h-3 rounded-full bg-red-500/80" />
           <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
           <div className="w-3 h-3 rounded-full bg-green-500/80" />
         </div>
-        <div className="text-xs font-mono text-neutral-400 select-none">
+        <div className="min-w-0 truncate px-3 text-xs font-mono text-neutral-400 select-none">
           {title}
         </div>
-        <div className="w-10" /> {/* Spacer for centering */}
+        <div className="w-10 shrink-0" /> {/* Spacer for centering */}
       </div>
       
       {/* Terminal Body */}

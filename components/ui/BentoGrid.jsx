@@ -22,7 +22,6 @@ export const BentoGridItem = ({
   description,
   header,
   icon,
-  id
 }) => {
   return (
     <div
@@ -50,9 +49,6 @@ export const BentoGridItem = ({
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             {icon}
-            <div className="text-[10px] font-mono text-green-500/70 tracking-widest uppercase border border-green-500/20 px-2 py-0.5 rounded">
-              Clearance: Lvl-{id || 'X'}
-            </div>
           </div>
         </div>
         
@@ -61,11 +57,6 @@ export const BentoGridItem = ({
         </div>
         <div className="font-sans font-normal text-neutral-400 text-sm leading-relaxed line-clamp-3">
           {description}
-        </div>
-        
-        {/* Command Prompt Visual */}
-        <div className="mt-4 text-xs font-mono text-neutral-600 group-hover/bento:text-green-500/80 transition-colors">
-          <span className="animate-pulse">_</span> ./execute_protocol.sh
         </div>
       </div>
     </div>

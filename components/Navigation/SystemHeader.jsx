@@ -39,12 +39,12 @@ const SystemHeader = () => {
   const style = laStatus ? STATUS_STYLES[laStatus.mode] : null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 px-4 py-4 flex justify-between items-start pointer-events-none mix-blend-difference">
+    <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 pb-8 flex justify-between items-start pointer-events-none bg-linear-to-b from-black/90 via-black/60 to-transparent">
 
       {/* Root Access / Logo */}
       <button
         onClick={scrollToTop}
-        className="pointer-events-auto group flex items-center gap-2 font-mono text-sm text-white/80 hover:text-green-400 transition-colors bg-black/20 backdrop-blur-sm px-3 py-1 rounded border border-white/5 hover:border-green-500/30"
+        className="pointer-events-auto group flex items-center gap-2 font-mono text-sm text-white/80 hover:text-green-400 transition-colors bg-black/60 backdrop-blur-sm px-3 py-1 rounded border border-white/10 hover:border-green-500/30"
       >
         <span className="text-green-500 font-bold text-lg">~/</span>
         <span className="hidden md:inline-block">
@@ -56,7 +56,7 @@ const SystemHeader = () => {
       {style && (
         <div className="flex flex-col items-end gap-1">
           <div
-            className={`flex items-center gap-2 font-mono text-xs bg-black/20 backdrop-blur-sm px-2 py-1 rounded border border-white/5 ${style.text}`}
+            className={`flex items-center gap-2 font-mono text-xs bg-black/60 backdrop-blur-sm px-2 py-1 rounded border border-white/10 ${style.text}`}
           >
             <div className={`w-1.5 h-1.5 rounded-full ${style.dot}`}></div>
             <span>{style.label}</span>

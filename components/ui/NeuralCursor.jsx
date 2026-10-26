@@ -64,7 +64,7 @@ const NeuralCursor = () => {
       animate={{
         opacity: isVisible ? 1 : 0,
         scale: isHovering ? 2.5 : 1,
-        backgroundColor: isHovering ? "rgba(52, 211, 153, 0.2)" : "transparent",
+        backgroundColor: isHovering ? "rgba(52, 211, 153, 0.2)" : "rgba(52, 211, 153, 0)",
         borderColor: isHovering ? "rgba(52, 211, 153, 0.8)" : "rgba(52, 211, 153, 1)",
       }}
       transition={{ type: "spring", stiffness: 500, damping: 28 }}
