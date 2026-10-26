@@ -10,7 +10,7 @@ export const projectData = [
         'Switch positions mid-shift without punching out',
         'Shipped on the App Store and Google Play, in English, Spanish and Portuguese',
       ],
-      tags: ['iOS', 'Android', 'Geolocation', 'i18n'],
+      tags: ['Flutter', 'iOS', 'Android', 'Geolocation', 'i18n'],
       image: '/images/projects/unique-punch.jpg',
       imageAlt: 'Unique Punch landing page with an interactive phone demo of the punch-in screen',
       links: { live: 'https://www.uniquepunch.app' },

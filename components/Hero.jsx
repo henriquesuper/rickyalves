@@ -51,23 +51,26 @@ const Hero = () => {
           </ScrollAnimation>
 
           <ScrollAnimation direction="up" delay={0.4}>
+            {/* Fixed-width number gutter keeps the three lines aligned despite their different sizes */}
             <div className="mt-4 max-w-xl font-mono space-y-2">
-              <p className="text-lg md:text-xl text-neutral-100 leading-snug">
-                <span className="text-green-500/50 mr-2 text-base">01</span>
-                Full-stack engineer based in Los Angeles.
+              <p className="flex items-baseline text-lg md:text-xl text-neutral-100 leading-snug">
+                <span className="w-8 shrink-0 text-sm text-green-500/50" aria-hidden="true">01</span>
+                <span>Full-stack engineer based in Los Angeles.</span>
               </p>
-              <p className="text-base md:text-lg text-neutral-300 leading-snug">
-                <span className="text-green-500/50 mr-2">02</span>
-                Building web &amp; mobile apps — iOS and Android.
+              <p className="flex items-baseline text-base md:text-lg text-neutral-300 leading-snug">
+                <span className="w-8 shrink-0 text-sm text-green-500/50" aria-hidden="true">02</span>
+                <span>Building web &amp; mobile apps — iOS and Android.</span>
               </p>
-              <p className="text-sm md:text-base text-neutral-400 flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="text-green-500/50">03</span>
-                {STACK.map((tech, i) => (
-                  <React.Fragment key={tech}>
-                    {i > 0 && <span className="text-green-500/40" aria-hidden="true">·</span>}
-                    <span>{tech}</span>
-                  </React.Fragment>
-                ))}
+              <p className="flex items-baseline text-sm md:text-base text-neutral-400">
+                <span className="w-8 shrink-0 text-sm text-green-500/50" aria-hidden="true">03</span>
+                <span className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                  {STACK.map((tech, i) => (
+                    <React.Fragment key={tech}>
+                      {i > 0 && <span className="text-green-500/40" aria-hidden="true">·</span>}
+                      <span>{tech}</span>
+                    </React.Fragment>
+                  ))}
+                </span>
               </p>
             </div>
           </ScrollAnimation>
