@@ -1,6 +1,7 @@
 export const projectData = [
     {
       id: 1,
+      slug: 'unique-punch',
       title: 'Unique Punch',
       tagline: 'Location-verified time clock for hourly teams.',
       description:
@@ -22,6 +23,7 @@ export const projectData = [
     },
     {
       id: 2,
+      slug: 'ricky-os',
       title: 'RICKY_OS',
       tagline: 'This site — a portfolio you can type into.',
       description:
@@ -38,6 +40,7 @@ export const projectData = [
     },
     {
       id: 3,
+      slug: 'piano',
       title: 'Sonic Synthesis Terminal',
       tagline: 'A playable piano that guesses the song you are playing.',
       description:
@@ -53,3 +56,11 @@ export const projectData = [
       links: { live: '/piano', source: 'https://github.com/henriquesuper/piano' },
     },
   ];
+
+// Shared by the Skills section and the terminal's `cat skills.json`
+export const skillsData = {
+  mobile: ['Flutter', 'Dart', 'Swift'],
+  web: ['React', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Three.js'],
+  backend: ['Node.js', 'Express', 'Socket.IO', 'Firebase'],
+  also: ['Python', 'Web Audio / Tone.js', 'Canvas'],
+};

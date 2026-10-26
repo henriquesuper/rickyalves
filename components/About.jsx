@@ -6,89 +6,121 @@ import ScrollAnimation from "../app/components/ScrollAnimation";
 import TerminalWindow from "./ui/TerminalWindow";
 import GlitchImage from "./ui/GlitchImage";
 import HackerText from "./ui/HackerText";
-import LatencySimulator from "./ui/LatencySimulator";
+import { getLAStatus, UPLINK_START, UPLINK_END } from "@/lib/la-status";
+
+const STATE_STYLES = {
+  uplink: { label: "ONLINE", text: "text-emerald-400", dot: "bg-emerald-500", ping: true },
+  async: { label: "ASYNC", text: "text-amber-400", dot: "bg-amber-400", ping: false },
+  sabbath: { label: "SABBATH", text: "text-violet-400", dot: "bg-violet-400", ping: false },
+};
+
+const Prompt = ({ cmd }) => (
+  <div className="text-sm text-neutral-500">
+    <span className="text-green-400 mr-2">$</span>{cmd}
+  </div>
+);
 
 const About = () => {
+  const [mode, setMode] = React.useState(null);
+
+  React.useEffect(() => {
+    const check = () => setMode(getLAStatus().mode);
+    check();
+    const interval = setInterval(check, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const state = mode ? STATE_STYLES[mode] : null;
+
   return (
     <div className="relative z-10 px-4 md:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
+
         {/* Left Column: Terminal Bio */}
         <ScrollAnimation direction="left">
           <div className="space-y-6">
             <h2 className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-linear-to-b from-white to-neutral-400 mb-2 font-mono">
               <HackerText text="> Identity_Log" />
             </h2>
-            
+
             <TerminalWindow title="root@ricky-os:~/identity">
-              <div className="space-y-4 text-neutral-300 leading-relaxed font-mono">
-                <p>
-                  <span className="text-green-400 mr-2">$</span>
-                  Donning my developer cape, I function as a <span className="text-yellow-400">Cyber_Sherlock_Holmes</span>, 
-                  sleuthing out elegant solutions for cryptic digital conundrums.
-                </p>
-                <p>
-                  <span className="text-green-400 mr-2">$</span>
-                  My stack is fueled by <span className="text-blue-400">HTML</span>, <span className="text-blue-400">CSS</span>, 
-                  and the mystical arts of <span className="text-yellow-400">JavaScript</span>. 
-                  I seamlessly toggle between front-end aesthetics and back-end logic like a 
-                  <span className="text-purple-400"> code-wielding_ballerina</span>.
-                </p>
-                <p>
-                  <span className="text-green-400 mr-2">$</span>
-                  Current Quest: Brewing up a storm in the realm of <span className="text-orange-400">Swift</span>. 
-                  Brace yourselves, system update imminent...
-                </p>
+              <div className="space-y-5 text-neutral-300 leading-relaxed font-mono">
+                <div className="space-y-1">
+                  <Prompt cmd="whoami" />
+                  <p>
+                    Brazilian-born software engineer in Los Angeles. I build products
+                    end to end — <span className="text-white">the mobile app, the web app,
+                    and the backend</span> that ties them together.
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <Prompt cmd="cat focus.txt" />
+                  <p>
+                    These days that means <span className="text-white">Flutter</span> on
+                    iOS and Android, and <span className="text-white">React / Next.js</span> on
+                    the web. I sweat the details people feel but rarely notice: a fast first
+                    load, a smooth animation, an app that speaks their language.
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <Prompt cmd="cat offline.txt" />
+                  <p>
+                    Away from the keyboard: music at the piano, and the Sabbath. From Friday
+                    to Saturday sundown this site switches to{" "}
+                    <span className="text-violet-400">SABBATH_MODE</span> and so do I.
+                  </p>
+                </div>
               </div>
             </TerminalWindow>
 
             {/* System Stats Grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-6">
-              
+
               {/* Location Module */}
               <div className="group bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm hover:border-green-500/30 transition-colors">
-                <div className="flex items-center justify-between mb-1">
-                  <div className="text-[10px] text-neutral-500 font-mono tracking-widest">GEO_LOCK</div>
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full opacity-50 group-hover:animate-ping"></div>
-                </div>
+                <div className="text-[10px] text-neutral-500 font-mono tracking-widest mb-1">GEO_LOCK</div>
                 <div className="text-sm text-green-400 font-mono font-bold truncate">
-                  <HackerText text="LOS_ANGELES_[CA]" />
+                  LOS_ANGELES
                 </div>
-                <div className="text-[9px] text-green-500/50 font-mono mt-1 tracking-tighter">
-                  34.0522°N, 118.2437°W
-                </div>
-              </div>
-
-              {/* Class Module */}
-              <div className="group bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm hover:border-purple-500/30 transition-colors">
-                <div className="text-[10px] text-neutral-500 font-mono tracking-widest mb-1">ARCHETYPE</div>
-                <div className="text-sm text-purple-400 font-mono font-bold">
-                  <HackerText text="CODE_WIZARD" />
-                </div>
-                <div className="text-[9px] text-purple-500/50 font-mono mt-1 border border-purple-500/20 rounded px-1 inline-block">
-                  LVL.99 FULL_STACK
+                <div className="text-[10px] text-green-500/50 font-mono mt-1">
+                  34.05°N, 118.24°W
                 </div>
               </div>
 
-              {/* Status Module */}
-              <div className="group bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm col-span-2 md:col-span-1 hover:border-emerald-500/30 transition-colors">
+              {/* Languages Module */}
+              <div className="group bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm hover:border-green-500/30 transition-colors">
+                <div className="text-[10px] text-neutral-500 font-mono tracking-widest mb-1">LOCALE</div>
+                <div className="text-sm text-green-400 font-mono font-bold">
+                  EN · PT-BR
+                </div>
+                <div className="text-[10px] text-green-500/50 font-mono mt-1">
+                  English · Portuguese
+                </div>
+              </div>
+
+              {/* Live availability, same source as the header badge */}
+              <div className="group bg-black/40 border border-white/10 p-3 rounded-lg backdrop-blur-sm col-span-2 md:col-span-1 hover:border-green-500/30 transition-colors">
                 <div className="text-[10px] text-neutral-500 font-mono tracking-widest mb-1">CURRENT_STATE</div>
-                <div className="text-sm text-emerald-400 font-mono flex items-center font-bold">
-                  <span className="relative flex h-2 w-2 mr-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                  </span>
-                  ONLINE
+                <div className={`text-sm font-mono flex items-center font-bold min-h-5 ${state?.text ?? "text-neutral-500"}`}>
+                  {state && (
+                    <>
+                      <span className="relative flex h-2 w-2 mr-2">
+                        {state.ping && <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${state.dot}`}></span>}
+                        <span className={`relative inline-flex rounded-full h-2 w-2 ${state.dot}`}></span>
+                      </span>
+                      {state.label}
+                    </>
+                  )}
                 </div>
-                <div className="text-[9px] text-emerald-500/50 font-mono mt-1">
-                  <LatencySimulator />
+                <div className="text-[10px] text-green-500/50 font-mono mt-1">
+                  Mon–Fri · {String(UPLINK_START).padStart(2, "0")}–{UPLINK_END}h PT
                 </div>
               </div>
 
             </div>
           </div>
         </ScrollAnimation>
-        
+
         {/* Right Column: Glitch Image */}
         <ScrollAnimation direction="right" delay={0.3}>
           <motion.div
@@ -96,10 +128,10 @@ const About = () => {
             transition={{ duration: 0.3 }}
             className="relative w-full max-w-md mx-auto lg:max-w-full"
           >
-            <GlitchImage 
-              src='/images/about.jpeg' 
-              alt="Ricky's Secure ID" 
-              width={500} 
+            <GlitchImage
+              src='/images/about.jpeg'
+              alt="Ricky dressed as a wizard, pointing a wand"
+              width={500}
               height={600}
               className="shadow-2xl shadow-green-500/10"
             />
@@ -108,7 +140,7 @@ const About = () => {
             <div className="absolute -top-4 -left-4 w-24 h-24 border-t-2 border-l-2 border-green-500/30 rounded-tl-xl"></div>
           </motion.div>
         </ScrollAnimation>
-        
+
       </div>
     </div>
   )

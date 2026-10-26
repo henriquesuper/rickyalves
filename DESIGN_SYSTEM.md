@@ -1,6 +1,6 @@
 # 🟢 The Digital Alchemist: Design System & Theme Bible
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **System:** RICKY_ALVES_OS  
 **Status:** ONLINE
 
@@ -31,65 +31,56 @@ The aesthetic is **"High-Fidelity Cyberpunk"**. It blends the raw, terminal-base
 ## 🧩 Core Components (The "Constructs")
 
 ### 1. Navigation: "The Terminal"
-*   **Concept:** Command line input.
-*   **Behavior:** Links are styled as directory paths (`~/about`, `~/projects`).
-*   **Effect:** **Text Decryption**. On hover, characters scramble before stabilizing.
-*   **Logo:** `> Ricky's_Code_Chronicles_`.
+*   **SystemHeader** (`components/Navigation/SystemHeader.jsx`): fixed `~/RICKY_ALVES` home button and the live availability badge (`UPLINK_OPEN` / `ASYNC_MODE` / `SABBATH_MODE`) with the Los Angeles clock. Sits on a black-to-transparent fade so content never bleeds through.
+*   **CommandDock** (`components/Navigation/CommandDock.jsx`): bottom dock of section shortcuts, plus a real shell (press `/` anywhere) with history and tab completion. `whoami`, `cat skills.json` and `ls ./work` print from `components/data.js`, so the terminal and the page never disagree.
 
 ### 2. Hero: "The Matrix"
-*   **Background:** **Full-Screen Matrix Rain**. A custom canvas simulation spanning the entire viewport depth (`z-0`).
-*   **Avatar:** **CyberGlitchImage**. 
-    *   *State A (Idle):* Grayscale, occasional random "signal loss" (chromatic aberration/slicing).
-    *   *State B (Hover):* Violent signal corruption, color split, intense noise.
-*   **Text:** `> The Digital Alchemist`.
+*   **Background:** Full-screen canvas Matrix rain (`MatrixRain.jsx`) behind everything; drops land and bounce on the footer.
+*   **Avatar:** `CyberGlitchImage` — grayscale with a phosphor tint at rest, signal corruption on hover.
+*   **Text:** `RICKY ALVES_` typewriter, `> The Digital Alchemist`, then three numbered lines (`01`/`02`/`03`) in a fixed-width number gutter: role, platforms, stack.
+*   **Actions:** primary `> ssh uplink` (solid green → contact) and secondary `> ls ./work` (outline → projects), then a row of social icons.
 
 ### 3. About: "Identity Log"
-*   **Container:** `TerminalWindow`. A glassmorphism container with macOS/Linux window controls (`🔴🟡🟢`) and a title bar (`root@ricky-os:~`).
-*   **Content:** Syntax highlighting on keywords (Gold for "Sherlock Holmes", Blue for "HTML", etc.).
-*   **Stats:** RPG-style data grid (Location, Class, Online Status).
+*   **Container:** `TerminalWindow` with `$ whoami`, `$ cat focus.txt`, `$ cat offline.txt` blocks. Emphasis is white, not rainbow syntax colors.
+*   **Stats:** three modules with real data only — `GEO_LOCK` (LA), `LOCALE` (EN · PT-BR), `CURRENT_STATE` (live, from `getLAStatus()`).
 
 ### 4. Skills: "Neural Extensions"
-*   **Concept:** Plug-and-play cybernetic modules.
-*   **Design:** **Data Cartridges**. Dark glass cards with technical borders, serial numbers (`MOD-01`), and status lights.
-*   **Motion:** **Infinite Conveyor Belt**. A continuous loop of loaded modules.
-*   **Interaction:** Hovering "activates" the module (Green border glow + Icon pulse).
+*   **Design:** a static `cat skills.json` terminal window, grouped (`mobile`, `web`, `backend`, `also`). Arrays wrap between items with a hanging indent.
+*   **Data:** `skillsData` in `components/data.js`.
 
 ### 5. Projects: "Deployed Constructs"
-*   **Concept:** Classified mission files.
-*   **Design:** **Bento Grid**. Asymmetrical grid layout.
-*   **Visuals:** "Corner Brackets" (HUD style), background grid patterns, scanline overlays on preview images.
-*   **Metadata:** `FILE_ID: SEC-00X`, `CLEARANCE: LVL-5`.
-*   **Actions:** Links are commands (`./view_source`).
+*   **Design:** alternating case-study rows. Screenshot in a browser/CRT frame (URL bar, faint scanlines) on one side; index (`01 / 03`), title, tagline, write-up, highlights, optional client quote, tags and `./open_live` / `./view_source` links on the other.
+*   **Data:** `projectData` in `components/data.js`. Screenshots live in `public/images/projects/` (1440×900 JPEG).
 
 ### 6. Contact: "Secure Uplink"
-*   **Concept:** Tactical HUD Console.
-*   **Visuals:** Signal strength bars, encryption status (`AES-256`), latency indicators.
-*   **Action:** **Holographic Launch Button**. A complex, multi-layer button for "Initiating Transmission".
+*   **Visuals:** HUD frame with corner brackets, spinning-border `INITIATE_TRANSMISSION` button (mono), and the email address in plain sight. Shows a Sabbath note while `SABBATH_MODE` is active.
 
 ### 7. Footer: "Kernel Status"
-*   **Concept:** System Root Bar.
-*   **Design:** Full-width, dark glass.
-*   **Content:** `SYSTEM_ID`, `[ RUNNING: NEXT.JS ]`, `UPLINK` status dots for social media.
+*   **Content:** `$ uptime` year-progress bar, `$ logout` with social links, "Connection to ricky-os closed."
 
 ---
 
 ## 🕹️ Interaction Guidelines
 
-1.  **Hover Everything:** The system should feel *reactive*. Nothing is static. Borders glow, text scrambles, images glitch.
-2.  **Deterministic Chaos:** Use `Math.random()` sparingly to avoid hydration errors. Use deterministic ID generation for "random-looking" strings (`SEC-001`).
-3.  **Performance:** Animations (Matrix Rain, Infinite Scroll) must be optimized (Canvas or CSS Transforms) to run at 60fps.
+1.  **Real data over fake HUD:** the theme is the costume, not the content. Prefer live, true readouts (LA clock, Sabbath mode, year progress, actual projects) over decorative fakes like simulated latency, "AES-256" or clearance levels.
+2.  **One title pattern:** section headings are `> Name` in mono, white-to-neutral gradient, `text-2xl md:text-4xl` so they fit one line on phones.
+3.  **Hover Everything:** the system should feel reactive — borders glow, text scrambles, images glitch.
+4.  **Deterministic Chaos:** use `Math.random()` sparingly to avoid hydration errors.
+5.  **Performance:** animations (Matrix rain, glitch) must run on canvas or CSS transforms at 60fps; respect `prefers-reduced-motion`.
 
 ## 📁 File Structure Map
 
 *   `components/ui/` -> **The Atomic Elements**
-    *   `HackerText.jsx`: Scramble text effect.
-    *   `MatrixRain.jsx`: Canvas background.
-    *   `TerminalWindow.jsx`: Glass container.
-    *   `CyberGlitchImage.jsx`: The advanced glitch avatar.
-    *   `BentoGrid.jsx`: Project file layout.
-    *   `InfiniteMovingCards.jsx`: Skill cartridges.
+    *   `HackerText.jsx`: scramble text effect.
+    *   `HumanTypewriter.jsx`: typed hero name.
+    *   `MatrixRain.jsx`: canvas background.
+    *   `TerminalWindow.jsx`: glass terminal container.
+    *   `CyberGlitchImage.jsx` / `GlitchImage.jsx`: glitch photos (hero / about).
+    *   `NeuralCursor.jsx`: custom cursor.
 *   `components/` -> **The Sections**
-    *   `Hero.jsx`, `About.jsx`, `Skills.jsx`, `Projects.jsx`, `Contact.jsx`.
+    *   `Hero.jsx`, `About.jsx`, `Skills.jsx`, `Projects.jsx`, `Contact.jsx`, `Footer.jsx`.
+    *   `data.js`: projects and skills, shared by the page and the terminal.
+*   `components/Navigation/` -> `SystemHeader.jsx`, `CommandDock.jsx`.
 
 ---
 

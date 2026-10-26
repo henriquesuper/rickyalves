@@ -22,7 +22,7 @@ export const TerminalWindow = ({ children, title = "user@system:~", className })
       </div>
       
       {/* Terminal Body */}
-      <div className="p-6 font-mono text-sm md:text-base">
+      <div className="p-4 md:p-6 font-mono text-sm md:text-base">
         {children}
       </div>
     </div>

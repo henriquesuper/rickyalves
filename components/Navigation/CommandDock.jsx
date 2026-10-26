@@ -5,6 +5,7 @@ import { FaTerminal } from "react-icons/fa";
 import { useRouter, usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { getLAStatus } from "@/lib/la-status";
+import { projectData, skillsData } from "../data";
 
 const MODE_LABELS = {
   uplink: "UPLINK_OPEN",
@@ -17,13 +18,6 @@ const MODE_NOTES = {
   sabbath: "sabbath in progress — replies resume after sundown.",
   async: "async hours — reply lands on the next uplink window.",
 };
-
-const PROJECTS = [
-  { name: "unique-punch", desc: "GPS time clock & attendance app", href: "https://www.uniquepunch.app" },
-  { name: "react-piano", desc: "Web Audio piano built with Tone.js", href: "https://github.com/henriquesuper/piano" },
-];
-
-const SKILLS = ["JavaScript", "React", "Node", "Python", "Swift", "Flutter", "HTML", "CSS"];
 
 const COMMANDS = [
   "help",
@@ -203,7 +197,7 @@ const CommandDock = () => {
         return [
           "visitor",
           "...but the interesting one is the sysadmin:",
-          "RICKY ALVES — The Digital Alchemist. Software wizard based in Los Angeles.",
+          "RICKY ALVES — The Digital Alchemist. Full-stack engineer in Los Angeles, building web & mobile apps.",
         ];
 
       case "cd ./bio":
@@ -217,9 +211,10 @@ const CommandDock = () => {
         scrollToSection("skills");
         return [
           "{",
-          `  "modules": [${SKILLS.map((s) => `"${s}"`).join(", ")}],`,
-          '  "status": "OPTIMIZED",',
-          '  "learning": "always"',
+          ...Object.entries(skillsData).map(
+            ([group, items], i, all) =>
+              `  "${group}": [${items.map((s) => `"${s}"`).join(", ")}]${i < all.length - 1 ? "," : ""}`
+          ),
           "}",
         ];
 
@@ -229,8 +224,8 @@ const CommandDock = () => {
       case "projects":
         scrollToSection("projects");
         return [
-          "total 2 constructs deployed:",
-          ...PROJECTS.map((p) => ({ text: `  ${p.name.padEnd(16)} ${p.desc}`, href: p.href })),
+          `total ${projectData.length} constructs deployed:`,
+          ...projectData.map((p) => ({ text: `  ${p.slug.padEnd(14)} ${p.tagline}`, href: p.links.live || p.links.source })),
         ];
 
       case "ssh uplink":
