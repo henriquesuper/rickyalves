@@ -5,6 +5,12 @@ export const projectData = [
       description:
         'A location-based time clock and attendance tracking app for modern businesses. Features GPS-based location verification, multi-position support, and secure attendance data storage. Built as a solo developer project.',
       gitHubLink: 'https://www.uniquepunch.app',
+      featured: true,
+      testimonial: {
+        quote: "The 'Unique Punch' app changed our workflow entirely. He is a true alchemist of code, turning ideas into gold.",
+        name: 'Abner Almeida',
+        role: 'COO @ Unique On The Go',
+      },
     },
     {
       id: 2,
