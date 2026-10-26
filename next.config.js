@@ -36,6 +36,8 @@ const nextConfig = {
               "img-src 'self' data: blob: https:",
               connectSrc,
               "media-src 'self' https://tonejs.github.io",
+              // Tone.js runs its clock in a Web Worker created from a blob: URL
+              "worker-src 'self' blob:",
               "frame-ancestors 'none'",
             ].join('; '),
           },

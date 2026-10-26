@@ -6,8 +6,6 @@ import { usePathname } from 'next/navigation';
 
 const NeuralCursor = () => {
   const pathname = usePathname();
-  if (pathname?.startsWith('/presentation')) return null;
-
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
@@ -51,6 +49,10 @@ const NeuralCursor = () => {
 
   // Hide cursor until first movement to prevent top-left flash
   // if (!isVisible) return null; // Removed to prevent hydration mismatch
+
+  // Bail out only after every hook has run, so navigating in and out of
+  // /presentation keeps the hook order stable
+  if (pathname?.startsWith('/presentation')) return null;
 
   return (
     <motion.div

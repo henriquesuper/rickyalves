@@ -822,7 +822,7 @@ const EmCasaPresentationPage = () => {
                       <div className="max-w-5xl w-full space-y-8">
                         <div className="text-left space-y-2">
                           <h2 className="text-3xl font-mono text-red-400 uppercase tracking-widest">Os Quatro Vilões do Delivery Tradicional</h2>
-                          <p className="text-gray-400 font-light font-mono text-xs">// O que trava a operação de quem vende por plataformas de terceiros</p>
+                          <p className="text-gray-400 font-light font-mono text-xs">{"// O que trava a operação de quem vende por plataformas de terceiros"}</p>
                         </div>
                         
                         <motion.div 
@@ -1036,7 +1036,7 @@ const EmCasaPresentationPage = () => {
                       <div className="max-w-5xl w-full space-y-8">
                         <div className="text-left space-y-2">
                           <h2 className="text-3xl font-mono text-emerald-400 uppercase tracking-widest">Os Quatro Pilares do Em Casa</h2>
-                          <p className="text-gray-400 font-light font-mono text-xs">// Como garantimos faturamento livre de intermediários</p>
+                          <p className="text-gray-400 font-light font-mono text-xs">{"// Como garantimos faturamento livre de intermediários"}</p>
                         </div>
                         
                         <motion.div 
@@ -1194,7 +1194,7 @@ const EmCasaPresentationPage = () => {
                         {/* Left Column: Context & Controls */}
                         <div className="lg:col-span-4 flex flex-col justify-between space-y-6 py-2">
                           <div className="space-y-4">
-                            <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase block">// INTELIGÊNCIA OPERACIONAL</span>
+                            <span className="text-emerald-400 font-mono text-xs tracking-widest uppercase block">{"// INTELIGÊNCIA OPERACIONAL"}</span>
                             <h3 className="text-3xl font-mono text-white tracking-wider font-light">
                               PAINEL DE <span className="text-emerald-400 font-cursive lowercase text-4xl block">dados & insights</span>
                             </h3>
@@ -1384,7 +1384,7 @@ const EmCasaPresentationPage = () => {
                                       {/* AI Replacement Offer info */}
                                       <div className="p-2 border border-purple-500/20 bg-purple-950/10 rounded flex justify-between items-center gap-2">
                                         <div className="space-y-0.5">
-                                          <span className="text-[9px] font-mono text-purple-400 block tracking-wider">// IA RECOMENDAÇÃO DE SUBSTITUIÇÃO</span>
+                                          <span className="text-[9px] font-mono text-purple-400 block tracking-wider">{"// IA RECOMENDAÇÃO DE SUBSTITUIÇÃO"}</span>
                                           <span className="text-xs text-white font-sans font-medium">{item.replacement}</span>
                                           <span className="text-[10px] font-mono text-gray-500 block">Estoque do Substituto: {item.replacementStock} unidades</span>
                                         </div>
