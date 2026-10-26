@@ -1,15 +1,20 @@
 'use client';
 
-/* eslint-disable react/no-unescaped-entities */
 import * as React from 'react';
-import { motion } from "framer-motion";
 import ScrollAnimation from "../app/components/ScrollAnimation";
-import HoverAnimation from "../app/components/HoverAnimation";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import HackerText from "./ui/HackerText";
 import CyberGlitchImage from "./ui/CyberGlitchImage";
 import HumanTypewriter from "./ui/HumanTypewriter";
+
+const STACK = ["React", "Next.js", "Node", "Swift", "Flutter"];
+
+const SOCIALS = [
+  { href: "https://github.com/henriquesuper", label: "GitHub", Icon: FaGithub },
+  { href: "https://linkedin.com/in/rickyalves/", label: "LinkedIn", Icon: FaLinkedin },
+  { href: "https://twitter.com/henriquesuper", label: "X", Icon: FaXTwitter },
+];
 
 const Hero = () => {
   return (
@@ -27,11 +32,11 @@ const Hero = () => {
             />
           </div>
         </ScrollAnimation>
-        
-        <div className="text-left md:col-span-2 md:text-left relative z-10">
+
+        <div className="text-left md:col-span-2 relative z-10">
           <ScrollAnimation direction="right" delay={0.2}>
             <h1 className="text-5xl md:text-7xl font-bold pb-4 font-mono tracking-tighter min-h-20">
-              <span className="sr-only">Ricky Alves — The Digital Alchemist, software engineer based in Los Angeles</span>
+              <span className="sr-only">Ricky Alves — full-stack engineer in Los Angeles building web and mobile apps</span>
               <span aria-hidden="true">
                 <HumanTypewriter
                   text="RICKY ALVES"
@@ -44,81 +49,62 @@ const Hero = () => {
               </span>
             </h1>
           </ScrollAnimation>
-          
+
           <ScrollAnimation direction="up" delay={0.4}>
-            <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg leading-relaxed font-mono">
-              <span className="text-green-500/50 mr-2">01</span>
-              I'm a software wizard based in Los Angeles.
-              <br/>
-              <span className="text-green-500/50 mr-2">02</span>
-              Conjuring exceptional digital magic.
-              <br/>
-              <span className="text-green-500/50 mr-2">03</span>
-              Weaving the matrix, one line at a time.
-            </p>
+            <div className="mt-4 max-w-xl font-mono space-y-2">
+              <p className="text-lg md:text-xl text-neutral-100 leading-snug">
+                <span className="text-green-500/50 mr-2 text-base">01</span>
+                Full-stack engineer based in Los Angeles.
+              </p>
+              <p className="text-base md:text-lg text-neutral-300 leading-snug">
+                <span className="text-green-500/50 mr-2">02</span>
+                Building web &amp; mobile apps — iOS and Android.
+              </p>
+              <p className="text-sm md:text-base text-neutral-400 flex flex-wrap items-center gap-x-2 gap-y-1">
+                <span className="text-green-500/50">03</span>
+                {STACK.map((tech, i) => (
+                  <React.Fragment key={tech}>
+                    {i > 0 && <span className="text-green-500/40" aria-hidden="true">·</span>}
+                    <span>{tech}</span>
+                  </React.Fragment>
+                ))}
+              </p>
+            </div>
           </ScrollAnimation>
-          
+
           <ScrollAnimation direction="up" delay={0.6}>
-            <div className="social-icons flex flex-wrap justify-center md:justify-start items-center gap-4 mt-10">
-              
-              {/* Twitter / X Data Cartridge */}
+            <div className="flex flex-wrap items-center gap-3 mt-10">
               <a
-                href="https://twitter.com/henriquesuper"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex items-center gap-3 p-3 bg-black/20 border border-white/10 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-500 rounded-sm overflow-hidden"
+                href="#contact"
+                className="group inline-flex items-center gap-2 h-12 px-5 bg-green-500 text-black font-mono text-sm font-bold tracking-wider rounded-sm hover:bg-green-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:ring-offset-4 focus-visible:ring-offset-black"
               >
-                {/* Corner Accents */}
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
-                
-                <FaXTwitter className="text-xl text-neutral-500 group-hover:text-green-400 transition-colors duration-300 relative z-10" />
-                
-                <div className="max-w-0 overflow-hidden group-hover:max-w-[120px] transition-all duration-500 ease-out">
-                  <span className="whitespace-nowrap pl-2 pr-2 text-xs font-mono text-green-500 tracking-widest border-l border-green-500/30">
-                    :: UPLINK_X
-                  </span>
-                </div>
+                <span aria-hidden="true">&gt;</span>
+                ssh uplink
+                <span className="sr-only">— get in touch</span>
               </a>
-              
-              {/* GitHub Data Cartridge */}
               <a
-                href="https://github.com/henriquesuper"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex items-center gap-3 p-3 bg-black/20 border border-white/10 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-500 rounded-sm overflow-hidden delay-75"
+                href="#projects"
+                className="inline-flex items-center gap-2 h-12 px-5 border border-white/15 text-neutral-200 font-mono text-sm tracking-wider rounded-sm hover:border-green-500/50 hover:text-green-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:ring-offset-4 focus-visible:ring-offset-black"
               >
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
-                
-                <FaGithub className="text-xl text-neutral-500 group-hover:text-green-400 transition-colors duration-300 relative z-10" />
-                
-                <div className="max-w-0 overflow-hidden group-hover:max-w-[120px] transition-all duration-500 ease-out">
-                  <span className="whitespace-nowrap pl-2 pr-2 text-xs font-mono text-green-500 tracking-widest border-l border-green-500/30">
-                    :: SRC_CODE
-                  </span>
-                </div>
-              </a>
-              
-              {/* LinkedIn Data Cartridge */}
-              <a
-                href="https://linkedin.com/in/rickyalves/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative flex items-center gap-3 p-3 bg-black/20 border border-white/10 hover:border-green-500/50 hover:bg-green-500/5 transition-all duration-500 rounded-sm overflow-hidden delay-150"
-              >
-                <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
-                <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20 group-hover:border-green-500 transition-colors duration-300"></div>
-                
-                <FaLinkedin className="text-xl text-neutral-500 group-hover:text-green-400 transition-colors duration-300 relative z-10" />
-                
-                <div className="max-w-0 overflow-hidden group-hover:max-w-[120px] transition-all duration-500 ease-out">
-                  <span className="whitespace-nowrap pl-2 pr-2 text-xs font-mono text-green-500 tracking-widest border-l border-green-500/30">
-                    :: NET_LINK
-                  </span>
-                </div>
+                <span aria-hidden="true" className="text-green-500">&gt;</span>
+                ls ./work
+                <span className="sr-only">— see projects</span>
               </a>
 
+              <nav aria-label="Social links" className="flex items-center gap-1 sm:ml-3">
+                {SOCIALS.map(({ href, label, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="p-3 text-neutral-500 hover:text-green-400 transition-colors"
+                  >
+                    <Icon className="text-xl" />
+                  </a>
+                ))}
+              </nav>
             </div>
           </ScrollAnimation>
         </div>
