@@ -4,9 +4,9 @@ import React, { useEffect, useRef } from 'react';
 const CELL = 20;
 // Glyphs traced from the film's code by Rezmason (MIT, see public/fonts/Matrix-Code.LICENSE.txt).
 // The font's shapes are already mirrored; CHARS follows its Reloaded/Revolutions glyph order.
-const FONT_FAMILY = 'Matrix-Code';
+export const FONT_FAMILY = 'Matrix-Code';
 const FONT_URL = '/fonts/Matrix-Code.ttf';
-const CHARS = 'モエヤキオカ7ケサスz152ヨタワ4ネヌナ98ヒ0ホア3ウセ¦:"꞊ミラリ╌ツテニハソ▪ー<>0|+*コシマムメ';
+export const CHARS ='モエヤキオカ7ケサスz152ヨタワ4ネヌナ98ヒ0ホア3ウセ¦:"꞊ミラリ╌ツテニハソ▪ー<>0|+*コシマムメ';
 const GREEN = '0, 255, 70';
 const HEAD_COLOR = 'rgba(220, 255, 225, 1)';
 const FADE = 0.05;

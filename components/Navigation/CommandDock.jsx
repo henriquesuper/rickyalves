@@ -31,6 +31,7 @@ const COMMANDS = [
   "run ./piano.exe",
   "sudo hire_ricky",
   "matrix",
+  "wake up",
   "ping",
   "history",
   "clear",
@@ -88,6 +89,14 @@ const CommandDock = () => {
       return [trimmed.replace(/^\s*\S+\s+/, "")];
     }
 
+    // Film quotes work with or without punctuation ("wake up, neo...")
+    const phrase = cmd.replace(/[^a-z ]/g, "").trim();
+    if (["wake up", "wake up neo", "follow the white rabbit", "follow white rabbit"].includes(phrase)) {
+      setTerminalOpen(false);
+      window.dispatchEvent(new Event("ricky:wake-up"));
+      return ["..."];
+    }
+
     if (cmd.startsWith("sudo rm")) {
       return [
         "rm: cannot remove '/': Permission denied",
@@ -112,6 +121,7 @@ const CommandDock = () => {
           "  run ./piano.exe   execute audio subroutine",
           "  sudo hire_ricky   escalate privileges",
           "  matrix            [REDACTED]",
+          "  wake up           follow the white rabbit",
           "  clear / exit      housekeeping",
           "",
           "hint: the filesystem hides things. try 'ls -la'.",
@@ -157,7 +167,13 @@ const CommandDock = () => {
           "-rw-r--r--  visitor  skills.json",
           "-rwx------  root     piano.exe",
           "-rw-------  root     .secret",
+          "drwx------  root     .rabbit_hole/",
         ];
+
+      case "cd .rabbit_hole":
+      case "cd ~/.rabbit_hole":
+      case "cd rabbit_hole":
+        return ["cd: permission denied", "only the red pill opens this one. follow the white rabbit."];
 
       case "cat .secret":
       case "cat secret": {
@@ -335,6 +351,25 @@ const CommandDock = () => {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // The red pill (WakeUp) drops the visitor into the rabbit hole
+  useEffect(() => {
+    const onRedPill = () => {
+      setHistory((prev) => [
+        ...prev,
+        {
+          cmd: "cd ~/.rabbit_hole",
+          lines: [
+            "Welcome to the real world.",
+            "~/.rabbit_hole is still being dug. come back soon.",
+          ],
+        },
+      ]);
+      setTerminalOpen(true);
+    };
+    window.addEventListener("ricky:red-pill", onRedPill);
+    return () => window.removeEventListener("ricky:red-pill", onRedPill);
   }, []);
 
   // Focus input and greet when the terminal opens

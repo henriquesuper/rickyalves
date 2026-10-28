@@ -6,6 +6,7 @@ import Footer from './Footer';
 import AnimatedLayout from './AnimatedLayout';
 import SystemHeader from './Navigation/SystemHeader';
 import CommandDock from './Navigation/CommandDock';
+import WakeUp from './ui/WakeUp';
 
 export default function LayoutContentRenderer({ children }) {
   const pathname = usePathname();
@@ -24,6 +25,7 @@ export default function LayoutContentRenderer({ children }) {
         <>
           <CommandDock />
           <Footer />
+          <WakeUp />
         </>
       )}
     </MotionConfig>

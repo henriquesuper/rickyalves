@@ -49,7 +49,17 @@ export default function NotFound() {
                 </div>
                 <div className="flex gap-2 mt-4 border-t border-white/10 pt-2">
                   <span className="text-green-500">{">"}</span>
-                  <span className="animate-pulse">Awaiting manual reboot_</span>
+                  <span className="animate-pulse">
+                    Follow the{" "}
+                    <button
+                      type="button"
+                      onClick={() => window.dispatchEvent(new Event("ricky:white-rabbit"))}
+                      className="underline decoration-green-500/40 underline-offset-4 hover:text-green-300 hover:decoration-green-300"
+                    >
+                      white rabbit
+                    </button>
+                    _
+                  </span>
                 </div>
               </div>
             </div>
