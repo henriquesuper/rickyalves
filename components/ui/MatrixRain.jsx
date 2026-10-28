@@ -1,6 +1,27 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
 
+const CELL = 20;
+// Glyphs traced from the film's code by Rezmason (MIT, see public/fonts/Matrix-Code.LICENSE.txt).
+// The font's shapes are already mirrored; CHARS follows its Reloaded/Revolutions glyph order.
+const FONT_FAMILY = 'Matrix-Code';
+const FONT_URL = '/fonts/Matrix-Code.ttf';
+const CHARS = 'モエヤキオカ7ケサスz152ヨタワ4ネヌナ98ヒ0ホア3ウセ¦:"꞊ミラリ╌ツテニハソ▪ー<>0|+*コシマムメ';
+const GREEN = '0, 255, 70';
+const HEAD_COLOR = 'rgba(220, 255, 225, 1)';
+const FADE = 0.05;
+
+const randomChar = () => CHARS.charAt(Math.floor(Math.random() * CHARS.length));
+// Each column falls at its own pace (cells per frame), capped at 1 so no row is skipped
+const randomSpeed = () => 0.45 + Math.random() * 0.55;
+
+const createColumn = (startRow) => ({
+  y: startRow,
+  row: Math.floor(startRow),
+  char: null,
+  speed: randomSpeed(),
+});
+
 const MatrixRain = () => {
   const canvasRef = useRef(null);
 
@@ -15,15 +36,34 @@ const MatrixRain = () => {
     canvas.width = width;
     canvas.height = height;
 
-    const COL_WIDTH = 20;
-    const columns = Math.floor(width / COL_WIDTH);
-    const drops = [];
-    const chars = "0123456789ABCDEF$#@%&";
-    const randomChar = () => chars.charAt(Math.floor(Math.random() * chars.length));
+    // Staggered start so the first screen isn't a single flat wave
+    const columns = [];
+    const fitColumns = () => {
+      const count = Math.floor(width / CELL);
+      while (columns.length < count) columns.push(createColumn(-Math.random() * 20));
+      columns.length = count;
+    };
+    fitColumns();
 
-    for (let i = 0; i < columns; i++) {
-      drops[i] = 1;
+    // Until the font loads the canvas falls back to monospace, so the rain starts right away
+    if (![...document.fonts].some((f) => f.family === FONT_FAMILY)) {
+      const face = new FontFace(FONT_FAMILY, `url(${FONT_URL})`);
+      document.fonts.add(face);
+      face.load().catch(() => {});
     }
+
+    // Glyphs are centered in their cell; y is the baseline
+    const drawGlyph = (char, x, y, color) => {
+      ctx.fillStyle = color;
+      ctx.fillText(char, x + CELL / 2, y);
+    };
+
+    const clearCell = (col, row) => {
+      ctx.fillStyle = '#000';
+      ctx.fillRect(col * CELL, row * CELL - CELL + 5, CELL, CELL);
+    };
+
+    const trailColor = () => `rgba(${GREEN}, ${0.75 + Math.random() * 0.25})`;
 
     // The footer is the rain's "floor": drops landing on its top edge
     // bounce as short-lived particles instead of falling through.
@@ -44,34 +84,81 @@ const MatrixRain = () => {
       return top > 0 && top < height ? top : Infinity;
     };
 
-    const stepDrops = (floorY, bursting) => {
-      for (let i = 0; i < drops.length; i++) {
-        const y = drops[i] * COL_WIDTH;
+    const resetColumn = (c, startRow) => {
+      c.y = startRow;
+      c.row = Math.floor(startRow);
+      c.char = null;
+      c.speed = randomSpeed();
+    };
 
-        // Varying opacity for depth; brighter during a burst
-        const alpha = bursting ? 0.5 + Math.random() * 0.5 : Math.random();
-        ctx.fillStyle = `rgba(0, 255, 70, ${alpha})`;
-        ctx.fillText(randomChar(), i * COL_WIDTH, y);
+    // Moves a column's head down one row, restarting it at the floor or offscreen
+    const advanceRow = (c, i, floorY) => {
+      // The old head becomes part of the green trail
+      if (c.char && c.row > 0) {
+        clearCell(i, c.row);
+        drawGlyph(c.char, i * CELL, c.row * CELL, trailColor());
+      }
 
-        if (y >= floorY) {
-          // Impact: hand the drop over to a bounce particle
-          if (bouncers.length < MAX_BOUNCERS) {
-            bouncers.push({
-              x: i * COL_WIDTH,
-              y: floorY,
-              vx: (Math.random() - 0.5) * 2.5,
-              vy: -(2 + Math.random() * 3.5),
-              char: randomChar(),
-              life: 1,
-              bounces: 0,
-            });
-          }
-          // Staggered restart so columns don't sync into a single wave
-          drops[i] = -Math.floor(Math.random() * 40);
-        } else if (y > height && Math.random() > 0.975) {
-          drops[i] = 0;
+      c.row++;
+      const y = c.row * CELL;
+
+      if (y >= floorY) {
+        // Impact: hand the drop over to a bounce particle
+        if (bouncers.length < MAX_BOUNCERS) {
+          bouncers.push({
+            x: i * CELL,
+            y: floorY,
+            vx: (Math.random() - 0.5) * 2.5,
+            vy: -(2 + Math.random() * 3.5),
+            char: randomChar(),
+            life: 1,
+            bounces: 0,
+          });
         }
-        drops[i]++;
+        // Staggered restart so columns don't sync into a single wave
+        resetColumn(c, -Math.floor(Math.random() * 40));
+        return;
+      }
+      if (y > height) {
+        if (Math.random() > 0.975) resetColumn(c, 0);
+        c.char = null;
+        return;
+      }
+
+      c.char = randomChar();
+      if (c.row > 0) {
+        ctx.shadowColor = `rgba(${GREEN}, 0.9)`;
+        ctx.shadowBlur = 8;
+        drawGlyph(c.char, i * CELL, y, HEAD_COLOR);
+        ctx.shadowBlur = 0;
+      }
+    };
+
+    const stepDrops = (floorY, bursting) => {
+      for (let i = 0; i < columns.length; i++) {
+        const c = columns[i];
+        c.y += bursting ? c.speed * 2 : c.speed;
+        // A restart rewinds c.y, so the condition is re-read every row
+        while (c.row < Math.floor(c.y)) advanceRow(c, i, floorY);
+      }
+    };
+
+    // Glyphs already in a trail occasionally change in place, as in the film
+    const mutateTrails = () => {
+      const attempts = Math.ceil(columns.length / 8);
+      for (let n = 0; n < attempts; n++) {
+        const i = Math.floor(Math.random() * columns.length);
+        const c = columns[i];
+        const dist = 1 + Math.floor(Math.random() * 25);
+        const row = c.row - dist;
+        if (row < 1 || row * CELL > height) continue;
+
+        // Match the brightness the fade has left at that distance from the head
+        const alpha = Math.pow(1 - FADE, dist / c.speed);
+        if (alpha < 0.08) continue;
+
+        clearCell(i, row);
+        drawGlyph(randomChar(), i * CELL, row * CELL, `rgba(${GREEN}, ${alpha})`);
       }
     };
 
@@ -92,8 +179,7 @@ const MatrixRain = () => {
           if (b.life <= 0 || b.bounces > 2 || floorY === Infinity) return false;
 
           // Brighter than the rain: impacts should read as "hitting ground"
-          ctx.fillStyle = `rgba(134, 255, 160, ${b.life})`;
-          ctx.fillText(b.char, b.x, b.y);
+          drawGlyph(b.char, b.x, b.y, `rgba(134, 255, 160, ${b.life})`);
           return true;
         });
       }
@@ -103,14 +189,15 @@ const MatrixRain = () => {
       const bursting = Date.now() < burstUntil;
 
       // Lighter fade during a burst leaves longer trails
-      ctx.fillStyle = `rgba(0, 0, 0, ${bursting ? 0.04 : 0.05})`;
+      ctx.fillStyle = `rgba(0, 0, 0, ${bursting ? 0.04 : FADE})`;
       ctx.fillRect(0, 0, width, height);
 
-      ctx.font = '15px monospace';
+      ctx.font = `15px "${FONT_FAMILY}", monospace`;
+      ctx.textAlign = 'center';
       const floorY = getFloorY();
 
       stepDrops(floorY, bursting);
-      if (bursting) stepDrops(floorY, true); // double speed
+      mutateTrails();
       stepBouncers(floorY);
     };
 
@@ -121,6 +208,7 @@ const MatrixRain = () => {
       height = window.innerHeight;
       canvas.width = width;
       canvas.height = height;
+      fitColumns();
     };
 
     window.addEventListener('resize', handleResize);

@@ -92,6 +92,27 @@ const Footer = () => {
           </nav>
         </div>
 
+        {/* credits */}
+        <div className="text-neutral-600">
+          rain glyphs: Matrix-Code font by{" "}
+          <a
+            href="https://github.com/Rezmason/matrix"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-500 hover:text-green-400 transition-colors"
+          >
+            Rezmason
+          </a>{" "}
+          (
+          <a
+            href="/fonts/Matrix-Code.LICENSE.txt"
+            className="text-neutral-500 hover:text-green-400 transition-colors"
+          >
+            MIT
+          </a>
+          )
+        </div>
+
         {/* session end */}
         <div className="text-neutral-600">
           Connection to ricky-os closed.
