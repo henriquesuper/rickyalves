@@ -39,7 +39,7 @@ const SystemHeader = () => {
   const style = laStatus ? STATUS_STYLES[laStatus.mode] : null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 pb-8 flex justify-between items-start pointer-events-none bg-linear-to-b from-black/90 via-black/60 to-transparent">
+    <div data-shell="portfolio" className="fixed top-0 left-0 right-0 z-50 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pt-[max(1rem,env(safe-area-inset-top))] pb-8 flex justify-between items-start pointer-events-none bg-linear-to-b from-black/90 via-black/60 to-transparent">
 
       {/* Root Access / Logo */}
       <button

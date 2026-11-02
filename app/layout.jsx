@@ -61,6 +61,15 @@ export const metadata = {
   },
 };
 
+// viewportFit: 'cover' lets the page draw under notches/sensor housings and Safari's toolbars;
+// safe-area insets are handled in globals.css and on the fixed header/dock.
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#000000',
+};
+
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',

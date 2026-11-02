@@ -396,7 +396,7 @@ const CommandDock = () => {
   }, [history]);
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center pb-4 px-4 pointer-events-none">
+    <div className="fixed bottom-0 left-0 right-0 z-50 flex flex-col items-center pb-[max(1rem,env(safe-area-inset-bottom))] pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] pointer-events-none">
 
       {/* Terminal Panel */}
       <AnimatePresence>
